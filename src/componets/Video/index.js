@@ -8,15 +8,30 @@ import {
    IconButton,
    Menu,
    MenuItem,
+   styled,
+   TextField,
    Typography
 } from '@material-ui/core'
 import BackspaceIcon from '@material-ui/icons/Backspace'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ShareIcon from '@material-ui/icons/Share'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import { useState } from 'react'
 import useStyles from './styles'
+import Comment from '../Comment'
+
+const ExpandMore = styled(props => {
+   const { expand, ...other } = props
+   return <IconButton {...other} />
+})(({ theme, expand }) => ({
+   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+   marginLeft: 'auto',
+   transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+   })
+}))
 
 function Video() {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -26,6 +41,12 @@ function Video() {
    }
    const handleClose = () => {
       setAnchorEl(null)
+   }
+
+   const [expanded, setExpanded] = useState(false)
+
+   const handleExpandClick = () => {
+      setExpanded(!expanded)
    }
 
    const styles = useStyles()
@@ -63,7 +84,16 @@ function Video() {
                <IconButton aria-label='share'>
                   <ShareIcon />
                </IconButton>
+               <ExpandMore
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label='show more'
+               >
+                  <ExpandMoreIcon />
+               </ExpandMore>
             </CardActions>
+            <Comment expanded={expanded} />
          </Card>
          <Menu
             id='basic-menu'

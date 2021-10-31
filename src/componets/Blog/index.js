@@ -4,20 +4,32 @@ import {
    CardActions,
    CardContent,
    CardHeader,
-   CardMedia,
-   Collapse,
    IconButton,
    Menu,
    MenuItem,
+   styled,
    Typography
 } from '@material-ui/core'
 import BackspaceIcon from '@material-ui/icons/Backspace'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ShareIcon from '@material-ui/icons/Share'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import React, { useState } from 'react'
+import Comment from '../Comment'
 import useStyles from './styles'
+
+const ExpandMore = styled(props => {
+   const { expand, ...other } = props
+   return <IconButton {...other} />
+})(({ theme, expand }) => ({
+   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+   marginLeft: 'auto',
+   transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+   })
+}))
 
 function Blog() {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -27,6 +39,12 @@ function Blog() {
    }
    const handleClose = () => {
       setAnchorEl(null)
+   }
+
+   const [expanded, setExpanded] = useState(false)
+
+   const handleExpandClick = () => {
+      setExpanded(!expanded)
    }
 
    const styles = useStyles()
@@ -61,7 +79,16 @@ function Blog() {
                <IconButton aria-label='share'>
                   <ShareIcon />
                </IconButton>
+               <ExpandMore
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label='show more'
+               >
+                  <ExpandMoreIcon />
+               </ExpandMore>
             </CardActions>
+            <Comment expanded={expanded} />
          </Card>
          <Menu
             id='basic-menu'

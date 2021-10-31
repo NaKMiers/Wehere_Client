@@ -1,15 +1,11 @@
 import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
-   menuIcon: {
-      marginLeft: 8
-   },
    collapse: {
       padding: '0 16px'
    },
    comments: {
       borderTop: 'solid #ccc 1px',
-      padding: 0,
-      paddingTop: 12
+      padding: 0
    },
    commentInputWrap: {
       display: 'flex',
@@ -21,5 +17,24 @@ export default makeStyles(theme => ({
    },
    commentInput: {
       width: '100%'
+   },
+   commentWrap: {
+      marginTop: 16
+   },
+   commentItem: {
+      display: 'flex',
+      padding: 0,
+      marginBottom: -12
+   },
+   commentActions: {
+      marginLeft: 52
+   },
+   replyCommentItem: {
+      display: 'flex',
+      marginLeft: 52
+   },
+   replyInputWrap: {
+      display: 'flex',
+      marginLeft: 52
    }
 }))
