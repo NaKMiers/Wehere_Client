@@ -1,4 +1,4 @@
-import Blog from '../../componets/Blog'
+import Blog from '../../components/Blog'
 
 function BlogPage() {
    return (

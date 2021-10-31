@@ -1,39 +1,20 @@
-import {
-   Avatar,
-   Card,
-   CardActions,
-   CardContent,
-   CardHeader,
-   Collapse,
-   IconButton,
-   Menu,
-   MenuItem,
-   styled,
-   TextField,
-   Typography
-} from '@material-ui/core'
-import BackspaceIcon from '@material-ui/icons/Backspace'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Menu, MenuItem } from '@material-ui/core'
+import Avatar from '@material-ui/core/Avatar'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardMedia from '@material-ui/core/CardMedia'
+import IconButton from '@material-ui/core/IconButton'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import ReplyIcon from '@material-ui/icons/Reply'
 import ShareIcon from '@material-ui/icons/Share'
+import BackspaceIcon from '@material-ui/icons/Backspace'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import { useState } from 'react'
 import useStyles from './styles'
-import Comment from '../Comment'
 
-const ExpandMore = styled(props => {
-   const { expand, ...other } = props
-   return <IconButton {...other} />
-})(({ theme, expand }) => ({
-   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-   marginLeft: 'auto',
-   transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-   })
-}))
-
-function Video() {
+function Short() {
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -43,16 +24,11 @@ function Video() {
       setAnchorEl(null)
    }
 
-   const [expanded, setExpanded] = useState(false)
-
-   const handleExpandClick = () => {
-      setExpanded(!expanded)
-   }
-
    const styles = useStyles()
+
    return (
       <div style={{ padding: 16 }}>
-         <Card className={styles.card}>
+         <Card className={styles.short}>
             <CardHeader
                avatar={<Avatar aria-label='recipe'>R</Avatar>}
                action={
@@ -63,37 +39,30 @@ function Video() {
                title='Shrimp and Chorizo Paella'
                subheader='September 14, 2016'
             />
-            <iframe
-               width='100%'
-               height='400'
-               src='https://www.youtube.com/embed/N-hhPRa_iaA'
-               title='YouTube video player'
-               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-               allowFullScreen
-            ></iframe>
-            <CardContent>
+            <CardMedia
+               class={styles.cardMedia}
+               component='img'
+               height='194'
+               image='images/short169.jpg'
+               alt='Paella dish'
+            />
+            {/* <CardContent>
                <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together
                   with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
                </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
+            </CardContent> */}
+            <CardActions disableSpacing className={styles.cardActions}>
                <IconButton aria-label='add to favorites'>
-                  <FavoriteIcon />
+                  <FavoriteIcon className={styles.iconActions} />
                </IconButton>
                <IconButton aria-label='share'>
-                  <ShareIcon />
+                  <ShareIcon className={styles.iconActions} />
                </IconButton>
-               <ExpandMore
-                  expand={expanded}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label='show more'
-               >
-                  <ExpandMoreIcon />
-               </ExpandMore>
+               <IconButton aria-label='share'>
+                  <ReplyIcon className={styles.iconActions} />
+               </IconButton>
             </CardActions>
-            <Comment expanded={expanded} />
          </Card>
          <Menu
             id='basic-menu'
@@ -115,4 +84,4 @@ function Video() {
    )
 }
 
-export default Video
+export default Short

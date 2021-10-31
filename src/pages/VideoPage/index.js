@@ -1,4 +1,4 @@
-import Video from '../../componets/Video'
+import Video from '../../components/Video'
 
 function VideoPage() {
    return (

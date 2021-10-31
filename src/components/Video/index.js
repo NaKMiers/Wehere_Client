@@ -4,7 +4,6 @@ import {
    CardActions,
    CardContent,
    CardHeader,
-   CardMedia,
    IconButton,
    Menu,
    MenuItem,
@@ -17,7 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ShareIcon from '@material-ui/icons/Share'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Comment from '../Comment'
 import useStyles from './styles'
 
@@ -32,7 +31,7 @@ const ExpandMore = styled(props => {
    })
 }))
 
-function Image() {
+function Video() {
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -51,7 +50,7 @@ function Image() {
    const styles = useStyles()
    return (
       <div style={{ padding: 16 }}>
-         <Card sx={{ maxWidth: 345 }}>
+         <Card className={styles.card}>
             <CardHeader
                avatar={<Avatar aria-label='recipe'>R</Avatar>}
                action={
@@ -62,9 +61,16 @@ function Image() {
                title='Shrimp and Chorizo Paella'
                subheader='September 14, 2016'
             />
-            <CardMedia component='img' image='/images/cute4k.jpg' alt='Paella dish' />
+            <iframe
+               width='100%'
+               height='400'
+               src='https://www.youtube.com/embed/N-hhPRa_iaA'
+               title='YouTube video player'
+               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+               allowFullScreen
+            ></iframe>
             <CardContent>
-               <Typography variant='body2' color='text.secondary'>
+               <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together
                   with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
                </Typography>
@@ -107,4 +113,4 @@ function Image() {
    )
 }
 
-export default Image
+export default Video

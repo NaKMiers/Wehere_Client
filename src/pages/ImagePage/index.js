@@ -1,4 +1,4 @@
-import Image from '../../componets/Image'
+import Image from '../../components/Image'
 
 function ImagePage() {
    return (

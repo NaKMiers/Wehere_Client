@@ -4,6 +4,7 @@ import {
    CardActions,
    CardContent,
    CardHeader,
+   CardMedia,
    IconButton,
    Menu,
    MenuItem,
@@ -31,7 +32,7 @@ const ExpandMore = styled(props => {
    })
 }))
 
-function Blog() {
+function Image() {
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -61,13 +62,9 @@ function Blog() {
                title='Shrimp and Chorizo Paella'
                subheader='September 14, 2016'
             />
-            {/* <CardMedia component='img' image='/images/cute4k.jpg' alt='Paella dish' /> */}
+            <CardMedia component='img' image='/images/cute4k.jpg' alt='Paella dish' />
             <CardContent>
-               <Typography variant='body2' color='text.secondary'>
-                  This impressive paella is a perfect party dish and a fun meal to cook together
-                  with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                  This impressive paella is a perfect party dish and a fun meal to cook together
-                  with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
+               <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together
                   with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
                </Typography>
@@ -110,4 +107,4 @@ function Blog() {
    )
 }
 
-export default Blog
+export default Image

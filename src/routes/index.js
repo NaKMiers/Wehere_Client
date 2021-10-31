@@ -1,12 +1,14 @@
+import HomePage from '../pages/Home'
 import VideoPage from '../pages/VideoPage'
 import ImagePage from '../pages/ImagePage'
 import BlogPage from '../pages/BlogPage'
 import { Route } from 'react-router'
+import ShortPage from '../pages/ShortPage'
 const routes = [
    {
-      path: '/videos',
+      path: '/blogs',
       exact: true,
-      component: () => <VideoPage />
+      component: () => <BlogPage />
    },
    {
       path: '/images',
@@ -14,9 +16,19 @@ const routes = [
       component: () => <ImagePage />
    },
    {
-      path: '/blogs',
+      path: '/',
       exact: true,
-      component: () => <BlogPage />
+      component: () => <HomePage />
+   },
+   {
+      path: '/videos',
+      exact: true,
+      component: () => <VideoPage />
+   },
+   {
+      path: '/shorts',
+      exact: true,
+      component: () => <ShortPage />
    }
 ]
 
