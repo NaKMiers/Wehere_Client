@@ -9,7 +9,7 @@ import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 import MenuIcon from '@material-ui/icons/Menu'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom'
 import useStyles from './styles'
 
@@ -18,6 +18,8 @@ const slideHeader2UrlList = [
    '/musics',
    '/events',
    '/todolist',
+   '/friend-list',
+   '/faq',
    '/menu',
    '/menu/setting'
 ]
@@ -35,7 +37,7 @@ function Header() {
       }
    }, [match.path])
 
-   useEffect(() => {
+   useLayoutEffect(() => {
       if (slideHeader === 2) {
          Object.assign(toolbarRef.current.style, {
             transform: 'translateX(-45.2%)',

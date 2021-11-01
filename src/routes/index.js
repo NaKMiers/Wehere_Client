@@ -9,6 +9,8 @@ import MenuPage from '../pages/MenuPage'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 import SettingPage from '../pages/SettingPage'
+import FriendListPage from '../pages/FriendListPage'
+import FAQPage from '../pages/FAQPage'
 const routes = [
    {
       path: '/blogs',
@@ -39,6 +41,16 @@ const routes = [
       path: '/todolist',
       exact: true,
       component: () => <TodoListPage />
+   },
+   {
+      path: '/friend-list',
+      exact: true,
+      component: () => <FriendListPage />
+   },
+   {
+      path: '/faq',
+      exact: true,
+      component: () => <FAQPage />
    },
    {
       path: '/menu',
