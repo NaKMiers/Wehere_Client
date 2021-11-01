@@ -9,15 +9,31 @@ import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 import MenuIcon from '@material-ui/icons/Menu'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
-import { useEffect, useRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { NavLink, useLocation, useRouteMatch } from 'react-router-dom'
 import useStyles from './styles'
+
+const slideHeader2UrlList = [
+   '/messenger',
+   '/musics',
+   '/events',
+   '/todolist',
+   '/menu',
+   '/menu/setting'
+]
 
 function Header() {
    const [slideHeader, setSlideHeader] = useState(0)
    const toolbarRef = useRef()
    const slideArrowRef = useRef()
    const styles = useStyles()
+   const match = useRouteMatch(useLocation().pathname)
+
+   useLayoutEffect(() => {
+      if (slideHeader2UrlList.includes(match.path)) {
+         setSlideHeader(3)
+      }
+   }, [match.path])
 
    useEffect(() => {
       if (slideHeader === 2) {
@@ -29,7 +45,7 @@ function Header() {
             transform: 'rotate(180deg)',
             transition: 'transform ease-in-out 0.5s'
          })
-      } else {
+      } else if (slideHeader === 1) {
          Object.assign(toolbarRef.current.style, {
             transform: 'translateX(0)',
             transition: 'transform ease-in-out 0.5s'
@@ -37,6 +53,13 @@ function Header() {
          Object.assign(slideArrowRef.current.style, {
             transform: 'rotate(0)',
             transition: 'transform ease-in-out 0.5s'
+         })
+      } else if (slideHeader === 3) {
+         Object.assign(toolbarRef.current.style, {
+            transform: 'translateX(-45.2%)'
+         })
+         Object.assign(slideArrowRef.current.style, {
+            transform: 'rotate(180deg)'
          })
       }
    }, [slideHeader])

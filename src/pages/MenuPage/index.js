@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 const menuList = [
    { icon: () => <AccountCircleIcon />, label: 'Profile', link: '/profile' },
    { icon: () => <SupervisedUserCircleIcon />, label: 'Friends', link: '/friends' },
-   { icon: () => <SettingsIcon />, label: 'Setting', link: '/setting' },
+   { icon: () => <SettingsIcon />, label: 'Setting', link: '/menu/setting' },
    { icon: () => <GavelIcon />, label: 'FAQ', link: '/profile' },
    { icon: () => <LiveHelpIcon />, label: 'Help & Support', link: '/help-and-support' },
    { icon: () => <SyncIcon />, label: 'Sync', link: '/sync' },

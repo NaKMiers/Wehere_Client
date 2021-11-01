@@ -8,6 +8,7 @@ import TodoListPage from '../pages/TodoListPage'
 import MenuPage from '../pages/MenuPage'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
+import SettingPage from '../pages/SettingPage'
 const routes = [
    {
       path: '/blogs',
@@ -43,6 +44,11 @@ const routes = [
       path: '/menu',
       exact: true,
       component: () => <MenuPage />
+   },
+   {
+      path: '/menu/setting',
+      exact: true,
+      component: () => <SettingPage />
    },
    {
       path: '/login',

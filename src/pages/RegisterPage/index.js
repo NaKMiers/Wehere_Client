@@ -1,6 +1,5 @@
 import {
    Button,
-   FormControl,
    FormControlLabel,
    FormLabel,
    Radio,
