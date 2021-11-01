@@ -15,6 +15,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow'
 import { useState } from 'react'
+import Header from '../../components/Header'
 import useStyles from './styles'
 
 const not = (a, b) => {
@@ -112,115 +113,118 @@ function TodoListPage() {
    console.log(taskValue)
 
    return (
-      <div style={{ padding: 16 }}>
-         <Grid className={styles.addTaskWrap}>
-            <TextField
-               onFocus={() => {
-                  setFocusInput1(true)
-               }}
-               onBlur={() => {
-                  setFocusInput1(false)
-               }}
-               InputProps={{
-                  classes: { input: styles.inputTextField }
-               }}
-               InputLabelProps={{
-                  style: {
-                     fontSize: 18,
-                     transform:
-                        isFocusInput1 || taskValue
-                           ? 'translate(14px, -6px) scale(0.75)'
-                           : 'translate(16px, 15px) scale(1)'
-                  }
-               }}
-               onChange={e => setTaskValue(e.target.value)}
-               className={styles.taskTextField}
-               label='Add new task...'
-               variant='outlined'
-            />
-            <TextField
-               type='number'
-               onFocus={() => {
-                  setFocusInput2(true)
-               }}
-               onBlur={() => {
-                  setFocusInput2(false)
-               }}
-               InputProps={{
-                  classes: { input: styles.inputTextField }
-               }}
-               InputLabelProps={{
-                  style: {
-                     fontSize: 18,
-                     transform:
-                        isFocusInput2 || pointValue
-                           ? 'translate(14px, -6px) scale(0.75)'
-                           : 'translate(16px, 15px) scale(1)'
-                  }
-               }}
-               onChange={e => setPointValue(e.target.value)}
-               className={styles.pointTextField}
-               label='Point'
-               variant='outlined'
-            />
-            <Button className={styles.addTaskBtn} color='primary' variant='contained'>
-               Add
-            </Button>
-         </Grid>
-
-         <Grid container spacing={2} justifyContent='center' alignItems='center'>
-            <Grid item xs={12}>
-               {customList(left, 'Ready')}
+      <>
+         <Header />
+         <div style={{ padding: 16 }}>
+            <Grid className={styles.addTaskWrap}>
+               <TextField
+                  onFocus={() => {
+                     setFocusInput1(true)
+                  }}
+                  onBlur={() => {
+                     setFocusInput1(false)
+                  }}
+                  InputProps={{
+                     classes: { input: styles.inputTextField }
+                  }}
+                  InputLabelProps={{
+                     style: {
+                        fontSize: 18,
+                        transform:
+                           isFocusInput1 || taskValue
+                              ? 'translate(14px, -6px) scale(0.75)'
+                              : 'translate(16px, 15px) scale(1)'
+                     }
+                  }}
+                  onChange={e => setTaskValue(e.target.value)}
+                  className={styles.taskTextField}
+                  label='Add new task...'
+                  variant='outlined'
+               />
+               <TextField
+                  type='number'
+                  onFocus={() => {
+                     setFocusInput2(true)
+                  }}
+                  onBlur={() => {
+                     setFocusInput2(false)
+                  }}
+                  InputProps={{
+                     classes: { input: styles.inputTextField }
+                  }}
+                  InputLabelProps={{
+                     style: {
+                        fontSize: 18,
+                        transform:
+                           isFocusInput2 || pointValue
+                              ? 'translate(14px, -6px) scale(0.75)'
+                              : 'translate(16px, 15px) scale(1)'
+                     }
+                  }}
+                  onChange={e => setPointValue(e.target.value)}
+                  className={styles.pointTextField}
+                  label='Point'
+                  variant='outlined'
+               />
+               <Button className={styles.addTaskBtn} color='primary' variant='contained'>
+                  Add
+               </Button>
             </Grid>
-            <Grid item xs={12}>
-               <Grid container alignItems='center' style={{ justifyContent: 'space-around' }}>
-                  <Button
-                     className={styles.todoActionBtn}
-                     variant='outlined'
-                     size='small'
-                     onClick={handleAllLeft}
-                     disabled={right.length === 0}
-                     aria-label='move all right'
-                  >
-                     <DoubleArrowIcon style={{ transform: 'rotate(-90deg)' }} />
-                  </Button>
-                  <Button
-                     className={styles.todoActionBtn}
-                     variant='outlined'
-                     size='small'
-                     onClick={handleCheckedLeft}
-                     disabled={rightChecked.length === 0}
-                     aria-label='move selected right'
-                  >
-                     <ArrowUpwardIcon />
-                  </Button>
-                  <Button
-                     className={styles.todoActionBtn}
-                     variant='outlined'
-                     size='small'
-                     onClick={handleCheckedRight}
-                     disabled={leftChecked.length === 0}
-                     aria-label='move selected left'
-                  >
-                     <ArrowDownwardIcon />
-                  </Button>
-                  <Button
-                     className={styles.todoActionBtn}
-                     variant='outlined'
-                     size='small'
-                     onClick={handleAllRight}
-                     disabled={left.length === 0}
-                     aria-label='move all left'
-                  >
-                     <DoubleArrowIcon style={{ transform: 'rotate(90deg)' }} />
-                  </Button>
+
+            <Grid container spacing={2} justifyContent='center' alignItems='center'>
+               <Grid item xs={12}>
+                  {customList(left, 'Ready')}
+               </Grid>
+               <Grid item xs={12}>
+                  <Grid container alignItems='center' style={{ justifyContent: 'space-around' }}>
+                     <Button
+                        className={styles.todoActionBtn}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleAllLeft}
+                        disabled={right.length === 0}
+                        aria-label='move all right'
+                     >
+                        <DoubleArrowIcon style={{ transform: 'rotate(-90deg)' }} />
+                     </Button>
+                     <Button
+                        className={styles.todoActionBtn}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleCheckedLeft}
+                        disabled={rightChecked.length === 0}
+                        aria-label='move selected right'
+                     >
+                        <ArrowUpwardIcon />
+                     </Button>
+                     <Button
+                        className={styles.todoActionBtn}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleCheckedRight}
+                        disabled={leftChecked.length === 0}
+                        aria-label='move selected left'
+                     >
+                        <ArrowDownwardIcon />
+                     </Button>
+                     <Button
+                        className={styles.todoActionBtn}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleAllRight}
+                        disabled={left.length === 0}
+                        aria-label='move all left'
+                     >
+                        <DoubleArrowIcon style={{ transform: 'rotate(90deg)' }} />
+                     </Button>
+                  </Grid>
+               </Grid>
+               <Grid item xs={12}>
+                  {customList(right, 'Completed')}
                </Grid>
             </Grid>
-            <Grid item xs={12}>
-               {customList(right, 'Completed')}
-            </Grid>
-         </Grid>
-      </div>
+         </div>
+      </>
    )
 }
 

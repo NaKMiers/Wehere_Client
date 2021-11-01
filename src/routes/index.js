@@ -6,6 +6,8 @@ import { Route } from 'react-router'
 import ShortPage from '../pages/ShortPage'
 import TodoListPage from '../pages/TodoListPage'
 import MenuPage from '../pages/MenuPage'
+import LoginPage from '../pages/LoginPage'
+import RegisterPage from '../pages/RegisterPage'
 const routes = [
    {
       path: '/blogs',
@@ -41,6 +43,16 @@ const routes = [
       path: '/menu',
       exact: true,
       component: () => <MenuPage />
+   },
+   {
+      path: '/login',
+      exact: true,
+      component: () => <LoginPage />
+   },
+   {
+      path: '/register',
+      exact: true,
+      component: () => <RegisterPage />
    }
 ]
 
