@@ -1,44 +1,142 @@
-import { AppBar, Avatar, Box, Grid, Toolbar } from '@material-ui/core'
+import { AppBar, Avatar, Grid, Toolbar } from '@material-ui/core'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import AssignmentIcon from '@material-ui/icons/Assignment'
+import ChatIcon from '@material-ui/icons/Chat'
+import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents'
 import ImageIcon from '@material-ui/icons/Image'
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
+import MenuIcon from '@material-ui/icons/Menu'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
+import { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import useStyles from './styles'
 
 function Header() {
+   const [slideHeader, setSlideHeader] = useState(0)
+   const toolbarRef = useRef()
+   const slideArrowRef = useRef()
    const styles = useStyles()
 
+   useEffect(() => {
+      if (slideHeader === 2) {
+         Object.assign(toolbarRef.current.style, {
+            transform: 'translateX(-45.2%)',
+            transition: 'transform ease-in-out 0.5s'
+         })
+         Object.assign(slideArrowRef.current.style, {
+            transform: 'rotate(180deg)',
+            transition: 'transform ease-in-out 0.5s'
+         })
+      } else {
+         Object.assign(toolbarRef.current.style, {
+            transform: 'translateX(0)',
+            transition: 'transform ease-in-out 0.5s'
+         })
+         Object.assign(slideArrowRef.current.style, {
+            transform: 'rotate(0)',
+            transition: 'transform ease-in-out 0.5s'
+         })
+      }
+   }, [slideHeader])
+
    return (
-      <Box>
-         <AppBar position='static'>
-            <Grid container>
-               <Grid item xs={12} md={4} className={styles.gridContainer}>
-                  <Toolbar className={styles.toolbar}>
-                     <NavLink to='/blogs' exact activeClassName={styles.selected}>
-                        <AssignmentIcon className={styles.headerIcon} />
-                     </NavLink>
-                     <NavLink to='/images' exact activeClassName={styles.selected}>
-                        <ImageIcon className={styles.headerIcon} />
-                     </NavLink>
-                     <NavLink to='/' exact activeClassName={styles.selectedHome}>
-                        <Avatar
-                           className={styles.logo}
-                           src='/images/wehere.jpg'
-                           alt='Wehere Logo'
-                        />
-                     </NavLink>
-                     <NavLink to='/videos' exact activeClassName={styles.selected}>
-                        <VideoLibraryIcon className={styles.headerIcon} />
-                     </NavLink>
-                     <NavLink to='/shorts' exact activeClassName={styles.selected}>
-                        <SlowMotionVideoIcon className={styles.headerIcon} />
-                     </NavLink>
-                  </Toolbar>
-               </Grid>
+      <AppBar position='static' className='appbar'>
+         <Grid container>
+            <Grid item xs={12} md={4} className={styles.gridContainer}>
+               <Toolbar className={styles.toolbar} ref={toolbarRef}>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/'
+                     exact
+                     activeClassName={styles.selectedHome}
+                  >
+                     <Avatar className={styles.logo} src='/images/wehere.jpg' alt='Wehere Logo' />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/blogs'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <AssignmentIcon className={styles.headerIcon} />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/images'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <ImageIcon className={styles.headerIcon} />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/videos'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <VideoLibraryIcon className={styles.headerIcon} />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/shorts'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <SlowMotionVideoIcon className={styles.headerIcon} />
+                  </NavLink>
+
+                  <ArrowForwardIosIcon
+                     className={styles.slideIcon}
+                     onClick={() => setSlideHeader(slideHeader < 2 ? 2 : 1)}
+                     ref={slideArrowRef}
+                  />
+
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/messenger'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <ChatIcon className={styles.headerIcon} style={{ marginTop: 5 }} />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/musics'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <LibraryMusicIcon className={styles.headerIcon} style={{ marginTop: 5 }} />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/events'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <EmojiEventsIcon className={styles.headerIcon} />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/todolist'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <CheckBoxIcon className={styles.headerIcon} />
+                  </NavLink>
+                  <NavLink
+                     className={styles.tabItem}
+                     to='/menu'
+                     exact
+                     activeClassName={styles.selected}
+                  >
+                     <MenuIcon className={styles.headerMenuIcon} />
+                  </NavLink>
+               </Toolbar>
             </Grid>
-         </AppBar>
-      </Box>
+         </Grid>
+      </AppBar>
    )
 }
 

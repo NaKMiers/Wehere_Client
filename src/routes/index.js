@@ -4,6 +4,8 @@ import ImagePage from '../pages/ImagePage'
 import BlogPage from '../pages/BlogPage'
 import { Route } from 'react-router'
 import ShortPage from '../pages/ShortPage'
+import TodoListPage from '../pages/TodoListPage'
+import MenuPage from '../pages/MenuPage'
 const routes = [
    {
       path: '/blogs',
@@ -29,6 +31,16 @@ const routes = [
       path: '/shorts',
       exact: true,
       component: () => <ShortPage />
+   },
+   {
+      path: '/todolist',
+      exact: true,
+      component: () => <TodoListPage />
+   },
+   {
+      path: '/menu',
+      exact: true,
+      component: () => <MenuPage />
    }
 ]
 

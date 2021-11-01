@@ -7,7 +7,7 @@ import routes from './routes'
 
 function App() {
    return (
-      <Router className='App'>
+      <Router>
          <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header />

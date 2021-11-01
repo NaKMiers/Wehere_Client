@@ -40,7 +40,7 @@ function Short() {
                subheader='September 14, 2016'
             />
             <CardMedia
-               class={styles.cardMedia}
+               className={styles.cardMedia}
                component='img'
                height='194'
                image='images/short169.jpg'
