@@ -19,11 +19,12 @@ const slideHeader2UrlList = [
    '/events',
    '/todolist',
    '/friend-list',
-   '/faq',
    '/menu',
+   '/menu/faq',
    '/menu/setting',
    '/menu/switch-account',
-   '/menu/sync'
+   '/menu/sync',
+   '/diaries'
 ]
 
 function Header() {

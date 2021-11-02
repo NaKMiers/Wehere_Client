@@ -7,15 +7,17 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle'
 import SyncIcon from '@material-ui/icons/Sync'
 import SyncAltIcon from '@material-ui/icons/SyncAlt'
+import MenuBookIcon from '@material-ui/icons/MenuBook'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
 import useStyles from './styles'
 
 const menuList = [
    { icon: () => <AccountCircleIcon />, label: 'Profile', link: '/profile' },
+   { icon: () => <MenuBookIcon />, label: 'Diaries', link: '/diaries' },
    { icon: () => <SupervisedUserCircleIcon />, label: 'Friends', link: '/friend-list' },
    { icon: () => <SettingsIcon />, label: 'Setting', link: '/menu/setting' },
-   { icon: () => <GavelIcon />, label: 'FAQ', link: '/faq' },
+   { icon: () => <GavelIcon />, label: 'FAQ', link: '/menu/faq' },
    { icon: () => <LiveHelpIcon />, label: 'Help & Support', link: '/help-and-support' },
    { icon: () => <SyncIcon />, label: 'Sync', link: '/menu/sync' },
    { icon: () => <SyncAltIcon />, label: 'Switch Account', link: '/menu/switch-account' },
