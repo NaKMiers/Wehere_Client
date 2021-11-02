@@ -21,7 +21,9 @@ const slideHeader2UrlList = [
    '/friend-list',
    '/faq',
    '/menu',
-   '/menu/setting'
+   '/menu/setting',
+   '/menu/switch-account',
+   '/menu/sync'
 ]
 
 function Header() {

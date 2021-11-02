@@ -11,6 +11,7 @@ export default makeStyles(theme => ({
       fontSize: 18
    },
    link: {
+      display: 'flex',
       textDecoration: 'none',
       width: '100%'
    }

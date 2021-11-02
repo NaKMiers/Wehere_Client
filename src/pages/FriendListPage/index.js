@@ -56,7 +56,9 @@ function FriendListPage() {
                      <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
                   </ListItemAvatar>
                   <ListItemText primary='User3' />
-                  <Button className={styles.friendBtn} variant='contained'>Unfriend</Button>
+                  <Button className={styles.friendBtn} variant='contained'>
+                     Unfriend
+                  </Button>
                </ListItem>
                <Divider light />
             </List>

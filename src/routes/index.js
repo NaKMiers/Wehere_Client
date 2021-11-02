@@ -11,6 +11,8 @@ import RegisterPage from '../pages/RegisterPage'
 import SettingPage from '../pages/SettingPage'
 import FriendListPage from '../pages/FriendListPage'
 import FAQPage from '../pages/FAQPage'
+import SwitchAccountPage from '../pages/SwitchAccountPage'
+import SyncPage from '../pages/Sync'
 const routes = [
    {
       path: '/blogs',
@@ -61,6 +63,16 @@ const routes = [
       path: '/menu/setting',
       exact: true,
       component: () => <SettingPage />
+   },
+   {
+      path: '/menu/sync',
+      exact: true,
+      component: () => <SyncPage />
+   },
+   {
+      path: '/menu/switch-account',
+      exact: true,
+      component: () => <SwitchAccountPage />
    },
    {
       path: '/login',
