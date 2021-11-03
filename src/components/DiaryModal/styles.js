@@ -37,6 +37,12 @@ export default makeStyles(theme => ({
       textAlign: 'center',
       marginBottom: 8
    },
+   formContent: {
+      backgroundSize: 'contain',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundOrigin: 'content-box'
+   },
    submitDiaryBtn: {
       position: 'absolute',
       width: 'calc(100% - 32px)',
@@ -53,36 +59,54 @@ export default makeStyles(theme => ({
       borderBottom: '3px #333 solid',
       outline: 'none',
       fontSize: 20,
-      marginBottom: 8
+      marginBottom: 8,
+      background: 'transparent'
    },
    inputContentDiary: {
       width: '100%',
+      height: '60vh',
       resize: 'none',
-      // height: 'calc(66vh - 16px)',
-      height: '50vh',
       border: '3px #333 solid',
       outline: 'none',
       padding: 16,
-      fontSize: 16
+      fontSize: 16,
+      transition: 'height 0.2s ease-in-out',
+      background: 'transparent'
    },
+   diaryBody: {},
    editDiaryWrap: {},
    expandMoreEditBtn: {
       margin: 'auto'
    },
+   listEditOption: {
+      display: 'flex',
+      flexDirection: 'column'
+   },
    editDiaryItem: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      margin: '-12px 0px'
+   },
+   editDiaryListBox: {
+      width: '100vw',
+      overflow: 'scroll'
+   },
+   buttonGroupTextColor: {
       display: 'flex',
       justifyContent: 'center'
    },
-   editDiaryListBox: {
-      width: 'auto',
-      marginLeft: 8
-   },
-   buttonGroupTextColor: {
-      display: 'flex'
-   },
-   textColorBtn: {
+   textColorOption: {
       maxWidth: 30,
       padding: 18,
+      border: '2px solid #fff'
+   },
+   buttonGroupBg: {
+      border: '2px solid #fff'
+   },
+   bgOption: {
+      width: 150,
+      height: 100,
       border: '2px solid #fff'
    }
 }))
