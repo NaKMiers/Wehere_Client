@@ -2,11 +2,11 @@ import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
    topProfile: {
-      position: 'relative'
+      margin: 'auto',
+      position: 'relative',
+      maxWidth: 960
    },
    bgProfile: {
-      margin: 'auto',
-      maxWidth: 960,
       minHeight: 200,
       maxHeight: 400,
       height: 'auto',
@@ -31,5 +31,32 @@ export default makeStyles(theme => ({
       width: '100%',
       textAlign: 'center',
       fontWeight: 'bold'
+   },
+   groupActionBtn: {
+      position: 'absolute',
+      bottom: '-120px',
+      left: '50%',
+      width: '75%',
+      transform: 'translateX(-50%)',
+      display: 'flex',
+      margin: 'auto'
+   },
+   actionBtn: {
+      backgroundColor: '#333',
+      color: '#fff',
+      fontWeight: 'bold',
+      margin: '0 4px',
+      padding: '6px 8px'
+   },
+   menuAction: {
+      marginLeft: 12
+   },
+   menuActionItem: {
+      minHeight: 'auto'
+   },
+   bottomProfile: {
+      width: '100%',
+      marginTop: 114,
+      padding: 16
    }
 }))
