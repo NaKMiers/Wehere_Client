@@ -26,7 +26,14 @@ export default makeStyles(theme => ({
       left: 0,
       right: 0,
       bottom: 52,
-      padding: '8px 16px 16px 16px'
+      padding: '8px 16px 16px 16px',
+      borderRadius: 16,
+      // background:
+      //    'url(https://images.pexels.com/photos/1624600/pexels-photo-1624600.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)',
+      backgroundOrigin: 'content-box',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center'
    },
    modalTitle: {
       fontSize: 24,
@@ -36,12 +43,6 @@ export default makeStyles(theme => ({
       fontSize: 10,
       textAlign: 'center',
       marginBottom: 8
-   },
-   formContent: {
-      backgroundSize: 'contain',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundOrigin: 'content-box'
    },
    submitDiaryBtn: {
       position: 'absolute',
@@ -105,8 +106,8 @@ export default makeStyles(theme => ({
       border: '2px solid #fff'
    },
    bgOption: {
-      width: 150,
-      height: 100,
+      width: 100,
+      height: 150,
       border: '2px solid #fff'
    }
 }))

@@ -39,12 +39,14 @@ function RegisterPage() {
                id='filled-basic'
                label='Password...'
                variant='filled'
+               type='password'
             />
             <TextField
                className={styles.textField}
                id='filled-basic'
                label='Password again...'
                variant='filled'
+               type='password'
             />
             <FormLabel component='legend'>Gender</FormLabel>
             <RadioGroup
@@ -58,7 +60,9 @@ function RegisterPage() {
                <FormControlLabel value='other' control={<Radio />} label='Other' />
             </RadioGroup>
             <Button type='submit' className={styles.loginBtn} variant='contained'>
-               Register
+               <Link to='/' style={{ textDecoration: 'none', color: '#333' }}>
+                  Register
+               </Link>
             </Button>
             <div className={styles.subOptions}>
                <span>

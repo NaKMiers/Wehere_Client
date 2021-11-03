@@ -45,7 +45,7 @@ function DiaryModal() {
       setOpenCollapeEdit(!openCollapeEdit)
       if (!openCollapeEdit) {
          Object.assign(inputContentArea.current.style, {
-            height: 'calc(60vh - 260px)'
+            height: 'calc(60vh - 310px)'
          })
       } else {
          setTimeout(
@@ -108,13 +108,7 @@ function DiaryModal() {
                      15:11 - 2:11:2021
                   </Typography>
 
-                  <form
-                     style={{
-                        background:
-                           'url(https://images.pexels.com/photos/3310691/pexels-photo-3310691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)'
-                     }}
-                     className={styles.formContent}
-                  >
+                  <form className={styles.formContent}>
                      <input
                         name='diaryTitle'
                         className={styles.inputTitleDiary}

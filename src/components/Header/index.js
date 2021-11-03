@@ -18,6 +18,7 @@ const slideHeader2UrlList = [
    '/musics',
    '/events',
    '/todolist',
+   '/profile',
    '/friend-list',
    '/menu',
    '/menu/faq',

@@ -19,12 +19,15 @@ function LoginPage() {
             />
             <TextField
                className={styles.textField}
+               type='password'
                id='filled-basic'
                label='Password...'
                variant='filled'
             />
             <Button type='submit' className={styles.loginBtn} variant='contained'>
-               Login
+               <Link to='/' style={{ textDecoration: 'none', color: '#333' }}>
+                  Login
+               </Link>
             </Button>
             <div className={styles.subOptions}>
                <span>

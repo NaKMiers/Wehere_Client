@@ -14,6 +14,7 @@ import FAQPage from '../pages/FAQPage'
 import SwitchAccountPage from '../pages/SwitchAccountPage'
 import SyncPage from '../pages/Sync'
 import DiaryPage from '../pages/DiaryPage'
+import ProfilePage from '../pages/ProfilePage'
 const routes = [
    {
       path: '/blogs',
@@ -44,6 +45,11 @@ const routes = [
       path: '/todolist',
       exact: true,
       component: () => <TodoListPage />
+   },
+   {
+      path: '/profile',
+      exact: true,
+      component: () => <ProfilePage />
    },
    {
       path: '/friend-list',
