@@ -39,7 +39,7 @@ export default makeStyles(theme => ({
       width: '75%',
       transform: 'translateX(-50%)',
       display: 'flex',
-      margin: 'auto'
+      justifyContent: 'center'
    },
    actionBtn: {
       backgroundColor: '#333',
@@ -54,9 +54,41 @@ export default makeStyles(theme => ({
    menuActionItem: {
       minHeight: 'auto'
    },
+
    bottomProfile: {
-      width: '100%',
+      margin: 'auto',
+      maxWidth: 960,
       marginTop: 114,
       padding: 16
+   },
+   tabsList: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%'
+   },
+   tabButtonsWrap: {
+      margin: '8px 0 8px 0'
+   },
+   tabButton: {
+      border: 'none',
+      fontWeight: 'bold',
+      padding: '6px 16px'
+   },
+   friendBtn: {
+      padding: '2px 8px',
+      backgroundColor: '#4caf50',
+      color: '#fff'
+   },
+   infoTab: {
+      borderTop: '3px #333 solid',
+      width: '100%'
+   },
+   friendsTab: {
+      borderTop: '3px #333 solid',
+      width: '100%'
+   },
+   postsTab: {
+      borderTop: '3px #333 solid',
+      width: '100%'
    }
 }))

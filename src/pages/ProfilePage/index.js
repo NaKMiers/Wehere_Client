@@ -2,6 +2,7 @@ import {
    Avatar,
    Box,
    Button,
+   ButtonGroup,
    CardMedia,
    Divider,
    Grid,
@@ -10,31 +11,21 @@ import {
    ListItemAvatar,
    ListItemIcon,
    ListItemText,
-   ListSubheader,
    Menu,
    MenuItem,
    Typography
 } from '@material-ui/core'
+import CakeIcon from '@material-ui/icons/Cake'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import HomeIcon from '@material-ui/icons/Home'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import ImageIcon from '@material-ui/icons/Image'
-import WorkIcon from '@material-ui/icons/Work'
-import BeachAccessIcon from '@material-ui/icons/BeachAccess'
-import FolderIcon from '@material-ui/icons/Folder'
-import Header from '../../components/Header'
-import Video from '../../components/Video'
-import Image from '../../components/Image'
-import Blog from '../../components/Blog'
-import useStyles from './styles'
 import { styled } from '@material-ui/styles'
-import { cloneElement, useState } from 'react'
-
-function generate(element) {
-   return [0, 1, 2].map(value =>
-      cloneElement(element, {
-         key: value
-      })
-   )
-}
+import { useState } from 'react'
+import Blog from '../../components/Blog'
+import Header from '../../components/Header'
+import Image from '../../components/Image'
+import Video from '../../components/Video'
+import useStyles from './styles'
 
 const Demo = styled('div')(({ theme }) => ({
    backgroundColor: theme.palette.background.paper
@@ -49,6 +40,84 @@ function ProfilePage() {
    const handleClose = () => {
       setAnchorEl(null)
    }
+
+   const [currentTab, setCurrentTab] = useState('posts')
+
+   const renderTabs = () => {
+      if (currentTab === 'info') {
+         return (
+            <Box className={styles.infoTab}>
+               <Grid item xs={12} md={6}>
+                  <Demo>
+                     <List>
+                        <ListItem>
+                           <ListItemIcon>
+                              <CakeIcon />
+                           </ListItemIcon>
+                           <ListItemText primary='14/09/2004' />
+                        </ListItem>
+                        <ListItem>
+                           <ListItemIcon>
+                              <FavoriteIcon />
+                           </ListItemIcon>
+                           <ListItemText primary='Single' />
+                        </ListItem>
+                        <ListItem>
+                           <ListItemIcon>
+                              <HomeIcon />
+                           </ListItemIcon>
+                           <ListItemText primary='Vinh Long' />
+                        </ListItem>
+                     </List>
+                  </Demo>
+               </Grid>
+            </Box>
+         )
+      } else if (currentTab === 'friends') {
+         return (
+            <Box className={styles.friendsTab}>
+               <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                  <ListItem>
+                     <ListItemAvatar>
+                        <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary='User1' />
+                     <Button className={styles.friendBtn} variant='contained'>
+                        Add Friend
+                     </Button>
+                  </ListItem>
+                  <ListItem>
+                     <ListItemAvatar>
+                        <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary='User2' />
+                     <Button className={styles.friendBtn} variant='contained'>
+                        Add Friend
+                     </Button>
+                  </ListItem>
+                  <ListItem>
+                     <ListItemAvatar>
+                        <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary='User3' />
+                     <Button className={styles.friendBtn} variant='contained'>
+                        Add Friend
+                     </Button>
+                  </ListItem>
+               </List>
+            </Box>
+         )
+      } else {
+         return (
+            <Box className={styles.postsTab}>
+               <Video />
+               <Image />
+               <Blog />
+            </Box>
+         )
+      }
+   }
+
    const styles = useStyles()
 
    return (
@@ -74,10 +143,18 @@ function ProfilePage() {
                </Typography>
 
                <Box className={styles.groupActionBtn}>
-                  <Button className={styles.actionBtn} variant='contained' style={{ flexGrow: 4 }}>
+                  <Button
+                     className={styles.actionBtn}
+                     variant='contained'
+                     style={{ backgroundColor: '#2196f3' }}
+                  >
                      Add Friend
                   </Button>
-                  <Button className={styles.actionBtn} variant='contained' style={{ flexGrow: 4 }}>
+                  <Button
+                     className={styles.actionBtn}
+                     variant='contained'
+                     style={{ backgroundColor: '#333' }}
+                  >
                      Messenger
                   </Button>
                   <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
@@ -91,71 +168,55 @@ function ProfilePage() {
                      onClose={handleClose}
                   >
                      <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                        Profile
+                        Unfriend
                      </MenuItem>
                      <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                        My account
-                     </MenuItem>
-                     <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                        Logout
+                        Block
                      </MenuItem>
                   </Menu>
                </Box>
-
                <Divider style={{ marginTop: 10 }} />
             </Box>
             <Box className={styles.bottomProfile}>
-               <Box className={styles.info}>
-                  <Grid item xs={12} md={6}>
-                     <Typography sx={{ mt: 4, mb: 2 }} variant='h6' component='div'>
+               <Box className={styles.tabsList}>
+                  <ButtonGroup
+                     variant='text'
+                     aria-label='text button group'
+                     className={styles.tabButtonsWrap}
+                  >
+                     <Button
+                        className={styles.tabButton}
+                        style={{
+                           border: 'none',
+                           backgroundColor: `${currentTab === 'info' ? '#ddd' : '#fff'}`
+                        }}
+                        onClick={() => setCurrentTab('info')}
+                     >
                         Info
-                     </Typography>
-                     <Demo>
-                        <List>
-                           {generate(
-                              <ListItem>
-                                 <ListItemIcon>
-                                    <FolderIcon />
-                                 </ListItemIcon>
-                                 <ListItemText primary='Single-line item' />
-                              </ListItem>
-                           )}
-                        </List>
-                     </Demo>
-                  </Grid>
-               </Box>
-               <Box className={styles.friends}>
-                  <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                     <ListItem>
-                        <ListItemAvatar>
-                           <Avatar>
-                              <ImageIcon />
-                           </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary='Photos' secondary='Jan 9, 2014' />
-                     </ListItem>
-                     <ListItem>
-                        <ListItemAvatar>
-                           <Avatar>
-                              <WorkIcon />
-                           </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary='Work' secondary='Jan 7, 2014' />
-                     </ListItem>
-                     <ListItem>
-                        <ListItemAvatar>
-                           <Avatar>
-                              <BeachAccessIcon />
-                           </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary='Vacation' secondary='July 20, 2014' />
-                     </ListItem>
-                  </List>
-               </Box>
-               <Box className={styles.posts}>
-                  <Video />
-                  <Image />
-                  <Blog />
+                     </Button>
+                     <Button
+                        className={styles.tabButton}
+                        style={{
+                           border: 'none',
+                           backgroundColor: `${currentTab === 'posts' ? '#ddd' : '#fff'}`
+                        }}
+                        onClick={() => setCurrentTab('posts')}
+                     >
+                        Posts
+                     </Button>
+                     <Button
+                        className={styles.tabButton}
+                        style={{
+                           border: 'none',
+                           backgroundColor: `${currentTab === 'friends' ? '#ddd' : '#fff'}`
+                        }}
+                        onClick={() => setCurrentTab('friends')}
+                     >
+                        Friends
+                     </Button>
+                  </ButtonGroup>
+
+                  {renderTabs()}
                </Box>
             </Box>
          </Box>
