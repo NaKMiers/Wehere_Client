@@ -15,6 +15,7 @@ import SwitchAccountPage from '../pages/SwitchAccountPage'
 import SyncPage from '../pages/Sync'
 import DiaryPage from '../pages/DiaryPage'
 import ProfilePage from '../pages/ProfilePage'
+import HelpAndSupportPage from '../pages/HelpAndSupportPage'
 const routes = [
    {
       path: '/blogs',
@@ -75,6 +76,11 @@ const routes = [
       path: '/menu/faq',
       exact: true,
       component: () => <FAQPage />
+   },
+   {
+      path: '/menu/help-and-support',
+      exact: true,
+      component: () => <HelpAndSupportPage />
    },
    {
       path: '/menu/sync',
