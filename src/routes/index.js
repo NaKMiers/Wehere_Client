@@ -16,7 +16,15 @@ import SyncPage from '../pages/Sync'
 import DiaryPage from '../pages/DiaryPage'
 import ProfilePage from '../pages/ProfilePage'
 import HelpAndSupportPage from '../pages/HelpAndSupportPage'
+import MusicPage from '../pages/MusicPage'
+import EventPage from '../pages/EventPage'
+import MessengerPage from '../pages/MessengerPage'
 const routes = [
+   {
+      path: '/',
+      exact: true,
+      component: () => <HomePage />
+   },
    {
       path: '/blogs',
       exact: true,
@@ -28,19 +36,29 @@ const routes = [
       component: () => <ImagePage />
    },
    {
-      path: '/',
-      exact: true,
-      component: () => <HomePage />
-   },
-   {
       path: '/videos',
       exact: true,
       component: () => <VideoPage />
    },
    {
-      path: '/shorts',
+      path: '/true',
       exact: true,
       component: () => <ShortPage />
+   },
+   {
+      path: '/musics',
+      exact: true,
+      component: () => <MusicPage />
+   },
+   {
+      path: '/messenger',
+      exact: true,
+      component: () => <MessengerPage />
+   },
+   {
+      path: '/events',
+      exact: true,
+      component: () => <EventPage />
    },
    {
       path: '/todolist',
