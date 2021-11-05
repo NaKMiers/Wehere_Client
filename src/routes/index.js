@@ -47,7 +47,7 @@ const routes = [
    },
    {
       path: '/musics',
-      exact: true,
+      exact: false,
       component: () => <MusicPage />
    },
    {
