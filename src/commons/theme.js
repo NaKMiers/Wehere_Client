@@ -10,6 +10,9 @@ const theme = createTheme({
       },
       highlight: {
          main: '#ff5757'
+      },
+      success: {
+         main: '#00CA25'
       }
    }
 })

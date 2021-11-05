@@ -28,8 +28,6 @@ export default makeStyles(theme => ({
       bottom: 52,
       padding: '8px 16px 16px 16px',
       borderRadius: 16,
-      // background:
-      //    'url(https://images.pexels.com/photos/1624600/pexels-photo-1624600.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)',
       backgroundOrigin: 'content-box',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',

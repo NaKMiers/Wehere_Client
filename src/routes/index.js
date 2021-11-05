@@ -41,7 +41,7 @@ const routes = [
       component: () => <VideoPage />
    },
    {
-      path: '/true',
+      path: '/shorts',
       exact: true,
       component: () => <ShortPage />
    },
@@ -52,7 +52,7 @@ const routes = [
    },
    {
       path: '/messenger',
-      exact: true,
+      exact: false,
       component: () => <MessengerPage />
    },
    {
