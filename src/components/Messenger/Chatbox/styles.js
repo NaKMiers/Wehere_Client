@@ -5,7 +5,8 @@ export default makeStyles(theme => ({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: '#ffeb3b',
+      backgroundColor: '#2196f3',
+      color: '#fff',
       borderBottomLeftRadius: 12,
       borderBottomRightRadius: 12
    },
@@ -24,8 +25,10 @@ export default makeStyles(theme => ({
       marginTop: -4
    },
    avtBtn: {
-      borderRadius: '50%',
-      padding: 8
+      borderRadius: '50%'
+   },
+   avtLink: {
+      position: 'relative'
    },
    avt: {
       width: 48,
@@ -33,11 +36,36 @@ export default makeStyles(theme => ({
       border: '3px #ddd solid'
    },
    badge: {
-      top: -14,
-      right: 6
+      position: 'absolute',
+      top: 9,
+      right: 5
+   },
+   menuIcon: {
+      color: '#fff'
    },
    menuItem: {
       padding: '4px 8px',
       minHeight: 0
+   },
+
+   chatContent: {
+      height: 'calc(100vh - 196px)',
+      padding: 16
+   },
+
+   chatInput: {
+      height: 80,
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: '#2197f3',
+      borderTopLeftRadius: 8,
+      borderTopRightRadius: 8
+   },
+   inputText: {
+      flexGrow: '1'
+   },
+   inputProps: {
+      color: '#fff'
    }
 }))

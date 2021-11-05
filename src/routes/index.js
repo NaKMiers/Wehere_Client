@@ -67,7 +67,7 @@ const routes = [
    },
    {
       path: '/profile',
-      exact: true,
+      exact: false,
       component: () => <ProfilePage />
    },
    {

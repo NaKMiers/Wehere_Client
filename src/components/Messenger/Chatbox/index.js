@@ -6,12 +6,16 @@ import {
    IconButton,
    Menu,
    MenuItem,
+   TextField,
    Typography
 } from '@material-ui/core'
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import SendIcon from '@material-ui/icons/Send'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
 import { useState } from 'react'
-
+import { Link } from 'react-router-dom'
+import Message from '../Message'
 import useStyles from './styles'
 
 function Chatbox() {
@@ -26,11 +30,18 @@ function Chatbox() {
    const styles = useStyles()
 
    return (
-      <Box>
+      <>
          <Box className={styles.chatHeader}>
             <Button className={styles.avtBtn}>
-               <Avatar className={styles.avt} alt='avt' src='https://bom.to/7UX3Hq'></Avatar>
-               <Badge className={styles.badge} color='primary' variant='dot' invisible={false} />
+               <Link to='/profile/user1' className={styles.avtLink}>
+                  <Avatar className={styles.avt} alt='avt' src='https://bom.to/7UX3Hq'></Avatar>
+                  <Badge
+                     className={styles.badge}
+                     color='primary'
+                     variant='dot'
+                     invisible={false}
+                  />
+               </Link>
             </Button>
             <Box className={styles.textHeader}>
                <Typography className={styles.userName} variant='h6'>
@@ -58,9 +69,32 @@ function Chatbox() {
                </MenuItem>
             </Menu>
          </Box>
-         <Box classname={styles.chatContent}></Box>
-         <Box classname={styles.chatInput}></Box>
-      </Box>
+
+         <Box className={styles.chatContent}>
+            <Message curUser />
+            <Message />
+            <Message curUser />
+         </Box>
+
+         <form className={styles.chatInput}>
+            <IconButton>
+               <EmojiEmotionsIcon style={{ color: '#fff' }} />
+            </IconButton>
+            <TextField
+               name='inputChat'
+               InputProps={{ className: styles.inputProps }}
+               className={styles.inputText}
+               id='outlined-multiline-flexible'
+               multiline
+               maxRows={4}
+               placeholder='Enter you message...'
+            />
+
+            <IconButton>
+               <SendIcon style={{ color: '#fff' }} />
+            </IconButton>
+         </form>
+      </>
    )
 }
 

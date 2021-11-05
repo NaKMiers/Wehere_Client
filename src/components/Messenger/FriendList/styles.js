@@ -6,13 +6,18 @@ export default makeStyles(theme => ({
       padding: 0,
       border: 'none'
    },
+   link: {
+      display: 'flex',
+      textDecoration: 'none',
+      color: '#333'
+   },
    avatar: {
       width: 48,
       height: 48,
       border: '3px #ddd solid'
    },
    badge: {
-      top: -14,
+      top: 9,
       right: 6
    },
    userName: {

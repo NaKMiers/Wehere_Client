@@ -10,9 +10,16 @@ function OnlineBar() {
       let result = []
       for (let i = 0; i < 10; i++) {
          result.push(
-            <Button className={styles.avatarBtn}>
-               <Avatar className={styles.avatar} src='https://bom.to/S1mMNM' alt='avt' />
-               <Badge variant='dot' className={styles.badge} invisible={false} />
+            <Button key={i} className={styles.avatarBtn}>
+               <Link to={`/messenger/user${i + 1}`} className={styles.link}>
+                  <Avatar className={styles.avatar} src='https://bom.to/S1mMNM' alt='avt' />
+                  <Badge
+                     variant='dot'
+                     color='primary'
+                     className={styles.badge}
+                     invisible={false}
+                  />
+               </Link>
             </Button>
          )
       }

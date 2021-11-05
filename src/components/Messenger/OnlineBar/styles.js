@@ -24,7 +24,8 @@ export default makeStyles(theme => ({
       position: 'absolute',
       top: '50%',
       left: '50%',
-      transform: 'translate(-30%, -50%)'
+      transform: 'translate(-30%, -50%)',
+      color: '#333'
    },
    avatarBtn: {
       width: 64,
@@ -32,13 +33,17 @@ export default makeStyles(theme => ({
       padding: 0,
       border: 'none'
    },
+   link: {
+      marginTop: '26px'
+   },
    avatar: {
       width: 48,
       height: 48,
-      border: '3px #fff solid'
+      border: '3px #fff solid',
+      borderRadius: '50%'
    },
    badge: {
-      top: -14,
-      right: 6
+      bottom: 52,
+      right: -18
    }
 }))
