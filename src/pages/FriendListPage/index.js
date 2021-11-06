@@ -1,20 +1,9 @@
-import {
-   Avatar,
-   Button,
-   Divider,
-   List,
-   ListItem,
-   ListItemAvatar,
-   ListItemText,
-   ListSubheader
-} from '@material-ui/core'
+import { List, ListSubheader } from '@material-ui/core'
 import React from 'react'
+import FriendListItem from '../../components/FriendListItem'
 import Header from '../../components/Header'
-import useStyles from './styles'
 
 function FriendListPage() {
-   const styles = useStyles()
-
    return (
       <>
          <Header />
@@ -29,38 +18,9 @@ function FriendListPage() {
                   </ListSubheader>
                }
             >
-               <ListItem>
-                  <ListItemAvatar>
-                     <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary='User1' />
-                  <Button className={styles.friendBtn} variant='contained'>
-                     Unfriend
-                  </Button>
-               </ListItem>
-               <Divider light />
-
-               <ListItem>
-                  <ListItemAvatar>
-                     <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary='User2' />
-                  <Button className={styles.friendBtn} variant='contained'>
-                     Unfriend
-                  </Button>
-               </ListItem>
-               <Divider light />
-
-               <ListItem>
-                  <ListItemAvatar>
-                     <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary='User3' />
-                  <Button className={styles.friendBtn} variant='contained'>
-                     Unfriend
-                  </Button>
-               </ListItem>
-               <Divider light />
+               <FriendListItem />
+               <FriendListItem />
+               <FriendListItem />
             </List>
          </div>
       </>

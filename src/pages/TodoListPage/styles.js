@@ -43,5 +43,10 @@ export default makeStyles(theme => ({
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)'
+   },
+   actionBtnWrap: {
+      margin: 'auto',
+      maxWidth: 360,
+      justifyContent: 'space-around'
    }
 }))

@@ -176,7 +176,7 @@ function TodoListPage() {
                   {customList(left, 'Ready')}
                </Grid>
                <Grid item xs={12}>
-                  <Grid container alignItems='center' style={{ justifyContent: 'space-around' }}>
+                  <Grid container alignItems='center' className={styles.actionBtnWrap}>
                      <Button
                         className={styles.todoActionBtn}
                         variant='outlined'
