@@ -20,5 +20,9 @@ export default makeStyles(theme => ({
    },
    iconActions: {
       fontSize: 36
+   },
+   linkToProfile: {
+      textDecoration: 'none',
+      color: '#fff'
    }
 }))

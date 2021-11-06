@@ -2,9 +2,11 @@ import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
    addTaskWrap: {
-      display: 'flex'
+      display: 'flex',
+      justifyContent: 'space-between'
    },
    taskTextField: {
+      flexGrow: 1,
       marginBottom: 16
    },
    pointTextField: {

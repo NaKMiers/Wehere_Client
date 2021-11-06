@@ -1,13 +1,12 @@
 import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
-   authorCount: {
-      textAlign: 'right',
-      color: '#aaa',
-      fontSize: 15,
-      marginBottom: 8
-   },
    authorItem: {
-      borderRadius: 8
+      borderRadius: 80
+   },
+   link: {
+      display: 'flex',
+      textDecoration: 'none',
+      color: '#333'
    },
    authorAvt: {
       width: 48,

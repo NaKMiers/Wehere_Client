@@ -18,6 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ShareIcon from '@material-ui/icons/Share'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Comment from '../Comment'
 import useStyles from './styles'
 
@@ -53,7 +54,11 @@ function Image() {
       <div style={{ padding: 16 }}>
          <Card sx={{ maxWidth: 345 }}>
             <CardHeader
-               avatar={<Avatar aria-label='recipe'>R</Avatar>}
+               avatar={
+                  <Link to='/profile/user1' className={styles.linkToProfile}>
+                     <Avatar aria-label='recipe'>R</Avatar>
+                  </Link>
+               }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
                      <MoreVertIcon />

@@ -9,9 +9,5 @@ export default makeStyles(theme => ({
    },
    recentlyList: {
       marginLeft: 24
-   },
-   songImg: {
-      border: '3px #333 solid',
-      marginRight: 8
    }
 }))

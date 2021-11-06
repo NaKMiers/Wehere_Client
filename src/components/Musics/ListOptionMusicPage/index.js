@@ -4,9 +4,9 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime'
 import MusicNoteIcon from '@material-ui/icons/MusicNote'
 import PersonPinIcon from '@material-ui/icons/PersonPin'
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay'
-import { ListItemButton } from '@mui/material'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import RecentlyItem from '../RecentlyItem'
 import useStyles from './styles'
 
 function ListOptionMusicPage() {
@@ -27,20 +27,9 @@ function ListOptionMusicPage() {
          </ListItem>
          <Collapse in={isShowRecentlySongs} timeout='auto' unmountOnExit>
             <List className={styles.recentlyList} component='div' disablePadding>
-               <ListItemButton>
-                  <Avatar
-                     className={styles.songImg}
-                     src='https://phunugioi.com/wp-content/uploads/2020/10/hinh-anh-avatar-de-thuong-cute.jpg'
-                  />
-                  <ListItemText primary='So Am i' secondary='Ava Max' />
-               </ListItemButton>
-               <ListItemButton>
-                  <Avatar
-                     className={styles.songImg}
-                     src='https://phunugioi.com/wp-content/uploads/2020/10/hinh-anh-avatar-de-thuong-cute.jpg'
-                  />
-                  <ListItemText primary='All Fall Down' secondary='Alan Walker' />
-               </ListItemButton>
+               <RecentlyItem />
+               <RecentlyItem />
+               <RecentlyItem />
             </List>
          </Collapse>
 
@@ -54,6 +43,7 @@ function ListOptionMusicPage() {
                <ListItemText primary='My Songs' secondary='216 songs' />
             </Link>
          </ListItem>
+
          <ListItem>
             <Link to='/musics/playlists' className={styles.link}>
                <ListItemAvatar>
@@ -64,6 +54,7 @@ function ListOptionMusicPage() {
                <ListItemText primary='My Playlists' secondary='3 playlists' />
             </Link>
          </ListItem>
+
          <ListItem>
             <Link to='/musics/authors' className={styles.link}>
                <ListItemAvatar>

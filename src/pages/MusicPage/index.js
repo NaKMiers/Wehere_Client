@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
-import AuthorList from '../../components/AuthorList'
+import AuthorList from '../../components/Musics/AuthorList'
 import Header from '../../components/Header'
 import ListOptionMusicPage from '../../components/Musics/ListOptionMusicPage'
 import PlayingBar from '../../components/Musics/PlayingBar'

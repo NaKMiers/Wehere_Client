@@ -1,9 +1,11 @@
 import { Button, List, Typography } from '@material-ui/core'
+// import { useParams } from 'react-router-dom'
 import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
-function SongList() {
+function SongOfAuthor() {
    const styles = useStyles()
+
    return (
       <List component='div' disablePadding>
          <Button variant='contained' className={styles.newSong}>
@@ -19,4 +21,4 @@ function SongList() {
    )
 }
 
-export default SongList
+export default SongOfAuthor

@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ReplyIcon from '@material-ui/icons/Reply'
+import { Link } from 'react-router-dom'
 import useStyles from './styles'
 
 function Comment({ expanded }) {
@@ -17,11 +18,13 @@ function Comment({ expanded }) {
       <Collapse className={styles.collapse} in={expanded} timeout='auto' unmountOnExit>
          <CardContent className={styles.comments}>
             <div className={styles.commentInputWrap}>
-               <Avatar
-                  className={styles.commentAuthor}
-                  alt='Remy Sharp'
-                  src='/static/images/avatar/1.jpg'
-               />
+               <Link to='/profile/user1' className={styles.linkToProfile}>
+                  <Avatar
+                     className={styles.commentAuthor}
+                     alt='Remy Sharp'
+                     src='/static/images/avatar/1.jpg'
+                  />
+               </Link>
                <TextField
                   className={styles.commentInput}
                   id='standard-basic'
@@ -31,11 +34,13 @@ function Comment({ expanded }) {
             </div>
             <div className={styles.commentWrap}>
                <div className={styles.commentItem}>
-                  <Avatar
-                     className={styles.commentAuthor}
-                     alt='Remy Sharp'
-                     src='/static/images/avatar/1.jpg'
-                  />
+                  <Link to='/profile/user1' className={styles.linkToProfile}>
+                     <Avatar
+                        className={styles.commentAuthor}
+                        alt='Remy Sharp'
+                        src='/static/images/avatar/1.jpg'
+                     />
+                  </Link>
                   <Typography paragraph>
                      Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside
                      for 10 minutes.
@@ -52,11 +57,13 @@ function Comment({ expanded }) {
                <div className={styles.replyCommentItem}>
                   <div className={styles.commentWrap}>
                      <div className={styles.commentItem}>
-                        <Avatar
-                           className={styles.commentAuthor}
-                           alt='Remy Sharp'
-                           src='/static/images/avatar/1.jpg'
-                        />
+                        <Link to='/profile/user1' className={styles.linkToProfile}>
+                           <Avatar
+                              className={styles.commentAuthor}
+                              alt='Remy Sharp'
+                              src='/static/images/avatar/1.jpg'
+                           />
+                        </Link>
                         <Typography paragraph>
                            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
                            aside for 10 minutes.
@@ -70,11 +77,13 @@ function Comment({ expanded }) {
                   </div>
                </div>
                <div className={styles.replyInputWrap}>
-                  <Avatar
-                     className={styles.commentAuthor}
-                     alt='Remy Sharp'
-                     src='/static/images/avatar/1.jpg'
-                  />
+                  <Link to='/profile/user1' className={styles.linkToProfile}>
+                     <Avatar
+                        className={styles.commentAuthor}
+                        alt='Remy Sharp'
+                        src='/static/images/avatar/1.jpg'
+                     />
+                  </Link>
                   <TextField
                      className={styles.commentInput}
                      id='standard-basic'

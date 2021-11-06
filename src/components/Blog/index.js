@@ -17,6 +17,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ShareIcon from '@material-ui/icons/Share'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Comment from '../Comment'
 import useStyles from './styles'
 
@@ -52,7 +53,11 @@ function Blog() {
       <div style={{ padding: 16 }}>
          <Card sx={{ maxWidth: 345 }}>
             <CardHeader
-               avatar={<Avatar aria-label='recipe'>R</Avatar>}
+               avatar={
+                  <Link to='/profile/user1' className={styles.linkToProfile}>
+                     <Avatar aria-label='recipe'>R</Avatar>
+                  </Link>
+               }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
                      <MoreVertIcon />
@@ -61,7 +66,6 @@ function Blog() {
                title='Shrimp and Chorizo Paella'
                subheader='September 14, 2016'
             />
-            {/* <CardMedia component='img' image='/images/cute4k.jpg' alt='Paella dish' /> */}
             <CardContent>
                <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together

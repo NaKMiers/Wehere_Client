@@ -21,5 +21,9 @@ export default makeStyles(theme => ({
    },
    commentInput: {
       width: '100%'
+   },
+   linkToProfile: {
+      textDecoration: 'none',
+      color: '#fff'
    }
 }))

@@ -13,6 +13,7 @@ import BackspaceIcon from '@material-ui/icons/Backspace'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import { useState } from 'react'
 import useStyles from './styles'
+import { Link } from 'react-router-dom'
 
 function Short() {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -30,7 +31,11 @@ function Short() {
       <div style={{ padding: 16 }}>
          <Card className={styles.short}>
             <CardHeader
-               avatar={<Avatar aria-label='recipe'>R</Avatar>}
+               avatar={
+                  <Link to='/profile/user1' className={styles.linkToProfile}>
+                     <Avatar aria-label='recipe'>R</Avatar>
+                  </Link>
+               }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
                      <MoreVertIcon />
@@ -46,12 +51,6 @@ function Short() {
                image='images/short169.jpg'
                alt='Paella dish'
             />
-            {/* <CardContent>
-               <Typography variant='body2'>
-                  This impressive paella is a perfect party dish and a fun meal to cook together
-                  with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-               </Typography>
-            </CardContent> */}
             <CardActions disableSpacing className={styles.cardActions}>
                <IconButton aria-label='add to favorites'>
                   <FavoriteIcon className={styles.iconActions} />

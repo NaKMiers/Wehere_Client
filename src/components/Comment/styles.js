@@ -36,5 +36,9 @@ export default makeStyles(theme => ({
    replyInputWrap: {
       display: 'flex',
       marginLeft: 52
+   },
+   linkToProfile: {
+      textDecoration: 'none',
+      color: '#fff'
    }
 }))
