@@ -21,7 +21,7 @@ function FriendListItem({ onlineList, isOnline }) {
       <>
          <ListItemButton className={styles.onlineUserBtn}>
             <Link to='/messenger/user1' className={styles.link}>
-               <Avatar className={styles.avatar} src='https://bom.to/S1mMNM' alt='avt' />
+               <Avatar className={styles.avatar} src='https://bom.to/E6b68V' alt='avt' />
                <Badge
                   variant='dot'
                   className={styles.badge}

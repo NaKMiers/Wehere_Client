@@ -12,7 +12,7 @@ function OnlineBar() {
          result.push(
             <Button key={i} className={styles.avatarBtn}>
                <Link to={`/messenger/user${i + 1}`} className={styles.link}>
-                  <Avatar className={styles.avatar} src='https://bom.to/S1mMNM' alt='avt' />
+                  <Avatar className={styles.avatar} src='https://bom.to/azrZKc' alt='avt' />
                   <Badge
                      variant='dot'
                      color='primary'

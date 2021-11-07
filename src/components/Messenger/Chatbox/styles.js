@@ -1,6 +1,19 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
+   '@global': {
+      '*::-webkit-scrollbar': {
+         width: 0,
+         height: 0
+      },
+      '*::-webkit-scrollbar-thumb:hover': {
+         backgroundColor: '#555'
+      }
+   },
+   chatBox: {
+      margin: 'auto',
+      maxWidth: 960
+   },
    chatHeader: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -49,7 +62,7 @@ export default makeStyles(theme => ({
    },
 
    chatContent: {
-      height: 'calc(100vh - 196px)',
+      // height: 'calc(100vh - 196px)',
       padding: 16
    },
 
@@ -67,5 +80,26 @@ export default makeStyles(theme => ({
    },
    inputProps: {
       color: '#fff'
+   },
+   emojiTable: {
+      textAlign: 'center',
+      height: '25vh'
+   },
+   emojiTableWrap: {
+      height: 'calc(25vh - 48px)',
+      padding: 8,
+      overflow: 'scroll'
+   },
+   emoji: {
+      fontSize: 20
+   },
+   emojiBar: {
+      display: 'flex',
+      justifyContent: 'center'
+   },
+   tabEmoji: {
+      fontSize: 24,
+      padding: 0,
+      borderRadius: 0
    }
 }))

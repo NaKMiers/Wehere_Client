@@ -3,6 +3,7 @@ import {
    Badge,
    Box,
    Button,
+   Collapse,
    IconButton,
    Menu,
    MenuItem,
@@ -18,19 +19,58 @@ import { Link } from 'react-router-dom'
 import Message from '../Message'
 import useStyles from './styles'
 
+const emojiList = [
+   '😀 😃 😄 😁 😆 😅 😂 🤣 🥲 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿',
+   '🐶 🐱 🐭 🐹 🐰 🦊 🐻 🐼 🐻‍❄️ 🐨 🐯 🦁 🐮 🐷 🐽 🐸 🐵 🙈 🙉 🙊 🐒 🐔 🐧 🐦 🐤 🐣 🐥 🦆 🦅 🦉 🦇 🐺 🐗 🐴 🦄 🐝 🪱 🐛 🦋 🐌 🐞 🐜 🪰 🪲 🪳 🦟 🦗 🕷 🕸 🦂 🐢 🐍 🦎 🦖 🦕 🐙 🦑 🦐 🦞 🦀 🐡 🐠 🐟 🐬 🐳 🐋 🦈 🐊 🐅 🐆 🦓 🦍 🦧 🦣 🐘 🦛 🦏 🐪 🐫 🦒 🦘 🦬 🐃 🐂 🐄 🐎 🐖 🐏 🐑 🦙 🐐 🦌 🐕 🐩 🦮 🐕‍🦺 🐈 🐈‍⬛ 🪶 🐓 🦃 🦤 🦚 🦜 🦢 🦩 🕊 🐇 🦝 🦨 🦡 🦫 🦦 🦥 🐁 🐀 🐿 🦔 🐾 🐉 🐲',
+   '🚗 🚕 🚙 🚌 🚎 🏎 🚓 🚑 🚒 🚐 🛻 🚚 🚛 🚜 🦯 🦽 🦼 🛴 🚲 🛵 🏍 🛺 🚨 🚔 🚍 🚘 🚖 🚡 🚠 🚟 🚃 🚋 🚞 🚝 🚄 🚅 🚈 🚂 🚆 🚇 🚊 🚉 ✈️ 🛫 🛬 🛩 💺 🛰 🚀 🛸 🚁 🛶 ⛵️ 🚤 🛥 🛳 ⛴ 🚢 ⚓️ 🪝 ⛽️ 🚧 🚦 🚥 🚏 🗺 🗿 🗽 🗼 🏰 🏯 🏟 🎡 🎢 🎠 ⛲️ ⛱ 🏖 🏝 🏜 🌋 ⛰ 🏔 🗻 🏕 ⛺️ 🛖 🏠 🏡 🏘 🏚 🏗 🏭 🏢 🏬 🏣 🏤 🏥 🏦 🏨 🏪 🏫 🏩 💒 🏛 ⛪️ 🕌 🕍 🛕 🕋 ⛩ 🛤 🛣 🗾 🎑 🏞 🌅 🌄 🌠 🎇 🎆 🌇 🌆 🏙 🌃 🌌 🌉 🌁',
+   '⚽️ 🏀 🏈 ⚾️ 🥎 🎾 🏐 🏉 🥏 🎱 🪀 🏓 🏸 🏒 🏑 🥍 🏏 🪃 🥅 ⛳️ 🪁 🏹 🎣 🤿 🥊 🥋 🎽 🛹 🛼 🛷 ⛸ 🥌 🎿 ⛷ 🏂 🪂 🏋️‍♀️ 🏋️ 🏋️‍♂️ 🤼‍♀️ 🤼 🤼‍♂️ 🤸‍♀️ 🤸 🤸‍♂️ ⛹️‍♀️ ⛹️ ⛹️‍♂️ 🤺 🤾‍♀️ 🤾 🤾‍♂️ 🏌️‍♀️ 🏌️ 🏌️‍♂️ 🏇 🧘‍♀️ 🧘 🧘‍♂️ 🏄‍♀️ 🏄 🏄‍♂️ 🏊‍♀️ 🏊 🏊‍♂️ 🤽‍♀️ 🤽 🤽‍♂️ 🚣‍♀️ 🚣 🚣‍♂️ 🧗‍♀️ 🧗 🧗‍♂️ 🚵‍♀️ 🚵 🚵‍♂️ 🚴‍♀️ 🚴 🚴‍♂️ 🏆 🥇 🥈 🥉 🏅 🎖 🏵 🎗 🎫 🎟 🎪 🤹 🤹‍♂️ 🤹‍♀️ 🎭 🩰 🎨 🎬 🎤 🎧 🎼 🎹 🥁 🪘 🎷 🎺 🪗 🎸 🪕 🎻 🎲 ♟ 🎯 🎳 🎮 🎰 🧩',
+   '🍏 🍎 🍐 🍊 🍋 🍌 🍉 🍇 🍓 🫐 🍈 🍒 🍑 🥭 🍍 🥥 🥝 🍅 🍆 🥑 🥦 🥬 🥒 🌶 🫑 🌽 🥕 🫒 🧄 🧅 🥔 🍠 🥐 🥯 🍞 🥖 🥨 🧀 🥚 🍳 🧈 🥞 🧇 🥓 🥩 🍗 🍖 🦴 🌭 🍔 🍟 🍕 🫓 🥪 🥙 🧆 🌮 🌯 🫔 🥗 🥘 🫕 🥫 🍝 🍜 🍲 🍛 🍣 🍱 🥟 🦪 🍤 🍙 🍚 🍘 🍥 🥠 🥮 🍢 🍡 🍧 🍨 🍦 🥧 🧁 🍰 🎂 🍮 🍭 🍬 🍫 🍿 🍩 🍪 🌰 🥜 🍯 🥛 🍼 🫖 ☕️ 🍵 🧃 🥤 🧋 🍶 🍺 🍻 🥂 🍷 🥃 🍸 🍹 🧉 🍾 🧊 🥄 🍴 🍽 🥣 🥡 🥢 🧂'
+]
+
 function Chatbox() {
    const [anchorEl, setAnchorEl] = useState(null)
+   const [emojiTab, setEmojiTab] = useState(1)
+   const [isOpenEmojiTable, setOpenEmojiTable] = useState(true)
+
    const isOpenHerderMenu = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
+
    const handleClose = () => {
       setAnchorEl(null)
    }
+
+   const handleClickEmoji = () => {
+      setOpenEmojiTable(false)
+   }
+
+   const renderEmoji = () => {
+      return emojiList[emojiTab - 1].split(' ').map(e => (
+         <Button key={e} onClick={handleClickEmoji} className={styles.emoji}>
+            {e}
+         </Button>
+      ))
+   }
+
+   const renderTabEmoji = () =>
+      '😀 🐼 🚎 ⚽️ 🍎'.split(' ').map((e, i) => (
+         <Button
+            key={e}
+            className={styles.tabEmoji}
+            style={{
+               borderTop: `${i + 1 === emojiTab ? '3px solid #f44336' : '3px solid #ddd'}`
+            }}
+            onClick={() => setEmojiTab(i + 1)}
+         >
+            {e}
+         </Button>
+      ))
+
    const styles = useStyles()
 
    return (
-      <>
+      <div className={styles.chatBox}>
          <Box className={styles.chatHeader}>
             <Button className={styles.avtBtn}>
                <Link to='/profile/user1' className={styles.avtLink}>
@@ -70,14 +110,17 @@ function Chatbox() {
             </Menu>
          </Box>
 
-         <Box className={styles.chatContent}>
+         <Box
+            className={styles.chatContent}
+            style={{ height: `calc(${isOpenEmojiTable ? '75vh' : '100vh'} - 196px)` }}
+         >
             <Message curUser />
             <Message />
             <Message curUser />
          </Box>
 
-         <form className={styles.chatInput}>
-            <IconButton>
+         <form className={styles.chatInput} style={{}}>
+            <IconButton onClick={() => setOpenEmojiTable(!isOpenEmojiTable)}>
                <EmojiEmotionsIcon style={{ color: '#fff' }} />
             </IconButton>
             <TextField
@@ -94,7 +137,16 @@ function Chatbox() {
                <SendIcon style={{ color: '#fff' }} />
             </IconButton>
          </form>
-      </>
+         <Collapse
+            className={styles.emojiTable}
+            in={isOpenEmojiTable}
+            timeout='auto'
+            unmountOnExit
+         >
+            <Box className={styles.emojiTableWrap}>{renderEmoji()}</Box>
+            <Box className={styles.emojiBar}>{renderTabEmoji()}</Box>
+         </Collapse>
+      </div>
    )
 }
 
