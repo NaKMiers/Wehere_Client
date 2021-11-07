@@ -1,4 +1,4 @@
-import { Menu, MenuItem } from '@material-ui/core'
+import { Collapse, Menu, MenuItem, Box } from '@material-ui/core'
 import Avatar from '@material-ui/core/Avatar'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -14,16 +14,25 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import { useState } from 'react'
 import useStyles from './styles'
 import { Link } from 'react-router-dom'
+import Comment from '../Comment'
 
 function Short() {
    const [anchorEl, setAnchorEl] = useState(null)
+   const [isOpenComments, setOpenComments] = useState(false)
    const open = Boolean(anchorEl)
+
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
    const handleClose = () => {
       setAnchorEl(null)
    }
+
+   const handleOpenComment = () => {
+      setOpenComments(!isOpenComments)
+   }
+
+   console.log(isOpenComments)
 
    const styles = useStyles()
 
@@ -51,17 +60,31 @@ function Short() {
                image='images/short169.jpg'
                alt='Paella dish'
             />
-            <CardActions disableSpacing className={styles.cardActions}>
+            <CardActions
+               disableSpacing
+               className={styles.cardActions}
+               style={{ bottom: `${isOpenComments ? 200 : 64}px` }}
+            >
                <IconButton aria-label='add to favorites'>
                   <FavoriteIcon className={styles.iconActions} />
                </IconButton>
                <IconButton aria-label='share'>
                   <ShareIcon className={styles.iconActions} />
                </IconButton>
-               <IconButton aria-label='share'>
+               <IconButton aria-label='share' onClick={handleOpenComment}>
                   <ReplyIcon className={styles.iconActions} />
                </IconButton>
             </CardActions>
+            <Collapse
+               className={styles.commentCollapse}
+               in={isOpenComments}
+               timeout='auto'
+               unmountOnExit
+            >
+               <Box className={styles.commentWrap}>
+                  <Comment expanded={true} />
+               </Box>
+            </Collapse>
          </Card>
          <Menu
             id='basic-menu'

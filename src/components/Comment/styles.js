@@ -8,6 +8,7 @@ export default makeStyles(theme => ({
       padding: 0
    },
    commentInputWrap: {
+      marginTop: 8,
       display: 'flex',
       padding: 0
    },

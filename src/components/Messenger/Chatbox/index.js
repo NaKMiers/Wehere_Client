@@ -30,7 +30,7 @@ const emojiList = [
 function Chatbox() {
    const [anchorEl, setAnchorEl] = useState(null)
    const [emojiTab, setEmojiTab] = useState(1)
-   const [isOpenEmojiTable, setOpenEmojiTable] = useState(true)
+   const [isOpenEmojiTable, setOpenEmojiTable] = useState(false)
 
    const isOpenHerderMenu = Boolean(anchorEl)
    const handleClick = event => {
