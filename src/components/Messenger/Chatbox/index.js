@@ -18,6 +18,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Message from '../Message'
 import useStyles from './styles'
+import SettingChat from './SettingChat'
 
 const emojiList = [
    '😀 😃 😄 😁 😆 😅 😂 🤣 🥲 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿',
@@ -32,6 +33,8 @@ function Chatbox() {
    const [emojiTab, setEmojiTab] = useState(1)
    const [isOpenEmojiTable, setOpenEmojiTable] = useState(false)
 
+   const [isOpenModalSettingChat, setOpenModalSettingChat] = useState(false)
+
    const isOpenHerderMenu = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
@@ -39,6 +42,7 @@ function Chatbox() {
 
    const handleClose = () => {
       setAnchorEl(null)
+      setOpenModalSettingChat(!isOpenModalSettingChat)
    }
 
    const handleClickEmoji = () => {
@@ -146,6 +150,8 @@ function Chatbox() {
             <Box className={styles.emojiTableWrap}>{renderEmoji()}</Box>
             <Box className={styles.emojiBar}>{renderTabEmoji()}</Box>
          </Collapse>
+
+         <SettingChat open={isOpenModalSettingChat} handleClose={handleClose} />
       </div>
    )
 }

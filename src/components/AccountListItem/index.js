@@ -46,12 +46,8 @@ function AccountListItem() {
             <Button className={styles.changeAccBtn} variant='contained'>
                <SyncAltIcon className={styles.changeAccIcon} />
             </Button>
-            <IconButton className={styles.showRmIcon}>
-               {isOpenRmBtn ? (
-                  <KeyboardArrowRightIcon onClick={handleClick} />
-               ) : (
-                  <KeyboardArrowLeftIcon onClick={handleClick} />
-               )}
+            <IconButton className={styles.showRmIcon} onClick={handleClick}>
+               {isOpenRmBtn ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
             </IconButton>
             <Collapse in={isOpenRmBtn} timeout='auto' unmountOnExit>
                <IconButton className={styles.removeAccBtn} onClick={handleOpen}>

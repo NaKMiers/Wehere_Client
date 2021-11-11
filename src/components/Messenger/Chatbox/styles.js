@@ -101,5 +101,22 @@ export default makeStyles(theme => ({
       fontSize: 24,
       padding: 0,
       borderRadius: 0
+   },
+
+   paperSetting: {
+      position: 'absolute',
+      top: 56,
+      bottom: 80,
+      left: 0,
+      right: 0,
+      overflow: 'hidden'
+   },
+   headingSeting: {
+      color: '#333',
+      padding: '8px 16px',
+      fontSize: 24
+   },
+   boxSetting: {
+      width: '100%'
    }
 }))

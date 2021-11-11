@@ -63,6 +63,7 @@ function SettingPage() {
                         />
                         <TextField
                            name='newPassword'
+                           type='password'
                            className={styles.textField}
                            id='filled-basic'
                            label='New Password'
@@ -72,6 +73,7 @@ function SettingPage() {
                         />
                         <TextField
                            name='retypePassword'
+                           type='password'
                            className={styles.textField}
                            id='filled-basic'
                            label='Password again'

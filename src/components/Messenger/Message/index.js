@@ -14,7 +14,7 @@ function Message({ curUser }) {
                className={styles.textMessage}
                onClick={() => setOpenTimeMg(!isOpenTimeMg)}
             >
-               Nguyen Nha Uyen....
+               Nguyen Anh Khoa....
             </Typography>
             <Collapse in={isOpenTimeMg} timeout='auto' unmountOnExit>
                <span className={styles.timeMessage}>1m ago</span>
