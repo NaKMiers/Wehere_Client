@@ -8,11 +8,6 @@ export default makeStyles(theme => ({
       right: 16,
       overflow: 'hidden'
    },
-   headingSeting: {
-      color: '#333',
-      padding: '8px 16px',
-      fontSize: 24
-   },
    boxSetting: {
       width: '100%'
    },
