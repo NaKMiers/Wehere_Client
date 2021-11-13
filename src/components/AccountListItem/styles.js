@@ -4,35 +4,34 @@ export default makeStyles(theme => ({
    accountItem: {
       display: 'flex',
       alignItems: 'center',
-      borderLeft: 'solid #f44336 3px',
+      borderLeft: `3px solid ${theme.border.highlight}`,
       marginBottom: 16,
       height: 64,
       paddingRight: 4,
-      backgroundColor: '#F2F2F2'
+      background: theme.palette.secondary.light
    },
    avatar: {
-      border: '3px #ddd solid'
+      border: `3px solid ${theme.border.main}`
    },
    changeAccBtn: {
       padding: '3px 0px',
       margin: '0',
-      backgroundColor: '#2196f3'
+      background: theme.palette.secondary.main
    },
    changeAccIcon: {
-      color: '#F2F2F2'
+      color: theme.palette.primary.text
    },
    showRmIcon: {
       padding: 4
    },
    removeAccBtn: {
-      color: '#f44336'
+      color: theme.palette.danger.main
    },
-   dialog: {},
    dialogTitle: {
       fontSize: 22,
       padding: '8px 16px',
-      backgroundColor: '#333',
-      color: '#fff'
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    },
    dialogContent: {
       padding: '16px 16px 8px 16px',
@@ -42,8 +41,16 @@ export default makeStyles(theme => ({
       display: 'flex',
       padding: '0px 4px 8px 4px'
    },
-   dialogBtn: {
+   dialogRmBtn: {
       flexGrow: 1,
-      margin: 8
+      margin: 8,
+      background: theme.palette.danger.gradient,
+      color: theme.palette.primary.text
+   },
+   dialogCancelBtn: {
+      flexGrow: 1,
+      margin: 8,
+      background: theme.palette.secondary.light,
+      color: theme.palette.secondary.text
    }
 }))

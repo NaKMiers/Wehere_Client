@@ -10,7 +10,7 @@ function AuthorList() {
    return (
       <Switch>
          <Route exact path='/musics/authors'>
-            <List>
+            <List style={{ padding: 16 }}>
                <Typography className={styles.authorCount}>Author: 32</Typography>
                <AuthorListItem />
                <AuthorListItem />

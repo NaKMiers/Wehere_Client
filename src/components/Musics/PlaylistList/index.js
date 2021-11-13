@@ -15,7 +15,7 @@ function PlaylistList() {
 
    return (
       <>
-         <List>
+         <List style={{ padding: 16 }}>
             <Button
                variant='contained'
                className={styles.newPlaylistBtn}

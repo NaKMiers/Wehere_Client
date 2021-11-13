@@ -40,7 +40,7 @@ function SongListItem({ showActionBtn = true }) {
                   <MoreHorizIcon style={{ fontSize: 30 }} />
                </span>
                <span className={styles.button}>
-                  <FavoriteIcon style={{ color: '#f44336' }} />
+                  <FavoriteIcon className={styles.heartIcon} />
                </span>
             </Box>
          )}

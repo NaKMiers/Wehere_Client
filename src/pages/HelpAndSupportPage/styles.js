@@ -19,7 +19,7 @@ export default makeStyles(theme => ({
       marginTop: 8,
       width: '100%',
       fontWeight: 'bold',
-      backgroundColor: '#333',
-      color: '#fff'
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    }
 }))

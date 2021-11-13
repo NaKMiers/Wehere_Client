@@ -7,17 +7,21 @@ export default makeStyles(theme => ({
    },
    taskTextField: {
       flexGrow: 1,
-      marginBottom: 16
+      marginBottom: 16,
+      marginRight: 16
    },
    pointTextField: {
       width: '20%'
    },
    inputTextField: {
-      padding: '14px 16px'
+      padding: '14px 16px',
+      borderBottom: `2px solid ${theme.border.dark}`
    },
    addTaskBtn: {
       marginLeft: 16,
-      height: 47
+      height: 47,
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    },
    listItemText: {
       fontSize: 18
@@ -27,13 +31,14 @@ export default makeStyles(theme => ({
       borderRadius: '4px'
    },
    cardHeader: {
-      backgroundColor: '#333',
-      color: '#fff',
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text,
       padding: '4px 16px'
    },
    pointWrap: {
       position: 'relative',
-      background: '#ccc',
+      background: theme.palette.secondary.main,
+      color: theme.palette.primary.text,
       borderRadius: '50%',
       width: 30,
       height: 30

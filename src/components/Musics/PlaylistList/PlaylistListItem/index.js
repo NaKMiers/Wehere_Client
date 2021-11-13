@@ -13,8 +13,8 @@ import { Box } from '@mui/system'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import EditIcon from '@material-ui/icons/Edit'
 import BackspaceIcon from '@material-ui/icons/Backspace'
-import useStyles from './styles'
 import { useState } from 'react'
+import useStyles from './styles'
 
 function PlaylistListItem({ showMoreBtn = true }) {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -68,10 +68,10 @@ function PlaylistListItem({ showMoreBtn = true }) {
 
          <Button className={styles.playlistBtn}>
             <Box>
-               <Typography variant='h5' style={{ fontWeight: 'bold' }}>
+               <Typography variant='h5' className={styles.playlistName}>
                   A-On
                </Typography>
-               <Typography variant='body1' style={{ fontSize: 12 }}>
+               <Typography variant='body1' className={styles.songCount}>
                   Songs: 42
                </Typography>
             </Box>

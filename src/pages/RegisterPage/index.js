@@ -7,6 +7,7 @@ import {
    TextField,
    Typography
 } from '@material-ui/core'
+import { FormControl } from '@mui/material'
 import { Link } from 'react-router-dom'
 import useStyles from './styles'
 
@@ -48,19 +49,21 @@ function RegisterPage() {
                variant='filled'
                type='password'
             />
-            <FormLabel component='legend'>Gender</FormLabel>
-            <RadioGroup
-               aria-label='gender'
-               defaultValue='female'
-               name='gender'
-               className={styles.radioGroup}
-            >
-               <FormControlLabel value='female' control={<Radio />} label='Female' />
-               <FormControlLabel value='male' control={<Radio />} label='Male' />
-               <FormControlLabel value='other' control={<Radio />} label='Other' />
-            </RadioGroup>
-            <Button type='submit' className={styles.loginBtn} variant='contained'>
-               <Link to='/' style={{ textDecoration: 'none', color: '#333' }}>
+            <FormControl style={{ padding: '18px 12px' }}>
+               <FormLabel component='legend'>Gender</FormLabel>
+               <RadioGroup
+                  aria-label='gender'
+                  defaultValue='female'
+                  name='gender'
+                  className={styles.radioGroup}
+               >
+                  <FormControlLabel value='female' control={<Radio />} label='Female' />
+                  <FormControlLabel value='male' control={<Radio />} label='Male' />
+                  <FormControlLabel value='other' control={<Radio />} label='Other' />
+               </RadioGroup>
+            </FormControl>
+            <Button type='submit' className={styles.registerBtn} variant='contained'>
+               <Link to='/' style={{ textDecoration: 'none', color: '#fff' }}>
                   Register
                </Link>
             </Button>

@@ -9,14 +9,17 @@ export default makeStyles(theme => ({
          backgroundColor: '#555'
       }
    },
-   menuIcon: {
-      marginLeft: 8
-   },
-   short: {
+   card: {
       position: 'relative',
       height: 'calc(100vh - 32px)',
       display: 'flex',
-      flexDirection: 'column '
+      flexDirection: 'column ',
+      maxWidth: 400,
+      margin: 24,
+      boxShadow: 'rgba(0, 0, 0, 0.3) 0px 0px 4px 0px'
+   },
+   menuIcon: {
+      marginLeft: 8
    },
    cardMedia: {
       height: '100%'

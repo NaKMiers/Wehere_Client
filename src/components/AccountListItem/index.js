@@ -59,18 +59,13 @@ function AccountListItem() {
             <Typography className={styles.dialogTitle}>Remove this account?</Typography>
             <Typography className={styles.dialogContent}>This action can't be restore.</Typography>
             <Box className={styles.dialogBtnWrap}>
-               <Button
-                  variant='contained'
-                  style={{ backgroundColor: '#f44336', color: '#fff' }}
-                  className={styles.dialogBtn}
-               >
+               <Button variant='contained' className={styles.dialogRmBtn}>
                   Remove
                </Button>
                <Button
                   onClick={handleClose}
-                  style={{ backgroundColor: '#ddd', color: '#333' }}
                   variant='contained'
-                  className={styles.dialogBtn}
+                  className={styles.dialogCancelBtn}
                >
                   Cancel
                </Button>

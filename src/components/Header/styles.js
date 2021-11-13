@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
+   header: {
+      background: theme.palette.primary.gradient
+   },
    selected: {
       transform: 'scale(1.3)',
       borderBottom: '3px solid #f44336'
@@ -12,11 +15,11 @@ export default makeStyles(theme => ({
    },
    headerIcon: {
       fontSize: 36,
-      color: '#fff',
+      color: theme.palette.primary.text,
       marginTop: 5
    },
    headerMenuIcon: {
-      color: '#fff',
+      color: theme.palette.primary.text,
       fontSize: 41,
       marginTop: 7
    },

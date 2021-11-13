@@ -29,120 +29,130 @@ function SettingPage() {
    return (
       <>
          <Header />
-         <div style={{ padding: 16 }}>
-            <List
-               sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-               component='nav'
-               aria-labelledby='nested-list-subheader'
-               subheader={
-                  <ListSubheader component='div' id='nested-list-subheader'>
-                     Setting
-                  </ListSubheader>
-               }
+         <List
+            style={{ padding: 16 }}
+            component='nav'
+            aria-labelledby='nested-list-subheader'
+            subheader={
+               <ListSubheader component='div' id='nested-list-subheader'>
+                  Setting
+               </ListSubheader>
+            }
+         >
+            <ListItem>
+               <ListItemText primary='Dark Theme' classes={{ primary: styles.listItemText }} />
+               <Switch />
+            </ListItem>
+
+            <ListItem onClick={() => setOpenChangePW(!openChangePW)}>
+               <ListItemText primary='Change Password' />
+               {openChangePW ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse className={styles.collape} in={openChangePW} timeout='auto' unmountOnExit>
+               <List component='div' disablePadding>
+                  <form>
+                     <TextField
+                        name='currentPassword'
+                        className={styles.textField}
+                        id='filled-basic'
+                        label='Current Password'
+                        variant='filled'
+                        value={currentPWValue}
+                        onChange={e => setCurrentPWValue(e.target.value)}
+                     />
+                     <TextField
+                        name='newPassword'
+                        type='password'
+                        className={styles.textField}
+                        id='filled-basic'
+                        label='New Password'
+                        variant='filled'
+                        value={newPWValue}
+                        onChange={e => setNewPWValue(e.target.value)}
+                     />
+                     <TextField
+                        name='retypePassword'
+                        type='password'
+                        className={styles.textField}
+                        id='filled-basic'
+                        label='Password again'
+                        variant='filled'
+                        value={retypePWValue}
+                        onChange={e => setRetypePWValue(e.target.value)}
+                     />
+                  </form>
+               </List>
+            </Collapse>
+
+            <ListItem onClick={() => setOpenComments(!openComments)}>
+               <ListItemText primary='Comments' />
+               {openComments ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse className={styles.collape} in={openComments} timeout='auto' unmountOnExit>
+               <List component='div' disablePadding>
+                  <ListItem sx={{ pl: 4 }}>
+                     <ListItemText
+                        primary='Lock Comments'
+                        classes={{ primary: styles.listItemText }}
+                     />
+                     <Switch />
+                  </ListItem>
+               </List>
+            </Collapse>
+
+            <ListItem onClick={() => setOpenBlockFriends(!openBlockFriends)}>
+               <ListItemText primary='Block Friends' />
+               {openBlockFriends ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse
+               className={styles.collape}
+               in={openBlockFriends}
+               timeout='auto'
+               unmountOnExit
             >
-               <ListItem>
-                  <ListItemText primary='Dark Theme' classes={{ primary: styles.listItemText }} />
-                  <Switch />
-               </ListItem>
+               <List component='div' disablePadding>
+                  <ListItem>
+                     <ListItemAvatar>
+                        <Avatar
+                           className={styles.userAvt}
+                           alt='avt'
+                           src='https://bom.to/WWExNT'
+                        ></Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary='User1' />
+                     <Switch />
+                  </ListItem>
+                  <ListItem>
+                     <ListItemAvatar>
+                        <Avatar
+                           className={styles.userAvt}
+                           alt='avt'
+                           src='https://bom.to/WWExNT'
+                        ></Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary='User2' />
+                     <Switch />
+                  </ListItem>
+                  <ListItem>
+                     <ListItemAvatar>
+                        <Avatar
+                           className={styles.userAvt}
+                           alt='avt'
+                           src='https://bom.to/WWExNT'
+                        ></Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary='User2' />
+                     <Switch />
+                  </ListItem>
+               </List>
+            </Collapse>
 
-               <ListItem onClick={() => setOpenChangePW(!openChangePW)}>
-                  <ListItemText primary='Change Password' />
-                  {openChangePW ? <ExpandLess /> : <ExpandMore />}
-               </ListItem>
-               <Collapse className={styles.collape} in={openChangePW} timeout='auto' unmountOnExit>
-                  <List component='div' disablePadding>
-                     <form>
-                        <TextField
-                           name='currentPassword'
-                           className={styles.textField}
-                           id='filled-basic'
-                           label='Current Password'
-                           variant='filled'
-                           value={currentPWValue}
-                           onChange={e => setCurrentPWValue(e.target.value)}
-                        />
-                        <TextField
-                           name='newPassword'
-                           type='password'
-                           className={styles.textField}
-                           id='filled-basic'
-                           label='New Password'
-                           variant='filled'
-                           value={newPWValue}
-                           onChange={e => setNewPWValue(e.target.value)}
-                        />
-                        <TextField
-                           name='retypePassword'
-                           type='password'
-                           className={styles.textField}
-                           id='filled-basic'
-                           label='Password again'
-                           variant='filled'
-                           value={retypePWValue}
-                           onChange={e => setRetypePWValue(e.target.value)}
-                        />
-                     </form>
-                  </List>
-               </Collapse>
-
-               <ListItem onClick={() => setOpenComments(!openComments)}>
-                  <ListItemText primary='Comments' />
-                  {openComments ? <ExpandLess /> : <ExpandMore />}
-               </ListItem>
-               <Collapse className={styles.collape} in={openComments} timeout='auto' unmountOnExit>
-                  <List component='div' disablePadding>
-                     <ListItem sx={{ pl: 4 }}>
-                        <ListItemText
-                           primary='Lock Comments'
-                           classes={{ primary: styles.listItemText }}
-                        />
-                        <Switch />
-                     </ListItem>
-                  </List>
-               </Collapse>
-
-               <ListItem onClick={() => setOpenBlockFriends(!openBlockFriends)}>
-                  <ListItemText primary='Block Friends' />
-                  {openBlockFriends ? <ExpandLess /> : <ExpandMore />}
-               </ListItem>
-               <Collapse
-                  className={styles.collape}
-                  in={openBlockFriends}
-                  timeout='auto'
-                  unmountOnExit
-               >
-                  <List component='div' disablePadding>
-                     <ListItem>
-                        <ListItemAvatar>
-                           <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary='User1' />
-                        <Switch />
-                     </ListItem>
-                     <ListItem>
-                        <ListItemAvatar>
-                           <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary='User2' />
-                        <Switch />
-                     </ListItem>
-                     <ListItem>
-                        <ListItemAvatar>
-                           <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary='User2' />
-                        <Switch />
-                     </ListItem>
-                  </List>
-               </Collapse>
-
-               <ListItem>
-                  <Button className={styles.deleteAccountItem}>
-                     <ListItemText primary='Delete Account' />
-                  </Button>
-               </ListItem>
-            </List>
-         </div>
+            <ListItem>
+               <Button className={styles.deleteAccountItem}>
+                  <ListItemText primary='Delete Account' />
+               </Button>
+            </ListItem>
+         </List>
       </>
    )
 }

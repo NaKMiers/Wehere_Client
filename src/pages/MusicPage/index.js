@@ -10,22 +10,20 @@ function MusicPage() {
    return (
       <>
          <Header />
-         <div style={{ padding: 16 }}>
-            <Switch>
-               <Route exact path='/musics'>
-                  <ListOptionMusicPage />
-               </Route>
-               <Route path='/musics/songs'>
-                  <SongList />
-               </Route>
-               <Route path='/musics/playlists'>
-                  <PlaylistList />
-               </Route>
-               <Route path='/musics/authors'>
-                  <AuthorList />
-               </Route>
-            </Switch>
-         </div>
+         <Switch>
+            <Route exact path='/musics'>
+               <ListOptionMusicPage />
+            </Route>
+            <Route path='/musics/songs'>
+               <SongList />
+            </Route>
+            <Route path='/musics/playlists'>
+               <PlaylistList />
+            </Route>
+            <Route path='/musics/authors'>
+               <AuthorList />
+            </Route>
+         </Switch>
          <PlayingBar />
       </>
    )

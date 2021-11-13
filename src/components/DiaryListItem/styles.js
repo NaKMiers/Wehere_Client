@@ -3,10 +3,8 @@ import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
    '@global': {
       '*::-webkit-scrollbar': {
-         width: '0.4em'
-      },
-      '*::-webkit-scrollbar-thumb:hover': {
-         backgroundColor: '#555'
+         width: 0,
+         height: 0
       }
    },
    diaryWrap: {
@@ -34,7 +32,7 @@ export default makeStyles(theme => ({
    },
    diaryTitle: {
       margin: '10px 16px',
-      color: '333',
+      color: theme.palette.secondary.text,
       fontSize: 30,
       textShadow: '2px 1px 2px #fff',
       transition: 'left 4s linear',
@@ -52,7 +50,7 @@ export default makeStyles(theme => ({
       minHeight: 100,
       padding: '8px 16px',
       backgroundColor: 'rgba(0, 0, 0, 0.3)',
-      color: '#fff',
+      color: theme.palette.primary.text,
       transition: 'opacity 0.5s ease-in-out',
       borderBottomLeftRadius: 16,
       borderBottomRightRadius: 16,
@@ -60,7 +58,7 @@ export default makeStyles(theme => ({
    },
    diaryTime: {
       margin: '-60px 18px',
-      color: '#fff',
+      color: theme.palette.primary.text,
       fontSize: 10,
       textShadow: '1px 1px 1px #222'
    },
@@ -70,7 +68,7 @@ export default makeStyles(theme => ({
       right: 0
    },
    moreIcon: {
-      color: '#fff'
+      color: theme.palette.primary.text
    },
    menuItem: {
       padding: '0 16px'

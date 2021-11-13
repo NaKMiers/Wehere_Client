@@ -39,7 +39,6 @@ export default makeStyles(theme => ({
       marginLeft: 52
    },
    linkToProfile: {
-      textDecoration: 'none',
-      color: '#fff'
+      textDecoration: 'none'
    }
 }))

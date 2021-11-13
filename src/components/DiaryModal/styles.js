@@ -1,21 +1,14 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
-   boxModal: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 400,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      boxShadow: 24,
-      p: 4
-   },
-   addDiaryBtn: {
+   addDiaryBtnBox: {
       position: 'fixed',
       bottom: 28,
       right: 32
+   },
+   addDiaryBtn: {
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    },
    diaryModal: {
       position: 'relative'
@@ -27,7 +20,7 @@ export default makeStyles(theme => ({
       right: 0,
       bottom: 52,
       padding: '8px 16px 16px 16px',
-      borderRadius: 16,
+      borderRadius: 4,
       backgroundOrigin: 'content-box',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -48,14 +41,14 @@ export default makeStyles(theme => ({
       bottom: 16,
       left: 16,
       right: 16,
-      backgroundColor: '#333',
-      color: '#fff'
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    },
    inputTitleDiary: {
       width: '100%',
       padding: '8px 0px',
       border: 'none',
-      borderBottom: '3px #333 solid',
+      borderBottom: `3px solid ${theme.border.dark}`,
       outline: 'none',
       fontSize: 20,
       marginBottom: 8,
@@ -65,7 +58,7 @@ export default makeStyles(theme => ({
       width: '100%',
       height: '60vh',
       resize: 'none',
-      border: '3px #333 solid',
+      border: `3px solid ${theme.border.dark}`,
       outline: 'none',
       padding: 16,
       fontSize: 16,
@@ -98,14 +91,14 @@ export default makeStyles(theme => ({
    textColorOption: {
       maxWidth: 30,
       padding: 18,
-      border: '2px solid #fff'
+      border: `2px solid ${theme.border.main}`
    },
    buttonGroupBg: {
-      border: '2px solid #fff'
+      border: `2px solid ${theme.border.main}`
    },
    bgOption: {
       width: 100,
       height: 150,
-      border: '2px solid #fff'
+      border: `2px solid ${theme.border.main}`
    }
 }))

@@ -4,6 +4,9 @@ export default makeStyles(theme => ({
       width: '100%',
       textAlign: 'left'
    },
+   menuIcon: {
+      background: theme.palette.primary.main
+   },
    listItem: {
       padding: '8px 16px'
    },

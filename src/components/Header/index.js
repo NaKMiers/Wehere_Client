@@ -72,7 +72,7 @@ function Header() {
    }, [slideHeader])
 
    return (
-      <AppBar position='static' className='appbar'>
+      <AppBar position='static' className={styles.header}>
          <Grid container>
             <Grid item xs={12} md={4} className={styles.gridContainer}>
                <Toolbar className={styles.toolbar} ref={toolbarRef}>

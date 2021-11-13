@@ -6,7 +6,7 @@ import PersonPinIcon from '@material-ui/icons/PersonPin'
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import RecentlyItem from '../RecentlyItem'
+import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
 function ListOptionMusicPage() {
@@ -18,7 +18,7 @@ function ListOptionMusicPage() {
       <List>
          <ListItem onClick={() => setShowRecentlySongs(!isShowRecentlySongs)}>
             <ListItemAvatar>
-               <Avatar>
+               <Avatar className={styles.listItemAvt}>
                   <AccessTimeIcon />
                </Avatar>
             </ListItemAvatar>
@@ -27,16 +27,16 @@ function ListOptionMusicPage() {
          </ListItem>
          <Collapse in={isShowRecentlySongs} timeout='auto' unmountOnExit>
             <List className={styles.recentlyList} component='div' disablePadding>
-               <RecentlyItem />
-               <RecentlyItem />
-               <RecentlyItem />
+               <SongListItem />
+               <SongListItem />
+               <SongListItem />
             </List>
          </Collapse>
 
          <ListItem>
             <Link to='/musics/songs' className={styles.link}>
                <ListItemAvatar>
-                  <Avatar>
+                  <Avatar className={styles.listItemAvt}>
                      <MusicNoteIcon />
                   </Avatar>
                </ListItemAvatar>
@@ -47,7 +47,7 @@ function ListOptionMusicPage() {
          <ListItem>
             <Link to='/musics/playlists' className={styles.link}>
                <ListItemAvatar>
-                  <Avatar>
+                  <Avatar className={styles.listItemAvt}>
                      <PlaylistPlayIcon />
                   </Avatar>
                </ListItemAvatar>
@@ -58,7 +58,7 @@ function ListOptionMusicPage() {
          <ListItem>
             <Link to='/musics/authors' className={styles.link}>
                <ListItemAvatar>
-                  <Avatar>
+                  <Avatar className={styles.listItemAvt}>
                      <PersonPinIcon />
                   </Avatar>
                </ListItemAvatar>

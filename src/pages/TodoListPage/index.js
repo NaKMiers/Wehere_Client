@@ -110,8 +110,6 @@ function TodoListPage() {
       </Paper>
    )
 
-   console.log(taskValue)
-
    return (
       <>
          <Header />

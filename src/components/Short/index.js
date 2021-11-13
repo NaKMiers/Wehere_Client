@@ -37,8 +37,8 @@ function Short() {
    const styles = useStyles()
 
    return (
-      <div style={{ padding: 16 }}>
-         <Card className={styles.short}>
+      <>
+         <Card className={styles.card}>
             <CardHeader
                avatar={
                   <Link to='/profile/user1' className={styles.linkToProfile}>
@@ -102,7 +102,7 @@ function Short() {
                Save <TurnedInIcon className={styles.menuIcon} />
             </MenuItem>
          </Menu>
-      </div>
+      </>
    )
 }
 

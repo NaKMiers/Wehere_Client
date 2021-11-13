@@ -46,7 +46,7 @@ function ProfilePage() {
    const renderTabs = () => {
       if (currentTab === 'info') {
          return (
-            <Box className={styles.infoTab}>
+            <Box className={styles.tab}>
                <Grid item xs={12} md={6}>
                   <Demo>
                      <List>
@@ -75,11 +75,11 @@ function ProfilePage() {
          )
       } else if (currentTab === 'friends') {
          return (
-            <Box className={styles.friendsTab}>
-               <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+            <Box className={styles.tab}>
+               <List>
                   <ListItem>
                      <ListItemAvatar>
-                        <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
+                        <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
                      </ListItemAvatar>
                      <ListItemText primary='User1' />
                      <Button className={styles.friendBtn} variant='contained'>
@@ -88,7 +88,7 @@ function ProfilePage() {
                   </ListItem>
                   <ListItem>
                      <ListItemAvatar>
-                        <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
+                        <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
                      </ListItemAvatar>
                      <ListItemText primary='User2' />
                      <Button className={styles.friendBtn} variant='contained'>
@@ -97,7 +97,7 @@ function ProfilePage() {
                   </ListItem>
                   <ListItem>
                      <ListItemAvatar>
-                        <Avatar alt='avt' src='images/wehere.jpg'></Avatar>
+                        <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
                      </ListItemAvatar>
                      <ListItemText primary='User3' />
                      <Button className={styles.friendBtn} variant='contained'>
@@ -109,7 +109,7 @@ function ProfilePage() {
          )
       } else {
          return (
-            <Box className={styles.postsTab}>
+            <Box className={styles.tab}>
                <Video />
                <Image />
                <Blog />
@@ -143,18 +143,10 @@ function ProfilePage() {
                </Typography>
 
                <Box className={styles.groupActionBtn}>
-                  <Button
-                     className={styles.actionBtn}
-                     variant='contained'
-                     style={{ backgroundColor: '#2196f3' }}
-                  >
+                  <Button className={styles.addFriendBtn} variant='contained'>
                      Add Friend
                   </Button>
-                  <Button
-                     className={styles.actionBtn}
-                     variant='contained'
-                     style={{ backgroundColor: '#333' }}
-                  >
+                  <Button className={styles.actionBtn} variant='contained'>
                      Messenger
                   </Button>
                   <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
@@ -188,7 +180,7 @@ function ProfilePage() {
                         className={styles.tabButton}
                         style={{
                            border: 'none',
-                           backgroundColor: `${currentTab === 'info' ? '#ddd' : '#fff'}`
+                           backgroundColor: `${currentTab === 'info' ? '#eee' : '#fff'}`
                         }}
                         onClick={() => setCurrentTab('info')}
                      >
@@ -198,7 +190,7 @@ function ProfilePage() {
                         className={styles.tabButton}
                         style={{
                            border: 'none',
-                           backgroundColor: `${currentTab === 'posts' ? '#ddd' : '#fff'}`
+                           backgroundColor: `${currentTab === 'posts' ? '#eee' : '#fff'}`
                         }}
                         onClick={() => setCurrentTab('posts')}
                      >
@@ -208,7 +200,7 @@ function ProfilePage() {
                         className={styles.tabButton}
                         style={{
                            border: 'none',
-                           backgroundColor: `${currentTab === 'friends' ? '#ddd' : '#fff'}`
+                           backgroundColor: `${currentTab === 'friends' ? '#eee' : '#fff'}`
                         }}
                         onClick={() => setCurrentTab('friends')}
                      >

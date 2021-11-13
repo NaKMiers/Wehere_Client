@@ -9,7 +9,6 @@ function FriendListPage() {
          <Header />
          <div style={{ padding: 16 }}>
             <List
-               sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
                component='nav'
                aria-labelledby='nested-list-subheader'
                subheader={

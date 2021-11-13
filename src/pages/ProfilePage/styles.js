@@ -15,7 +15,7 @@ export default makeStyles(theme => ({
    },
    avatarWrap: {
       position: 'absolute',
-      border: '6px #fff solid',
+      border: `6px solid ${theme.border.main}`,
       borderRadius: '50%',
       bottom: '-8%',
       left: '50%',
@@ -42,8 +42,15 @@ export default makeStyles(theme => ({
       justifyContent: 'center'
    },
    actionBtn: {
-      backgroundColor: '#333',
-      color: '#fff',
+      background: theme.palette.secondary.dark,
+      color: theme.palette.primary.text,
+      fontWeight: 'bold',
+      margin: '0 4px',
+      padding: '6px 8px'
+   },
+   addFriendBtn: {
+      background: theme.palette.secondary.main,
+      color: theme.palette.primary.text,
       fontWeight: 'bold',
       margin: '0 4px',
       padding: '6px 8px'
@@ -76,19 +83,11 @@ export default makeStyles(theme => ({
    },
    friendBtn: {
       padding: '2px 8px',
-      backgroundColor: '#4caf50',
-      color: '#fff'
+      background: theme.palette.secondary.main,
+      color: theme.palette.primary.text
    },
-   infoTab: {
-      borderTop: '3px #333 solid',
-      width: '100%'
-   },
-   friendsTab: {
-      borderTop: '3px #333 solid',
-      width: '100%'
-   },
-   postsTab: {
-      borderTop: '3px #333 solid',
+   tab: {
+      borderTop: `3px solid ${theme.border.dark}`,
       width: '100%'
    }
 }))

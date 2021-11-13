@@ -8,27 +8,25 @@ function SyncPage() {
    return (
       <>
          <Header />
-         <div style={{ padding: 16 }}>
-            <List
-               sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-               component='nav'
-               aria-labelledby='nested-list-subheader'
-               subheader={
-                  <ListSubheader component='div' id='nested-list-subheader'>
-                     Sync & Backup
-                  </ListSubheader>
-               }
-            >
-               <ListItem>
-                  <ListItemText primary='Sync ' classes={{ primary: styles.listItemText }} />
-                  <Switch />
-               </ListItem>
-               <ListItem>
-                  <ListItemText primary='Backup' classes={{ primary: styles.listItemText }} />
-                  <Switch />
-               </ListItem>
-            </List>
-         </div>
+         <List
+            style={{ padding: 16 }}
+            component='nav'
+            aria-labelledby='nested-list-subheader'
+            subheader={
+               <ListSubheader component='div' id='nested-list-subheader'>
+                  Sync & Backup
+               </ListSubheader>
+            }
+         >
+            <ListItem>
+               <ListItemText primary='Sync' />
+               <Switch />
+            </ListItem>
+            <ListItem>
+               <ListItemText primary='Backup' />
+               <Switch className={styles.switch} />
+            </ListItem>
+         </List>
       </>
    )
 }

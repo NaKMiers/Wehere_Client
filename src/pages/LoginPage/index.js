@@ -25,7 +25,7 @@ function LoginPage() {
                variant='filled'
             />
             <Button type='submit' className={styles.loginBtn} variant='contained'>
-               <Link to='/' style={{ textDecoration: 'none', color: '#333' }}>
+               <Link to='/' style={{ textDecoration: 'none', color: '#fff' }}>
                   Login
                </Link>
             </Button>

@@ -78,8 +78,8 @@ function DiaryModal() {
 
    return (
       <div>
-         <Box className={styles.addDiaryBtn} onClick={handleOpen}>
-            <Fab color='primary' aria-label='add'>
+         <Box className={styles.addDiaryBtnBox} onClick={handleOpen}>
+            <Fab aria-label='add' className={styles.addDiaryBtn}>
                <AddIcon />
             </Fab>
          </Box>

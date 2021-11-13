@@ -33,7 +33,7 @@ function MenuPage() {
             <Link to={item.link} className={styles.link}>
                <Button className={styles.menuItem}>
                   <ListItemAvatar className={styles.listItemAvt}>
-                     <Avatar>{item.icon()}</Avatar>
+                     <Avatar className={styles.menuIcon}>{item.icon()}</Avatar>
                   </ListItemAvatar>
                   <ListItemText classes={{ primary: styles.listItemText }} primary={item.label} />
                </Button>
@@ -44,9 +44,7 @@ function MenuPage() {
    return (
       <>
          <Header />
-         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {renderList()}
-         </List>
+         <List>{renderList()}</List>
       </>
    )
 }

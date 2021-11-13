@@ -1,13 +1,17 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
-   settingItem: {
-      width: '100%',
-      textAlign: 'left'
+   '@global': {
+      '.MuiSwitch-colorSecondary': {
+         color: theme.palette.secondary.light
+      }
+   },
+   userAvt: {
+      border: `3px solid ${theme.border.light}`
    },
    deleteAccountItem: {
-      backgroundColor: '#f44336',
-      color: '#fff',
+      background: theme.palette.danger.gradient,
+      color: theme.palette.primary.text,
       textShadow: '1px 1px 2px #333',
       textAlign: 'center',
       width: 'calc(100% - 32px)',

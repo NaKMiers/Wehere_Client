@@ -8,9 +8,17 @@ export default makeStyles(theme => ({
    },
    playlistAvt: {
       width: 140,
-      border: '3px #ddd solid',
+      border: `3px solid ${theme.border.light}`,
       borderRadius: 8,
       overflow: 'hidden'
+   },
+   playlistName: {
+      fontWeight: 'bold',
+      color: theme.palette.secondary.text
+   },
+   songCount: {
+      fontSize: 12,
+      color: theme.palette.secondary.text
    },
    playlistBtn: {
       width: '100%',

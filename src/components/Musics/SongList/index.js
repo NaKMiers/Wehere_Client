@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Button, List, Typography } from '@material-ui/core'
 import SongListItem from '../SongListItem'
-import useStyles from './styles'
 import AddNewSongModal from '../AddNewSongModal'
+import useStyles from './styles'
 
 function SongList() {
    const [isOpenAddNewSongModal, setOpenAddNewSongModal] = useState(false)
@@ -14,7 +14,7 @@ function SongList() {
    const styles = useStyles()
    return (
       <>
-         <List component='div' disablePadding>
+         <List component='div' disablePadding style={{ padding: 16 }}>
             <Button
                variant='contained'
                className={styles.newSong}

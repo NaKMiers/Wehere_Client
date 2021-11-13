@@ -50,7 +50,7 @@ function Video() {
 
    const styles = useStyles()
    return (
-      <div style={{ padding: 16 }}>
+      <>
          <Card className={styles.card}>
             <CardHeader
                avatar={
@@ -114,7 +114,7 @@ function Video() {
                Save <TurnedInIcon className={styles.menuIcon} />
             </MenuItem>
          </Menu>
-      </div>
+      </>
    )
 }
 

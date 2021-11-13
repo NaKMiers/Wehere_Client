@@ -4,10 +4,7 @@ export default makeStyles(theme => ({
    listItem: {
       marginBottom: 8,
       borderTopRightRadius: 16,
-      padding: 0,
-      '&:hover $boxButton': {
-         display: 'flex'
-      }
+      padding: 0
    },
    listItemButton: {
       borderRadius: 8
@@ -19,13 +16,16 @@ export default makeStyles(theme => ({
       borderRadius: 8
    },
    boxButton: {
-      display: 'none',
+      display: 'flex',
       flexDirection: 'column'
    },
    button: {
       padding: '0px 16px',
       textAlign: 'center',
       cursor: 'pointer'
+   },
+   heartIcon: {
+      color: theme.palette.danger.main
    },
    menu: {
       padding: 0
