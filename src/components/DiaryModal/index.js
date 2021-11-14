@@ -62,11 +62,7 @@ function DiaryModal() {
 
    const renderTextColorOptions = () =>
       textColorOptions.map(o => (
-         <Button
-            key={o}
-            style={{ backgroundColor: o }}
-            className={styles.textColorOption}
-         ></Button>
+         <Button key={o} style={{ backgroundColor: o }} className={styles.textColorOption} />
       ))
 
    const renderBgOptions = () =>
@@ -117,6 +113,7 @@ function DiaryModal() {
 
                      <textarea
                         className={styles.inputContentDiary}
+                        placeholder='Enter your diaries content...'
                         ref={inputContentArea}
                      ></textarea>
                   </form>

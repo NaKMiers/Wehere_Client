@@ -31,7 +31,7 @@ function OnlineBar() {
          <ButtonGroup variant='outlined' aria-label='outlined button group'>
             <Button className={styles.menuOnlineBtn}>
                <Link to='/messenger/onlines'>
-                  <ArrowForwardIosIcon className={styles.menuMusicIcon} />
+                  <ArrowForwardIosIcon className={styles.expandedIcon} />
                </Link>
             </Button>
             {renderUserOnline()}

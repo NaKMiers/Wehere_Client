@@ -15,7 +15,7 @@ export default makeStyles(theme => ({
    loginBtn: {
       width: '100%',
       padding: 10,
-      marginBottom: 16,
+      margin: '16px 0px',
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text
    },

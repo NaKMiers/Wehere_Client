@@ -10,8 +10,8 @@ export default makeStyles(theme => ({
       borderRadius: 8
    },
    songImg: {
-      width: 48,
-      height: 48,
+      width: 42,
+      height: 42,
       marginRight: 8,
       borderRadius: 8
    },
@@ -31,7 +31,7 @@ export default makeStyles(theme => ({
       padding: 0
    },
    menuItem: {
-      padding: '8px 16px',
-      minHeight: 'auto'
+      padding: '4px 8px',
+      minHeight: 0
    }
 }))

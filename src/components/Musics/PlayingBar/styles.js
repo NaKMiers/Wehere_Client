@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
       bottom: 0,
       left: 0,
       right: 0,
-      background: '#333'
+      background: theme.palette.primary.gradient
    },
    playingBarTop: {
       display: 'flex',
@@ -14,26 +14,31 @@ export default makeStyles(theme => ({
       alignItems: 'center',
       padding: '0 16px',
       height: 40,
-      borderBottom: '1px #ddd solid'
+      borderBottom: `1px solid ${theme.border.light}`,
+      cursor: 'pointer'
    },
    aboutName: {
       display: 'flex',
       flexGrow: '1',
-      color: '#fff',
+      color: theme.palette.primary.text,
       padding: '8px 0px'
    },
    favoriteBtn: {
       padding: 0,
-      color: '#fff'
+      color: theme.favoriteIcon.main
    },
    playingBarCenter: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      color: '#fff',
+      color: theme.palette.primary.text,
       padding: '8px 16px',
-      borderBottom: '1px #ddd solid',
-      height: 40
+      height: 40,
+      borderBottom: `1px solid ${theme.border.light}`
+   },
+   processPlayingBar: {
+      width: '75%',
+      cursor: 'pointer'
    },
    playingBarBottom: {
       display: 'flex'
@@ -42,15 +47,14 @@ export default makeStyles(theme => ({
       position: 'relative',
       minWidth: 32,
       padding: 0,
-      backgroundColor: '#ddd',
+      backgroundColor: theme.palette.secondary.light,
       borderRadius: 0
    },
    menuMusicIcon: {
       position: 'absolute',
       top: '50%',
       left: '50%',
-      transform: 'translate(-30%, -50%)',
-      color: '#111'
+      transform: 'translate(-30%, -50%)'
    },
    audioBtnGroup: {
       display: 'flex',
@@ -58,12 +62,12 @@ export default makeStyles(theme => ({
       justifyContent: 'space-around'
    },
    audioBtn: {
-      color: '#fff'
+      color: theme.palette.primary.text
    },
    playBtn: {
-      width: 52,
-      height: 52,
-      border: '3px #fff solid'
+      width: 40,
+      height: 40,
+      border: `3px solid ${theme.border.main}`
    },
    audioIcon: {
       fontSize: 24

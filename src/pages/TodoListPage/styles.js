@@ -53,5 +53,11 @@ export default makeStyles(theme => ({
       margin: 'auto',
       maxWidth: 360,
       justifyContent: 'space-around'
+   },
+   todoActionBtnUp: {
+      color: theme.palette.primary.main
+   },
+   todoActionBtnDown: {
+      color: theme.palette.secondary.main
    }
 }))

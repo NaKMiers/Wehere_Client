@@ -71,7 +71,8 @@ export default makeStyles(theme => ({
       color: theme.palette.primary.text
    },
    menuItem: {
-      padding: '0 16px'
+      padding: '4px 8px',
+      minHeight: 0
    },
    menuIcon: {
       marginLeft: 8

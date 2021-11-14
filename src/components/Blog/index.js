@@ -55,12 +55,12 @@ function Blog() {
             <CardHeader
                avatar={
                   <Link to='/profile/user1' className={styles.linkToProfile}>
-                     <Avatar aria-label='recipe'>R</Avatar>
+                     <Avatar alt='avt' src='https://bom.to/GBtMwW' />
                   </Link>
                }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
-                     <MoreVertIcon />
+                     <MoreVertIcon className={styles.icon} />
                   </IconButton>
                }
                title='Shrimp and Chorizo Paella'
@@ -78,10 +78,10 @@ function Blog() {
             </CardContent>
             <CardActions disableSpacing>
                <IconButton aria-label='add to favorites'>
-                  <FavoriteIcon />
+                  <FavoriteIcon className={styles.icon} />
                </IconButton>
                <IconButton aria-label='share'>
-                  <ShareIcon />
+                  <ShareIcon className={styles.icon} />
                </IconButton>
                <ExpandMore
                   expand={expanded}
@@ -89,7 +89,7 @@ function Blog() {
                   aria-expanded={expanded}
                   aria-label='show more'
                >
-                  <ExpandMoreIcon />
+                  <ExpandMoreIcon className={styles.icon} />
                </ExpandMore>
             </CardActions>
             <Comment expanded={expanded} />

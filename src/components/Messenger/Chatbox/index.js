@@ -42,7 +42,12 @@ function Chatbox() {
 
    const handleClose = () => {
       setAnchorEl(null)
-      setOpenModalSettingChat(!isOpenModalSettingChat)
+      setOpenModalSettingChat(false)
+   }
+
+   const handleOpenModalSettingChat = () => {
+      setOpenModalSettingChat(true)
+      setAnchorEl(null)
    }
 
    const handleClickEmoji = () => {
@@ -63,7 +68,7 @@ function Chatbox() {
             key={e}
             className={styles.tabEmoji}
             style={{
-               borderTop: `${i + 1 === emojiTab ? '3px solid #f44336' : '3px solid #ddd'}`
+               borderTop: `${i + 1 === emojiTab ? '3px solid #21abe2' : '3px solid #eee'}`
             }}
             onClick={() => setEmojiTab(i + 1)}
          >
@@ -107,7 +112,7 @@ function Chatbox() {
                   'aria-labelledby': 'basic-button'
                }}
             >
-               <MenuItem onClick={handleClose} className={styles.menuItem}>
+               <MenuItem onClick={handleOpenModalSettingChat} className={styles.menuItem}>
                   <SettingsApplicationsIcon style={{ marginRight: 4 }} />
                   Seting
                </MenuItem>

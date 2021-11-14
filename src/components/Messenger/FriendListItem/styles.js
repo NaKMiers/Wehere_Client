@@ -9,18 +9,18 @@ export default makeStyles(theme => ({
    },
    link: {
       display: 'flex',
+      alignItems: 'center',
       flexGrow: 1,
       textDecoration: 'none',
-      color: '#333'
+      color: theme.palette.secondary.text
    },
    avatar: {
-      width: 48,
-      height: 48,
-      border: '3px #ddd solid'
+      width: 42,
+      height: 42
    },
    badge: {
-      top: 9,
-      right: 6
+      top: -14,
+      right: 4
    },
    userName: {
       marginLeft: 12

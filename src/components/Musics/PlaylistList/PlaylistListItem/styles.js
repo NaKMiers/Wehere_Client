@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
    },
    playlistAvt: {
       width: 140,
-      border: `3px solid ${theme.border.light}`,
+      // border: `3px solid ${theme.border.light}`,
       borderRadius: 8,
       overflow: 'hidden'
    },
@@ -31,9 +31,8 @@ export default makeStyles(theme => ({
       right: 0
    },
    menuItem: {
-      minHeight: 0,
-      padding: '8px 16px',
-      fontSize: 18
+      padding: '4px 8px',
+      minHeight: 0
    },
    menuIcon: {
       marginLeft: 8

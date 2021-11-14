@@ -6,22 +6,19 @@ export default makeStyles(theme => ({
          width: 0,
          height: 0
       },
-      '*::-webkit-scrollbar-thumb:hover': {
-         backgroundColor: '#555'
+      '.MuiBadge-colorPrimary': {
+         background: theme.palette.success.main,
+         border: `1.5px solid ${theme.border.main}`
       }
-   },
-   chatBox: {
-      margin: 'auto',
-      maxWidth: 960
    },
    chatHeader: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: '#2196f3',
-      color: '#fff',
-      borderBottomLeftRadius: 12,
-      borderBottomRightRadius: 12
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.primary.text,
+      borderBottomLeftRadius: 8,
+      borderBottomRightRadius: 8
    },
    textHeader: {
       flexGrow: 1,
@@ -34,7 +31,7 @@ export default makeStyles(theme => ({
    },
    status: {
       fontSize: 12,
-      color: '#aaa',
+      color: theme.palette.success.main,
       marginTop: -4
    },
    avtBtn: {
@@ -44,9 +41,9 @@ export default makeStyles(theme => ({
       position: 'relative'
    },
    avt: {
-      width: 48,
-      height: 48,
-      border: '3px #ddd solid'
+      width: 42,
+      height: 42
+      // border: `3px solid ${theme.border.light}`
    },
    badge: {
       position: 'absolute',
@@ -62,7 +59,6 @@ export default makeStyles(theme => ({
    },
 
    chatContent: {
-      // height: 'calc(100vh - 196px)',
       padding: 16
    },
 
@@ -71,7 +67,7 @@ export default makeStyles(theme => ({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: '#2197f3',
+      background: theme.palette.secondary.main,
       borderTopLeftRadius: 8,
       borderTopRightRadius: 8
    },
@@ -79,7 +75,7 @@ export default makeStyles(theme => ({
       flexGrow: '1'
    },
    inputProps: {
-      color: '#fff'
+      color: theme.palette.primary.text
    },
    emojiTable: {
       textAlign: 'center',
@@ -110,13 +106,5 @@ export default makeStyles(theme => ({
       left: 0,
       right: 0,
       overflow: 'hidden'
-   },
-   headingSeting: {
-      color: '#333',
-      padding: '8px 16px',
-      fontSize: 24
-   },
-   boxSetting: {
-      width: '100%'
    }
 }))

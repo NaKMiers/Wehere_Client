@@ -7,11 +7,18 @@ export default makeStyles(theme => ({
       top: '45%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      padding: '16px 16px 32px 16px'
+      padding: 0,
+      borderRadius: 8,
+      overflow: 'hidden'
    },
    heading: {
       padding: '8px 16px',
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text,
       textAlign: 'center'
+   },
+   form: {
+      padding: '8px 16px 24px 16px'
    },
    textField: {
       width: '100%',
@@ -19,7 +26,7 @@ export default makeStyles(theme => ({
    },
    textFieldFile: {
       content: 'Select some files',
-      background: '#e8e8e8',
+      background: theme.palette.secondary.light,
       padding: '5px 8px',
       cursor: 'pointer',
       marginBottom: 16,
@@ -33,7 +40,7 @@ export default makeStyles(theme => ({
 
    submitBtn: {
       width: '100%',
-      backgroundColor: '#333',
-      color: '#fff'
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    }
 }))

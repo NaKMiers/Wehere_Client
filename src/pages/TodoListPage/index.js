@@ -113,7 +113,7 @@ function TodoListPage() {
    return (
       <>
          <Header />
-         <div style={{ padding: 16 }}>
+         <div style={{ maxWidth: 960, margin: '24px auto' }}>
             <Grid className={styles.addTaskWrap}>
                <TextField
                   onFocus={() => {
@@ -176,7 +176,7 @@ function TodoListPage() {
                <Grid item xs={12}>
                   <Grid container alignItems='center' className={styles.actionBtnWrap}>
                      <Button
-                        className={styles.todoActionBtn}
+                        className={styles.todoActionBtnUp}
                         variant='outlined'
                         size='small'
                         onClick={handleAllLeft}
@@ -186,7 +186,7 @@ function TodoListPage() {
                         <DoubleArrowIcon style={{ transform: 'rotate(-90deg)' }} />
                      </Button>
                      <Button
-                        className={styles.todoActionBtn}
+                        className={styles.todoActionBtnUp}
                         variant='outlined'
                         size='small'
                         onClick={handleCheckedLeft}
@@ -196,7 +196,7 @@ function TodoListPage() {
                         <ArrowUpwardIcon />
                      </Button>
                      <Button
-                        className={styles.todoActionBtn}
+                        className={styles.todoActionBtnDown}
                         variant='outlined'
                         size='small'
                         onClick={handleCheckedRight}
@@ -206,7 +206,7 @@ function TodoListPage() {
                         <ArrowDownwardIcon />
                      </Button>
                      <Button
-                        className={styles.todoActionBtn}
+                        className={styles.todoActionBtnDown}
                         variant='outlined'
                         size='small'
                         onClick={handleAllRight}

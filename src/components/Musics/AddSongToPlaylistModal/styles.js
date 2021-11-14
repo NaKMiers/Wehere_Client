@@ -5,12 +5,9 @@ export default makeStyles(theme => ({
       '*::-webkit-scrollbar': {
          width: 0,
          height: 0
-      },
-      '*::-webkit-scrollbar-thumb:hover': {
-         backgroundColor: '#555'
       }
    },
-   paperSetting: {
+   paper: {
       position: 'absolute',
       top: '50%',
       left: '50%',
@@ -18,17 +15,18 @@ export default makeStyles(theme => ({
       overflow: 'hidden',
       borderRadius: 8,
       outline: 'none',
-      padding: '0px 8px',
       paddingBottom: 10
    },
    heading: {
-      padding: 12,
-      textAlign: 'center'
+      padding: 8,
+      textAlign: 'center',
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    },
    playlistList: {
       width: 300,
       height: 450,
       overflow: 'scroll',
-      padding: 0
+      padding: 12
    }
 }))

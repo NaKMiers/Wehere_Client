@@ -6,35 +6,21 @@ export default makeStyles(theme => ({
       marginBottom: 8
    },
    avtMessage: {
-      border: '3px #ddd solid',
+      // border: `3px solid ${theme.border.light}`,
       alignSelf: 'flex-end'
    },
    textMessageWrap: {
       margin: '0px 8px'
    },
    textMessage: {
-      backgroundColor: '#ffe3b3',
+      background: theme.message.main,
+      color: theme.message.text,
       padding: '6px 14px',
       marginTop: 4,
       borderRadius: 16
    },
    timeMessage: {
-      margin: '0 8px'
-   },
-
-   chatInput: {
-      height: 80,
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: '#2197f3',
-      borderTopLeftRadius: 8,
-      borderTopRightRadius: 8
-   },
-   inputText: {
-      flexGrow: '1'
-   },
-   inputProps: {
-      color: '#fff'
+      margin: '0 8px',
+      color: theme.message.lightText
    }
 }))

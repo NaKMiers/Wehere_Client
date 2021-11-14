@@ -7,12 +7,18 @@ export default makeStyles(theme => ({
       top: '45%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      padding: '16px 16px 32px 16px',
-      outline: 'none'
+      outline: 'none',
+      borderRadius: 8,
+      overflow: 'hidden'
+   },
+   form: {
+      padding: '8px 16px 24px 16px'
    },
    heading: {
       padding: '8px 16px',
-      textAlign: 'center'
+      textAlign: 'center',
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    },
    textField: {
       width: '100%',
@@ -32,8 +38,8 @@ export default makeStyles(theme => ({
    searchBtn: {
       padding: '2px 12px',
       minWidth: 0,
-      backgroundColor: '#333',
-      color: '#fff'
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    },
 
    songList: {
@@ -44,7 +50,7 @@ export default makeStyles(theme => ({
 
    submitBtn: {
       width: '100%',
-      backgroundColor: '#333',
-      color: '#fff'
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text
    }
 }))

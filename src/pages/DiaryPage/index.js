@@ -28,7 +28,7 @@ function DiaryPage() {
    return (
       <>
          <Header />
-         <List>
+         <List style={{ maxWidth: 960, margin: '8px auto' }}>
             {diaries.map((d, i) => (
                <DiaryListItem
                   key={i}

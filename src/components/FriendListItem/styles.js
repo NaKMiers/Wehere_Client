@@ -9,7 +9,7 @@ export default makeStyles(theme => ({
       alignItems: 'center'
    },
    avatar: {
-      border: `3px  solid ${theme.border.light}`
+      // border: `3px  solid ${theme.border.light}`
    },
    friendBtn: {
       padding: '3px 16px',

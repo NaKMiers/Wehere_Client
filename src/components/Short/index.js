@@ -42,12 +42,12 @@ function Short() {
             <CardHeader
                avatar={
                   <Link to='/profile/user1' className={styles.linkToProfile}>
-                     <Avatar aria-label='recipe'>R</Avatar>
+                     <Avatar alt='avt' src='https://bom.to/TBnSyu' />
                   </Link>
                }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
-                     <MoreVertIcon />
+                     <MoreVertIcon className={styles.icon} />
                   </IconButton>
                }
                title='Shrimp and Chorizo Paella'

@@ -12,16 +12,24 @@ function MusicPage() {
          <Header />
          <Switch>
             <Route exact path='/musics'>
-               <ListOptionMusicPage />
+               <div style={{ maxWidth: 960, margin: 'auto' }}>
+                  <ListOptionMusicPage />
+               </div>
             </Route>
             <Route path='/musics/songs'>
-               <SongList />
+               <div style={{ maxWidth: 960, margin: 'auto' }}>
+                  <SongList />
+               </div>
             </Route>
             <Route path='/musics/playlists'>
-               <PlaylistList />
+               <div style={{ maxWidth: 960, margin: 'auto' }}>
+                  <PlaylistList />
+               </div>
             </Route>
             <Route path='/musics/authors'>
-               <AuthorList />
+               <div style={{ maxWidth: 960, margin: 'auto' }}>
+                  <AuthorList />
+               </div>
             </Route>
          </Switch>
          <PlayingBar />

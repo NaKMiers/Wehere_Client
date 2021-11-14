@@ -6,7 +6,7 @@ function LoginPage() {
    const styles = useStyles()
 
    return (
-      <div style={{ padding: 16 }}>
+      <div style={{ maxWidth: 960, margin: '24px auto' }}>
          <Typography variant='h3' className={styles.title}>
             Wehere
          </Typography>

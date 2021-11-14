@@ -8,7 +8,7 @@ function HelpAndSupportPage() {
    return (
       <>
          <Header />
-         <div style={{ padding: 16 }}>
+         <div style={{ maxWidth: 960, margin: '24px auto' }}>
             <Typography className={styles.heading} variant='h4'>
                Help & Support
             </Typography>

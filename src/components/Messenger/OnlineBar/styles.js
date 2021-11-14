@@ -7,25 +7,27 @@ export default makeStyles(theme => ({
          height: '3px'
       },
       '*::-webkit-scrollbar-thumb:hover': {
-         backgroundColor: '#333'
+         backgroundColor: theme.palette.primary.main
+      },
+      '.MuiBadge-colorPrimary': {
+         background: theme.palette.success.main,
+         border: `1.5px solid ${theme.border.main}`
       }
    },
    onlineBar: {
-      backgroundColor: '#ddd',
-      padding: '0px 0px',
-      overflow: 'scroll'
+      padding: 0,
+      overflow: 'scroll',
+      borderBottom: `2px solid ${theme.palette.secondary.main}`
    },
    menuOnlineBtn: {
       position: 'relative',
-      minWidth: 32,
-      border: 'none'
+      minWidth: 32
    },
-   menuMusicIcon: {
+   expandedIcon: {
       position: 'absolute',
       top: '50%',
       left: '50%',
-      transform: 'translate(-30%, -50%)',
-      color: '#333'
+      transform: 'translate(-30%, -50%)'
    },
    avatarBtn: {
       width: 64,
@@ -37,9 +39,8 @@ export default makeStyles(theme => ({
       marginTop: '26px'
    },
    avatar: {
-      width: 48,
-      height: 48,
-      border: '3px #fff solid',
+      width: 42,
+      height: 42,
       borderRadius: '50%'
    },
    badge: {

@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
    menuItem: {
-      width: '100%',
-      textAlign: 'left'
+      padding: '4px 8px',
+      minHeight: 0
    },
    menuIcon: {
       background: theme.palette.primary.main

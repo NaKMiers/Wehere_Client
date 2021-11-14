@@ -6,8 +6,10 @@ function ShortPage() {
    return (
       <>
          <Header />
-         <Short />
-         <Short />
+         <div style={{ maxWidth: 480, margin: '24px auto' }}>
+            <Short />
+            <Short />
+         </div>
       </>
    )
 }

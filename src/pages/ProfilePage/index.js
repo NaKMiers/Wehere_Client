@@ -21,6 +21,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { styled } from '@material-ui/styles'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Blog from '../../components/Blog'
 import Header from '../../components/Header'
 import Image from '../../components/Image'
@@ -78,27 +79,33 @@ function ProfilePage() {
             <Box className={styles.tab}>
                <List>
                   <ListItem>
-                     <ListItemAvatar>
-                        <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
-                     </ListItemAvatar>
+                     <Link to='/profile/user1'>
+                        <ListItemAvatar>
+                           <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
+                        </ListItemAvatar>
+                     </Link>
                      <ListItemText primary='User1' />
                      <Button className={styles.friendBtn} variant='contained'>
                         Add Friend
                      </Button>
                   </ListItem>
                   <ListItem>
-                     <ListItemAvatar>
-                        <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
-                     </ListItemAvatar>
+                     <Link to='/profile/user1'>
+                        <ListItemAvatar>
+                           <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
+                        </ListItemAvatar>
+                     </Link>
                      <ListItemText primary='User2' />
                      <Button className={styles.friendBtn} variant='contained'>
                         Add Friend
                      </Button>
                   </ListItem>
                   <ListItem>
-                     <ListItemAvatar>
-                        <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
-                     </ListItemAvatar>
+                     <Link to='/profile/user1'>
+                        <ListItemAvatar>
+                           <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
+                        </ListItemAvatar>
+                     </Link>
                      <ListItemText primary='User3' />
                      <Button className={styles.friendBtn} variant='contained'>
                         Add Friend
@@ -109,7 +116,7 @@ function ProfilePage() {
          )
       } else {
          return (
-            <Box className={styles.tab}>
+            <Box className={styles.tab} style={{ padding: '24px 0px' }}>
                <Video />
                <Image />
                <Blog />

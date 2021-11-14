@@ -14,8 +14,8 @@ export default makeStyles(theme => ({
       color: '#333'
    },
    avatar: {
-      width: 48,
-      height: 48,
+      width: 42,
+      height: 42,
       border: '3px #ddd solid'
    },
    badge: {

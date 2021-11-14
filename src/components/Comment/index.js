@@ -22,23 +22,25 @@ function Comment({ expanded }) {
                   <Avatar
                      className={styles.commentAuthor}
                      alt='Remy Sharp'
-                     src='/static/images/avatar/1.jpg'
+                     src='https://bom.to/qz55fE'
                   />
                </Link>
                <TextField
-                  className={styles.commentInput}
+                  inputProps={{ className: styles.commentInput }}
+                  className={styles.commentTextField}
                   id='standard-basic'
                   label='Comment...'
                   variant='standard'
                />
             </div>
+
             <div className={styles.commentWrap}>
                <div className={styles.commentItem}>
                   <Link to='/profile/user1' className={styles.linkToProfile}>
                      <Avatar
                         className={styles.commentAuthor}
                         alt='Remy Sharp'
-                        src='/static/images/avatar/1.jpg'
+                        src='https://bom.to/qz55fE'
                      />
                   </Link>
                   <Typography paragraph>
@@ -48,10 +50,10 @@ function Comment({ expanded }) {
                </div>
                <div className={styles.commentActions}>
                   <IconButton aria-label='add to favorites' size='small'>
-                     <FavoriteIcon />
+                     <FavoriteIcon className={styles.icon} />
                   </IconButton>
                   <IconButton aria-label='share' size='small'>
-                     <ReplyIcon />
+                     <ReplyIcon className={styles.icon} />
                   </IconButton>
                </div>
                <div className={styles.replyCommentItem}>
@@ -61,7 +63,7 @@ function Comment({ expanded }) {
                            <Avatar
                               className={styles.commentAuthor}
                               alt='Remy Sharp'
-                              src='/static/images/avatar/1.jpg'
+                              src='https://bom.to/qz55fE'
                            />
                         </Link>
                         <Typography paragraph>
@@ -71,7 +73,7 @@ function Comment({ expanded }) {
                      </div>
                      <div className={styles.commentActions}>
                         <IconButton aria-label='add to favorites' size='small'>
-                           <FavoriteIcon />
+                           <FavoriteIcon className={styles.icon} />
                         </IconButton>
                      </div>
                   </div>
@@ -81,11 +83,12 @@ function Comment({ expanded }) {
                      <Avatar
                         className={styles.commentAuthor}
                         alt='Remy Sharp'
-                        src='/static/images/avatar/1.jpg'
+                        src='https://bom.to/qz55fE'
                      />
                   </Link>
                   <TextField
-                     className={styles.commentInput}
+                     inputProps={{ className: styles.commentInput }}
+                     className={styles.commentTextField}
                      id='standard-basic'
                      label='Comment...'
                      variant='standard'
@@ -97,7 +100,7 @@ function Comment({ expanded }) {
                   <Avatar
                      className={styles.commentAuthor}
                      alt='Remy Sharp'
-                     src='/static/images/avatar/1.jpg'
+                     src='https://bom.to/qz55fE'
                   />
                   <Typography paragraph>
                      Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside
@@ -106,10 +109,10 @@ function Comment({ expanded }) {
                </div>
                <div className={styles.commentActions}>
                   <IconButton aria-label='add to favorites' size='small'>
-                     <FavoriteIcon />
+                     <FavoriteIcon className={styles.icon} />
                   </IconButton>
                   <IconButton aria-label='share' size='small'>
-                     <ReplyIcon />
+                     <ReplyIcon className={styles.icon} />
                   </IconButton>
                </div>
                <div className={styles.replyCommentItem}>
@@ -118,7 +121,7 @@ function Comment({ expanded }) {
                         <Avatar
                            className={styles.commentAuthor}
                            alt='Remy Sharp'
-                           src='/static/images/avatar/1.jpg'
+                           src='https://bom.to/qz55fE'
                         />
                         <Typography paragraph>
                            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
@@ -127,7 +130,7 @@ function Comment({ expanded }) {
                      </div>
                      <div className={styles.commentActions}>
                         <IconButton aria-label='add to favorites' size='small'>
-                           <FavoriteIcon />
+                           <FavoriteIcon className={styles.icon} />
                         </IconButton>
                      </div>
                   </div>
@@ -136,10 +139,11 @@ function Comment({ expanded }) {
                   <Avatar
                      className={styles.commentAuthor}
                      alt='Remy Sharp'
-                     src='/static/images/avatar/1.jpg'
+                     src='https://bom.to/qz55fE'
                   />
                   <TextField
-                     className={styles.commentInput}
+                     inputProps={{ className: styles.commentInput }}
+                     className={styles.commentTextField}
                      id='standard-basic'
                      label='Comment...'
                      variant='standard'

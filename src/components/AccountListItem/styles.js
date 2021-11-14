@@ -11,6 +11,8 @@ export default makeStyles(theme => ({
       background: theme.palette.secondary.light
    },
    avatar: {
+      width: 42,
+      height: 42,
       border: `3px solid ${theme.border.main}`
    },
    changeAccBtn: {

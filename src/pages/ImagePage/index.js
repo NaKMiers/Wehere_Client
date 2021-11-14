@@ -5,8 +5,10 @@ function ImagePage() {
    return (
       <>
          <Header />
-         <Image />
-         <Image />
+         <div style={{ maxWidth: 480, margin: '24px auto' }}>
+            <Image />
+            <Image />
+         </div>
       </>
    )
 }

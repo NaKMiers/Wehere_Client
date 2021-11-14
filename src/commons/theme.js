@@ -29,6 +29,15 @@ const theme = createTheme({
       dark: '#333',
       main: '#fff',
       highlight: '#4f00bc'
+   },
+   favoriteIcon: {
+      main: '#fff',
+      liked: '#f44336'
+   },
+   message: {
+      main: '#ffe3b3',
+      text: '#333',
+      lightText: '#ccc'
    }
 })
 

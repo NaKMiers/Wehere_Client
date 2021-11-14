@@ -7,13 +7,15 @@ function HomePage() {
    return (
       <>
          <Header />
-         <Blog />
-         <Image />
-         <Video />
-         <Blog />
-         <Image />
-         <Video />
-         <Video />
+         <div style={{ maxWidth: 480, margin: '24px auto' }}>
+            <Blog />
+            <Image />
+            <Video />
+            <Blog />
+            <Image />
+            <Video />
+            <Video />
+         </div>
       </>
    )
 }

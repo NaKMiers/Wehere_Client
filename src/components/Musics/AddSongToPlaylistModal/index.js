@@ -12,7 +12,7 @@ function AddSongToPlayListModal({ open, handleClose }) {
          aria-labelledby='modal-modal-title'
          aria-describedby='modal-modal-description'
       >
-         <Paper className={styles.paperSetting}>
+         <Paper className={styles.paper}>
             <Typography variant='h5' className={styles.heading}>
                Add To Playlist
             </Typography>

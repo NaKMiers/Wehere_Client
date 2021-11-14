@@ -5,8 +5,10 @@ function BlogPage() {
    return (
       <>
          <Header />
-         <Blog />
-         <Blog />
+         <div style={{ maxWidth: 480, margin: '24px auto' }}>
+            <Blog />
+            <Blog />
+         </div>
       </>
    )
 }

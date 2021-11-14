@@ -17,7 +17,7 @@ function AddNewPlaylistModal({ open, handleClose }) {
             <Typography variant='h5' className={styles.heading}>
                Add New Playlist
             </Typography>
-            <form>
+            <form className={styles.form}>
                <TextField
                   className={styles.textField}
                   id='filled-search'

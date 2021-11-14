@@ -15,7 +15,7 @@ function AddNewSongModal({ open, handleClose }) {
             <Typography variant='h5' className={styles.heading}>
                Add New Song
             </Typography>
-            <form>
+            <form className={styles.form}>
                <TextField
                   className={styles.textField}
                   id='filled-search'

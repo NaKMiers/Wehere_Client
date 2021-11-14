@@ -35,7 +35,11 @@ function PlayingBar() {
          <Collapse in={isShowPlayingBarCenter} timeout='auto' unmountOnExit>
             <Box className={styles.playingBarCenter}>
                <Typography variant='body1'>00:14</Typography>
-               <LinearProgress variant='determinate' value={20} style={{ width: '75%' }} />
+               <LinearProgress
+                  variant='determinate'
+                  value={20}
+                  className={styles.processPlayingBar}
+               />
                <Typography variant='body1'>4:19</Typography>
             </Box>
          </Collapse>

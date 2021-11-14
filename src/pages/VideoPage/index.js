@@ -5,8 +5,10 @@ function VideoPage() {
    return (
       <>
          <Header />
-         <Video />
-         <Video />
+         <div style={{ maxWidth: 480, margin: '24px auto' }}>
+            <Video />
+            <Video />
+         </div>
       </>
    )
 }

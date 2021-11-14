@@ -11,14 +11,20 @@ function MessengerPage() {
          <Header />
          <Switch>
             <Route exact path='/messenger'>
-               <OnlineBar />
-               <FriendList />
+               <div style={{ maxWidth: 960, margin: 'auto' }}>
+                  <OnlineBar />
+                  <FriendList />
+               </div>
             </Route>
             <Route exact path='/messenger/onlines'>
-               <OnlineList />
+               <div style={{ maxWidth: 960, margin: 'auto' }}>
+                  <OnlineList />
+               </div>
             </Route>
             <Route exact path='/messenger/:user'>
-               <Chatbox />
+               <div style={{ maxWidth: 960, margin: 'auto' }}>
+                  <Chatbox />
+               </div>
             </Route>
          </Switch>
       </>

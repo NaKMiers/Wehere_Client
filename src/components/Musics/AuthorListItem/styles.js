@@ -6,12 +6,12 @@ export default makeStyles(theme => ({
    link: {
       display: 'flex',
       textDecoration: 'none',
+      alignItems: 'center',
       color: theme.palette.secondary.text
    },
    authorAvt: {
-      width: 48,
-      height: 48,
-      border: `3px  solid ${theme.border.light}`,
+      width: 42,
+      height: 42,
       marginRight: 12
    }
 }))

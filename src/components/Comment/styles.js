@@ -4,8 +4,10 @@ export default makeStyles(theme => ({
       padding: '0 16px'
    },
    comments: {
-      borderTop: 'solid #ccc 1px',
       padding: 0
+   },
+   icon: {
+      color: theme.palette.primary.text
    },
    commentInputWrap: {
       marginTop: 8,
@@ -15,9 +17,13 @@ export default makeStyles(theme => ({
    commentAuthor: {
       marginRight: 16,
       marginTop: 10
+      // border: `3px solid ${theme.border.light}`
+   },
+   commentTextField: {
+      width: '100%'
    },
    commentInput: {
-      width: '100%'
+      color: theme.palette.primary.text
    },
    commentWrap: {
       marginTop: 16

@@ -30,7 +30,7 @@ function SettingPage() {
       <>
          <Header />
          <List
-            style={{ padding: 16 }}
+            style={{ maxWidth: 960, margin: '16px auto' }}
             component='nav'
             aria-labelledby='nested-list-subheader'
             subheader={
@@ -48,47 +48,48 @@ function SettingPage() {
                <ListItemText primary='Change Password' />
                {openChangePW ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-            <Collapse className={styles.collape} in={openChangePW} timeout='auto' unmountOnExit>
-               <List component='div' disablePadding>
-                  <form>
-                     <TextField
-                        name='currentPassword'
-                        className={styles.textField}
-                        id='filled-basic'
-                        label='Current Password'
-                        variant='filled'
-                        value={currentPWValue}
-                        onChange={e => setCurrentPWValue(e.target.value)}
-                     />
-                     <TextField
-                        name='newPassword'
-                        type='password'
-                        className={styles.textField}
-                        id='filled-basic'
-                        label='New Password'
-                        variant='filled'
-                        value={newPWValue}
-                        onChange={e => setNewPWValue(e.target.value)}
-                     />
-                     <TextField
-                        name='retypePassword'
-                        type='password'
-                        className={styles.textField}
-                        id='filled-basic'
-                        label='Password again'
-                        variant='filled'
-                        value={retypePWValue}
-                        onChange={e => setRetypePWValue(e.target.value)}
-                     />
-                  </form>
-               </List>
+            <Collapse style={{ marginLeft: 24 }} in={openChangePW} timeout='auto' unmountOnExit>
+               <form>
+                  <TextField
+                     style={{ width: '100%' }}
+                     name='currentPassword'
+                     className={styles.textField}
+                     id='filled-basic'
+                     label='Current Password'
+                     variant='filled'
+                     value={currentPWValue}
+                     onChange={e => setCurrentPWValue(e.target.value)}
+                  />
+                  <TextField
+                     style={{ width: '100%' }}
+                     name='newPassword'
+                     type='password'
+                     className={styles.textField}
+                     id='filled-basic'
+                     label='New Password'
+                     variant='filled'
+                     value={newPWValue}
+                     onChange={e => setNewPWValue(e.target.value)}
+                  />
+                  <TextField
+                     style={{ width: '100%' }}
+                     name='retypePassword'
+                     type='password'
+                     className={styles.textField}
+                     id='filled-basic'
+                     label='Password again'
+                     variant='filled'
+                     value={retypePWValue}
+                     onChange={e => setRetypePWValue(e.target.value)}
+                  />
+               </form>
             </Collapse>
 
             <ListItem onClick={() => setOpenComments(!openComments)}>
                <ListItemText primary='Comments' />
                {openComments ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-            <Collapse className={styles.collape} in={openComments} timeout='auto' unmountOnExit>
+            <Collapse style={{ marginLeft: 24 }} in={openComments} timeout='auto' unmountOnExit>
                <List component='div' disablePadding>
                   <ListItem sx={{ pl: 4 }}>
                      <ListItemText
@@ -105,7 +106,7 @@ function SettingPage() {
                {openBlockFriends ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse
-               className={styles.collape}
+               style={{ marginLeft: 24 }}
                in={openBlockFriends}
                timeout='auto'
                unmountOnExit
