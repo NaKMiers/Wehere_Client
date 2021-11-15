@@ -5,8 +5,7 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient
    },
    selected: {
-      transform: 'scale(1.3)',
-      borderBottom: '3px solid #f44336'
+      transform: 'scale(1.3)'
    },
    selectedHome: {
       transform: 'scale(1.1)',

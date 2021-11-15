@@ -3,14 +3,14 @@ import { createTheme } from '@mui/material/styles'
 const theme = createTheme({
    palette: {
       primary: {
-         gradient: 'linear-gradient(45deg, #4f00bc, #21abe2)',
-         main: '#4f00bc',
+         gradient: 'linear-gradient(45deg, #db03e4, #35afff)',
+         main: '#db03e4',
          text: '#fff'
       },
       secondary: {
          light: '#eee',
          dark: '#333',
-         main: '#21abe2',
+         main: '#35afff',
          text: '#333'
       },
       success: {

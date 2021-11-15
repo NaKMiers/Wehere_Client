@@ -1,27 +1,27 @@
 import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import GavelIcon from '@material-ui/icons/Gavel'
-import LiveHelpIcon from '@material-ui/icons/LiveHelp'
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
-import SettingsIcon from '@material-ui/icons/Settings'
-import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle'
-import SyncIcon from '@material-ui/icons/Sync'
-import SyncAltIcon from '@material-ui/icons/SyncAlt'
-import MenuBookIcon from '@material-ui/icons/MenuBook'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
+import ChangeIcon from '../../components/Icons/ChangeIcon'
+import DiaryIcon from '../../components/Icons/DiaryIcon'
+import FriendIcon from '../../components/Icons/FriendIcon'
+import HelpAndSupportIcon from '../../components/Icons/HelpAndSupportIcon'
+import LogOutIcon from '../../components/Icons/LogOutIcon'
+import SettingsIcon from '../../components/Icons/SettingIcon'
+import SyncIcon from '../../components/Icons/SyncIcon'
+import UserIcon from '../../components/Icons/UserIcon'
 import useStyles from './styles'
 
 const menuList = [
-   { icon: () => <AccountCircleIcon />, label: 'Profile', link: '/profile' },
-   { icon: () => <MenuBookIcon />, label: 'Diaries', link: '/diaries' },
-   { icon: () => <SupervisedUserCircleIcon />, label: 'Friends', link: '/friend-list' },
-   { icon: () => <SettingsIcon />, label: 'Setting', link: '/menu/setting' },
+   { icon: () => <UserIcon />, label: 'Profile', link: '/profile' },
+   { icon: () => <DiaryIcon />, label: 'Diaries', link: '/diaries' },
+   { icon: () => <FriendIcon />, label: 'Friends', link: '/friend-list' },
+   { icon: () => <SettingsIcon mutiple />, label: 'Setting', link: '/menu/setting' },
    { icon: () => <GavelIcon />, label: 'FAQ', link: '/menu/faq' },
-   { icon: () => <LiveHelpIcon />, label: 'Help & Support', link: '/menu/help-and-support' },
+   { icon: () => <HelpAndSupportIcon />, label: 'Help & Support', link: '/menu/help-and-support' },
    { icon: () => <SyncIcon />, label: 'Sync', link: '/menu/sync' },
-   { icon: () => <SyncAltIcon />, label: 'Switch Account', link: '/menu/switch-account' },
-   { icon: () => <MeetingRoomIcon />, label: 'Log Out', link: '/login' }
+   { icon: () => <ChangeIcon />, label: 'Switch Account', link: '/menu/switch-account' },
+   { icon: () => <LogOutIcon />, label: 'Log Out', link: '/login' }
 ]
 
 function MenuPage() {
@@ -44,7 +44,7 @@ function MenuPage() {
    return (
       <>
          <Header />
-         <List>{renderList()}</List>
+         <List style={{ maxWidth: 960, margin: '12px auto' }}>{renderList()}</List>
       </>
    )
 }

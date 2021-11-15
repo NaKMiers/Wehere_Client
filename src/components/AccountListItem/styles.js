@@ -4,7 +4,7 @@ export default makeStyles(theme => ({
    accountItem: {
       display: 'flex',
       alignItems: 'center',
-      borderLeft: `3px solid ${theme.border.highlight}`,
+      borderLeft: `3px solid ${theme.palette.primary.main}`,
       marginBottom: 16,
       height: 64,
       paddingRight: 4,

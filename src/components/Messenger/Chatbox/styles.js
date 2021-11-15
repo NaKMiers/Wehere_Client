@@ -20,6 +20,14 @@ export default makeStyles(theme => ({
       borderBottomLeftRadius: 8,
       borderBottomRightRadius: 8
    },
+   moreBtn: {
+      cursor: 'pointer',
+      padding: 12
+   },
+   moreIcon: {
+      fontSize: 22,
+      color: theme.palette.primary.text
+   },
    textHeader: {
       flexGrow: 1,
       display: 'flex',
@@ -43,7 +51,6 @@ export default makeStyles(theme => ({
    avt: {
       width: 42,
       height: 42
-      // border: `3px solid ${theme.border.light}`
    },
    badge: {
       position: 'absolute',
@@ -75,6 +82,10 @@ export default makeStyles(theme => ({
       flexGrow: '1'
    },
    inputProps: {
+      color: theme.palette.primary.text
+   },
+   formIcon: {
+      fontSize: 22,
       color: theme.palette.primary.text
    },
    emojiTable: {

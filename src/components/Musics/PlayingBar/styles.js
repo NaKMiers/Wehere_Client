@@ -51,10 +51,10 @@ export default makeStyles(theme => ({
       borderRadius: 0
    },
    menuMusicIcon: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-30%, -50%)'
+      fontSize: 28,
+      fontWeight: 300,
+      marginRight: 1,
+      color: theme.palette.primary.main
    },
    audioBtnGroup: {
       display: 'flex',
@@ -62,14 +62,16 @@ export default makeStyles(theme => ({
       justifyContent: 'space-around'
    },
    audioBtn: {
-      color: theme.palette.primary.text
-   },
-   playBtn: {
-      width: 40,
-      height: 40,
-      border: `3px solid ${theme.border.main}`
+      color: theme.palette.primary.text,
+      margin: '0px 8px'
    },
    audioIcon: {
-      fontSize: 24
+      fontSize: 28,
+      fontWeight: 300
+   },
+   playBtn: {
+      width: 50,
+      height: 50,
+      border: `3px solid ${theme.border.main}`
    }
 }))

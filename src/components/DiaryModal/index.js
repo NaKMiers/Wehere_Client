@@ -11,10 +11,10 @@ import {
    Paper,
    Typography
 } from '@material-ui/core'
-import { ExpandLess, ExpandMore } from '@material-ui/icons'
-import AddIcon from '@material-ui/icons/Add'
 import { ListItemButton } from '@mui/material'
 import { useRef, useState } from 'react'
+import ExpandIcon from '../../components/Icons/ExpandIcon'
+import AddIcon from '../Icons/AddIcon'
 import useStyles from './styles'
 
 const textColorOptions = ['#f44336', '#2196f3', '#4caf50', '#F2F7F7', '#f57eeb', '#ffeb3b', '#333']
@@ -120,9 +120,9 @@ function DiaryModal() {
                   <Box className={styles.editDiaryWrap}>
                      <ListItemButton onClick={handleExpandEdit}>
                         {openCollapeEdit ? (
-                           <ExpandLess className={styles.expandMoreEditBtn} />
+                           <ExpandIcon rotate color='secondary' style={{ margin: 'auto' }} />
                         ) : (
-                           <ExpandMore className={styles.expandMoreEditBtn} />
+                           <ExpandIcon color='secondary' style={{ margin: 'auto' }} />
                         )}
                      </ListItemButton>
                      <Collapse in={openCollapeEdit} timeout='auto' unmountOnExit>

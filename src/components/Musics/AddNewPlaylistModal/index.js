@@ -1,5 +1,5 @@
 import { Button, List, Modal, Paper, TextField, Typography } from '@material-ui/core'
-import SearchIcon from '@material-ui/icons/Search'
+import clsx from 'clsx'
 import SongListItem from '../SongListItem'
 import useStyle from './styles'
 
@@ -31,7 +31,7 @@ function AddNewPlaylistModal({ open, handleClose }) {
                      className={styles.searchSongInput}
                   />
                   <Button className={styles.searchBtn}>
-                     <SearchIcon />
+                     <i className={clsx(styles.searchIcon, 'fad fa-search')}></i>
                   </Button>
                </form>
                <List className={styles.songList}>

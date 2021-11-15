@@ -11,10 +11,9 @@ import {
    Typography
 } from '@material-ui/core'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft'
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
-import SyncAltIcon from '@material-ui/icons/SyncAlt'
 import { useState } from 'react'
+import ChangeIcon from '../../components/Icons/ChangeIcon'
+import ExpandIcon from '../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 
 function AccountListItem() {
@@ -44,10 +43,14 @@ function AccountListItem() {
             </ListItemAvatar>
             <ListItemText primary='Account 1' />
             <Button className={styles.changeAccBtn} variant='contained'>
-               <SyncAltIcon className={styles.changeAccIcon} />
+               <ChangeIcon style={{ fontSize: 24 }} />
             </Button>
             <IconButton className={styles.showRmIcon} onClick={handleClick}>
-               {isOpenRmBtn ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
+               {isOpenRmBtn ? (
+                  <ExpandIcon color='secondary' style={{ transform: 'rotate(90deg)' }} />
+               ) : (
+                  <ExpandIcon color='secondary' style={{ transform: 'rotate(-90deg)' }} />
+               )}
             </IconButton>
             <Collapse in={isOpenRmBtn} timeout='auto' unmountOnExit>
                <IconButton className={styles.removeAccBtn} onClick={handleOpen}>

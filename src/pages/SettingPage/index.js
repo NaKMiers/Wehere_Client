@@ -10,10 +10,9 @@ import {
    Switch,
    TextField
 } from '@material-ui/core'
-import ExpandLess from '@material-ui/icons/ExpandLess'
-import ExpandMore from '@material-ui/icons/ExpandMore'
 import { useState } from 'react'
 import Header from '../../components/Header'
+import ExpandIcon from '../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 
 function SettingPage() {
@@ -46,7 +45,11 @@ function SettingPage() {
 
             <ListItem onClick={() => setOpenChangePW(!openChangePW)}>
                <ListItemText primary='Change Password' />
-               {openChangePW ? <ExpandLess /> : <ExpandMore />}
+               {openChangePW ? (
+                  <ExpandIcon rotate color='secondary' />
+               ) : (
+                  <ExpandIcon color='secondary' />
+               )}
             </ListItem>
             <Collapse style={{ marginLeft: 24 }} in={openChangePW} timeout='auto' unmountOnExit>
                <form>
@@ -87,7 +90,11 @@ function SettingPage() {
 
             <ListItem onClick={() => setOpenComments(!openComments)}>
                <ListItemText primary='Comments' />
-               {openComments ? <ExpandLess /> : <ExpandMore />}
+               {openComments ? (
+                  <ExpandIcon rotate color='secondary' />
+               ) : (
+                  <ExpandIcon color='secondary' />
+               )}
             </ListItem>
             <Collapse style={{ marginLeft: 24 }} in={openComments} timeout='auto' unmountOnExit>
                <List component='div' disablePadding>
@@ -103,7 +110,11 @@ function SettingPage() {
 
             <ListItem onClick={() => setOpenBlockFriends(!openBlockFriends)}>
                <ListItemText primary='Block Friends' />
-               {openBlockFriends ? <ExpandLess /> : <ExpandMore />}
+               {openBlockFriends ? (
+                  <ExpandIcon rotate color='secondary' />
+               ) : (
+                  <ExpandIcon color='secondary' />
+               )}
             </ListItem>
             <Collapse
                style={{ marginLeft: 24 }}

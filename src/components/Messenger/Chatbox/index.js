@@ -10,15 +10,13 @@ import {
    TextField,
    Typography
 } from '@material-ui/core'
-import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import SendIcon from '@material-ui/icons/Send'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
+import clsx from 'clsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Message from '../Message'
-import useStyles from './styles'
 import SettingChat from './SettingChat'
+import useStyles from './styles'
 
 const emojiList = [
    '😀 😃 😄 😁 😆 😅 😂 🤣 🥲 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿',
@@ -100,9 +98,9 @@ function Chatbox() {
                   Action now
                </Typography>
             </Box>
-            <IconButton onClick={handleClick} className={styles.menuIcon}>
-               <MoreVertIcon />
-            </IconButton>
+            <Box className={styles.moreBtn} onClick={handleClick}>
+               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')}></i>
+            </Box>
             <Menu
                id='basic-menu'
                anchorEl={anchorEl}
@@ -130,7 +128,7 @@ function Chatbox() {
 
          <form className={styles.chatInput} style={{}}>
             <IconButton onClick={() => setOpenEmojiTable(!isOpenEmojiTable)}>
-               <EmojiEmotionsIcon style={{ color: '#fff' }} />
+               <i className={clsx(styles.formIcon, 'fas fa-laugh-squint')}></i>
             </IconButton>
             <TextField
                name='inputChat'
@@ -143,7 +141,7 @@ function Chatbox() {
             />
 
             <IconButton>
-               <SendIcon style={{ color: '#fff' }} />
+               <i className={clsx(styles.formIcon, 'fas fa-paper-plane')}></i>
             </IconButton>
          </form>
          <Collapse

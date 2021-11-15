@@ -6,11 +6,11 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents'
 import ImageIcon from '@material-ui/icons/Image'
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
-import MenuIcon from '@material-ui/icons/Menu'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom'
+import BarIcon from '../Icons/BarIcon'
 import useStyles from './styles'
 
 const slideHeader2UrlList = [
@@ -129,7 +129,7 @@ function Header() {
                      exact
                      activeClassName={styles.selected}
                   >
-                     <ChatIcon className={styles.headerIcon} style={{ marginTop: 5 }} />
+                     <ChatIcon className={styles.headerIcon} />
                   </NavLink>
                   <NavLink
                      className={styles.tabItem}
@@ -137,7 +137,7 @@ function Header() {
                      exact
                      activeClassName={styles.selected}
                   >
-                     <LibraryMusicIcon className={styles.headerIcon} style={{ marginTop: 5 }} />
+                     <LibraryMusicIcon className={styles.headerIcon} />
                   </NavLink>
                   <NavLink
                      className={styles.tabItem}
@@ -161,7 +161,7 @@ function Header() {
                      exact
                      activeClassName={styles.selected}
                   >
-                     <MenuIcon className={styles.headerMenuIcon} />
+                     <BarIcon className={styles.headerMenuIcon} />
                   </NavLink>
                </Toolbar>
             </Grid>

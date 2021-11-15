@@ -6,9 +6,12 @@ export default makeStyles(theme => ({
       padding: 0,
       marginBottom: 16
    },
+   moreIcon: {
+      fontSize: 22,
+      color: theme.palette.secondary.main
+   },
    playlistAvt: {
       width: 140,
-      // border: `3px solid ${theme.border.light}`,
       borderRadius: 8,
       overflow: 'hidden'
    },
@@ -28,7 +31,9 @@ export default makeStyles(theme => ({
    moreBtn: {
       position: 'absolute',
       top: 0,
-      right: 0
+      right: 0,
+      cursor: 'pointer',
+      padding: 12
    },
    menuItem: {
       padding: '4px 8px',

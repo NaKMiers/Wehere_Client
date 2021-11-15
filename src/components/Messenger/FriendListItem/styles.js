@@ -25,6 +25,10 @@ export default makeStyles(theme => ({
    userName: {
       marginLeft: 12
    },
+   moreIcon: {
+      fontSize: 22,
+      color: theme.palette.secondary.main
+   },
    menuItem: {
       padding: '4px 8px',
       minHeight: 0

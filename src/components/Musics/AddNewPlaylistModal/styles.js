@@ -11,6 +11,7 @@ export default makeStyles(theme => ({
       borderRadius: 8,
       overflow: 'hidden'
    },
+
    form: {
       padding: '8px 16px 24px 16px'
    },
@@ -36,10 +37,13 @@ export default makeStyles(theme => ({
       border: 'none'
    },
    searchBtn: {
-      padding: '2px 12px',
+      padding: '6px 14px',
       minWidth: 0,
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text
+   },
+   searchIcon: {
+      fontSize: 16
    },
 
    songList: {

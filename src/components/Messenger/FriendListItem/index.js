@@ -1,6 +1,6 @@
-import { Avatar, Badge, IconButton, ListItemText, Menu, MenuItem } from '@material-ui/core'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { Avatar, Badge, Box, ListItemText, Menu, MenuItem } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
+import clsx from 'clsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useStyles from './styles'
@@ -30,9 +30,9 @@ function FriendListItem({ onlineList, isOnline }) {
                />
                <ListItemText primary='User1' secondary='5p before' className={styles.userName} />
             </Link>
-            <IconButton onClick={handleClick}>
-               <MoreVertIcon />
-            </IconButton>
+            <Box className={styles.moreBtn} onClick={handleClick}>
+               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')}></i>
+            </Box>
          </ListItemButton>
          <Menu
             id='basic-menu'

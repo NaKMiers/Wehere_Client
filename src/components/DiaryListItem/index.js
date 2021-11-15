@@ -1,7 +1,7 @@
 import { Box, IconButton, ListItem, Menu, MenuItem, Typography } from '@material-ui/core'
 import BackspaceIcon from '@material-ui/icons/Backspace'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { useState } from 'react'
+import MoreIcon from '../../components/Icons/MoreIcon'
 import useStyles from './styles'
 
 function DiaryListItem({ title, desc, bgImg, createdAt }) {
@@ -31,7 +31,7 @@ function DiaryListItem({ title, desc, bgImg, createdAt }) {
                {title}
             </Typography>
             <IconButton aria-label='settings' className={styles.moreIconBtn} onClick={handleClick}>
-               <MoreVertIcon className={styles.moreIcon} />
+               <MoreIcon rotate />
             </IconButton>
             <Typography className={styles.diaryTime}>{createdAt}</Typography>
             <Typography className={styles.diaryDesc} variant='subtitle1'>

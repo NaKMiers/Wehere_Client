@@ -11,9 +11,7 @@ import {
    Paper,
    TextField
 } from '@material-ui/core'
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow'
+import clsx from 'clsx'
 import { useState } from 'react'
 import Header from '../../components/Header'
 import useStyles from './styles'
@@ -183,7 +181,7 @@ function TodoListPage() {
                         disabled={right.length === 0}
                         aria-label='move all right'
                      >
-                        <DoubleArrowIcon style={{ transform: 'rotate(-90deg)' }} />
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-up')}></i>
                      </Button>
                      <Button
                         className={styles.todoActionBtnUp}
@@ -193,7 +191,7 @@ function TodoListPage() {
                         disabled={rightChecked.length === 0}
                         aria-label='move selected right'
                      >
-                        <ArrowUpwardIcon />
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-up')}></i>
                      </Button>
                      <Button
                         className={styles.todoActionBtnDown}
@@ -203,7 +201,7 @@ function TodoListPage() {
                         disabled={leftChecked.length === 0}
                         aria-label='move selected left'
                      >
-                        <ArrowDownwardIcon />
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-down')}></i>
                      </Button>
                      <Button
                         className={styles.todoActionBtnDown}
@@ -213,7 +211,9 @@ function TodoListPage() {
                         disabled={left.length === 0}
                         aria-label='move all left'
                      >
-                        <DoubleArrowIcon style={{ transform: 'rotate(90deg)' }} />
+                        <i
+                           className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-down')}
+                        ></i>
                      </Button>
                   </Grid>
                </Grid>

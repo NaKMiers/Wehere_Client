@@ -6,7 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
 import IconButton from '@material-ui/core/IconButton'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import MoreIcon from '../../components/Icons/MoreIcon'
 import ReplyIcon from '@material-ui/icons/Reply'
 import ShareIcon from '@material-ui/icons/Share'
 import BackspaceIcon from '@material-ui/icons/Backspace'
@@ -47,7 +47,7 @@ function Short() {
                }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
-                     <MoreVertIcon className={styles.icon} />
+                     <MoreIcon rotate />
                   </IconButton>
                }
                title='Shrimp and Chorizo Paella'

@@ -7,7 +7,7 @@ function AuthorListItem() {
    const styles = useStyles()
 
    return (
-      <ListItemButton className={styles.authorItem} style={{ padding: '6px 0px' }}>
+      <ListItemButton className={styles.authorItem} style={{ padding: '6px 16px' }}>
          <Link to='/musics/authors/ava-max' className={styles.link}>
             <ListItemAvatar>
                <Avatar className={styles.authorAvt} src='https://bom.to/ixXHXu' alt='author avt' />

@@ -12,14 +12,14 @@ import {
    Typography
 } from '@material-ui/core'
 import BackspaceIcon from '@material-ui/icons/Backspace'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import ShareIcon from '@material-ui/icons/Share'
+import ShareIcon from '../../components/Icons/ShareIcon'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ExpandIcon from '../../components/Icons/ExpandIcon'
 import Comment from '../Comment'
+import HeartIcon from '../Icons/HeartIcon'
+import MoreIcon from '../Icons/MoreIcon'
 import useStyles from './styles'
 
 const ExpandMore = styled(props => {
@@ -61,7 +61,7 @@ function Image() {
                }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
-                     <MoreVertIcon className={styles.icon} />
+                     <MoreIcon rotate />
                   </IconButton>
                }
                title='Shrimp and Chorizo Paella'
@@ -76,10 +76,10 @@ function Image() {
             </CardContent>
             <CardActions disableSpacing>
                <IconButton aria-label='add to favorites'>
-                  <FavoriteIcon className={styles.icon} />
+                  <HeartIcon />
                </IconButton>
                <IconButton aria-label='share'>
-                  <ShareIcon className={styles.icon} />
+                  <ShareIcon />
                </IconButton>
                <ExpandMore
                   expand={expanded}
@@ -87,7 +87,7 @@ function Image() {
                   aria-expanded={expanded}
                   aria-label='show more'
                >
-                  <ExpandMoreIcon className={styles.icon} />
+                  <ExpandIcon style={{ marginRight: 1 }} />
                </ExpandMore>
             </CardActions>
             <Comment expanded={expanded} />

@@ -1,11 +1,8 @@
 import { Avatar, Collapse, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
-import { ExpandLess, ExpandMore } from '@material-ui/icons'
-import AccessTimeIcon from '@material-ui/icons/AccessTime'
-import MusicNoteIcon from '@material-ui/icons/MusicNote'
-import PersonPinIcon from '@material-ui/icons/PersonPin'
-import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay'
+import clsx from 'clsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ExpandIcon from '../../Icons/ExpandIcon'
 import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
@@ -19,11 +16,18 @@ function ListOptionMusicPage() {
          <ListItem onClick={() => setShowRecentlySongs(!isShowRecentlySongs)}>
             <ListItemAvatar>
                <Avatar className={styles.listItemAvt}>
-                  <AccessTimeIcon />
+                  <i
+                     className={clsx(styles.listIcon, 'fad fa-clock')}
+                     style={{ marginLeft: 2 }}
+                  ></i>
                </Avatar>
             </ListItemAvatar>
             <ListItemText primary='Recently' secondary='22h before' />
-            {isShowRecentlySongs ? <ExpandLess /> : <ExpandMore />}
+            {isShowRecentlySongs ? (
+               <ExpandIcon rotate={true} color='secondary' style={{ marginRight: 6 }} />
+            ) : (
+               <ExpandIcon color='secondary' style={{ marginRight: 6 }} />
+            )}
          </ListItem>
          <Collapse in={isShowRecentlySongs} timeout='auto' unmountOnExit>
             <List className={styles.recentlyList} component='div' disablePadding>
@@ -32,34 +36,40 @@ function ListOptionMusicPage() {
                <SongListItem />
             </List>
          </Collapse>
-
          <ListItem>
             <Link to='/musics/songs' className={styles.link}>
                <ListItemAvatar>
                   <Avatar className={styles.listItemAvt}>
-                     <MusicNoteIcon />
+                     <i
+                        className={clsx(styles.listIcon, 'fad fa-music')}
+                        style={{ fontSize: 22 }}
+                     ></i>
                   </Avatar>
                </ListItemAvatar>
                <ListItemText primary='My Songs' secondary='216 songs' />
             </Link>
          </ListItem>
-
          <ListItem>
             <Link to='/musics/playlists' className={styles.link}>
                <ListItemAvatar>
                   <Avatar className={styles.listItemAvt}>
-                     <PlaylistPlayIcon />
+                     <i
+                        className={clsx(styles.listIcon, 'fad fa-th-list')}
+                        style={{ fontSize: 22, marginLeft: 2 }}
+                     ></i>
                   </Avatar>
                </ListItemAvatar>
                <ListItemText primary='My Playlists' secondary='3 playlists' />
             </Link>
          </ListItem>
-
          <ListItem>
             <Link to='/musics/authors' className={styles.link}>
                <ListItemAvatar>
                   <Avatar className={styles.listItemAvt}>
-                     <PersonPinIcon />
+                     <i
+                        className={clsx(styles.listIcon, 'fad fa-user')}
+                        style={{ marginLeft: 2 }}
+                     />
                   </Avatar>
                </ListItemAvatar>
                <ListItemText primary='Authors' secondary='32 authors' />

@@ -18,12 +18,12 @@ import {
 import CakeIcon from '@material-ui/icons/Cake'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import HomeIcon from '@material-ui/icons/Home'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { styled } from '@material-ui/styles'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Blog from '../../components/Blog'
 import Header from '../../components/Header'
+import MoreIcon from '../../components/Icons/MoreIcon'
 import Image from '../../components/Image'
 import Video from '../../components/Video'
 import useStyles from './styles'
@@ -157,7 +157,7 @@ function ProfilePage() {
                      Messenger
                   </Button>
                   <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
-                     <MoreHorizIcon />
+                     <MoreIcon />
                   </Button>
                   <Menu
                      className={styles.menuAction}

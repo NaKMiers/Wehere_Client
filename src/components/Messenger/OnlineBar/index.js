@@ -1,5 +1,5 @@
 import { Avatar, Badge, Button, ButtonGroup, List } from '@material-ui/core'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 import useStyles from './styles'
 
@@ -31,7 +31,7 @@ function OnlineBar() {
          <ButtonGroup variant='outlined' aria-label='outlined button group'>
             <Button className={styles.menuOnlineBtn}>
                <Link to='/messenger/onlines'>
-                  <ArrowForwardIosIcon className={styles.expandedIcon} />
+                  <i className={clsx(styles.menuOnlineIcon, 'fad fa-chevron-right')}></i>
                </Link>
             </Button>
             {renderUserOnline()}

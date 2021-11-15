@@ -9,6 +9,7 @@ export default makeStyles(theme => ({
    listItemButton: {
       borderRadius: 8
    },
+
    songImg: {
       width: 42,
       height: 42,
@@ -20,13 +21,11 @@ export default makeStyles(theme => ({
       flexDirection: 'column'
    },
    button: {
-      padding: '0px 16px',
+      padding: '4px 16px',
       textAlign: 'center',
       cursor: 'pointer'
    },
-   heartIcon: {
-      color: theme.palette.danger.main
-   },
+
    menu: {
       padding: 0
    },

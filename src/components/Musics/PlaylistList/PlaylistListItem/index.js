@@ -1,18 +1,9 @@
-import {
-   Button,
-   CardMedia,
-   Grid,
-   IconButton,
-   ListItem,
-   Menu,
-   MenuItem,
-   Typography
-} from '@material-ui/core'
+import { Button, CardMedia, Grid, ListItem, Menu, MenuItem, Typography } from '@material-ui/core'
+import BackspaceIcon from '@material-ui/icons/Backspace'
+import EditIcon from '@material-ui/icons/Edit'
 import { ListItemButton } from '@mui/material'
 import { Box } from '@mui/system'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import EditIcon from '@material-ui/icons/Edit'
-import BackspaceIcon from '@material-ui/icons/Backspace'
+import clsx from 'clsx'
 import { useState } from 'react'
 import useStyles from './styles'
 
@@ -78,9 +69,9 @@ function PlaylistListItem({ showMoreBtn = true }) {
          </Button>
 
          {showMoreBtn && (
-            <IconButton className={styles.moreBtn} onClick={handleClick}>
-               <MoreVertIcon />
-            </IconButton>
+            <Box className={styles.moreBtn} onClick={handleClick}>
+               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')}></i>
+            </Box>
          )}
 
          <Menu

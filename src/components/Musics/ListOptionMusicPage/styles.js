@@ -12,5 +12,15 @@ export default makeStyles(theme => ({
    },
    recentlyList: {
       marginLeft: 24
+   },
+   expandedIcon: {
+      fontSize: 20,
+      marginRight: 6,
+      cursor: 'pointer',
+      color: theme.palette.secondary.main
+   },
+   listIcon: {
+      fontSize: 24,
+      fontWeight: 300
    }
 }))

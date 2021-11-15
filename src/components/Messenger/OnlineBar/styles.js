@@ -23,6 +23,12 @@ export default makeStyles(theme => ({
       position: 'relative',
       minWidth: 32
    },
+   menuOnlineIcon: {
+      fontSize: 24,
+      fontWeight: 300,
+      marginRight: 1,
+      color: theme.palette.primary.main
+   },
    expandedIcon: {
       position: 'absolute',
       top: '50%',

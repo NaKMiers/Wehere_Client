@@ -38,7 +38,7 @@ export default makeStyles(theme => ({
    submitDiaryBtn: {
       position: 'absolute',
       width: 'calc(100% - 32px)',
-      bottom: 16,
+      bottom: 24,
       left: 16,
       right: 16,
       background: theme.palette.primary.gradient,
@@ -64,11 +64,6 @@ export default makeStyles(theme => ({
       fontSize: 16,
       transition: 'height 0.2s ease-in-out',
       background: 'transparent'
-   },
-   diaryBody: {},
-   editDiaryWrap: {},
-   expandMoreEditBtn: {
-      margin: 'auto'
    },
    listEditOption: {
       display: 'flex',

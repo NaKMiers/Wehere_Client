@@ -54,6 +54,9 @@ export default makeStyles(theme => ({
       maxWidth: 360,
       justifyContent: 'space-around'
    },
+   todoActionIcon: {
+      fontSize: 20
+   },
    todoActionBtnUp: {
       color: theme.palette.primary.main
    },

@@ -1,10 +1,10 @@
 import { Avatar, Box, ListItem, ListItemText, Menu, MenuItem } from '@material-ui/core'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 import BackspaceIcon from '@material-ui/icons/Backspace'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { ListItemButton } from '@mui/material'
 import { useState } from 'react'
+import HeartIcon from '../../Icons/HeartIcon'
+import MoreIcon from '../../Icons/MoreIcon'
 import AddSongToPlayListModal from '../AddSongToPlaylistModal'
 import useStyles from './styles'
 
@@ -23,7 +23,6 @@ function SongListItem({ showActionBtn = true }) {
 
    const handleDeletSong = () => {
       setAnchorEl(null)
-      console.log('handleDeletSong')
    }
 
    const styles = useStyles()
@@ -37,10 +36,10 @@ function SongListItem({ showActionBtn = true }) {
          {showActionBtn && (
             <Box className={styles.boxButton}>
                <span className={styles.button} onClick={handleClick}>
-                  <MoreHorizIcon style={{ fontSize: 30 }} />
+                  <MoreIcon color='secondary' />
                </span>
                <span className={styles.button}>
-                  <FavoriteIcon className={styles.heartIcon} />
+                  <HeartIcon liked />
                </span>
             </Box>
          )}

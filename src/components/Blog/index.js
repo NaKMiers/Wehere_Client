@@ -11,14 +11,14 @@ import {
    Typography
 } from '@material-ui/core'
 import BackspaceIcon from '@material-ui/icons/Backspace'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import ShareIcon from '@material-ui/icons/Share'
 import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Comment from '../Comment'
+import ExpandIcon from '../Icons/ExpandIcon'
+import HeartIcon from '../Icons/HeartIcon'
+import MoreIcon from '../Icons/MoreIcon'
+import ShareIcon from '../Icons/ShareIcon'
 import useStyles from './styles'
 
 const ExpandMore = styled(props => {
@@ -60,7 +60,7 @@ function Blog() {
                }
                action={
                   <IconButton aria-label='settings' onClick={handleClick}>
-                     <MoreVertIcon className={styles.icon} />
+                     <MoreIcon rotate />
                   </IconButton>
                }
                title='Shrimp and Chorizo Paella'
@@ -78,10 +78,10 @@ function Blog() {
             </CardContent>
             <CardActions disableSpacing>
                <IconButton aria-label='add to favorites'>
-                  <FavoriteIcon className={styles.icon} />
+                  <HeartIcon />
                </IconButton>
                <IconButton aria-label='share'>
-                  <ShareIcon className={styles.icon} />
+                  <ShareIcon />
                </IconButton>
                <ExpandMore
                   expand={expanded}
@@ -89,7 +89,7 @@ function Blog() {
                   aria-expanded={expanded}
                   aria-label='show more'
                >
-                  <ExpandMoreIcon className={styles.icon} />
+                  <ExpandIcon style={{ marginRight: 1 }} />
                </ExpandMore>
             </CardActions>
             <Comment expanded={expanded} />
