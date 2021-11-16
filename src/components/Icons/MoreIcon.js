@@ -5,7 +5,7 @@ import React from 'react'
 function MoreIcon({ rotate = false, color, style }) {
    const styles = makeStyles(theme => ({
       icon: {
-         fontSize: 24,
+         fontSize: 22,
          color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text,
          transform: rotate && 'rotate(90deg)',
          cursor: 'pointer'

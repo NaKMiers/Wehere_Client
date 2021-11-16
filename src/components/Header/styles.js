@@ -1,40 +1,40 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
+   '@global': {
+      '.MuiToolbar-root': {
+         justifyContent: 'space-between',
+         minHeight: 0,
+         padding: '8px 12px',
+         width: '183.3333333%',
+         transition: 'margin 0.5s ease-in-out'
+      }
+   },
    header: {
       background: theme.palette.primary.gradient
    },
-   selected: {
-      transform: 'scale(1.3)'
-   },
-   selectedHome: {
-      transform: 'scale(1.1)',
-      outline: '#fff solid 2px',
-      borderRadius: '50%'
-   },
-   headerIcon: {
-      fontSize: 36,
-      color: theme.palette.primary.text,
-      marginTop: 5
-   },
-   headerMenuIcon: {
-      color: theme.palette.primary.text,
-      fontSize: 41,
-      marginTop: 7
-   },
-   slideIcon: {
-      margin: '0px -12px 0px -16px',
-      fontSize: 32
-   },
-   gridContainer: {
+   headerContainer: {
       margin: 'auto',
       overflow: 'hidden'
    },
-   toolbar: {
-      width: '182.4%',
+   headerItem: {
       display: 'flex',
-      padding: '0px 6.8%',
-      justifyContent: 'space-between',
-      overflow: 'hidden'
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '16.66666%',
+      textDecoration: 'none',
+      color: theme.palette.primary.text
+   },
+   headerIcon: {
+      margin: 'auto',
+      fontSize: 36
+   },
+
+   selectedHome: {
+      transform: 'scale(1.11)'
+   },
+
+   selected: {
+      transform: 'scale(1.3)'
    }
 }))

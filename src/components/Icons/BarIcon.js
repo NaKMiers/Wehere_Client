@@ -4,7 +4,7 @@ import clsx from 'clsx'
 function BarIcon({ color, className, style }) {
    const styles = makeStyles(theme => ({
       icon: {
-         fontSize: 34,
+         fontSize: 30,
          cursor: 'pointer',
          marginTop: -1,
          color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text

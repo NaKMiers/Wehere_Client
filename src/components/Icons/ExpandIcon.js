@@ -7,7 +7,8 @@ function ExpandIcon({ rotate = false, style, color }) {
          fontSize: 20,
          cursor: 'pointer',
          color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text,
-         transform: rotate && 'rotate(180deg)'
+         transform: rotate && 'rotate(180deg)',
+         transition: 'transform 0.2s ease-in-out'
       }
    }))()
 
