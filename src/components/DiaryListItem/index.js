@@ -1,7 +1,7 @@
 import { Box, IconButton, ListItem, Menu, MenuItem, Typography } from '@material-ui/core'
-import BackspaceIcon from '@material-ui/icons/Backspace'
 import { useState } from 'react'
 import MoreIcon from '../../components/Icons/MoreIcon'
+import DeleteIcon from '../Icons/DeleteIcon'
 import useStyles from './styles'
 
 function DiaryListItem({ title, desc, bgImg, createdAt }) {
@@ -44,11 +44,11 @@ function DiaryListItem({ title, desc, bgImg, createdAt }) {
             open={open}
             onClose={handleClose}
             MenuListProps={{
-               'aria-labelledby': 'basic-button'
+               'aria-labelledby': 'basic-button',
             }}
          >
             <MenuItem className={styles.menuItem} onClick={handleClose}>
-               Delete <BackspaceIcon className={styles.menuIcon} />
+               Delete <DeleteIcon />
             </MenuItem>
          </Menu>
       </ListItem>

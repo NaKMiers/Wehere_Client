@@ -4,11 +4,11 @@ import {
    Collapse,
    IconButton,
    TextField,
-   Typography
+   Typography,
 } from '@material-ui/core'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ReplyIcon from '@material-ui/icons/Reply'
 import { Link } from 'react-router-dom'
+import ReplyIcon from '../../components/Icons/ReplyIcon'
+import HeartIcon from '../Icons/HeartIcon'
 import useStyles from './styles'
 
 function Comment({ expanded }) {
@@ -50,7 +50,7 @@ function Comment({ expanded }) {
                </div>
                <div className={styles.commentActions}>
                   <IconButton aria-label='add to favorites' size='small'>
-                     <FavoriteIcon className={styles.icon} />
+                     <HeartIcon />
                   </IconButton>
                   <IconButton aria-label='share' size='small'>
                      <ReplyIcon className={styles.icon} />
@@ -73,7 +73,7 @@ function Comment({ expanded }) {
                      </div>
                      <div className={styles.commentActions}>
                         <IconButton aria-label='add to favorites' size='small'>
-                           <FavoriteIcon className={styles.icon} />
+                           <HeartIcon />
                         </IconButton>
                      </div>
                   </div>
@@ -109,7 +109,7 @@ function Comment({ expanded }) {
                </div>
                <div className={styles.commentActions}>
                   <IconButton aria-label='add to favorites' size='small'>
-                     <FavoriteIcon className={styles.icon} />
+                     <HeartIcon />
                   </IconButton>
                   <IconButton aria-label='share' size='small'>
                      <ReplyIcon className={styles.icon} />
@@ -130,7 +130,7 @@ function Comment({ expanded }) {
                      </div>
                      <div className={styles.commentActions}>
                         <IconButton aria-label='add to favorites' size='small'>
-                           <FavoriteIcon className={styles.icon} />
+                           <HeartIcon />
                         </IconButton>
                      </div>
                   </div>

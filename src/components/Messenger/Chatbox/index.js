@@ -8,9 +8,9 @@ import {
    Menu,
    MenuItem,
    TextField,
-   Typography
+   Typography,
 } from '@material-ui/core'
-import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications'
+import SettingIcon from '../../../components/Icons/SettingIcon'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -23,7 +23,7 @@ const emojiList = [
    '🐶 🐱 🐭 🐹 🐰 🦊 🐻 🐼 🐻‍❄️ 🐨 🐯 🦁 🐮 🐷 🐽 🐸 🐵 🙈 🙉 🙊 🐒 🐔 🐧 🐦 🐤 🐣 🐥 🦆 🦅 🦉 🦇 🐺 🐗 🐴 🦄 🐝 🪱 🐛 🦋 🐌 🐞 🐜 🪰 🪲 🪳 🦟 🦗 🕷 🕸 🦂 🐢 🐍 🦎 🦖 🦕 🐙 🦑 🦐 🦞 🦀 🐡 🐠 🐟 🐬 🐳 🐋 🦈 🐊 🐅 🐆 🦓 🦍 🦧 🦣 🐘 🦛 🦏 🐪 🐫 🦒 🦘 🦬 🐃 🐂 🐄 🐎 🐖 🐏 🐑 🦙 🐐 🦌 🐕 🐩 🦮 🐕‍🦺 🐈 🐈‍⬛ 🪶 🐓 🦃 🦤 🦚 🦜 🦢 🦩 🕊 🐇 🦝 🦨 🦡 🦫 🦦 🦥 🐁 🐀 🐿 🦔 🐾 🐉 🐲',
    '🚗 🚕 🚙 🚌 🚎 🏎 🚓 🚑 🚒 🚐 🛻 🚚 🚛 🚜 🦯 🦽 🦼 🛴 🚲 🛵 🏍 🛺 🚨 🚔 🚍 🚘 🚖 🚡 🚠 🚟 🚃 🚋 🚞 🚝 🚄 🚅 🚈 🚂 🚆 🚇 🚊 🚉 ✈️ 🛫 🛬 🛩 💺 🛰 🚀 🛸 🚁 🛶 ⛵️ 🚤 🛥 🛳 ⛴ 🚢 ⚓️ 🪝 ⛽️ 🚧 🚦 🚥 🚏 🗺 🗿 🗽 🗼 🏰 🏯 🏟 🎡 🎢 🎠 ⛲️ ⛱ 🏖 🏝 🏜 🌋 ⛰ 🏔 🗻 🏕 ⛺️ 🛖 🏠 🏡 🏘 🏚 🏗 🏭 🏢 🏬 🏣 🏤 🏥 🏦 🏨 🏪 🏫 🏩 💒 🏛 ⛪️ 🕌 🕍 🛕 🕋 ⛩ 🛤 🛣 🗾 🎑 🏞 🌅 🌄 🌠 🎇 🎆 🌇 🌆 🏙 🌃 🌌 🌉 🌁',
    '⚽️ 🏀 🏈 ⚾️ 🥎 🎾 🏐 🏉 🥏 🎱 🪀 🏓 🏸 🏒 🏑 🥍 🏏 🪃 🥅 ⛳️ 🪁 🏹 🎣 🤿 🥊 🥋 🎽 🛹 🛼 🛷 ⛸ 🥌 🎿 ⛷ 🏂 🪂 🏋️‍♀️ 🏋️ 🏋️‍♂️ 🤼‍♀️ 🤼 🤼‍♂️ 🤸‍♀️ 🤸 🤸‍♂️ ⛹️‍♀️ ⛹️ ⛹️‍♂️ 🤺 🤾‍♀️ 🤾 🤾‍♂️ 🏌️‍♀️ 🏌️ 🏌️‍♂️ 🏇 🧘‍♀️ 🧘 🧘‍♂️ 🏄‍♀️ 🏄 🏄‍♂️ 🏊‍♀️ 🏊 🏊‍♂️ 🤽‍♀️ 🤽 🤽‍♂️ 🚣‍♀️ 🚣 🚣‍♂️ 🧗‍♀️ 🧗 🧗‍♂️ 🚵‍♀️ 🚵 🚵‍♂️ 🚴‍♀️ 🚴 🚴‍♂️ 🏆 🥇 🥈 🥉 🏅 🎖 🏵 🎗 🎫 🎟 🎪 🤹 🤹‍♂️ 🤹‍♀️ 🎭 🩰 🎨 🎬 🎤 🎧 🎼 🎹 🥁 🪘 🎷 🎺 🪗 🎸 🪕 🎻 🎲 ♟ 🎯 🎳 🎮 🎰 🧩',
-   '🍏 🍎 🍐 🍊 🍋 🍌 🍉 🍇 🍓 🫐 🍈 🍒 🍑 🥭 🍍 🥥 🥝 🍅 🍆 🥑 🥦 🥬 🥒 🌶 🫑 🌽 🥕 🫒 🧄 🧅 🥔 🍠 🥐 🥯 🍞 🥖 🥨 🧀 🥚 🍳 🧈 🥞 🧇 🥓 🥩 🍗 🍖 🦴 🌭 🍔 🍟 🍕 🫓 🥪 🥙 🧆 🌮 🌯 🫔 🥗 🥘 🫕 🥫 🍝 🍜 🍲 🍛 🍣 🍱 🥟 🦪 🍤 🍙 🍚 🍘 🍥 🥠 🥮 🍢 🍡 🍧 🍨 🍦 🥧 🧁 🍰 🎂 🍮 🍭 🍬 🍫 🍿 🍩 🍪 🌰 🥜 🍯 🥛 🍼 🫖 ☕️ 🍵 🧃 🥤 🧋 🍶 🍺 🍻 🥂 🍷 🥃 🍸 🍹 🧉 🍾 🧊 🥄 🍴 🍽 🥣 🥡 🥢 🧂'
+   '🍏 🍎 🍐 🍊 🍋 🍌 🍉 🍇 🍓 🫐 🍈 🍒 🍑 🥭 🍍 🥥 🥝 🍅 🍆 🥑 🥦 🥬 🥒 🌶 🫑 🌽 🥕 🫒 🧄 🧅 🥔 🍠 🥐 🥯 🍞 🥖 🥨 🧀 🥚 🍳 🧈 🥞 🧇 🥓 🥩 🍗 🍖 🦴 🌭 🍔 🍟 🍕 🫓 🥪 🥙 🧆 🌮 🌯 🫔 🥗 🥘 🫕 🥫 🍝 🍜 🍲 🍛 🍣 🍱 🥟 🦪 🍤 🍙 🍚 🍘 🍥 🥠 🥮 🍢 🍡 🍧 🍨 🍦 🥧 🧁 🍰 🎂 🍮 🍭 🍬 🍫 🍿 🍩 🍪 🌰 🥜 🍯 🥛 🍼 🫖 ☕️ 🍵 🧃 🥤 🧋 🍶 🍺 🍻 🥂 🍷 🥃 🍸 🍹 🧉 🍾 🧊 🥄 🍴 🍽 🥣 🥡 🥢 🧂',
 ]
 
 function Chatbox() {
@@ -66,7 +66,7 @@ function Chatbox() {
             key={e}
             className={styles.tabEmoji}
             style={{
-               borderTop: `${i + 1 === emojiTab ? '3px solid #21abe2' : '3px solid #eee'}`
+               borderTop: `${i + 1 === emojiTab ? '3px solid #21abe2' : '3px solid #eee'}`,
             }}
             onClick={() => setEmojiTab(i + 1)}
          >
@@ -99,7 +99,7 @@ function Chatbox() {
                </Typography>
             </Box>
             <Box className={styles.moreBtn} onClick={handleClick}>
-               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')}></i>
+               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')} />
             </Box>
             <Menu
                id='basic-menu'
@@ -107,28 +107,27 @@ function Chatbox() {
                open={isOpenHerderMenu}
                onClose={handleClose}
                MenuListProps={{
-                  'aria-labelledby': 'basic-button'
+                  'aria-labelledby': 'basic-button',
                }}
             >
                <MenuItem onClick={handleOpenModalSettingChat} className={styles.menuItem}>
-                  <SettingsApplicationsIcon style={{ marginRight: 4 }} />
-                  Seting
+                  Seting <SettingIcon style={{ marginLeft: 8 }} />
                </MenuItem>
             </Menu>
          </Box>
 
          <Box
             className={styles.chatContent}
-            style={{ height: `calc(${isOpenEmojiTable ? '75vh' : '100vh'} - 196px)` }}
+            style={{ height: `calc(${isOpenEmojiTable ? '75vh' : '100vh'} - 228px)` }}
          >
             <Message curUser />
             <Message />
             <Message curUser />
          </Box>
 
-         <form className={styles.chatInput} style={{}}>
+         <form className={styles.chatInput}>
             <IconButton onClick={() => setOpenEmojiTable(!isOpenEmojiTable)}>
-               <i className={clsx(styles.formIcon, 'fas fa-laugh-squint')}></i>
+               <i className={clsx(styles.formIcon, 'fas fa-laugh-squint')} />
             </IconButton>
             <TextField
                name='inputChat'
@@ -141,7 +140,7 @@ function Chatbox() {
             />
 
             <IconButton>
-               <i className={clsx(styles.formIcon, 'fas fa-paper-plane')}></i>
+               <i className={clsx(styles.formIcon, 'fas fa-paper-plane')} />
             </IconButton>
          </form>
          <Collapse

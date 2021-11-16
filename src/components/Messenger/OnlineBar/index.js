@@ -31,7 +31,7 @@ function OnlineBar() {
          <ButtonGroup variant='outlined' aria-label='outlined button group'>
             <Button className={styles.menuOnlineBtn}>
                <Link to='/messenger/onlines'>
-                  <i className={clsx(styles.menuOnlineIcon, 'fad fa-chevron-right')}></i>
+                  <i className={clsx(styles.menuOnlineIcon, 'fad fa-chevron-right')} />
                </Link>
             </Button>
             {renderUserOnline()}

@@ -4,14 +4,14 @@ export default makeStyles(theme => ({
    topProfile: {
       margin: 'auto',
       position: 'relative',
-      maxWidth: 960
+      maxWidth: 960,
    },
    bgProfile: {
       minHeight: 200,
       maxHeight: 400,
       height: 'auto',
       borderBottomLeftRadius: 8,
-      borderBottomRightRadius: 8
+      borderBottomRightRadius: 8,
    },
    avatarWrap: {
       position: 'absolute',
@@ -19,18 +19,18 @@ export default makeStyles(theme => ({
       borderRadius: '50%',
       bottom: '-8%',
       left: '50%',
-      transform: 'translateX(-50%)'
+      transform: 'translateX(-50%)',
    },
    avatar: {
       width: 170,
-      height: 170
+      height: 170,
    },
    name: {
       position: 'absolute',
       top: '108.5%',
       width: '100%',
       textAlign: 'center',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
    },
    groupActionBtn: {
       position: 'absolute',
@@ -39,55 +39,66 @@ export default makeStyles(theme => ({
       width: '75%',
       transform: 'translateX(-50%)',
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
    },
    actionBtn: {
       background: theme.palette.secondary.dark,
       color: theme.palette.primary.text,
       fontWeight: 'bold',
       margin: '0 4px',
-      padding: '6px 8px'
+      padding: '6px 8px',
+   },
+
+   fiendListItem: {
+      display: 'flex',
+      justifyContent: 'space-between',
+   },
+   linkFiendListItem: {
+      display: 'flex',
+      textDecoration: 'none',
+      width: '88%',
+      color: theme.palette.secondary.text,
    },
    addFriendBtn: {
       background: theme.palette.secondary.main,
       color: theme.palette.primary.text,
       fontWeight: 'bold',
       margin: '0 4px',
-      padding: '6px 8px'
+      padding: '6px 8px',
    },
    menuAction: {
-      marginLeft: 12
+      marginLeft: 12,
    },
    menuActionItem: {
-      minHeight: 'auto'
+      minHeight: 'auto',
    },
 
    bottomProfile: {
       margin: 'auto',
       maxWidth: 960,
       marginTop: 114,
-      padding: 16
+      padding: 16,
    },
    tabsList: {
       display: 'flex',
       flexDirection: 'column',
-      width: '100%'
+      width: '100%',
    },
    tabButtonsWrap: {
-      margin: '8px 0 8px 0'
+      margin: '8px 0 8px 0',
    },
    tabButton: {
       border: 'none',
       fontWeight: 'bold',
-      padding: '6px 16px'
+      padding: '6px 16px',
    },
    friendBtn: {
       padding: '2px 8px',
       background: theme.palette.secondary.main,
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    tab: {
       borderTop: `3px solid ${theme.border.dark}`,
-      width: '100%'
-   }
+      width: '100%',
+   },
 }))

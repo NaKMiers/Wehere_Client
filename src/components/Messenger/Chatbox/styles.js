@@ -18,7 +18,8 @@ export default makeStyles(theme => ({
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.primary.text,
       borderBottomLeftRadius: 8,
-      borderBottomRightRadius: 8
+      borderBottomRightRadius: 8,
+      padding: '0px 12.5px'
    },
    moreBtn: {
       cursor: 'pointer',
@@ -66,7 +67,7 @@ export default makeStyles(theme => ({
    },
 
    chatContent: {
-      padding: 16
+      padding: 24
    },
 
    chatInput: {
@@ -76,7 +77,8 @@ export default makeStyles(theme => ({
       alignItems: 'center',
       background: theme.palette.secondary.main,
       borderTopLeftRadius: 8,
-      borderTopRightRadius: 8
+      borderTopRightRadius: 8,
+      padding: '0px 12px'
    },
    inputText: {
       flexGrow: '1'

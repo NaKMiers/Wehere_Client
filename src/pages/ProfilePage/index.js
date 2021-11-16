@@ -13,7 +13,7 @@ import {
    ListItemText,
    Menu,
    MenuItem,
-   Typography
+   Typography,
 } from '@material-ui/core'
 import CakeIcon from '@material-ui/icons/Cake'
 import FavoriteIcon from '@material-ui/icons/Favorite'
@@ -24,12 +24,14 @@ import { Link } from 'react-router-dom'
 import Blog from '../../components/Blog'
 import Header from '../../components/Header'
 import MoreIcon from '../../components/Icons/MoreIcon'
+import BlockIcon from '../../components/Icons/BlockIcon'
 import Image from '../../components/Image'
 import Video from '../../components/Video'
 import useStyles from './styles'
+import HideUserIcon from '../../components/Icons/HideUserIcon'
 
 const Demo = styled('div')(({ theme }) => ({
-   backgroundColor: theme.palette.background.paper
+   backgroundColor: theme.palette.background.paper,
 }))
 
 function ProfilePage() {
@@ -78,35 +80,35 @@ function ProfilePage() {
          return (
             <Box className={styles.tab}>
                <List>
-                  <ListItem>
-                     <Link to='/profile/user1'>
+                  <ListItem className={styles.fiendListItem}>
+                     <Link className={styles.linkFiendListItem} to='/profile/user1'>
                         <ListItemAvatar>
                            <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
                         </ListItemAvatar>
+                        <ListItemText primary='User1' />
                      </Link>
-                     <ListItemText primary='User1' />
                      <Button className={styles.friendBtn} variant='contained'>
                         Add Friend
                      </Button>
                   </ListItem>
-                  <ListItem>
-                     <Link to='/profile/user1'>
+                  <ListItem className={styles.fiendListItem}>
+                     <Link className={styles.linkFiendListItem} to='/profile/user2'>
                         <ListItemAvatar>
                            <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
                         </ListItemAvatar>
+                        <ListItemText primary='User2' />
                      </Link>
-                     <ListItemText primary='User2' />
                      <Button className={styles.friendBtn} variant='contained'>
                         Add Friend
                      </Button>
                   </ListItem>
-                  <ListItem>
-                     <Link to='/profile/user1'>
+                  <ListItem className={styles.fiendListItem}>
+                     <Link className={styles.linkFiendListItem} to='/profile/user3'>
                         <ListItemAvatar>
                            <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
                         </ListItemAvatar>
+                        <ListItemText primary='User3' />
                      </Link>
-                     <ListItemText primary='User3' />
                      <Button className={styles.friendBtn} variant='contained'>
                         Add Friend
                      </Button>
@@ -116,7 +118,7 @@ function ProfilePage() {
          )
       } else {
          return (
-            <Box className={styles.tab} style={{ padding: '24px 0px' }}>
+            <Box className={styles.tab} style={{ padding: '24px 8px' }}>
                <Video />
                <Image />
                <Blog />
@@ -167,10 +169,10 @@ function ProfilePage() {
                      onClose={handleClose}
                   >
                      <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                        Unfriend
+                        Unfriend <HideUserIcon />
                      </MenuItem>
                      <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                        Block
+                        Block <BlockIcon style={{ marginLeft: 8 }} />
                      </MenuItem>
                   </Menu>
                </Box>
@@ -187,7 +189,7 @@ function ProfilePage() {
                         className={styles.tabButton}
                         style={{
                            border: 'none',
-                           backgroundColor: `${currentTab === 'info' ? '#eee' : '#fff'}`
+                           backgroundColor: `${currentTab === 'info' ? '#eee' : '#fff'}`,
                         }}
                         onClick={() => setCurrentTab('info')}
                      >
@@ -197,7 +199,7 @@ function ProfilePage() {
                         className={styles.tabButton}
                         style={{
                            border: 'none',
-                           backgroundColor: `${currentTab === 'posts' ? '#eee' : '#fff'}`
+                           backgroundColor: `${currentTab === 'posts' ? '#eee' : '#fff'}`,
                         }}
                         onClick={() => setCurrentTab('posts')}
                      >
@@ -207,7 +209,7 @@ function ProfilePage() {
                         className={styles.tabButton}
                         style={{
                            border: 'none',
-                           backgroundColor: `${currentTab === 'friends' ? '#eee' : '#fff'}`
+                           backgroundColor: `${currentTab === 'friends' ? '#eee' : '#fff'}`,
                         }}
                         onClick={() => setCurrentTab('friends')}
                      >

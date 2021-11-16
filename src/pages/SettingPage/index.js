@@ -8,11 +8,12 @@ import {
    ListItemText,
    ListSubheader,
    Switch,
-   TextField
+   TextField,
 } from '@material-ui/core'
 import { useState } from 'react'
 import Header from '../../components/Header'
 import ExpandIcon from '../../components/Icons/ExpandIcon'
+import { Link } from 'react-router-dom'
 import useStyles from './styles'
 
 function SettingPage() {
@@ -29,7 +30,7 @@ function SettingPage() {
       <>
          <Header />
          <List
-            style={{ maxWidth: 960, margin: '16px auto' }}
+            style={{ maxWidth: 960, padding: 6, margin: 'auto' }}
             component='nav'
             aria-labelledby='nested-list-subheader'
             subheader={
@@ -123,37 +124,43 @@ function SettingPage() {
                unmountOnExit
             >
                <List component='div' disablePadding>
-                  <ListItem>
-                     <ListItemAvatar>
-                        <Avatar
-                           className={styles.userAvt}
-                           alt='avt'
-                           src='https://bom.to/WWExNT'
-                        ></Avatar>
-                     </ListItemAvatar>
-                     <ListItemText primary='User1' />
+                  <ListItem className={styles.listBlockFrItem}>
+                     <Link to='/profile/user1' className={styles.linkBlockFriend}>
+                        <ListItemAvatar>
+                           <Avatar
+                              className={styles.userAvt}
+                              alt='avt'
+                              src='https://bom.to/WWExNT'
+                           />
+                        </ListItemAvatar>
+                        <ListItemText primary='User1' />
+                     </Link>
                      <Switch />
                   </ListItem>
-                  <ListItem>
-                     <ListItemAvatar>
-                        <Avatar
-                           className={styles.userAvt}
-                           alt='avt'
-                           src='https://bom.to/WWExNT'
-                        ></Avatar>
-                     </ListItemAvatar>
-                     <ListItemText primary='User2' />
+                  <ListItem className={styles.listBlockFrItem}>
+                     <Link to='/profile/user1' className={styles.linkBlockFriend}>
+                        <ListItemAvatar>
+                           <Avatar
+                              className={styles.userAvt}
+                              alt='avt'
+                              src='https://bom.to/WWExNT'
+                           />
+                        </ListItemAvatar>
+                        <ListItemText primary='User1' />
+                     </Link>
                      <Switch />
                   </ListItem>
-                  <ListItem>
-                     <ListItemAvatar>
-                        <Avatar
-                           className={styles.userAvt}
-                           alt='avt'
-                           src='https://bom.to/WWExNT'
-                        ></Avatar>
-                     </ListItemAvatar>
-                     <ListItemText primary='User2' />
+                  <ListItem className={styles.listBlockFrItem}>
+                     <Link to='/profile/user1' className={styles.linkBlockFriend}>
+                        <ListItemAvatar>
+                           <Avatar
+                              className={styles.userAvt}
+                              alt='avt'
+                              src='https://bom.to/WWExNT'
+                           />
+                        </ListItemAvatar>
+                        <ListItemText primary='User1' />
+                     </Link>
                      <Switch />
                   </ListItem>
                </List>

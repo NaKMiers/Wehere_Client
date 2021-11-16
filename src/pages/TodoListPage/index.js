@@ -9,7 +9,7 @@ import {
    ListItemIcon,
    ListItemText,
    Paper,
-   TextField
+   TextField,
 } from '@material-ui/core'
 import clsx from 'clsx'
 import { useState } from 'react'
@@ -88,7 +88,7 @@ function TodoListPage() {
                            tabIndex={-1}
                            disableRipple
                            inputProps={{
-                              'aria-labelledby': labelId
+                              'aria-labelledby': labelId,
                            }}
                         />
                      </ListItemIcon>
@@ -111,7 +111,7 @@ function TodoListPage() {
    return (
       <>
          <Header />
-         <div style={{ maxWidth: 960, margin: '24px auto' }}>
+         <div style={{ maxWidth: 960, padding: 24, margin: 'auto' }}>
             <Grid className={styles.addTaskWrap}>
                <TextField
                   onFocus={() => {
@@ -121,7 +121,7 @@ function TodoListPage() {
                      setFocusInput1(false)
                   }}
                   InputProps={{
-                     classes: { input: styles.inputTextField }
+                     classes: { input: styles.inputTextField },
                   }}
                   InputLabelProps={{
                      style: {
@@ -129,8 +129,8 @@ function TodoListPage() {
                         transform:
                            isFocusInput1 || taskValue
                               ? 'translate(14px, -6px) scale(0.75)'
-                              : 'translate(16px, 15px) scale(1)'
-                     }
+                              : 'translate(16px, 15px) scale(1)',
+                     },
                   }}
                   onChange={e => setTaskValue(e.target.value)}
                   className={styles.taskTextField}
@@ -146,7 +146,7 @@ function TodoListPage() {
                      setFocusInput2(false)
                   }}
                   InputProps={{
-                     classes: { input: styles.inputTextField }
+                     classes: { input: styles.inputTextField },
                   }}
                   InputLabelProps={{
                      style: {
@@ -154,8 +154,8 @@ function TodoListPage() {
                         transform:
                            isFocusInput2 || pointValue
                               ? 'translate(14px, -6px) scale(0.75)'
-                              : 'translate(16px, 15px) scale(1)'
-                     }
+                              : 'translate(16px, 15px) scale(1)',
+                     },
                   }}
                   onChange={e => setPointValue(e.target.value)}
                   className={styles.pointTextField}
@@ -181,7 +181,7 @@ function TodoListPage() {
                         disabled={right.length === 0}
                         aria-label='move all right'
                      >
-                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-up')}></i>
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-up')} />
                      </Button>
                      <Button
                         className={styles.todoActionBtnUp}
@@ -191,7 +191,7 @@ function TodoListPage() {
                         disabled={rightChecked.length === 0}
                         aria-label='move selected right'
                      >
-                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-up')}></i>
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-up')} />
                      </Button>
                      <Button
                         className={styles.todoActionBtnDown}
@@ -201,7 +201,7 @@ function TodoListPage() {
                         disabled={leftChecked.length === 0}
                         aria-label='move selected left'
                      >
-                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-down')}></i>
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-down')} />
                      </Button>
                      <Button
                         className={styles.todoActionBtnDown}
@@ -211,9 +211,7 @@ function TodoListPage() {
                         disabled={left.length === 0}
                         aria-label='move all left'
                      >
-                        <i
-                           className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-down')}
-                        ></i>
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-down')} />
                      </Button>
                   </Grid>
                </Grid>

@@ -2,20 +2,18 @@ import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
    menuItem: {
       padding: '4px 8px',
-      minHeight: 0
+      minHeight: 0,
    },
    menuIcon: {
-      background: theme.palette.primary.main
-   },
-   listItem: {
-      padding: '8px 16px'
+      background: theme.palette.primary.main,
    },
    listItemText: {
-      fontSize: 18
+      fontSize: 18,
    },
    link: {
       display: 'flex',
       textDecoration: 'none',
-      width: '100%'
-   }
+      width: '100%',
+      padding: 8,
+   },
 }))

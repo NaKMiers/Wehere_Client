@@ -23,7 +23,7 @@ function PlayingBar() {
                <Typography variant='body1'>So Am I</Typography>
             </Box>
             <IconButton className={styles.favoriteBtn}>
-               <i className={clsx(styles.audioIcon, 'fad fa-heart-circle')}></i>
+               <i className={clsx(styles.audioIcon, 'fad fa-heart-circle')} />
             </IconButton>
          </Box>
          <Collapse in={isShowPlayingBarCenter} timeout='auto' unmountOnExit>
@@ -41,16 +41,16 @@ function PlayingBar() {
          <Box className={styles.playingBarBottom}>
             <Button className={styles.menuMusicBtn}>
                <Link to='/musics'>
-                  <i className={clsx(styles.menuMusicIcon, 'fad fa-chevron-left')}></i>
+                  <i className={clsx(styles.menuMusicIcon, 'fad fa-chevron-left')} />
                </Link>
             </Button>
             <Box className={styles.audioBtnGroup}>
                <Box>
                   <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-random')}></i>
+                     <i className={clsx(styles.audioIcon, 'fad fa-random')} />
                   </IconButton>
                   <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-step-backward')}></i>
+                     <i className={clsx(styles.audioIcon, 'fad fa-step-backward')} />
                   </IconButton>
                   <IconButton className={styles.audioBtn}>
                      <Avatar
@@ -60,10 +60,10 @@ function PlayingBar() {
                      />
                   </IconButton>
                   <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-step-forward')}></i>
+                     <i className={clsx(styles.audioIcon, 'fad fa-step-forward')} />
                   </IconButton>
                   <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-repeat')}></i>
+                     <i className={clsx(styles.audioIcon, 'fad fa-repeat')} />
                   </IconButton>
                </Box>
             </Box>

@@ -1,5 +1,6 @@
-import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
+import { Avatar, List, ListItemAvatar, ListItemText } from '@material-ui/core'
 import GavelIcon from '@material-ui/icons/Gavel'
+import { ListItemButton } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
 import ChangeIcon from '../../components/Icons/ChangeIcon'
@@ -21,7 +22,7 @@ const menuList = [
    { icon: () => <HelpAndSupportIcon />, label: 'Help & Support', link: '/menu/help-and-support' },
    { icon: () => <SyncIcon />, label: 'Sync', link: '/menu/sync' },
    { icon: () => <ChangeIcon />, label: 'Switch Account', link: '/menu/switch-account' },
-   { icon: () => <LogOutIcon />, label: 'Log Out', link: '/login' }
+   { icon: () => <LogOutIcon />, label: 'Log Out', link: '/login' },
 ]
 
 function MenuPage() {
@@ -29,16 +30,14 @@ function MenuPage() {
 
    const renderList = () =>
       menuList.map(item => (
-         <ListItem key={item.label} className={styles.listItem}>
+         <ListItemButton key={item.label} className={styles.listItem}>
             <Link to={item.link} className={styles.link}>
-               <Button className={styles.menuItem}>
-                  <ListItemAvatar className={styles.listItemAvt}>
-                     <Avatar className={styles.menuIcon}>{item.icon()}</Avatar>
-                  </ListItemAvatar>
-                  <ListItemText classes={{ primary: styles.listItemText }} primary={item.label} />
-               </Button>
+               <ListItemAvatar className={styles.listItemAvt}>
+                  <Avatar className={styles.menuIcon}>{item.icon()}</Avatar>
+               </ListItemAvatar>
+               <ListItemText classes={{ primary: styles.listItemText }} primary={item.label} />
             </Link>
-         </ListItem>
+         </ListItemButton>
       ))
 
    return (

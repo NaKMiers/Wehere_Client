@@ -8,16 +8,16 @@ import {
    Menu,
    MenuItem,
    styled,
-   Typography
+   Typography,
 } from '@material-ui/core'
-import BackspaceIcon from '@material-ui/icons/Backspace'
-import TurnedInIcon from '@material-ui/icons/TurnedIn'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Comment from '../Comment'
+import DeleteIcon from '../Icons/DeleteIcon'
 import ExpandIcon from '../Icons/ExpandIcon'
 import HeartIcon from '../Icons/HeartIcon'
 import MoreIcon from '../Icons/MoreIcon'
+import SaveIcon from '../Icons/SaveIcon'
 import ShareIcon from '../Icons/ShareIcon'
 import useStyles from './styles'
 
@@ -28,8 +28,8 @@ const ExpandMore = styled(props => {
    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
    marginLeft: 'auto',
    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-   })
+      duration: theme.transitions.duration.shortest,
+   }),
 }))
 
 function Blog() {
@@ -100,14 +100,14 @@ function Blog() {
             open={open}
             onClose={handleClose}
             MenuListProps={{
-               'aria-labelledby': 'basic-button'
+               'aria-labelledby': 'basic-button',
             }}
          >
             <MenuItem onClick={handleClose}>
-               Delete <BackspaceIcon className={styles.menuIcon} />
+               Delete <DeleteIcon />
             </MenuItem>
             <MenuItem onClick={handleClose}>
-               Save <TurnedInIcon className={styles.menuIcon} />
+               Save <SaveIcon />
             </MenuItem>
          </Menu>
       </>

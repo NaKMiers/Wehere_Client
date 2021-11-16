@@ -3,18 +3,18 @@ export default makeStyles(theme => ({
    card: {
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
-      maxWidth: 480,
+      maxWidth: 560,
       marginBottom: 24,
       margin: 'auto',
-      boxShadow: 'rgba(0, 0, 0, 0.3) 0px 0px 4px 0px'
+      boxShadow: 'rgba(0, 0, 0, 0.3) 0px 0px 4px 0px',
    },
    icon: {
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    menuIcon: {
-      marginLeft: 4
+      marginLeft: 4,
    },
    linkToProfile: {
-      textDecoration: 'none'
-   }
+      textDecoration: 'none',
+   },
 }))

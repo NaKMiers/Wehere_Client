@@ -5,12 +5,12 @@ export default makeStyles(theme => ({
       display: 'flex',
       height: 72,
       padding: 0,
+      justifyContent: 'space-between',
       border: 'none'
    },
    link: {
       display: 'flex',
       alignItems: 'center',
-      flexGrow: 1,
       textDecoration: 'none',
       color: theme.palette.secondary.text
    },
@@ -24,6 +24,9 @@ export default makeStyles(theme => ({
    },
    userName: {
       marginLeft: 12
+   },
+   moreBtn: {
+      cursor: 'pointer'
    },
    moreIcon: {
       fontSize: 22,

@@ -1,10 +1,10 @@
 import { Button, CardMedia, Grid, ListItem, Menu, MenuItem, Typography } from '@material-ui/core'
-import BackspaceIcon from '@material-ui/icons/Backspace'
-import EditIcon from '@material-ui/icons/Edit'
 import { ListItemButton } from '@mui/material'
 import { Box } from '@mui/system'
 import clsx from 'clsx'
 import { useState } from 'react'
+import DeleteIcon from '../../../../components/Icons/DeleteIcon'
+import EditIcon from '../../../../components/Icons/EditIcon'
 import useStyles from './styles'
 
 function PlaylistListItem({ showMoreBtn = true }) {
@@ -70,7 +70,7 @@ function PlaylistListItem({ showMoreBtn = true }) {
 
          {showMoreBtn && (
             <Box className={styles.moreBtn} onClick={handleClick}>
-               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')}></i>
+               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')} />
             </Box>
          )}
 
@@ -80,14 +80,14 @@ function PlaylistListItem({ showMoreBtn = true }) {
             open={open}
             onClose={handleClose}
             MenuListProps={{
-               'aria-labelledby': 'basic-button'
+               'aria-labelledby': 'basic-button',
             }}
          >
             <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Edit <EditIcon className={styles.menuIcon} />
+               Edit <EditIcon />
             </MenuItem>
             <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Save <BackspaceIcon className={styles.menuIcon} />
+               Save <DeleteIcon />
             </MenuItem>
          </Menu>
       </ListItem>

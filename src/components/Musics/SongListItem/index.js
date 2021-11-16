@@ -1,8 +1,8 @@
 import { Avatar, Box, ListItem, ListItemText, Menu, MenuItem } from '@material-ui/core'
-import AddCircleIcon from '@material-ui/icons/AddCircle'
-import BackspaceIcon from '@material-ui/icons/Backspace'
 import { ListItemButton } from '@mui/material'
 import { useState } from 'react'
+import AddIcon from '../../../components/Icons/AddIcon'
+import DeleteIcon from '../../Icons/DeleteIcon'
 import HeartIcon from '../../Icons/HeartIcon'
 import MoreIcon from '../../Icons/MoreIcon'
 import AddSongToPlayListModal from '../AddSongToPlaylistModal'
@@ -53,18 +53,18 @@ function SongListItem({ showActionBtn = true }) {
             onClose={() => setAnchorEl(null)}
             anchorOrigin={{
                vertical: 'top',
-               horizontal: 'left'
+               horizontal: 'left',
             }}
             transformOrigin={{
                vertical: 'top',
-               horizontal: 'left'
+               horizontal: 'left',
             }}
          >
             <MenuItem onClick={handleAddToPlayList} className={styles.menuItem}>
-               Add To Playlist <AddCircleIcon style={{ marginLeft: 8 }} />
+               Add To Playlist <AddIcon circle style={{ marginLeft: 8 }} />
             </MenuItem>
             <MenuItem onClick={handleDeletSong} className={styles.menuItem}>
-               Delete <BackspaceIcon style={{ marginLeft: 8 }} />
+               Delete <DeleteIcon />
             </MenuItem>
          </Menu>
 

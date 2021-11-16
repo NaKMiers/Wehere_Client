@@ -9,8 +9,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import MoreIcon from '../../components/Icons/MoreIcon'
 import ReplyIcon from '@material-ui/icons/Reply'
 import ShareIcon from '@material-ui/icons/Share'
-import BackspaceIcon from '@material-ui/icons/Backspace'
-import TurnedInIcon from '@material-ui/icons/TurnedIn'
+import DeleteIcon from '../../components/Icons/DeleteIcon'
+import SaveIcon from '../../components/Icons/SaveIcon'
 import { useState } from 'react'
 import useStyles from './styles'
 import { Link } from 'react-router-dom'
@@ -92,14 +92,14 @@ function Short() {
             open={open}
             onClose={handleClose}
             MenuListProps={{
-               'aria-labelledby': 'basic-button'
+               'aria-labelledby': 'basic-button',
             }}
          >
             <MenuItem onClick={handleClose}>
-               Delete <BackspaceIcon className={styles.menuIcon} />
+               Delete <DeleteIcon />
             </MenuItem>
             <MenuItem onClick={handleClose}>
-               Save <TurnedInIcon className={styles.menuIcon} />
+               Save <SaveIcon />
             </MenuItem>
          </Menu>
       </>

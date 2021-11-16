@@ -17,7 +17,7 @@ function MessengerPage() {
                </div>
             </Route>
             <Route exact path='/messenger/onlines'>
-               <div style={{ maxWidth: 960, margin: 'auto' }}>
+               <div style={{ maxWidth: 960, padding: '6px 8px', margin: 'auto' }}>
                   <OnlineList />
                </div>
             </Route>

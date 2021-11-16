@@ -5,11 +5,12 @@ import {
    CardMedia,
    Collapse,
    Fab,
+   Fade,
    List,
    ListItem,
    Modal,
    Paper,
-   Typography
+   Typography,
 } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
 import { useRef, useState } from 'react'
@@ -31,7 +32,7 @@ const bgOptions = [
    'https://images.pexels.com/photos/3310691/pexels-photo-3310691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
    'https://images.pexels.com/photos/2850287/pexels-photo-2850287.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
    'https://images.pexels.com/photos/4210037/pexels-photo-4210037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-   'https://images.pexels.com/photos/1553962/pexels-photo-1553962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+   'https://images.pexels.com/photos/1553962/pexels-photo-1553962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
 ]
 
 function DiaryModal() {
@@ -45,13 +46,13 @@ function DiaryModal() {
       setOpenCollapeEdit(!openCollapeEdit)
       if (!openCollapeEdit) {
          Object.assign(inputContentArea.current.style, {
-            height: 'calc(60vh - 310px)'
+            height: 'calc(60vh - 300px)',
          })
       } else {
          setTimeout(
             () =>
                Object.assign(inputContentArea.current.style, {
-                  height: 'calc(60vh)'
+                  height: 'calc(60vh)',
                }),
             200
          )
@@ -79,88 +80,89 @@ function DiaryModal() {
                <AddIcon />
             </Fab>
          </Box>
-         <Modal
-            open={open}
-            onClose={handleClose}
-            className={styles.diaryModal}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'
-         >
-            <Paper className={styles.paper} variant='outlined'>
-               <Box className={styles.diaryBody}>
-                  <Typography
-                     className={styles.modalTitle}
-                     id='modal-modal-title'
-                     variant='h6'
-                     component='h2'
-                  >
-                     Add New Diary
-                  </Typography>
-                  <Typography
-                     className={styles.modalSubTitle}
-                     id='modal-modal-description'
-                     sx={{ mt: 2 }}
-                  >
-                     15:11 - 2:11:2021
-                  </Typography>
+         <Fade in={open}>
+            <Modal
+               open
+               onClose={handleClose}
+               className={styles.diaryModal}
+               aria-labelledby='modal-modal-title'
+               aria-describedby='modal-modal-description'
+            >
+               <Paper className={styles.paper} variant='outlined'>
+                  <Box className={styles.diaryBody}>
+                     <Typography
+                        className={styles.modalTitle}
+                        id='modal-modal-title'
+                        variant='h6'
+                        component='h2'
+                     >
+                        Add New Diary
+                     </Typography>
+                     <Typography
+                        className={styles.modalSubTitle}
+                        id='modal-modal-description'
+                        sx={{ mt: 2 }}
+                     >
+                        15:11 - 2:11:2021
+                     </Typography>
 
-                  <form className={styles.formContent}>
-                     <input
-                        name='diaryTitle'
-                        className={styles.inputTitleDiary}
-                        placeholder='Enter your diaries title...'
-                     />
+                     <form className={styles.formContent}>
+                        <input
+                           name='diaryTitle'
+                           className={styles.inputTitleDiary}
+                           placeholder='Enter your diaries title...'
+                        />
 
-                     <textarea
-                        className={styles.inputContentDiary}
-                        placeholder='Enter your diaries content...'
-                        ref={inputContentArea}
-                     ></textarea>
-                  </form>
-                  <Box className={styles.editDiaryWrap}>
-                     <ListItemButton onClick={handleExpandEdit}>
-                        {openCollapeEdit ? (
-                           <ExpandIcon rotate color='secondary' style={{ margin: 'auto' }} />
-                        ) : (
-                           <ExpandIcon color='secondary' style={{ margin: 'auto' }} />
-                        )}
-                     </ListItemButton>
-                     <Collapse in={openCollapeEdit} timeout='auto' unmountOnExit>
-                        <List component='div' disablePadding className={styles.listEditOption}>
-                           <ListItem className={styles.editDiaryItem}>
-                              <p style={{ fontWeight: 'bold' }}>Text: </p>
-                              <Box className={styles.editDiaryListBox}>
-                                 <ButtonGroup
-                                    className={styles.buttonGroupTextColor}
-                                    variant='outlined'
-                                    aria-label='outlined button group'
-                                 >
-                                    {renderTextColorOptions()}
-                                 </ButtonGroup>
-                              </Box>
-                           </ListItem>
-                           <ListItem className={styles.editDiaryItem}>
-                              <p style={{ fontWeight: 'bold' }}>Background: </p>
-                              <Box className={styles.editDiaryListBox}>
-                                 <ButtonGroup
-                                    className={styles.buttonGroupBg}
-                                    variant='outlined'
-                                    aria-label='outlined button group'
-                                 >
-                                    {renderBgOptions()}
-                                 </ButtonGroup>
-                              </Box>
-                           </ListItem>
-                        </List>
-                     </Collapse>
+                        <textarea
+                           className={styles.inputContentDiary}
+                           placeholder='Enter your diaries content...'
+                           ref={inputContentArea}
+                        />
+                     </form>
+                     <Box className={styles.editDiaryWrap}>
+                        <ListItemButton onClick={handleExpandEdit}>
+                           {openCollapeEdit ? (
+                              <ExpandIcon rotate color='secondary' style={{ margin: 'auto' }} />
+                           ) : (
+                              <ExpandIcon color='secondary' style={{ margin: 'auto' }} />
+                           )}
+                        </ListItemButton>
+                        <Collapse in={openCollapeEdit} timeout='auto' unmountOnExit>
+                           <List component='div' disablePadding className={styles.listEditOption}>
+                              <ListItem className={styles.editDiaryItem}>
+                                 <p style={{ fontWeight: 'bold' }}>Text: </p>
+                                 <Box className={styles.editDiaryListBox}>
+                                    <ButtonGroup
+                                       className={styles.buttonGroupTextColor}
+                                       variant='outlined'
+                                       aria-label='outlined button group'
+                                    >
+                                       {renderTextColorOptions()}
+                                    </ButtonGroup>
+                                 </Box>
+                              </ListItem>
+                              <ListItem className={styles.editDiaryItem}>
+                                 <p style={{ fontWeight: 'bold' }}>Background: </p>
+                                 <Box className={styles.editDiaryListBox}>
+                                    <ButtonGroup
+                                       className={styles.buttonGroupBg}
+                                       variant='outlined'
+                                       aria-label='outlined button group'
+                                    >
+                                       {renderBgOptions()}
+                                    </ButtonGroup>
+                                 </Box>
+                              </ListItem>
+                           </List>
+                        </Collapse>
+                     </Box>
                   </Box>
-
                   <Button variant='contained' className={styles.submitDiaryBtn}>
                      Add To My Diaries
                   </Button>
-               </Box>
-            </Paper>
-         </Modal>
+               </Paper>
+            </Modal>
+         </Fade>
       </div>
    )
 }

@@ -9,7 +9,7 @@ function SyncPage() {
       <>
          <Header />
          <List
-            style={{ maxWidth: 960, margin: '16px auto' }}
+            style={{ maxWidth: 960, padding: 6, margin: 'auto' }}
             component='nav'
             aria-labelledby='nested-list-subheader'
             subheader={

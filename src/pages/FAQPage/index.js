@@ -5,7 +5,7 @@ function FAQPage() {
    return (
       <>
          <Header />
-         <div style={{ maxWidth: 960, margin: '24px auto' }}>
+         <div style={{ maxWidth: 960, padding: 24, margin: 'auto' }}>
             <Typography variant='h4'>FAQ</Typography>
             <Typography variant='body2'>
                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem

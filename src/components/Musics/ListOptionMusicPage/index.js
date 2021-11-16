@@ -16,10 +16,7 @@ function ListOptionMusicPage() {
          <ListItem onClick={() => setShowRecentlySongs(!isShowRecentlySongs)}>
             <ListItemAvatar>
                <Avatar className={styles.listItemAvt}>
-                  <i
-                     className={clsx(styles.listIcon, 'fad fa-clock')}
-                     style={{ marginLeft: 2 }}
-                  ></i>
+                  <i className={clsx(styles.listIcon, 'fad fa-clock')} />
                </Avatar>
             </ListItemAvatar>
             <ListItemText primary='Recently' secondary='22h before' />
@@ -43,7 +40,7 @@ function ListOptionMusicPage() {
                      <i
                         className={clsx(styles.listIcon, 'fad fa-music')}
                         style={{ fontSize: 22 }}
-                     ></i>
+                     />
                   </Avatar>
                </ListItemAvatar>
                <ListItemText primary='My Songs' secondary='216 songs' />
@@ -56,7 +53,7 @@ function ListOptionMusicPage() {
                      <i
                         className={clsx(styles.listIcon, 'fad fa-th-list')}
                         style={{ fontSize: 22, marginLeft: 2 }}
-                     ></i>
+                     />
                   </Avatar>
                </ListItemAvatar>
                <ListItemText primary='My Playlists' secondary='3 playlists' />
