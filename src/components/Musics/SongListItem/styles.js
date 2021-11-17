@@ -4,33 +4,36 @@ export default makeStyles(theme => ({
    listItem: {
       marginBottom: 8,
       borderTopRightRadius: 16,
-      padding: 0
+      padding: 0,
    },
    listItemButton: {
-      borderRadius: 8
+      borderRadius: 8,
    },
 
    songImg: {
       width: 42,
       height: 42,
       marginRight: 8,
-      borderRadius: 8
+      borderRadius: 8,
    },
    boxButton: {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
    },
    button: {
       padding: '4px 16px',
       textAlign: 'center',
-      cursor: 'pointer'
+      cursor: 'pointer',
    },
 
    menu: {
-      padding: 0
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
    },
    menuItem: {
       padding: '4px 8px',
-      minHeight: 0
-   }
+      minHeight: 0,
+   },
 }))

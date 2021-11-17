@@ -19,6 +19,7 @@ import HeartIcon from '../Icons/HeartIcon'
 import MoreIcon from '../Icons/MoreIcon'
 import SaveIcon from '../Icons/SaveIcon'
 import ShareIcon from '../Icons/ShareIcon'
+import ShareMolal from '../../components/ShareModal'
 import useStyles from './styles'
 
 const ExpandMore = styled(props => {
@@ -33,6 +34,7 @@ const ExpandMore = styled(props => {
 }))
 
 function Blog() {
+   const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -40,6 +42,7 @@ function Blog() {
    }
    const handleClose = () => {
       setAnchorEl(null)
+      setOpenShareModal(false)
    }
 
    const [expanded, setExpanded] = useState(false)
@@ -80,7 +83,7 @@ function Blog() {
                <IconButton aria-label='add to favorites'>
                   <HeartIcon />
                </IconButton>
-               <IconButton aria-label='share'>
+               <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
                </IconButton>
                <ExpandMore
@@ -92,9 +95,12 @@ function Blog() {
                   <ExpandIcon style={{ marginRight: 1 }} />
                </ExpandMore>
             </CardActions>
+
             <Comment expanded={expanded} />
          </Card>
+         <ShareMolal open={isOpenShareModal} handleClose={handleClose} />
          <Menu
+            className={styles.menu}
             id='basic-menu'
             anchorEl={anchorEl}
             open={open}
@@ -103,10 +109,10 @@ function Blog() {
                'aria-labelledby': 'basic-button',
             }}
          >
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleClose} className={styles.menuItem}>
                Delete <DeleteIcon />
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleClose} className={styles.menuItem}>
                Save <SaveIcon />
             </MenuItem>
          </Menu>

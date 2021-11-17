@@ -4,12 +4,12 @@ export default makeStyles(theme => ({
    '@global': {
       '*::-webkit-scrollbar': {
          width: 0,
-         height: 0
+         height: 0,
       },
       '.MuiBadge-colorPrimary': {
          background: theme.palette.success.main,
-         border: `1.5px solid ${theme.border.main}`
-      }
+         border: `1.5px solid ${theme.border.main}`,
+      },
    },
    chatHeader: {
       display: 'flex',
@@ -19,55 +19,59 @@ export default makeStyles(theme => ({
       color: theme.palette.primary.text,
       borderBottomLeftRadius: 8,
       borderBottomRightRadius: 8,
-      padding: '0px 12.5px'
+      padding: '0px 12.5px',
    },
    moreBtn: {
       cursor: 'pointer',
-      padding: 12
+      padding: 12,
    },
    moreIcon: {
       fontSize: 22,
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    textHeader: {
       flexGrow: 1,
       display: 'flex',
       flexDirection: 'column',
-      padding: '0px 8px'
+      padding: '0px 8px',
    },
    userName: {
-      fontSize: 20
+      fontSize: 20,
    },
    status: {
       fontSize: 12,
       color: theme.palette.success.main,
-      marginTop: -4
+      marginTop: -4,
    },
    avtBtn: {
-      borderRadius: '50%'
+      borderRadius: '50%',
    },
    avtLink: {
-      position: 'relative'
+      position: 'relative',
    },
    avt: {
       width: 42,
-      height: 42
+      height: 42,
    },
    badge: {
       position: 'absolute',
       top: 9,
-      right: 5
+      right: 5,
    },
-   menuIcon: {
-      color: '#fff'
+
+   menu: {
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
    },
    menuItem: {
       padding: '4px 8px',
-      minHeight: 0
+      minHeight: 0,
    },
 
    chatContent: {
-      padding: 24
+      padding: 24,
    },
 
    chatInput: {
@@ -78,38 +82,38 @@ export default makeStyles(theme => ({
       background: theme.palette.secondary.main,
       borderTopLeftRadius: 8,
       borderTopRightRadius: 8,
-      padding: '0px 12px'
+      padding: '0px 12px',
    },
-   inputText: {
-      flexGrow: '1'
+   inputTextField: {
+      flexGrow: '1',
    },
    inputProps: {
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    formIcon: {
       fontSize: 22,
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    emojiTable: {
       textAlign: 'center',
-      height: '25vh'
+      height: '25vh',
    },
    emojiTableWrap: {
       height: 'calc(25vh - 48px)',
       padding: 8,
-      overflow: 'scroll'
+      overflow: 'scroll',
    },
    emoji: {
-      fontSize: 20
+      fontSize: 20,
    },
    emojiBar: {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
    },
    tabEmoji: {
       fontSize: 24,
       padding: 0,
-      borderRadius: 0
+      borderRadius: 0,
    },
 
    paperSetting: {
@@ -118,6 +122,6 @@ export default makeStyles(theme => ({
       bottom: 80,
       left: 0,
       right: 0,
-      overflow: 'hidden'
-   }
+      overflow: 'hidden',
+   },
 }))

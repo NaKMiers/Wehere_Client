@@ -7,8 +7,8 @@ function BarIcon({ color, className, style }) {
          fontSize: 30,
          cursor: 'pointer',
          marginTop: -1,
-         color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text
-      }
+         color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text,
+      },
    }))()
 
    return <i className={clsx(className, styles.icon, 'fas fa-bars')} style={style} />

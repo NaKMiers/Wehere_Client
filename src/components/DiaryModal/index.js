@@ -74,7 +74,7 @@ function DiaryModal() {
       ))
 
    return (
-      <div>
+      <>
          <Box className={styles.addDiaryBtnBox} onClick={handleOpen}>
             <Fab aria-label='add' className={styles.addDiaryBtn}>
                <AddIcon />
@@ -163,7 +163,7 @@ function DiaryModal() {
                </Paper>
             </Modal>
          </Fade>
-      </div>
+      </>
    )
 }
 

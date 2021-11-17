@@ -1,4 +1,4 @@
-import { Button, Fade, List, Modal, Paper, TextField, Typography } from '@material-ui/core'
+import { Button, Fade, List, Modal, Paper, TextField, Typography, Box } from '@material-ui/core'
 import SearchIcon from '../../Icons/SearchIcon'
 import SongListItem from '../SongListItem'
 import useStyle from './styles'
@@ -18,7 +18,7 @@ function AddNewPlaylistModal({ open, handleClose }) {
                <Typography variant='h5' className={styles.heading}>
                   Add New Playlist
                </Typography>
-               <form className={styles.form}>
+               <Box className={styles.form}>
                   <TextField
                      className={styles.textField}
                      id='filled-search'
@@ -26,7 +26,7 @@ function AddNewPlaylistModal({ open, handleClose }) {
                      variant='filled'
                   />
 
-                  <form className={styles.searchForm}>
+                  <form className={styles.searchForm} onSubmit={e => e.preventDefault()}>
                      <input
                         placeholder='What you need to search ?'
                         className={styles.searchSongInput}
@@ -49,7 +49,7 @@ function AddNewPlaylistModal({ open, handleClose }) {
                   <Button className={styles.submitBtn} type='button' variant='contained'>
                      Add
                   </Button>
-               </form>
+               </Box>
             </Paper>
          </Modal>
       </Fade>

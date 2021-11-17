@@ -1,6 +1,6 @@
 import { Avatar, Badge, Button, ButtonGroup, List } from '@material-ui/core'
-import clsx from 'clsx'
 import { Link } from 'react-router-dom'
+import ExpandIcon from '../../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 
 function OnlineBar() {
@@ -31,7 +31,7 @@ function OnlineBar() {
          <ButtonGroup variant='outlined' aria-label='outlined button group'>
             <Button className={styles.menuOnlineBtn}>
                <Link to='/messenger/onlines'>
-                  <i className={clsx(styles.menuOnlineIcon, 'fad fa-chevron-right')} />
+                  <ExpandIcon color='secondary' style={{ transform: 'rotate(90deg)' }} />
                </Link>
             </Button>
             {renderUserOnline()}

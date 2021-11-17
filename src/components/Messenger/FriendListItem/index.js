@@ -1,7 +1,7 @@
 import { Avatar, Badge, Box, ListItem, ListItemText, Menu, MenuItem } from '@material-ui/core'
-import clsx from 'clsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import MoreIcon from '../../../components/Icons/MoreIcon'
 import HideUserIcon from '../../Icons/HideUserIcon'
 import MarkReadIcon from '../../Icons/MarkReadIcon'
 import RemoveIcon from '../../Icons/RemoveIcon'
@@ -33,7 +33,7 @@ function FriendListItem({ onlineList, isOnline }) {
                <ListItemText primary='User1' secondary='5p before' className={styles.userName} />
             </Link>
             <Box className={styles.moreBtn} onClick={handleClick}>
-               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')} />
+               <MoreIcon rotate color='secondary' />
             </Box>
          </ListItem>
          <Menu
@@ -44,6 +44,7 @@ function FriendListItem({ onlineList, isOnline }) {
             MenuListProps={{
                'aria-labelledby': 'basic-button',
             }}
+            className={styles.menu}
          >
             <MenuItem onClick={handleClose} className={styles.menuItem}>
                Hide <HideUserIcon />

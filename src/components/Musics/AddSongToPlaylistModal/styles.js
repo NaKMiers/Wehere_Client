@@ -4,8 +4,8 @@ export default makeStyles(theme => ({
    '@global': {
       '*::-webkit-scrollbar': {
          width: 0,
-         height: 0
-      }
+         height: 0,
+      },
    },
    paper: {
       position: 'absolute',
@@ -15,18 +15,18 @@ export default makeStyles(theme => ({
       overflow: 'hidden',
       borderRadius: 8,
       outline: 'none',
-      paddingBottom: 10
+      paddingBottom: 10,
    },
    heading: {
       padding: 8,
       textAlign: 'center',
       background: theme.palette.primary.gradient,
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    playlistList: {
       width: 300,
       height: 450,
       overflow: 'scroll',
-      padding: 12
-   }
+      padding: 12,
+   },
 }))

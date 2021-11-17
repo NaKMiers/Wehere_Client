@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
       bottom: 0,
       left: 0,
       right: 0,
-      background: theme.palette.primary.gradient
+      background: theme.palette.primary.gradient,
    },
    playingBarTop: {
       display: 'flex',
@@ -15,17 +15,17 @@ export default makeStyles(theme => ({
       padding: '0 16px',
       height: 40,
       borderBottom: `1px solid ${theme.border.light}`,
-      cursor: 'pointer'
+      cursor: 'pointer',
    },
    aboutName: {
       display: 'flex',
       flexGrow: '1',
       color: theme.palette.primary.text,
-      padding: '8px 0px'
+      padding: '8px 0px',
    },
    favoriteBtn: {
       padding: 0,
-      color: theme.favoriteIcon.main
+      color: theme.favoriteIcon.main,
    },
    playingBarCenter: {
       display: 'flex',
@@ -34,44 +34,44 @@ export default makeStyles(theme => ({
       color: theme.palette.primary.text,
       padding: '8px 16px',
       height: 40,
-      borderBottom: `1px solid ${theme.border.light}`
+      borderBottom: `1px solid ${theme.border.light}`,
    },
    processPlayingBar: {
       width: '75%',
-      cursor: 'pointer'
+      cursor: 'pointer',
    },
    playingBarBottom: {
-      display: 'flex'
+      display: 'flex',
    },
    menuMusicBtn: {
       position: 'relative',
       minWidth: 32,
-      padding: 0,
+      padding: '0px 2px 0px 0px',
       backgroundColor: theme.palette.secondary.light,
-      borderRadius: 0
+      borderRadius: 0,
    },
    menuMusicIcon: {
       fontSize: 28,
       fontWeight: 300,
       marginRight: 1,
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
    },
    audioBtnGroup: {
       display: 'flex',
       margin: 'auto',
-      justifyContent: 'space-around'
+      justifyContent: 'space-around',
    },
    audioBtn: {
       color: theme.palette.primary.text,
-      margin: '0px 8px'
+      margin: '0px 8px',
    },
    audioIcon: {
       fontSize: 28,
-      fontWeight: 300
+      fontWeight: 300,
    },
    playBtn: {
       width: 50,
       height: 50,
-      border: `3px solid ${theme.border.main}`
-   }
+      border: `3px solid ${theme.border.main}`,
+   },
 }))

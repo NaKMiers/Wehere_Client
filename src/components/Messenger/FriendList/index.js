@@ -3,7 +3,7 @@ import FriendListItem from '../FriendListItem'
 
 function FriendList() {
    return (
-      <List style={{ padding: '8.5px 8px' }}>
+      <List style={{ padding: '8.5px 24px' }}>
          <FriendListItem isOnline={true} />
          <FriendListItem isOnline={true} />
          <FriendListItem isOnline={true} />

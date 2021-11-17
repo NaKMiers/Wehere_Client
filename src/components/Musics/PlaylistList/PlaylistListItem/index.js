@@ -1,10 +1,10 @@
 import { Button, CardMedia, Grid, ListItem, Menu, MenuItem, Typography } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
 import { Box } from '@mui/system'
-import clsx from 'clsx'
 import { useState } from 'react'
 import DeleteIcon from '../../../../components/Icons/DeleteIcon'
 import EditIcon from '../../../../components/Icons/EditIcon'
+import MoreIcon from '../../../../components/Icons/MoreIcon'
 import useStyles from './styles'
 
 function PlaylistListItem({ showMoreBtn = true }) {
@@ -70,7 +70,7 @@ function PlaylistListItem({ showMoreBtn = true }) {
 
          {showMoreBtn && (
             <Box className={styles.moreBtn} onClick={handleClick}>
-               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')} />
+               <MoreIcon rotate color='secondary' />
             </Box>
          )}
 
@@ -82,6 +82,7 @@ function PlaylistListItem({ showMoreBtn = true }) {
             MenuListProps={{
                'aria-labelledby': 'basic-button',
             }}
+            className={styles.menu}
          >
             <MenuItem onClick={handleClose} className={styles.menuItem}>
                Edit <EditIcon />

@@ -6,7 +6,7 @@ function SaveIcon({ style }) {
       icon: {
          fontSize: 20,
          cursor: 'pointer',
-         color: theme.palette.secondary.text,
+         color: theme.palette.primary.text,
          marginLeft: 8,
       },
    }))()

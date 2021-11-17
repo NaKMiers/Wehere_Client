@@ -11,10 +11,19 @@ export default makeStyles(theme => ({
    icon: {
       color: theme.palette.primary.text,
    },
-   menuIcon: {
-      marginLeft: 4,
-   },
+
    linkToProfile: {
       textDecoration: 'none',
+   },
+
+   menu: {
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
+   },
+   menuItem: {
+      padding: '4px 8px',
+      minHeight: 0,
    },
 }))

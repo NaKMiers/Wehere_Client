@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom'
 import Message from '../Message'
 import SettingChat from './SettingChat'
 import useStyles from './styles'
+import MoreIcon from '../../Icons/MoreIcon'
 
 const emojiList = [
    '😀 😃 😄 😁 😆 😅 😂 🤣 🥲 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿',
@@ -99,7 +100,7 @@ function Chatbox() {
                </Typography>
             </Box>
             <Box className={styles.moreBtn} onClick={handleClick}>
-               <i className={clsx(styles.moreIcon, 'fad fa-ellipsis-v')} />
+               <MoreIcon rotate />
             </Box>
             <Menu
                id='basic-menu'
@@ -109,6 +110,7 @@ function Chatbox() {
                MenuListProps={{
                   'aria-labelledby': 'basic-button',
                }}
+               className={styles.menu}
             >
                <MenuItem onClick={handleOpenModalSettingChat} className={styles.menuItem}>
                   Seting <SettingIcon style={{ marginLeft: 8 }} />
@@ -132,7 +134,7 @@ function Chatbox() {
             <TextField
                name='inputChat'
                InputProps={{ className: styles.inputProps }}
-               className={styles.inputText}
+               className={styles.inputTextField}
                id='outlined-multiline-flexible'
                multiline
                maxRows={4}

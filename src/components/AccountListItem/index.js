@@ -30,8 +30,8 @@ function AccountListItem() {
    }
 
    const handleClose = () => {
-      setOpenDialogAcc(!isOpenDialogAcc)
-      setOpenRmBtn(!isOpenRmBtn)
+      setOpenDialogAcc(false)
+      setOpenRmBtn(false)
    }
 
    const styles = useStyles()
@@ -63,7 +63,8 @@ function AccountListItem() {
                </IconButton>
             </Collapse>
          </ListItem>
-         <Fade in={isOpenDialogAcc}>
+
+         <Fade in={!!isOpenDialogAcc}>
             <Dialog onClose={handleClose} open>
                <Typography className={styles.dialogTitle}>
                   {isOpenDialogAcc === 'remove'

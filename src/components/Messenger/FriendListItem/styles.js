@@ -6,34 +6,37 @@ export default makeStyles(theme => ({
       height: 72,
       padding: 0,
       justifyContent: 'space-between',
-      border: 'none'
+      border: 'none',
    },
    link: {
       display: 'flex',
       alignItems: 'center',
       textDecoration: 'none',
-      color: theme.palette.secondary.text
+      color: theme.palette.secondary.text,
    },
    avatar: {
       width: 42,
-      height: 42
+      height: 42,
    },
    badge: {
       top: -14,
-      right: 4
+      right: 4,
    },
    userName: {
-      marginLeft: 12
+      marginLeft: 12,
    },
    moreBtn: {
-      cursor: 'pointer'
+      cursor: 'pointer',
    },
-   moreIcon: {
-      fontSize: 22,
-      color: theme.palette.secondary.main
+
+   menu: {
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
    },
    menuItem: {
       padding: '4px 8px',
-      minHeight: 0
-   }
+      minHeight: 0,
+   },
 }))

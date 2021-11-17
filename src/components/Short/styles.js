@@ -51,4 +51,15 @@ export default makeStyles(theme => ({
       height: 200,
       overflow: 'scroll',
    },
+
+   menu: {
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
+   },
+   menuItem: {
+      padding: '4px 8px',
+      minHeight: 0,
+   },
 }))

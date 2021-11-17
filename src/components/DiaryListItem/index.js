@@ -31,7 +31,7 @@ function DiaryListItem({ title, desc, bgImg, createdAt }) {
                {title}
             </Typography>
             <IconButton aria-label='settings' className={styles.moreIconBtn} onClick={handleClick}>
-               <MoreIcon rotate />
+               <MoreIcon rotate style={{ fontSize: 20 }} />
             </IconButton>
             <Typography className={styles.diaryTime}>{createdAt}</Typography>
             <Typography className={styles.diaryDesc} variant='subtitle1'>
@@ -46,6 +46,7 @@ function DiaryListItem({ title, desc, bgImg, createdAt }) {
             MenuListProps={{
                'aria-labelledby': 'basic-button',
             }}
+            className={styles.menu}
          >
             <MenuItem className={styles.menuItem} onClick={handleClose}>
                Delete <DeleteIcon />

@@ -87,6 +87,7 @@ function Short() {
             </Collapse>
          </Card>
          <Menu
+            className={styles.menu}
             id='basic-menu'
             anchorEl={anchorEl}
             open={open}
@@ -95,10 +96,10 @@ function Short() {
                'aria-labelledby': 'basic-button',
             }}
          >
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleClose} className={styles.menuItem}>
                Delete <DeleteIcon />
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleClose} className={styles.menuItem}>
                Save <SaveIcon />
             </MenuItem>
          </Menu>

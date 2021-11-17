@@ -56,7 +56,7 @@ export default makeStyles(theme => ({
    linkFiendListItem: {
       display: 'flex',
       textDecoration: 'none',
-      width: '88%',
+      width: 'calc(100% - 114px)',
       color: theme.palette.secondary.text,
    },
    addFriendBtn: {
@@ -66,11 +66,16 @@ export default makeStyles(theme => ({
       margin: '0 4px',
       padding: '6px 8px',
    },
+
    menuAction: {
-      marginLeft: 12,
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
    },
    menuActionItem: {
-      minHeight: 'auto',
+      padding: '4px 8px',
+      minHeight: 0,
    },
 
    bottomProfile: {

@@ -3,6 +3,8 @@ import LinearProgress from '@mui/material/LinearProgress'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import HeartIcon from '../../../components/Icons/HeartIcon'
+import ExpandIcon from '../../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 
 function PlayingBar() {
@@ -23,7 +25,7 @@ function PlayingBar() {
                <Typography variant='body1'>So Am I</Typography>
             </Box>
             <IconButton className={styles.favoriteBtn}>
-               <i className={clsx(styles.audioIcon, 'fad fa-heart-circle')} />
+               <HeartIcon />
             </IconButton>
          </Box>
          <Collapse in={isShowPlayingBarCenter} timeout='auto' unmountOnExit>
@@ -41,7 +43,10 @@ function PlayingBar() {
          <Box className={styles.playingBarBottom}>
             <Button className={styles.menuMusicBtn}>
                <Link to='/musics'>
-                  <i className={clsx(styles.menuMusicIcon, 'fad fa-chevron-left')} />
+                  <ExpandIcon
+                     color='primary'
+                     style={{ transform: 'rotate(-90deg)', fontSize: 26 }}
+                  />
                </Link>
             </Button>
             <Box className={styles.audioBtnGroup}>

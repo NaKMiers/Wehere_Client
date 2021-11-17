@@ -4,8 +4,8 @@ export default makeStyles(theme => ({
    '@global': {
       '*::-webkit-scrollbar': {
          width: 0,
-         height: 0
-      }
+         height: 0,
+      },
    },
    diaryWrap: {
       position: 'relative',
@@ -20,15 +20,15 @@ export default makeStyles(theme => ({
       transition: 'height 0.2s ease-in-out',
       overflow: 'hidden',
       '&:hover': {
-         height: '170px'
+         height: '170px',
       },
       '&:hover $diaryDesc': {
          display: 'block',
-         opacity: 1
+         opacity: 1,
       },
       '&:hover $diaryTime': {
-         display: 'none'
-      }
+         display: 'none',
+      },
    },
    diaryTitle: {
       margin: '10px 16px',
@@ -39,7 +39,7 @@ export default makeStyles(theme => ({
       WebkitBoxOrient: 'vertical',
       whiteSpace: 'normal',
       overflow: 'hidden',
-      textOverflow: 'ellipsis'
+      textOverflow: 'ellipsis',
    },
    diaryDesc: {
       opacity: 0,
@@ -54,27 +54,31 @@ export default makeStyles(theme => ({
       transition: 'opacity 0.5s ease-in-out',
       borderBottomLeftRadius: 16,
       borderBottomRightRadius: 16,
-      overflowY: 'scroll'
+      overflowY: 'scroll',
    },
    diaryTime: {
       margin: '-60px 18px',
       color: theme.palette.primary.text,
       fontSize: 10,
-      textShadow: '1px 1px 1px #222'
+      textShadow: '1px 1px 1px #222',
    },
    moreIconBtn: {
       position: 'absolute',
       top: 0,
-      right: 0
+      right: 0,
    },
    moreIcon: {
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
+   },
+
+   menu: {
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
    },
    menuItem: {
       padding: '4px 8px',
-      minHeight: 0
+      minHeight: 0,
    },
-   menuIcon: {
-      marginLeft: 8
-   }
 }))
