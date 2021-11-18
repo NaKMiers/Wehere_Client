@@ -48,7 +48,7 @@ export default makeStyles(theme => ({
       bottom: 0,
    },
    commentWrap: {
-      height: 200,
+      height: 280,
       overflow: 'scroll',
    },
 
@@ -59,7 +59,7 @@ export default makeStyles(theme => ({
       },
    },
    menuItem: {
-      padding: '4px 8px',
+      padding: '6px 12px',
       minHeight: 0,
    },
 }))

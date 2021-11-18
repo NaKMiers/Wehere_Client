@@ -19,6 +19,7 @@ import ExpandIcon from '../Icons/ExpandIcon'
 import HeartIcon from '../Icons/HeartIcon'
 import MoreIcon from '../Icons/MoreIcon'
 import ShareIcon from '../Icons/ShareIcon'
+import ShareMolal from '../../components/ShareModal'
 import useStyles from './styles'
 
 const ExpandMore = styled(props => {
@@ -33,6 +34,7 @@ const ExpandMore = styled(props => {
 }))
 
 function Video() {
+   const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -40,6 +42,7 @@ function Video() {
    }
    const handleClose = () => {
       setAnchorEl(null)
+      setOpenShareModal(false)
    }
 
    const [expanded, setExpanded] = useState(false)
@@ -73,7 +76,7 @@ function Video() {
                title='YouTube video player'
                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                allowFullScreen
-            ></iframe>
+            />
             <CardContent>
                <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together
@@ -84,7 +87,7 @@ function Video() {
                <IconButton aria-label='add to favorites'>
                   <HeartIcon />
                </IconButton>
-               <IconButton aria-label='share'>
+               <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
                </IconButton>
                <ExpandMore
@@ -98,6 +101,7 @@ function Video() {
             </CardActions>
             <Comment expanded={expanded} />
          </Card>
+         <ShareMolal open={isOpenShareModal} handleClose={handleClose} />
          <Menu
             className={styles.menu}
             id='basic-menu'

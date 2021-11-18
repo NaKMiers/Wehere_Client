@@ -1,20 +1,20 @@
-import { Collapse, Menu, MenuItem, Box } from '@material-ui/core'
+import { Box, Collapse, Menu, MenuItem } from '@material-ui/core'
 import Avatar from '@material-ui/core/Avatar'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
 import IconButton from '@material-ui/core/IconButton'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import MoreIcon from '../../components/Icons/MoreIcon'
-import ReplyIcon from '@material-ui/icons/Reply'
-import ShareIcon from '@material-ui/icons/Share'
-import DeleteIcon from '../../components/Icons/DeleteIcon'
-import SaveIcon from '../../components/Icons/SaveIcon'
 import { useState } from 'react'
-import useStyles from './styles'
 import { Link } from 'react-router-dom'
+import DeleteIcon from '../../components/Icons/DeleteIcon'
+import HeartIcon from '../../components/Icons/HeartIcon'
+import MoreIcon from '../../components/Icons/MoreIcon'
+import ReplyIcon from '../../components/Icons/ReplyIcon'
+import SaveIcon from '../../components/Icons/SaveIcon'
+import ShareIcon from '../../components/Icons/ShareIcon'
 import Comment from '../Comment'
+import useStyles from './styles'
 
 function Short() {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -31,8 +31,6 @@ function Short() {
    const handleOpenComment = () => {
       setOpenComments(!isOpenComments)
    }
-
-   console.log(isOpenComments)
 
    const styles = useStyles()
 
@@ -63,16 +61,16 @@ function Short() {
             <CardActions
                disableSpacing
                className={styles.cardActions}
-               style={{ bottom: `${isOpenComments ? 200 : 64}px` }}
+               style={{ bottom: `${isOpenComments ? 280 : 64}px` }}
             >
                <IconButton aria-label='add to favorites'>
-                  <FavoriteIcon className={styles.iconActions} />
+                  <HeartIcon style={{ fontSize: 33 }} />
                </IconButton>
                <IconButton aria-label='share'>
-                  <ShareIcon className={styles.iconActions} />
+                  <ShareIcon style={{ fontSize: 30 }} />
                </IconButton>
                <IconButton aria-label='share' onClick={handleOpenComment}>
-                  <ReplyIcon className={styles.iconActions} />
+                  <ReplyIcon style={{ fontSize: 28 }} />
                </IconButton>
             </CardActions>
             <Collapse

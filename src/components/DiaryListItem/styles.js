@@ -78,7 +78,7 @@ export default makeStyles(theme => ({
       },
    },
    menuItem: {
-      padding: '4px 8px',
+      padding: '6px 12px',
       minHeight: 0,
    },
 }))

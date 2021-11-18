@@ -20,6 +20,7 @@ import DeleteIcon from '../Icons/DeleteIcon'
 import HeartIcon from '../Icons/HeartIcon'
 import MoreIcon from '../Icons/MoreIcon'
 import SaveIcon from '../Icons/SaveIcon'
+import ShareMolal from '../../components/ShareModal'
 import useStyles from './styles'
 
 const ExpandMore = styled(props => {
@@ -34,6 +35,7 @@ const ExpandMore = styled(props => {
 }))
 
 function Image() {
+   const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -41,6 +43,7 @@ function Image() {
    }
    const handleClose = () => {
       setAnchorEl(null)
+      setOpenShareModal(false)
    }
 
    const [expanded, setExpanded] = useState(false)
@@ -78,7 +81,7 @@ function Image() {
                <IconButton aria-label='add to favorites'>
                   <HeartIcon />
                </IconButton>
-               <IconButton aria-label='share'>
+               <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
                </IconButton>
                <ExpandMore
@@ -92,6 +95,7 @@ function Image() {
             </CardActions>
             <Comment expanded={expanded} />
          </Card>
+         <ShareMolal open={isOpenShareModal} handleClose={handleClose} />
          <Menu
             className={styles.menu}
             id='basic-menu'

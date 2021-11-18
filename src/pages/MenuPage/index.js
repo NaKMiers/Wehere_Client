@@ -4,7 +4,6 @@ import { ListItemButton } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
 import ChangeIcon from '../../components/Icons/ChangeIcon'
-import DiaryIcon from '../../components/Icons/DiaryIcon'
 import FriendIcon from '../../components/Icons/FriendIcon'
 import HelpAndSupportIcon from '../../components/Icons/HelpAndSupportIcon'
 import LogOutIcon from '../../components/Icons/LogOutIcon'
@@ -15,7 +14,6 @@ import useStyles from './styles'
 
 const menuList = [
    { icon: () => <UserIcon />, label: 'Profile', link: '/profile' },
-   { icon: () => <DiaryIcon />, label: 'Diaries', link: '/diaries' },
    { icon: () => <FriendIcon />, label: 'Friends', link: '/friend-list' },
    { icon: () => <SettingsIcon mutiple />, label: 'Setting', link: '/menu/setting' },
    { icon: () => <GavelIcon />, label: 'FAQ', link: '/menu/faq' },

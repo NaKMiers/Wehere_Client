@@ -47,7 +47,7 @@ export default makeStyles(theme => ({
    },
    linkToCopy: {
       flexGrow: 1,
-      padding: '4px 16px',
+      padding: '4px 6px',
       border: `2px solid ${theme.border.light}`,
       borderRadius: 4,
       overflow: 'scroll',

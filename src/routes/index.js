@@ -19,107 +19,113 @@ import HelpAndSupportPage from '../pages/HelpAndSupportPage'
 import MusicPage from '../pages/MusicPage'
 import EventPage from '../pages/EventPage'
 import MessengerPage from '../pages/MessengerPage'
+import RestorePasswordPage from '../pages/RestorePasswordPage'
 const routes = [
    {
       path: '/',
       exact: true,
-      component: () => <HomePage />
+      component: () => <HomePage />,
    },
    {
       path: '/blogs',
       exact: true,
-      component: () => <BlogPage />
+      component: () => <BlogPage />,
    },
    {
       path: '/images',
       exact: true,
-      component: () => <ImagePage />
+      component: () => <ImagePage />,
    },
    {
       path: '/videos',
       exact: true,
-      component: () => <VideoPage />
+      component: () => <VideoPage />,
    },
    {
       path: '/shorts',
       exact: true,
-      component: () => <ShortPage />
+      component: () => <ShortPage />,
    },
    {
       path: '/musics',
       exact: false,
-      component: () => <MusicPage />
+      component: () => <MusicPage />,
    },
    {
       path: '/messenger',
       exact: false,
-      component: () => <MessengerPage />
+      component: () => <MessengerPage />,
    },
    {
       path: '/events',
       exact: true,
-      component: () => <EventPage />
+      component: () => <EventPage />,
    },
    {
       path: '/todolist',
       exact: true,
-      component: () => <TodoListPage />
+      component: () => <TodoListPage />,
    },
    {
       path: '/profile',
       exact: false,
-      component: () => <ProfilePage />
+      component: () => <ProfilePage />,
    },
    {
       path: '/friend-list',
       exact: true,
-      component: () => <FriendListPage />
+      component: () => <FriendListPage />,
    },
    {
       path: '/diaries',
       exact: true,
-      component: () => <DiaryPage />
+      component: () => <DiaryPage />,
    },
    {
       path: '/menu',
       exact: true,
-      component: () => <MenuPage />
+      component: () => <MenuPage />,
    },
    {
       path: '/menu/setting',
       exact: true,
-      component: () => <SettingPage />
+      component: () => <SettingPage />,
    },
    {
       path: '/menu/faq',
       exact: true,
-      component: () => <FAQPage />
+      component: () => <FAQPage />,
    },
    {
       path: '/menu/help-and-support',
       exact: true,
-      component: () => <HelpAndSupportPage />
+      component: () => <HelpAndSupportPage />,
    },
    {
       path: '/menu/sync',
       exact: true,
-      component: () => <SyncPage />
+      component: () => <SyncPage />,
    },
    {
       path: '/menu/switch-account',
       exact: true,
-      component: () => <SwitchAccountPage />
+      component: () => <SwitchAccountPage />,
    },
    {
       path: '/login',
       exact: true,
-      component: () => <LoginPage />
+      component: () => <LoginPage />,
    },
    {
       path: '/register',
       exact: true,
-      component: () => <RegisterPage />
-   }
+      component: () => <RegisterPage />,
+   },
+   {
+      path: '/restore-password',
+      exact: false,
+      component: () => <RestorePasswordPage />,
+   },
 ]
 
 const renderRoutes = routes =>

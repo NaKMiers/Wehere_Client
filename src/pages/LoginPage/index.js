@@ -31,7 +31,7 @@ function LoginPage() {
             </Button>
             <div className={styles.subOptions}>
                <span>
-                  <Link to='forget-password' style={{ textDecoration: 'none' }}>
+                  <Link to='/restore-password' style={{ textDecoration: 'none' }}>
                      Forget Password?
                   </Link>
                </span>

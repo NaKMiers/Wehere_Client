@@ -4,7 +4,6 @@ function EventPage() {
    return (
       <>
          <Header />
-         This is EventPage
       </>
    )
 }
