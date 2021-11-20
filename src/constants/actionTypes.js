@@ -1,0 +1,8 @@
+const types = {
+   CHECK_USER: 'CHECK_USER',
+   SHOW_VALIDATE_REGISTER: 'SHOW_VALIDATE_REGISTER',
+
+   CREATE_NEW_USER: 'CREATE_NEW_USER',
+}
+
+export default types

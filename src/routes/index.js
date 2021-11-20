@@ -20,6 +20,7 @@ import MusicPage from '../pages/MusicPage'
 import EventPage from '../pages/EventPage'
 import MessengerPage from '../pages/MessengerPage'
 import RestorePasswordPage from '../pages/RestorePasswordPage'
+
 const routes = [
    {
       path: '/',
