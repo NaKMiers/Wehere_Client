@@ -1,4 +1,5 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Backdrop from './commons/Backdrop'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import theme from './commons/theme'
@@ -10,6 +11,7 @@ function App() {
          <ThemeProvider theme={theme}>
             <CssBaseline />
             <Switch>{routes}</Switch>
+            <Backdrop />
          </ThemeProvider>
       </Router>
    )

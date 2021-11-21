@@ -8,14 +8,16 @@ import {
    Typography,
 } from '@material-ui/core'
 import { FormControl } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import useStyles from './styles'
-import { bindActionCreators } from 'redux'
+import { useState } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
 import actions from '../../actions'
+import apis from '../../apis'
+import useStyles from './styles'
+import { useHistory } from 'react-router-dom'
 
-function RegisterPage({ validate, actionCreators }) {
+function RegisterPage({ actionCreators }) {
    const [name, setName] = useState('')
    const [username, setUsername] = useState('')
    const [email, setEmail] = useState('')
@@ -23,72 +25,95 @@ function RegisterPage({ validate, actionCreators }) {
    const [passwordAgain, setPasswordAgain] = useState('')
    const [gender, setGender] = useState('male')
 
-   const [validateState, setValidate] = useState({})
-
-   const [errors, setErrors] = useState({
-      name: '',
-      username: '',
-      email: '',
-      password: '',
-      passwordAgain: '',
-   })
+   const [errorName, setErrorName] = useState('')
+   const [errorUsername, setErrorUsername] = useState('')
+   const [errorEmail, setErrorEmail] = useState('')
+   const [errorPassword, setErrorPassword] = useState('')
+   const [errorPasswordAgain, setErrorPasswordAgain] = useState('')
 
    const styles = useStyles()
-
-   useEffect(() => {
-      setValidate(validate)
-   }, [validate])
+   const history = useHistory()
 
    const handleSubmit = async e => {
       e.preventDefault()
-      await actionCreators.checkUser({ username, email })
+
+      handleValidate('name')
+      handleValidate('username')
+      handleValidate('email', true)
+      handleValidate('password')
+      handleValidate('passwordAgain')
 
       if (
-         errors.name === '' &&
-         errors.username === '' &&
-         errors.email === '' &&
-         errors.password === '' &&
-         errors.passwordAgain === '' &&
-         name !== '' &&
-         username !== '' &&
-         email !== '' &&
-         password !== '' &&
-         !validateState.matchOtherUsernameRegistor &&
-         !validateState.matchOtherEmailRegistor
+         !errorName &&
+         !errorUsername &&
+         !errorEmail &&
+         !errorPassword &&
+         !errorPasswordAgain &&
+         name &&
+         username &&
+         email &&
+         password &&
+         passwordAgain
       ) {
          console.log('OK')
+         const data = { name, username, email, password, gender }
+         actionCreators.createNewUser(data)
+         history.push('/')
+      } else {
+         console.log('NOT OK')
       }
    }
 
-   const handleValidate = (type, message) => {
+   const handleValidate = async (type, notcheck) => {
+      const validateEmail = email => {
+         const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+         return re.test(email)
+      }
       switch (type) {
          case 'name':
             if (name.trim() === '') {
-               setErrors({ ...errors, name: message })
+               setErrorName(() => 'Name is empty.')
             }
             break
          case 'username':
-            if (username.trim() === '') {
-               setErrors({ ...errors, username: message })
+            try {
+               let res = await apis.checkUser(username, email)
+               if (username.trim() === '') {
+                  setErrorUsername(() => 'Username is empty.')
+               } else if (res.data.matchOtherUsername) {
+                  setErrorUsername(() => 'Username has been already.')
+               }
+            } catch (err) {
+               console.log(err)
             }
             break
          case 'email':
-            if (email.trim() === '') {
-               setErrors({ ...errors, email: message })
+            try {
+               let res = await apis.checkUser(username, email)
+               if (email.trim() === '') {
+                  setErrorEmail(() => 'Email is empty.')
+               } else if (!validateEmail(email.trim())) {
+                  setErrorEmail(() => 'This must be email.')
+               } else if (res.data.matchOtherEmail && !notcheck) {
+                  setErrorEmail(() => 'Email has been already.')
+               }
+            } catch (err) {
+               console.log(err)
             }
             break
          case 'password':
             if (password.trim() === '') {
-               setErrors({ ...errors, password: message })
+               setErrorPassword(() => 'Password is empty.')
             } else if (password.length < 6) {
-               setErrors({ ...errors, password: 'Password greater than 6 characters' })
+               setErrorPassword(() => 'Password must be at least 6 characters')
             }
             break
          case 'passwordAgain':
             if (passwordAgain.trim() === '') {
-               setErrors({ ...errors, passwordAgain: message })
+               setErrorPasswordAgain(() => 'Password gain is empty.')
             } else if (passwordAgain.trim() !== password.trim()) {
-               setErrors({ ...errors, passwordAgain: 'Password does not match' })
+               setErrorPasswordAgain(() => 'Password does not match.')
             }
             break
          default:
@@ -110,10 +135,10 @@ function RegisterPage({ validate, actionCreators }) {
                variant='filled'
                value={name}
                onChange={e => setName(e.target.value)}
-               onBlur={() => handleValidate('name', 'Name is empty.')}
-               onFocus={() => setErrors({ ...errors, name: '' })}
-               error={!!errors.name}
-               helperText={errors.name}
+               onBlur={() => handleValidate('name')}
+               onFocus={() => setErrorName('')}
+               error={!!errorName}
+               helperText={errorName}
             />
             <TextField
                name='username'
@@ -123,14 +148,10 @@ function RegisterPage({ validate, actionCreators }) {
                variant='filled'
                value={username}
                onChange={e => setUsername(e.target.value)}
-               onBlur={() => handleValidate('username', 'Username is empty')}
-               onFocus={() => setErrors({ ...errors, username: '' })}
-               error={!!errors.username || validate.matchOtherUsernameRegistor}
-               helperText={
-                  validate.matchOtherUsernameRegistor
-                     ? 'This is username has been already.'
-                     : errors.username
-               }
+               onBlur={() => handleValidate('username')}
+               onFocus={() => setErrorUsername('')}
+               error={!!errorUsername}
+               helperText={errorUsername}
             />
             <TextField
                name='email'
@@ -140,14 +161,10 @@ function RegisterPage({ validate, actionCreators }) {
                variant='filled'
                value={email}
                onChange={e => setEmail(e.target.value)}
-               onBlur={() => handleValidate('email', 'Email is empty')}
-               onFocus={() => setErrors({ ...errors, email: '' })}
-               error={!!errors.email || validate.matchOtherEmailRegistor}
-               helperText={
-                  validate.matchOtherEmailRegistor
-                     ? 'This is email has been already.'
-                     : errors.email
-               }
+               onBlur={() => handleValidate('email')}
+               onFocus={() => setErrorEmail('')}
+               error={!!errorEmail}
+               helperText={errorEmail}
             />
             <TextField
                name='password'
@@ -158,10 +175,10 @@ function RegisterPage({ validate, actionCreators }) {
                type='password'
                value={password}
                onChange={e => setPassword(e.target.value)}
-               onBlur={() => handleValidate('password', 'Password is empty')}
-               onFocus={() => setErrors({ ...errors, password: '' })}
-               error={!!errors.password}
-               helperText={errors.password}
+               onBlur={() => handleValidate('password')}
+               onFocus={() => setErrorPassword('')}
+               error={!!errorPassword}
+               helperText={errorPassword}
             />
             <TextField
                name='passwordAgain'
@@ -172,10 +189,10 @@ function RegisterPage({ validate, actionCreators }) {
                type='password'
                value={passwordAgain}
                onChange={e => setPasswordAgain(e.target.value)}
-               onBlur={() => handleValidate('passwordAgain', 'Password Again is empty')}
-               onFocus={() => setErrors({ ...errors, passwordAgain: '' })}
-               error={!!errors.passwordAgain}
-               helperText={errors.passwordAgain}
+               onBlur={() => handleValidate('passwordAgain')}
+               onFocus={() => setErrorPasswordAgain('')}
+               error={!!errorPasswordAgain}
+               helperText={errorPasswordAgain}
             />
             <FormControl style={{ padding: '18px 12px' }}>
                <FormLabel component='legend'>Gender</FormLabel>

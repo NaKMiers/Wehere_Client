@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import users from './userReducer'
-import validate from './validateReducer'
+import showBackdrop from './showBackdrop'
 
-const reducers = combineReducers({ users, validate })
+const reducers = combineReducers({ users, showBackdrop })
 
 export default reducers
