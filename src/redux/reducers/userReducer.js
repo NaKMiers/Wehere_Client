@@ -4,9 +4,12 @@ const initState = {
 }
 
 function useReducer(state = initState, action) {
+   const { payload } = action
    switch (action.type) {
       case types.LOGIN:
-         return { ...state, curUser: action.payload }
+         return { ...state, curUser: payload }
+      case types.CHANGE_THEME:
+         return { ...state, curUser: payload }
       default:
          return state
    }

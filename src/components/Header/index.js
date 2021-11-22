@@ -16,10 +16,11 @@ import NotificationIcon from '../Icons/NotificationIcon'
 import SearchIcon from '../Icons/SearchIcon'
 import css from './header.module.css'
 import useStyles from './styles'
+import { connect } from 'react-redux'
 
 const slide2matches = ['/messenger', '/musics', '/events', '/todolist', '/diaries']
 
-function Header() {
+function Header({ curUser }) {
    const currentUrl = useLocation().pathname
    const initSlide = () => {
       if (
@@ -187,11 +188,15 @@ function Header() {
                <NotificationIcon style={{ fontSize: 20 }} />
             </Button>
             <Link to='/menu'>
-               <Avatar className={styles.avatar} alt='Pi Pi' src='https://bom.to/2Mysnv' />
+               <Avatar className={styles.avatar} alt='Pi Pi' src={curUser.avatar} />
             </Link>
          </Box>
       </AppBar>
    )
 }
 
-export default Header
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+
+export default connect(mapState)(Header)

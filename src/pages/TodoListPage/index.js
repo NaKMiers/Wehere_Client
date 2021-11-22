@@ -13,6 +13,9 @@ import {
 } from '@material-ui/core'
 import clsx from 'clsx'
 import { useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actions from '../../actions'
 import Header from '../../components/Header'
 import useStyles from './styles'
 
@@ -24,17 +27,18 @@ const intersection = (a, b) => {
    return a.filter(value => b.indexOf(value) !== -1)
 }
 
-function TodoListPage() {
+function TodoListPage({ curUser, actionCreators }) {
    const [checked, setChecked] = useState([])
    const [left, setLeft] = useState([0, 1, 2, 3])
    const [right, setRight] = useState([4, 5, 6, 7])
    const [isFocusInput1, setFocusInput1] = useState(false)
    const [isFocusInput2, setFocusInput2] = useState(false)
-   const [taskValue, setTaskValue] = useState('')
-   const [pointValue, setPointValue] = useState(0)
 
    const leftChecked = intersection(checked, left)
    const rightChecked = intersection(checked, right)
+
+   const [addNewTaskValue, setAddNewTaskValue] = useState('')
+   const [newTaskPoint, setNewTaskPoint] = useState('')
 
    const styles = useStyles()
 
@@ -72,12 +76,12 @@ function TodoListPage() {
       setLeft(left.concat(right))
       setRight([])
    }
-   const customList = (items, title) => (
+   const customList = (todolist, title) => (
       <Paper className={styles.paper}>
          <CardHeader title={title} className={styles.cardHeader} />
          <Divider />
          <List dense component='div' role='list'>
-            {items.map(value => {
+            {todolist.map(value => {
                const labelId = `transfer-list-item-${value}-label`
 
                return (
@@ -87,9 +91,6 @@ function TodoListPage() {
                            checked={checked.indexOf(value) !== -1}
                            tabIndex={-1}
                            disableRipple
-                           inputProps={{
-                              'aria-labelledby': labelId,
-                           }}
                         />
                      </ListItemIcon>
                      <ListItemText
@@ -127,15 +128,16 @@ function TodoListPage() {
                      style: {
                         fontSize: 18,
                         transform:
-                           isFocusInput1 || taskValue
+                           isFocusInput1 || addNewTaskValue
                               ? 'translate(14px, -6px) scale(0.75)'
                               : 'translate(16px, 15px) scale(1)',
                      },
                   }}
-                  onChange={e => setTaskValue(e.target.value)}
                   className={styles.taskTextField}
                   label='Add new task...'
                   variant='outlined'
+                  onChange={e => setAddNewTaskValue(e.target.value)}
+                  value={addNewTaskValue}
                />
                <TextField
                   type='number'
@@ -152,15 +154,16 @@ function TodoListPage() {
                      style: {
                         fontSize: 18,
                         transform:
-                           isFocusInput2 || pointValue
+                           isFocusInput2 || newTaskPoint
                               ? 'translate(14px, -6px) scale(0.75)'
                               : 'translate(16px, 15px) scale(1)',
                      },
                   }}
-                  onChange={e => setPointValue(e.target.value)}
                   className={styles.pointTextField}
                   label='Point'
                   variant='outlined'
+                  onChange={e => setNewTaskPoint(+e.target.value)}
+                  value={newTaskPoint}
                />
                <Button className={styles.addTaskBtn} color='primary' variant='contained'>
                   Add
@@ -171,6 +174,7 @@ function TodoListPage() {
                <Grid item xs={12}>
                   {customList(left, 'Ready')}
                </Grid>
+
                <Grid item xs={12}>
                   <Grid container alignItems='center' className={styles.actionBtnWrap}>
                      <Button
@@ -215,6 +219,7 @@ function TodoListPage() {
                      </Button>
                   </Grid>
                </Grid>
+
                <Grid item xs={12}>
                   {customList(right, 'Completed')}
                </Grid>
@@ -224,4 +229,11 @@ function TodoListPage() {
    )
 }
 
-export default TodoListPage
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(TodoListPage)
