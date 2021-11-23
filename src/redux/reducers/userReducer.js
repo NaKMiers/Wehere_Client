@@ -10,6 +10,8 @@ function useReducer(state = initState, action) {
          return { ...state, curUser: payload }
       case types.CHANGE_THEME:
          return { ...state, curUser: payload }
+      case types.UPDATE_TODOLIST:
+         return { ...state, curUser: payload }
       default:
          return state
    }
