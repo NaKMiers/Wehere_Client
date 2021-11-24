@@ -48,8 +48,8 @@ const renderTheme = () => {
          palette: {
             primary: {
                gradient: theme.gradient,
-               main: '#db03e4',
-               text: '#fff',
+               main: theme.primaryColor,
+               text: theme.primaryText,
             },
             secondary: {
                light: '#eee',

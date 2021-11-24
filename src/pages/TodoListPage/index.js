@@ -42,7 +42,9 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    const rightChecked = intersection(checked, right)
 
    const [addNewTaskValue, setAddNewTaskValue] = useState('')
-   const [newTaskPoint, setNewTaskPoint] = useState('')
+   const [newTaskPoint, setNewTaskPoint] = useState(1)
+
+   const [taskEditing, setTaskEditing] = useState(null)
 
    const styles = useStyles()
 
@@ -83,7 +85,7 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    }
 
    const handleAllLeft = () => {
-      actionCreators.editTaskRequest(right.map(task => ({ ...task, status: 'completed' })))
+      actionCreators.editTaskRequest(right.map(task => ({ ...task, status: 'ready' })))
 
       setLeft(left.concat(right))
       setRight([])
@@ -102,16 +104,33 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
 
    const handleAddTask = e => {
       e.preventDefault()
-      actionCreators.addNewTaskRequest(curUser._id, {
-         title: addNewTaskValue.trim(),
-         point: +newTaskPoint,
-      })
-      setAddNewTaskValue('')
-      setNewTaskPoint('')
+      if (addNewTaskValue.trim() !== '') {
+         actionCreators.addNewTaskRequest(curUser._id, {
+            title: addNewTaskValue.trim(),
+            point: +newTaskPoint,
+         })
+         setAddNewTaskValue('')
+         setNewTaskPoint('')
+      }
    }
 
    const handleDeleteTask = taskId => {
       actionCreators.deleteTaskRequest(taskId)
+   }
+
+   const handleMarkImportant = (task, e, isImportant) => {
+      actionCreators.editTaskRequest([
+         {
+            ...task,
+            important: !task.important,
+         },
+      ])
+   }
+
+   const handleEditSubmit = e => {
+      e.preventDefault()
+      actionCreators.editTaskRequest([taskEditing])
+      setTaskEditing(null)
    }
 
    const customList = (todolist, title) => (
@@ -124,33 +143,68 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
 
                return (
                   <ListItem className={styles.taskListItem} key={task._id} role='listitem' button>
-                     <Box className={styles.taskWrap} onClick={handleToggle(task)}>
-                        <ListItemIcon>
-                           <Checkbox
-                              checked={checked.indexOf(task) !== -1}
-                              tabIndex={-1}
-                              disableRipple
-                           />
-                        </ListItemIcon>
-                        <ListItemText
-                           classes={{ primary: styles.listItemText }}
-                           id={labelId}
-                           primary={task.title}
-                        />
-                     </Box>
+                     {taskEditing?._id !== task._id ? (
+                        <>
+                           <Box className={styles.taskWrap} onClick={handleToggle(task)}>
+                              <ListItemIcon>
+                                 <Checkbox
+                                    checked={checked.indexOf(task) !== -1}
+                                    tabIndex={-1}
+                                    disableRipple
+                                 />
+                              </ListItemIcon>
+                              <ListItemText
+                                 classes={{ primary: styles.listItemText }}
+                                 id={labelId}
+                                 primary={task.title}
+                              />
+                           </Box>
 
-                     <IconButton
-                        className={styles.deleteTaskBtn}
-                        onClick={() => handleDeleteTask(task._id)}
-                     >
-                        <HighlightOffIcon className={styles.deleteTaskIcon} />
-                     </IconButton>
-                     <IconButton className={styles.editTaskBtn}>
-                        <EditIcon className={styles.editTaskIcon} />
-                     </IconButton>
-                     <div className={styles.pointWrap}>
-                        <span className={styles.point}>{task.point}</span>
-                     </div>
+                           <IconButton
+                              className={styles.deleteTaskBtn}
+                              onClick={() => handleDeleteTask(task._id)}
+                           >
+                              <HighlightOffIcon className={styles.deleteTaskIcon} />
+                           </IconButton>
+                           <IconButton
+                              className={styles.editTaskBtn}
+                              onClick={() => setTaskEditing(task)}
+                           >
+                              <EditIcon className={styles.editTaskIcon} />
+                           </IconButton>
+                           <div
+                              className={styles.pointWrap}
+                              onClick={e => handleMarkImportant(task, e, task.important)}
+                              style={{ background: task.important && '#f44336' }}
+                           >
+                              <span className={styles.point}>{task.point}</span>
+                           </div>
+                        </>
+                     ) : (
+                        <form className={styles.formEditing} onSubmit={handleEditSubmit}>
+                           <input
+                              type='text'
+                              className={styles.editingInput}
+                              value={taskEditing.title}
+                              onChange={e =>
+                                 setTaskEditing({ ...taskEditing, title: e.target.value })
+                              }
+                           />
+                           <input
+                              type='number'
+                              className={styles.editingPoint}
+                              value={taskEditing.point}
+                              max='99'
+                              min='1'
+                              onChange={e =>
+                                 setTaskEditing({ ...taskEditing, point: e.target.value })
+                              }
+                           />
+                           <Button type='submit' variant='contained' className={styles.saveEditBtn}>
+                              Save
+                           </Button>
+                        </form>
+                     )}
                   </ListItem>
                )
             })}

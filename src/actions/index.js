@@ -21,7 +21,7 @@ class Actions {
    deleteTaskRequest = taskId => ({ type: types.DELETE_TASK_REQUEST, taskId })
    deleteTask = taskId => ({ type: types.DELETE_TASK, taskId })
    editTaskRequest = payload => ({ type: types.EDIT_TASK_REQUEST, payload })
-   // editTask = payload => ({ type: types.EDIT_TASK, payload })
+   editTask = payload => ({ type: types.EDIT_TASK, payload })
 
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })

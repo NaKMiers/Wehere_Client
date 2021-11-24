@@ -58,9 +58,11 @@ function* deleteTask({ taskId }) {
 }
 
 function* editTask({ payload }) {
-   const taskEditedList = yield call(apis.editTask, payload)
-   if (taskEditedList.status === 200) {
-      // yield put(actions.editTask(taskEditedList.data))
+   const res = yield call(apis.editTask, payload)
+   if (res.status === 200) {
+      if (res.data.length === 1) {
+         yield put(actions.editTask(res.data[0]))
+      }
    }
 }
 

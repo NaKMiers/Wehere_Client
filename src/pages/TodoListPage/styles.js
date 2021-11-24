@@ -11,7 +11,7 @@ export default makeStyles(theme => ({
       marginRight: 16,
    },
    pointTextField: {
-      width: '20%',
+      width: '10%',
    },
    inputTextField: {
       padding: '14px 16px',
@@ -56,6 +56,37 @@ export default makeStyles(theme => ({
    },
    editTaskIcon: {
       color: theme.palette.success.main,
+   },
+
+   formEditing: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+   },
+
+   editingInput: {
+      outline: 'none',
+      fontSize: 18,
+      padding: '8.5px 8px',
+      borderRadius: 4,
+      border: 'none',
+      flexGrow: 1,
+   },
+   editingPoint: {
+      outline: 'none',
+      fontSize: 18,
+      padding: '8.5px 8px',
+      borderRadius: 4,
+      border: 'none',
+      marginLeft: 8,
+      width: '8%',
+   },
+   saveEditBtn: {
+      padding: '8.5px 8px',
+      marginLeft: 8,
+      background: theme.palette.success.main,
+      color: theme.palette.primary.text,
    },
 
    paper: {
