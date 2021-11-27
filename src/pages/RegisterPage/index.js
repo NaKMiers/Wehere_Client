@@ -10,22 +10,19 @@ import {
 import { FormControl } from '@mui/material'
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../actions'
 import apis from '../../apis'
 import useStyles from './styles'
-import { useHistory } from 'react-router-dom'
 
 function RegisterPage({ actionCreators }) {
-   const [name, setName] = useState('')
    const [username, setUsername] = useState('')
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
    const [passwordAgain, setPasswordAgain] = useState('')
    const [gender, setGender] = useState('male')
 
-   const [errorName, setErrorName] = useState('')
    const [errorUsername, setErrorUsername] = useState('')
    const [errorEmail, setErrorEmail] = useState('')
    const [errorPassword, setErrorPassword] = useState('')
@@ -44,19 +41,17 @@ function RegisterPage({ actionCreators }) {
       handleValidate('passwordAgain')
 
       if (
-         !errorName &&
          !errorUsername &&
          !errorEmail &&
          !errorPassword &&
          !errorPasswordAgain &&
-         name &&
          username &&
          email &&
          password &&
          passwordAgain
       ) {
          console.log('OK')
-         const data = { name, username, email, password, gender }
+         const data = { username, email, password, gender }
          actionCreators.createNewUser(data)
          history.push('/')
       } else {
@@ -71,11 +66,6 @@ function RegisterPage({ actionCreators }) {
          return re.test(email)
       }
       switch (type) {
-         case 'name':
-            if (name.trim() === '') {
-               setErrorName(() => 'Name is empty.')
-            }
-            break
          case 'username':
             try {
                let res = await apis.checkUser(username, email)
@@ -127,19 +117,6 @@ function RegisterPage({ actionCreators }) {
             Wehere
          </Typography>
          <form onSubmit={handleSubmit}>
-            <TextField
-               name='name'
-               className={styles.textField}
-               id='filled-basic'
-               label='Name...'
-               variant='filled'
-               value={name}
-               onChange={e => setName(e.target.value)}
-               onBlur={() => handleValidate('name')}
-               onFocus={() => setErrorName('')}
-               error={!!errorName}
-               helperText={errorName}
-            />
             <TextField
                name='username'
                className={styles.textField}

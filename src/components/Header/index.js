@@ -1,14 +1,30 @@
-import { AppBar, Avatar, Box, Button, TextField, Toolbar, Typography } from '@material-ui/core'
+import {
+   AppBar,
+   Avatar,
+   Badge,
+   Box,
+   Button,
+   IconButton,
+   Menu,
+   MenuItem,
+   TextField,
+   Toolbar,
+   Typography,
+} from '@material-ui/core'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import ChatIcon from '@material-ui/icons/Chat'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import ClearIcon from '@material-ui/icons/Clear'
+import DoneIcon from '@material-ui/icons/Done'
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents'
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
 import { useLayoutEffect, useRef, useState } from 'react'
+import { connect } from 'react-redux'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import apis from '../../apis'
 import DiaryIcon from '../Icons/DiaryIcon'
 import ExpandIcon from '../Icons/ExpandIcon'
 import HomeIcon from '../Icons/HomeIcon'
@@ -16,7 +32,6 @@ import NotificationIcon from '../Icons/NotificationIcon'
 import SearchIcon from '../Icons/SearchIcon'
 import css from './header.module.css'
 import useStyles from './styles'
-import { connect } from 'react-redux'
 
 const slide2matches = ['/messenger', '/musics', '/events', '/todolist', '/diaries']
 
@@ -50,10 +65,118 @@ function Header({ curUser }) {
       setSlideHeader(slideHeader === 1 ? 2 : 1)
    }
 
+   const [anchorEl, setAnchorEl] = useState(null)
+   const openMenuNotification = Boolean(anchorEl)
+   const handleOpenMenuNotification = event => {
+      setAnchorEl(event.currentTarget)
+   }
+   const handleClose = () => {
+      setAnchorEl(null)
+   }
+   const renderMenuItem = () =>
+      curUser?.notifications.map((n, i) => {
+         switch (n.type) {
+            case 'ADD_FRIEND_REQUEST':
+               return (
+                  <MenuItem key={i} onClick={handleClose} className={styles.menuItem}>
+                     <Avatar src={n.userRequest.avatar} alt='avt' />
+                     <Typography className={styles.usernameItem}>
+                        {n.userRequest.username}
+                     </Typography>
+                     <Box className={styles.menuBtnWrap}>
+                        <IconButton
+                           variant='contained'
+                           className={styles.menuAcceptBtn}
+                           onClick={() =>
+                              handleResponseNotification(
+                                 'ADD_FRIEND_REQUEST',
+                                 n.userRequest._id,
+                                 curUser._id,
+                                 true
+                              )
+                           }
+                        >
+                           <DoneIcon />
+                        </IconButton>
+                        <IconButton
+                           variant='contained'
+                           className={styles.menuDenyBtn}
+                           onClick={() =>
+                              handleResponseNotification(
+                                 'ADD_FRIEND_REQUEST',
+                                 n.userRequest._id,
+                                 curUser._id,
+                                 false
+                              )
+                           }
+                        >
+                           <ClearIcon />
+                        </IconButton>
+                     </Box>
+                  </MenuItem>
+               )
+
+            case 'ADD_FRIEND_ACCEPT':
+               return (
+                  <MenuItem key={i} onClick={handleClose} className={styles.menuItem}>
+                     <Avatar src={n.userAcceptRequest.avatar} alt='avt' />
+                     <Typography className={styles.usernameItem}>
+                        {n.userAcceptRequest.username} has accepted your friend request.
+                     </Typography>
+                     <IconButton
+                        variant='contained'
+                        className={styles.menuDenyBtn}
+                        onClick={() =>
+                           handleResponseNotification(
+                              'ADD_FRIEND_ACCEPT',
+                              n.userRequest._id,
+                              curUser._id
+                           )
+                        }
+                     >
+                        <ClearIcon />
+                     </IconButton>
+                  </MenuItem>
+               )
+
+            default:
+               return undefined
+         }
+      })
+   const handleResponseNotification = async (type, userRequestId, curUserId, value) => {
+      switch (type) {
+         case 'ADD_FRIEND_REQUEST':
+            console.log('ADD_FRIEND_REQUEST')
+            await apis.addFriendResponse(userRequestId, curUserId, value)
+            break
+         case 'ADD_FRIEND_ACCEPT': // remove notify
+            console.log('ADD_FRIEND_ACCEPT')
+            await apis.removeNotify(userRequestId, curUserId)
+            break
+         default:
+            break
+      }
+   }
+
    return (
       <AppBar position='static' className={styles.header}>
          <Box className={styles.leftHeader}>
-            <Typography className={styles.wehereLogo}>Wehere</Typography>
+            {!isShowSearchHeader && <Typography className={styles.wehereLogo}>Wehere</Typography>}
+            {isShowSearchHeader && (
+               <TextField
+                  style={{ width: '80%' }}
+                  placeholder='What you need...?'
+                  className={styles.searchTextField}
+                  InputProps={{ className: styles.searchInput }}
+               />
+            )}
+            <Button
+               style={{ margin: !isShowSearchHeader && '0% 2%' }}
+               className={styles.topHeaderBtn}
+               onClick={() => setShowSearchHeader(!isShowSearchHeader)}
+            >
+               <SearchIcon style={{ fontSize: 20 }} />
+            </Button>
          </Box>
          <Box className={styles.navigation}>
             <Box className={styles.topHeader}>
@@ -77,7 +200,14 @@ function Header({ curUser }) {
                      <SearchIcon style={{ fontSize: 20 }} />
                   </Button>
                   <Button className={styles.topHeaderBtn}>
-                     <NotificationIcon style={{ fontSize: 20 }} />
+                     <Badge
+                        badgeContent={3}
+                        color='primary'
+                        invisible={false}
+                        onClick={handleOpenMenuNotification}
+                     >
+                        <NotificationIcon style={{ fontSize: 20 }} />
+                     </Badge>
                   </Button>
                </Box>
             </Box>
@@ -179,18 +309,30 @@ function Header({ curUser }) {
          </Box>
 
          <Box className={styles.rightHeader}>
-            <TextField
-               placeholder='What you need...?'
-               className={styles.searchTextField}
-               InputProps={{ className: styles.searchInput }}
-            />
-            <Button className={styles.topHeaderBtn}>
-               <NotificationIcon style={{ fontSize: 20 }} />
-            </Button>
             <Link to='/menu'>
-               <Avatar className={styles.avatar} alt='Pi Pi' src={curUser.avatar} />
+               <Avatar className={styles.avatar} alt='Pi Pi' src={curUser?.avatar} />
             </Link>
+            <Typography className={styles.username}>{curUser?.username}</Typography>
+            <Button className={styles.topHeaderBtn}>
+               <Badge
+                  badgeContent={curUser?.notifications.length}
+                  color='primary'
+                  onClick={handleOpenMenuNotification}
+               >
+                  <NotificationIcon style={{ fontSize: 20 }} />
+               </Badge>
+            </Button>
          </Box>
+
+         <Menu
+            id='basic-menu'
+            anchorEl={anchorEl}
+            open={openMenuNotification && curUser?.notifications.length > 0}
+            onClose={handleClose}
+            className={styles.menu}
+         >
+            {renderMenuItem()}
+         </Menu>
       </AppBar>
    )
 }

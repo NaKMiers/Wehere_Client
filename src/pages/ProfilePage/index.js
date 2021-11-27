@@ -19,22 +19,26 @@ import CakeIcon from '@material-ui/icons/Cake'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import HomeIcon from '@material-ui/icons/Home'
 import { styled } from '@material-ui/styles'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useLayoutEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import actions from '../../actions'
+import apis from '../../apis'
 import Blog from '../../components/Blog'
 import Header from '../../components/Header'
-import MoreIcon from '../../components/Icons/MoreIcon'
 import BlockIcon from '../../components/Icons/BlockIcon'
+import HideUserIcon from '../../components/Icons/HideUserIcon'
+import MoreIcon from '../../components/Icons/MoreIcon'
 import Image from '../../components/Image'
 import Video from '../../components/Video'
 import useStyles from './styles'
-import HideUserIcon from '../../components/Icons/HideUserIcon'
 
 const Demo = styled('div')(({ theme }) => ({
    backgroundColor: theme.palette.background.paper,
 }))
 
-function ProfilePage() {
+function ProfilePage({ curUser, userProfile, actionCreators }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -43,8 +47,15 @@ function ProfilePage() {
    const handleClose = () => {
       setAnchorEl(null)
    }
-
    const [currentTab, setCurrentTab] = useState('posts')
+
+   const styles = useStyles()
+   const localtion = useLocation()
+
+   useLayoutEffect(() => {
+      const userId = localtion.pathname.split('/')[2]
+      actionCreators.getUserRequest(userId)
+   }, [actionCreators, localtion.pathname])
 
    const renderTabs = () => {
       if (currentTab === 'info') {
@@ -83,7 +94,7 @@ function ProfilePage() {
                   <ListItem className={styles.fiendListItem}>
                      <Link className={styles.linkFiendListItem} to='/profile/user1'>
                         <ListItemAvatar>
-                           <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
+                           <Avatar alt='avt' src='https://bom.to/tIyuw5' />
                         </ListItemAvatar>
                         <ListItemText primary='User1' />
                      </Link>
@@ -127,7 +138,9 @@ function ProfilePage() {
       }
    }
 
-   const styles = useStyles()
+   const handleAddFriendRequest = async () => {
+      await apis.addFriendRequest(userProfile._id, curUser._id)
+   }
 
    return (
       <div>
@@ -138,28 +151,29 @@ function ProfilePage() {
                   height='300px'
                   className={styles.bgProfile}
                   component='img'
-                  image='https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+                  image={userProfile?.background}
                />
                <Box className={styles.avatarWrap}>
-                  <Avatar
-                     className={styles.avatar}
-                     alt='avt'
-                     src='https://i.pinimg.com/originals/00/a4/10/00a410ce9c3a23c388cbd6c629cc3053.jpg'
-                  />
+                  <Avatar className={styles.avatar} alt='avt' src={userProfile?.avatar} />
                </Box>
                <Typography variant='h4' className={styles.name}>
-                  Nguyen Anh Khoa
+                  {userProfile?.username}
                </Typography>
 
                <Box className={styles.groupActionBtn}>
-                  <Button className={styles.addFriendBtn} variant='contained'>
-                     Add Friend
+                  <Button
+                     className={styles.addFriendBtn}
+                     variant='contained'
+                     onClick={handleAddFriendRequest}
+                     disabled={userProfile?.friends.includes(curUser._id)}
+                  >
+                     {!userProfile?.friends.includes(curUser._id) ? 'Add friend' : 'Friend'}
                   </Button>
                   <Button className={styles.actionBtn} variant='contained'>
                      Messenger
                   </Button>
                   <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
-                     <MoreIcon />
+                     <MoreIcon style={{ color: '#fff' }} />
                   </Button>
 
                   <Menu
@@ -226,4 +240,13 @@ function ProfilePage() {
    )
 }
 
-export default ProfilePage
+const mapState = state => ({
+   curUser: state.user.curUser,
+   userProfile: state.user.userProfile,
+})
+
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(ProfilePage)

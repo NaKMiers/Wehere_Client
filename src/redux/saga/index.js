@@ -20,6 +20,13 @@ function* login({ payload }) {
    yield put(actions.hideBackdrop())
 }
 
+function* getUser({ userId }) {
+   const res = yield call(apis.getUser, userId)
+   if (res.status === 200) {
+      yield put(actions.getUser(res.data))
+   }
+}
+
 function* changeTheme({ payload }) {
    yield put(actions.showBackdrop())
    yield delay(350)
@@ -69,6 +76,7 @@ function* editTask({ payload }) {
 function* rootSaga() {
    yield takeLatest(types.CREATE_NEW_USER, createUserAndLogin)
    yield takeLatest(types.LOGIN_REQUEST, login)
+   yield takeLatest(types.GET_USER_REQUEST, getUser)
    yield takeLatest(types.CHANGE_THEME_REQUEST, changeTheme)
    yield takeLatest(types.GET_ALL_TASK_REQUEST, getAllTaskRequest)
    yield takeLatest(types.ADD_NEW_TASK_REQUEST, addTaskAndUpdateTodoList)

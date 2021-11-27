@@ -92,10 +92,10 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    }
 
    useEffect(() => {
-      if (curUser.todolist) {
-         actionCreators.getAllTaskRequest(curUser.todolist)
+      if (curUser?.todolist) {
+         actionCreators.getAllTaskRequest(curUser?.todolist)
       }
-   }, [curUser.todolist, actionCreators])
+   }, [curUser?.todolist, actionCreators])
 
    useEffect(() => {
       setLeft(() => todoList.filter(task => task.status === 'ready'))

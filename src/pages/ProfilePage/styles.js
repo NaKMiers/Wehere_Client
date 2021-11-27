@@ -43,7 +43,7 @@ export default makeStyles(theme => ({
    },
    actionBtn: {
       background: theme.palette.secondary.dark,
-      color: theme.palette.primary.text,
+      color: '#fff',
       fontWeight: 'bold',
       margin: '0 4px',
       padding: '6px 8px',

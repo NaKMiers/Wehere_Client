@@ -1,14 +1,13 @@
 import { Button, TextField, Typography } from '@material-ui/core'
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../actions'
 import apis from '../../apis'
 import useStyles from './styles'
-import { useHistory } from 'react-router-dom'
 
-function LoginPage({ actionCreators }) {
+function LoginPage({ curUser, actionCreators }) {
    const [usernameOrEmail, setUsernameOrEmail] = useState('')
    const [password, setPassword] = useState('')
 
@@ -24,6 +23,12 @@ function LoginPage({ actionCreators }) {
       await handleValidate('password')
       await handleValidate('submit')
    }
+
+   useLayoutEffect(() => {
+      if (curUser) {
+         history.push('/')
+      }
+   }, [curUser, history])
 
    const handleValidate = async type => {
       if (type === 'usernameOrEmail' && usernameOrEmail.length === 0) {
@@ -99,8 +104,12 @@ function LoginPage({ actionCreators }) {
    )
 }
 
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+
 const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(LoginPage)
+export default connect(mapState, mapDispatch)(LoginPage)

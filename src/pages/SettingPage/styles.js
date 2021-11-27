@@ -27,7 +27,6 @@ export default makeStyles(theme => ({
       fontSize: 10,
       textTransform: 'capitalize',
       fontWeight: '500',
-      textShadow: '0px 0px 2px #333',
    },
 
    listBlockFrItem: {

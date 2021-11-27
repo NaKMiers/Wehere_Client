@@ -20,6 +20,8 @@ import MusicPage from '../pages/MusicPage'
 import EventPage from '../pages/EventPage'
 import MessengerPage from '../pages/MessengerPage'
 import RestorePasswordPage from '../pages/RestorePasswordPage'
+import NotFoundPage from '../pages/NotFoundPage'
+import AuthLogin from '../commons/AuthLogin'
 
 const routes = [
    {
@@ -127,11 +129,31 @@ const routes = [
       exact: false,
       component: () => <RestorePasswordPage />,
    },
+   {
+      path: '/',
+      exact: false,
+      component: () => <NotFoundPage />,
+   },
 ]
 
 const renderRoutes = routes =>
-   routes.map(route => (
-      <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />
-   ))
+   routes.map(route => {
+      if (['/login', '/register', '/restore-password'].includes(route.path)) {
+         return (
+            <Route
+               key={route.path}
+               exact={route.exact}
+               path={route.path}
+               component={route.component}
+            />
+         )
+      } else {
+         return (
+            <AuthLogin key={route.path} exact={route.exact} path={route.path}>
+               {route.component()}
+            </AuthLogin>
+         )
+      }
+   })
 
 export default renderRoutes(routes)

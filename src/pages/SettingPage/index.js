@@ -64,7 +64,11 @@ function SettingPage({ curUser, actionCreators }) {
                         <Button
                            onClick={() => handleChangeTheme(i)}
                            className={styles.themeBtn}
-                           style={{ background: item.gradient, color: item.primaryText }}
+                           style={{
+                              background: item.gradient,
+                              color: item.primaryText,
+                              textShadow: `0px 0px 2px ${item.secondaryText}`,
+                           }}
                         >
                            {item.title}
                         </Button>

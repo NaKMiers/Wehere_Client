@@ -5,7 +5,7 @@ export default makeStyles(theme => ({
       '.MuiToolbar-root': {
          justifyContent: 'space-between',
          minHeight: 0,
-         padding: '0px 8px 8px 8px',
+         padding: '0px 9px 8px 1px',
          width: '183.3333333%',
          transition: 'margin 0.5s ease-in-out',
          '@media (min-width: 780px)': {
@@ -30,7 +30,7 @@ export default makeStyles(theme => ({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '6px 0px',
+      padding: 6,
       '@media (min-width: 780px)': {
          display: 'none',
       },
@@ -38,7 +38,7 @@ export default makeStyles(theme => ({
    leftHeader: {
       width: '27.5%',
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
       alignItems: 'center',
       padding: '6px 0px',
       '@media (max-width: 780px)': {
@@ -59,8 +59,14 @@ export default makeStyles(theme => ({
       cursor: 'pointer',
       marginLeft: 8,
    },
+   username: {
+      color: theme.palette.primary.text,
+      marginLeft: '2%',
+      marginRight: '1%',
+   },
 
    wehereLogo: {
+      color: theme.palette.primary.text,
       fontSize: 32,
       fontWeight: 'bold',
       lineHeight: '34px',
@@ -104,5 +110,44 @@ export default makeStyles(theme => ({
 
    selected: {
       transform: 'scale(1.3)',
+   },
+
+   menu: {
+      '& .MuiPaper-root': {
+         background: theme.palette.primary.gradient,
+         color: theme.palette.primary.text,
+      },
+   },
+   menuItem: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '6px 12px',
+      minHeight: 0,
+   },
+
+   menuBtnWrap: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+   },
+
+   usernameItem: {
+      marginLeft: 4,
+      marginRight: 36,
+   },
+
+   menuAcceptBtn: {
+      padding: 6,
+      background: theme.palette.success.main,
+      color: theme.palette.primary.text,
+      marginRight: 2,
+   },
+
+   menuDenyBtn: {
+      padding: 6,
+      background: theme.palette.danger.main,
+      color: theme.palette.primary.text,
+      marginLeft: 2,
    },
 }))

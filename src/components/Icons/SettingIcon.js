@@ -1,14 +1,15 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
 
-function SettingIcon({ mutiple, style }) {
+function SettingIcon({ mutiple, style, color }) {
    const styles = makeStyles(theme => ({
       icon: {
          fontSize: 20,
          marginTop: 1,
          marginLeft: 1,
-         cursor: 'pointer'
-      }
+         cursor: 'pointer',
+         color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text,
+      },
    }))()
 
    return mutiple ? (

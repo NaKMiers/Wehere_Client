@@ -15,11 +15,13 @@ export default makeStyles(theme => ({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: theme.palette.secondary.main,
+      background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
       borderBottomLeftRadius: 8,
       borderBottomRightRadius: 8,
-      padding: '0px 12.5px',
+      padding: '2px 12.5px',
+      borderTop: `3px solid ${theme.border.main}`,
+      boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0)',
    },
    moreBtn: {
       cursor: 'pointer',
@@ -43,14 +45,12 @@ export default makeStyles(theme => ({
       color: theme.palette.success.main,
       marginTop: -4,
    },
-   avtBtn: {
-      borderRadius: '50%',
-   },
    avtLink: {
       position: 'relative',
    },
    avt: {
       width: 42,
+      borderRadius: '50%',
       height: 42,
    },
    badge: {
@@ -79,10 +79,12 @@ export default makeStyles(theme => ({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      background: theme.palette.secondary.main,
+      background: theme.palette.primary.gradient,
       borderTopLeftRadius: 8,
       borderTopRightRadius: 8,
       padding: '0px 12px',
+      borderBottom: `3px solid ${theme.border.main}`,
+      boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0)',
    },
    inputTextField: {
       flexGrow: '1',

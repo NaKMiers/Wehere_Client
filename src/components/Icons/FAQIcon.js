@@ -1,16 +1,18 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
 
-function FriendIcon({ style, color }) {
+function FAQIcon({ style, color }) {
    const styles = makeStyles(theme => ({
       icon: {
-         fontSize: 20,
+         fontSize: 26,
+         marginLeft: 1,
+         marginBottom: 1,
          cursor: 'pointer',
          color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text,
       },
    }))()
 
-   return <i className={clsx(styles.icon, 'fad fa-users')} style={style} />
+   return <i className={clsx(styles.icon, 'fad fa-gavel')} style={style} />
 }
 
-export default FriendIcon
+export default FAQIcon

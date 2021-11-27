@@ -10,17 +10,17 @@ const themeList = [
    {
       gradient: 'linear-gradient(45deg, #ee9ca7, #ffdde1)',
       primaryColor: '#ee9ca7',
-      primaryText: '#fff',
+      primaryText: '#333',
       secondaryColor: '#ffdde1',
-      secondaryText: '#333',
+      secondaryText: '#fff',
       title: 'Piggy Pink',
    },
    {
       gradient: 'linear-gradient(45deg, #c6ffdd, #fbd786, #f7797d)',
       primaryColor: '#c6ffdd',
-      primaryText: '#fff',
+      primaryText: '#333',
       secondaryColor: '#f7797d',
-      secondaryText: '#333',
+      secondaryText: '#fff',
       title: 'MegaTron',
    },
    {

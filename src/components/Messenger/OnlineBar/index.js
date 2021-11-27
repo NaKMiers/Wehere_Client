@@ -1,30 +1,42 @@
 import { Avatar, Badge, Button, ButtonGroup, List } from '@material-ui/core'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
+import apis from '../../../apis'
 import ExpandIcon from '../../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 
-function OnlineBar() {
+function OnlineBar({ curUser, actionCreators }) {
+   const [onlineFriends, setOnlineFriends] = useState([])
+
+   useEffect(() => {
+      if (curUser) {
+         const getFriends = async () => {
+            try {
+               const res = await apis.getFriends(curUser.friends)
+               setOnlineFriends(res.data.filter(f => f.online))
+            } catch (err) {
+               console.log(err)
+            }
+         }
+         getFriends()
+      }
+   }, [curUser])
+
    const styles = useStyles()
 
-   const renderUserOnline = () => {
-      let result = []
-      for (let i = 0; i < 10; i++) {
-         result.push(
-            <Button key={i} className={styles.avatarBtn}>
-               <Link to={`/messenger/user${i + 1}`} className={styles.link}>
-                  <Avatar className={styles.avatar} src='https://bom.to/azrZKc' alt='avt' />
-                  <Badge
-                     variant='dot'
-                     color='primary'
-                     className={styles.badge}
-                     invisible={false}
-                  />
-               </Link>
-            </Button>
-         )
-      }
-      return result
-   }
+   const renderUserOnline = () =>
+      onlineFriends.map(onlF => (
+         <Button key={onlF.username} className={styles.avatarBtn}>
+            <Link to={`/messenger/${onlF._id}`} className={styles.link}>
+               <Avatar className={styles.avatar} src={onlF.avatar} alt='avt' />
+               <Badge variant='dot' color='primary' className={styles.badge} />
+            </Link>
+         </Button>
+      ))
 
    return (
       <List className={styles.onlineBar}>
@@ -40,4 +52,11 @@ function OnlineBar() {
    )
 }
 
-export default OnlineBar
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+const mapDispath = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispath)(OnlineBar)

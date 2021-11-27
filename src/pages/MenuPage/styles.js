@@ -13,6 +13,7 @@ export default makeStyles(theme => ({
    link: {
       display: 'flex',
       textDecoration: 'none',
+      color: theme.palette.secondary.text,
       width: '100%',
       padding: 8,
    },

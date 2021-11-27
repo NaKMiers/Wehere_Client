@@ -7,6 +7,11 @@ class Actions {
    loginRequest = payload => ({ type: types.LOGIN_REQUEST, payload })
    login = payload => ({ type: types.LOGIN, payload })
 
+   logOut = () => ({ type: types.LOG_OUT })
+
+   getUserRequest = userId => ({ type: types.GET_USER_REQUEST, userId })
+   getUser = payload => ({ type: types.GET_USER, payload })
+
    changeThemeRequest = payload => ({ type: types.CHANGE_THEME_REQUEST, payload })
    changeTheme = payload => ({ type: types.CHANGE_THEME, payload })
 
@@ -22,6 +27,8 @@ class Actions {
    deleteTask = taskId => ({ type: types.DELETE_TASK, taskId })
    editTaskRequest = payload => ({ type: types.EDIT_TASK_REQUEST, payload })
    editTask = payload => ({ type: types.EDIT_TASK, payload })
+
+   setCurConversation = payload => ({ type: types.SET_CUR_CONVERSATION, payload })
 
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })
