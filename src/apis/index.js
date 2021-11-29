@@ -25,15 +25,19 @@ class Apis {
 
    addFriendRequest = async (userId, curUserId) =>
       axios.put(`${API}/users/add-friend/request/${userId}`, { curUserId })
-   addFriendResponse = async (userId, curUserId, value) =>
-      axios.put(`${API}/users/add-friend/response/${userId}`, { curUserId, value })
+   addFriendResponse = async (userId, curUserId, value, notifyId) =>
+      axios.put(`${API}/users/add-friend/response/${userId}`, { curUserId, value, notifyId })
 
-   removeNotify = async (userId, curUserId, value) =>
-      axios.put(`${API}/users/remove-notify/${userId}`, { curUserId, value })
+   removeNotify = async (userRequestId, curUserId, curNotify) =>
+      axios.put(`${API}/users/remove-notify`, { userRequestId, curUserId, curNotify })
 
    getFriends = async friends => axios.post(`${API}/users/get-friends`, { friends })
 
    getConversation = async userId => axios.get(`${API}/conversations/${userId}`)
+
+   getNotifications = async notificationList =>
+      axios.post(`${API}/notifications`, { notificationList })
+   seenNotifications = async userId => axios.put(`${API}/users/seen-notifications/${userId}`)
 }
 
 export default new Apis()

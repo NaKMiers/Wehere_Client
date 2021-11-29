@@ -9,21 +9,30 @@ function useReducer(state = initState, action) {
    const { payload } = action
    switch (action.type) {
       case types.LOGIN:
-         Cookies.set('user', JSON.stringify(payload)) // payload from server || from cookies(client)
-         return { ...state, curUser: JSON.parse(Cookies.get('user')) }
+         Cookies.set('userId', JSON.stringify(payload._id))
+         Cookies.set('theme', JSON.stringify(payload.setting.theme))
+         return { ...state, curUser: payload }
 
       case types.GET_USER:
          return { ...state, userProfile: payload }
 
       case types.CHANGE_THEME:
-         Cookies.set('user', JSON.stringify(payload)) // payload from servser
-         return { ...state, curUser: JSON.parse(Cookies.get('user')) }
+         console.log('CHANGE_THEME: ', action.theme)
+         Cookies.set('theme', JSON.stringify(action.theme))
+         return {
+            ...state,
+            curUser: {
+               ...state.curUser,
+               setting: { ...state.curUser.setting, theme: action.theme },
+            },
+         }
 
       case types.UPDATE_TODOLIST:
          return { ...state, curUser: payload }
 
       case types.LOG_OUT:
-         Cookies.remove('user')
+         Cookies.remove('userId')
+         Cookies.remove('theme')
          return { ...state, userProfile: null, curUser: null }
 
       default:

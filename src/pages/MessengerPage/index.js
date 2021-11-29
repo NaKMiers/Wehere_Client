@@ -33,7 +33,7 @@ function MessengerPage({ curUser, actionCreators }) {
          <Switch>
             <Route exact path='/messenger'>
                <div style={{ maxWidth: 960, margin: 'auto' }}>
-                  <OnlineBar />
+                  <OnlineBar conversations={conversations} />
                   <FriendList conversations={conversations} />
                </div>
             </Route>

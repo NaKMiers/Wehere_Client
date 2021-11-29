@@ -1,26 +1,51 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 import Cookies from 'js-cookie'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from './actions'
+import apis from './apis'
 import Backdrop from './commons/Backdrop'
-import theme, { themeDefault } from './commons/theme'
+import theme from './commons/theme'
 import routes from './routes'
 
 function App({ curUser, actionCreators }) {
-   useLayoutEffect(() => {
-      const user = Cookies.get('user')
-      if (user) {
-         actionCreators.login(JSON.parse(user))
+   console.log('App')
+   useEffect(() => {
+      const getUser = async () => {
+         const userId = Cookies.get('userId')
+         if (userId) {
+            try {
+               const res = await apis.getUser(JSON.parse(userId))
+               actionCreators.login(res.data)
+               actionCreators.seenNotifications(res.data.seenNotifications)
+            } catch (err) {
+               throw new Error(err)
+            }
+         }
       }
-   }, [actionCreators])
+      getUser()
+   }, [actionCreators, curUser?._id])
+
+   useEffect(() => {
+      const getNotifications = async () => {
+         if (curUser?.notifications.length > 0) {
+            try {
+               const res = await apis.getNotifications(curUser.notifications)
+               actionCreators.getNotifications(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getNotifications()
+   }, [curUser?.notifications, actionCreators])
 
    return (
       <Router>
-         <ThemeProvider theme={theme[curUser?.setting?.theme] || themeDefault}>
+         <ThemeProvider theme={theme[Cookies.get('theme') ? JSON.parse(Cookies.get('theme')) : 0]}>
             <CssBaseline />
             <Switch>{routes}</Switch>
             <Backdrop />

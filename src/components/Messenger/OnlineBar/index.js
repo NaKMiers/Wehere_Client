@@ -9,22 +9,9 @@ import apis from '../../../apis'
 import ExpandIcon from '../../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 
-function OnlineBar({ curUser, actionCreators }) {
+function OnlineBar({ curUser, actionCreators, conversations }) {
    const [onlineFriends, setOnlineFriends] = useState([])
-
-   useEffect(() => {
-      if (curUser) {
-         const getFriends = async () => {
-            try {
-               const res = await apis.getFriends(curUser.friends)
-               setOnlineFriends(res.data.filter(f => f.online))
-            } catch (err) {
-               console.log(err)
-            }
-         }
-         getFriends()
-      }
-   }, [curUser])
+   console.log(conversations)
 
    const styles = useStyles()
 

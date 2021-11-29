@@ -24,6 +24,8 @@ import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import actions from '../../actions'
 import apis from '../../apis'
 import DiaryIcon from '../Icons/DiaryIcon'
 import ExpandIcon from '../Icons/ExpandIcon'
@@ -35,7 +37,7 @@ import useStyles from './styles'
 
 const slide2matches = ['/messenger', '/musics', '/events', '/todolist', '/diaries']
 
-function Header({ curUser }) {
+function Header({ curUser, notifications, isSeenNotifications, actionCreators }) {
    const currentUrl = useLocation().pathname
    const initSlide = () => {
       if (
@@ -49,18 +51,15 @@ function Header({ curUser }) {
       }
       return 1
    }
-
    const [slideHeader, setSlideHeader] = useState(initSlide)
    const [isShowSearchHeader, setShowSearchHeader] = useState(false)
    const toolbarRef = useRef()
    const styles = useStyles()
-
    useLayoutEffect(() => {
       slideHeader === 2
          ? toolbarRef.current.classList.add(css.slide2)
          : toolbarRef.current.classList.remove(css.slide2)
    })
-
    const handleChangeSlide = () => {
       setSlideHeader(slideHeader === 1 ? 2 : 1)
    }
@@ -72,28 +71,30 @@ function Header({ curUser }) {
    }
    const handleClose = () => {
       setAnchorEl(null)
+      apis.seenNotifications(curUser._id)
+      actionCreators.seenNotifications(true)
    }
+
    const renderMenuItem = () =>
-      curUser?.notifications.map((n, i) => {
+      notifications.map((n, i) => {
          switch (n.type) {
             case 'ADD_FRIEND_REQUEST':
                return (
                   <MenuItem key={i} onClick={handleClose} className={styles.menuItem}>
-                     <Avatar src={n.userRequest.avatar} alt='avt' />
-                     <Typography className={styles.usernameItem}>
-                        {n.userRequest.username}
-                     </Typography>
+                     <Avatar src={n.senderAvt} alt='avt' />
+                     <Typography className={styles.usernameItem}>{n.senderUsername}</Typography>
                      <Box className={styles.menuBtnWrap}>
                         <IconButton
                            variant='contained'
                            className={styles.menuAcceptBtn}
                            onClick={() =>
-                              handleResponseNotification(
-                                 'ADD_FRIEND_REQUEST',
-                                 n.userRequest._id,
-                                 curUser._id,
-                                 true
-                              )
+                              handleResponseNotification({
+                                 type: 'ADD_FRIEND_REQUEST',
+                                 senderId: n.senderId,
+                                 curUserId: curUser._id,
+                                 value: true,
+                                 curNotify: n._id,
+                              })
                            }
                         >
                            <DoneIcon />
@@ -102,12 +103,13 @@ function Header({ curUser }) {
                            variant='contained'
                            className={styles.menuDenyBtn}
                            onClick={() =>
-                              handleResponseNotification(
-                                 'ADD_FRIEND_REQUEST',
-                                 n.userRequest._id,
-                                 curUser._id,
-                                 false
-                              )
+                              handleResponseNotification({
+                                 type: 'ADD_FRIEND_REQUEST',
+                                 senderId: n.senderId,
+                                 curUserId: curUser._id,
+                                 value: false,
+                                 curNotify: n._id,
+                              })
                            }
                         >
                            <ClearIcon />
@@ -116,22 +118,23 @@ function Header({ curUser }) {
                   </MenuItem>
                )
 
-            case 'ADD_FRIEND_ACCEPT':
+            case 'ADD_FRIEND_RESPONSE':
                return (
                   <MenuItem key={i} onClick={handleClose} className={styles.menuItem}>
-                     <Avatar src={n.userAcceptRequest.avatar} alt='avt' />
+                     <Avatar src={n.senderAvt} alt='avt' />
                      <Typography className={styles.usernameItem}>
-                        {n.userAcceptRequest.username} has accepted your friend request.
+                        {n.senderUsername} has accepted your friend request.
                      </Typography>
                      <IconButton
                         variant='contained'
                         className={styles.menuDenyBtn}
                         onClick={() =>
-                           handleResponseNotification(
-                              'ADD_FRIEND_ACCEPT',
-                              n.userRequest._id,
-                              curUser._id
-                           )
+                           handleResponseNotification({
+                              type: 'ADD_FRIEND_RESPONSE',
+                              senderId: n.senderId,
+                              curUserId: curUser._id,
+                              curNotify: n._id,
+                           })
                         }
                      >
                         <ClearIcon />
@@ -143,15 +146,17 @@ function Header({ curUser }) {
                return undefined
          }
       })
-   const handleResponseNotification = async (type, userRequestId, curUserId, value) => {
+   const handleResponseNotification = async ({ type, senderId, curUserId, value, curNotify }) => {
       switch (type) {
          case 'ADD_FRIEND_REQUEST':
             console.log('ADD_FRIEND_REQUEST')
-            await apis.addFriendResponse(userRequestId, curUserId, value)
+            actionCreators.removeNotify(curNotify)
+            await apis.addFriendResponse(senderId, curUserId, value, curNotify)
             break
          case 'ADD_FRIEND_ACCEPT': // remove notify
             console.log('ADD_FRIEND_ACCEPT')
-            await apis.removeNotify(userRequestId, curUserId)
+            actionCreators.removeNotify(curNotify)
+            await apis.removeNotify(senderId, curUserId, curNotify)
             break
          default:
             break
@@ -178,6 +183,7 @@ function Header({ curUser }) {
                <SearchIcon style={{ fontSize: 20 }} />
             </Button>
          </Box>
+
          <Box className={styles.navigation}>
             <Box className={styles.topHeader}>
                {!isShowSearchHeader && (
@@ -199,12 +205,11 @@ function Header({ curUser }) {
                   >
                      <SearchIcon style={{ fontSize: 20 }} />
                   </Button>
-                  <Button className={styles.topHeaderBtn}>
+                  <Button className={styles.topHeaderBtn} onClick={handleOpenMenuNotification}>
                      <Badge
-                        badgeContent={3}
+                        badgeContent={notifications.length}
                         color='primary'
-                        invisible={false}
-                        onClick={handleOpenMenuNotification}
+                        invisible={isSeenNotifications || !notifications.length}
                      >
                         <NotificationIcon style={{ fontSize: 20 }} />
                      </Badge>
@@ -309,25 +314,29 @@ function Header({ curUser }) {
          </Box>
 
          <Box className={styles.rightHeader}>
-            <Link to='/menu'>
-               <Avatar className={styles.avatar} alt='Pi Pi' src={curUser?.avatar} />
-            </Link>
-            <Typography className={styles.username}>{curUser?.username}</Typography>
-            <Button className={styles.topHeaderBtn}>
-               <Badge
-                  badgeContent={curUser?.notifications.length}
-                  color='primary'
-                  onClick={handleOpenMenuNotification}
-               >
-                  <NotificationIcon style={{ fontSize: 20 }} />
-               </Badge>
-            </Button>
+            {curUser && (
+               <>
+                  <Link to='/menu'>
+                     <Avatar className={styles.avatar} alt='Pi Pi' src={curUser?.avatar} />
+                  </Link>
+                  <Typography className={styles.username}>{curUser?.username}</Typography>
+                  <Button className={styles.topHeaderBtn} onClick={handleOpenMenuNotification}>
+                     <Badge
+                        badgeContent={notifications.length}
+                        color='primary'
+                        invisible={isSeenNotifications || !notifications.length}
+                     >
+                        <NotificationIcon style={{ fontSize: 20 }} />
+                     </Badge>
+                  </Button>
+               </>
+            )}
          </Box>
 
          <Menu
             id='basic-menu'
             anchorEl={anchorEl}
-            open={openMenuNotification && curUser?.notifications.length > 0}
+            open={openMenuNotification && notifications.length > 0}
             onClose={handleClose}
             className={styles.menu}
          >
@@ -339,6 +348,12 @@ function Header({ curUser }) {
 
 const mapState = state => ({
    curUser: state.user.curUser,
+   notifications: state.notification.notificationList,
+   isSeenNotifications: state.notification.seenNotifications,
 })
 
-export default connect(mapState)(Header)
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(Header)

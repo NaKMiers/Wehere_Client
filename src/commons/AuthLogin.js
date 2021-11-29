@@ -6,7 +6,7 @@ function AuthLogin({ children, ...rest }) {
       <Route
          {...rest}
          render={({ location }) =>
-            !!Cookies.get('user') ? (
+            !!Cookies.get('userId') ? (
                children
             ) : (
                <Redirect

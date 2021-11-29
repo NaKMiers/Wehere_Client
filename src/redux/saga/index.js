@@ -32,7 +32,7 @@ function* changeTheme({ payload }) {
    yield delay(350)
    const res = yield call(apis.changeTheme, payload.userId, payload.themeIndex)
    if (res.status === 200) {
-      yield put(actions.changeTheme(res.data))
+      yield put(actions.changeTheme(res.data.setting.theme))
    }
    yield put(actions.hideBackdrop())
 }

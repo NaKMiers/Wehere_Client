@@ -19,7 +19,7 @@ import CakeIcon from '@material-ui/icons/Cake'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import HomeIcon from '@material-ui/icons/Home'
 import { styled } from '@material-ui/styles'
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -39,6 +39,7 @@ const Demo = styled('div')(({ theme }) => ({
 }))
 
 function ProfilePage({ curUser, userProfile, actionCreators }) {
+   const [isAllowAddFriends, setIsAllowAddFriends] = useState(true)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -52,10 +53,22 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    const styles = useStyles()
    const localtion = useLocation()
 
-   useLayoutEffect(() => {
+   useEffect(() => {
       const userId = localtion.pathname.split('/')[2]
       actionCreators.getUserRequest(userId)
-   }, [actionCreators, localtion.pathname])
+      setIsAllowAddFriends(
+         () =>
+            curUser?.friends.includes(userProfile?._id) ||
+            curUser?.addFriendRequestList.includes(userProfile?._id)
+      )
+   }, [
+      actionCreators,
+      localtion.pathname,
+      curUser?.friends,
+      curUser?.addFriendRequestList,
+      curUser?._id,
+      userProfile?._id,
+   ])
 
    const renderTabs = () => {
       if (currentTab === 'info') {
@@ -139,6 +152,7 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    }
 
    const handleAddFriendRequest = async () => {
+      setIsAllowAddFriends(true)
       await apis.addFriendRequest(userProfile._id, curUser._id)
    }
 
@@ -160,40 +174,45 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                   {userProfile?.username}
                </Typography>
 
-               <Box className={styles.groupActionBtn}>
-                  <Button
-                     className={styles.addFriendBtn}
-                     variant='contained'
-                     onClick={handleAddFriendRequest}
-                     disabled={userProfile?.friends.includes(curUser._id)}
-                  >
-                     {!userProfile?.friends.includes(curUser._id) ? 'Add friend' : 'Friend'}
-                  </Button>
-                  <Button className={styles.actionBtn} variant='contained'>
-                     Messenger
-                  </Button>
-                  <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
-                     <MoreIcon style={{ color: '#fff' }} />
-                  </Button>
+               {curUser?._id !== userProfile?._id && (
+                  <Box className={styles.groupActionBtn}>
+                     <Button
+                        className={styles.addFriendBtn}
+                        variant='contained'
+                        onClick={handleAddFriendRequest}
+                        disabled={isAllowAddFriends}
+                     >
+                        {!userProfile?.friends.includes(curUser?._id) ? 'Add friend' : 'Friend'}
+                     </Button>
+                     <Button className={styles.actionBtn} variant='contained'>
+                        Messenger
+                     </Button>
+                     <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
+                        <MoreIcon style={{ color: '#fff' }} />
+                     </Button>
 
-                  <Menu
-                     className={styles.menuAction}
-                     id='basic-menu'
-                     anchorEl={anchorEl}
-                     open={open}
-                     onClose={handleClose}
-                  >
-                     <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                        Unfriend <HideUserIcon />
-                     </MenuItem>
-                     <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                        Block <BlockIcon style={{ marginLeft: 8 }} />
-                     </MenuItem>
-                  </Menu>
-               </Box>
+                     <Menu
+                        className={styles.menuAction}
+                        id='basic-menu'
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                     >
+                        <MenuItem className={styles.menuActionItem} onClick={handleClose}>
+                           Unfriend <HideUserIcon />
+                        </MenuItem>
+                        <MenuItem className={styles.menuActionItem} onClick={handleClose}>
+                           Block <BlockIcon style={{ marginLeft: 8 }} />
+                        </MenuItem>
+                     </Menu>
+                  </Box>
+               )}
                <Divider style={{ marginTop: 10 }} />
             </Box>
-            <Box className={styles.bottomProfile}>
+            <Box
+               className={styles.bottomProfile}
+               style={{ marginTop: curUser?._id === userProfile?._id && '4%' }}
+            >
                <Box className={styles.tabsList}>
                   <ButtonGroup
                      variant='text'
