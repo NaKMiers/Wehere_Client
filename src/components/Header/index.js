@@ -69,9 +69,9 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
    const handleOpenMenuNotification = event => {
       setAnchorEl(event.currentTarget)
    }
-   const handleClose = () => {
+   const handleClose = async () => {
       setAnchorEl(null)
-      apis.seenNotifications(curUser._id)
+      await apis.seenNotifications()
       actionCreators.seenNotifications(true)
    }
 
@@ -151,13 +151,15 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
          case 'ADD_FRIEND_REQUEST':
             console.log('ADD_FRIEND_REQUEST')
             actionCreators.removeNotify(curNotify)
-            await apis.addFriendResponse(senderId, curUserId, value, curNotify)
+            await apis.addFriendResponse(senderId, value, curNotify)
             break
+
          case 'ADD_FRIEND_ACCEPT': // remove notify
             console.log('ADD_FRIEND_ACCEPT')
             actionCreators.removeNotify(curNotify)
             await apis.removeNotify(senderId, curUserId, curNotify)
             break
+
          default:
             break
       }

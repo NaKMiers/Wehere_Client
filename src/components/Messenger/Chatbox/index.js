@@ -14,7 +14,7 @@ import clsx from 'clsx'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import apis from '../../../apis'
 import SettingIcon from '../../../components/Icons/SettingIcon'
 import MoreIcon from '../../Icons/MoreIcon'
@@ -36,7 +36,7 @@ function Chatbox({ curUser }) {
    const [isOpenEmojiTable, setOpenEmojiTable] = useState(false)
    const [isOpenModalSettingChat, setOpenModalSettingChat] = useState(false)
    const [curFriend, setCurFriend] = useState({})
-   const [curCvs, setCurCvs] = useState(() => {
+   const [curCvs] = useState(() => {
       if (Cookies.get('curCvs')) {
          return JSON.parse(Cookies.get('curCvs'))
       }
@@ -142,7 +142,7 @@ function Chatbox({ curUser }) {
 
                <Box
                   className={styles.chatContent}
-                  style={{ height: `calc(${isOpenEmojiTable ? '79vh' : '104vh'} - 231px)` }}
+                  style={{ height: `calc(${isOpenEmojiTable ? '79vh' : '104vh'} - 276px)` }}
                >
                   <Message curUser />
                   <Message />
@@ -179,9 +179,7 @@ function Chatbox({ curUser }) {
 
                <SettingChat open={isOpenModalSettingChat} handleClose={handleClose} />
             </>
-         ) : (
-            <Redirect to='/messenger' />
-         )}
+         ) : null}
       </div>
    )
 }

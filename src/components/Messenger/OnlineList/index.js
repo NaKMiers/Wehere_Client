@@ -1,25 +1,29 @@
 import { List } from '@material-ui/core'
 import { ListSubheader } from '@mui/material'
-import FriendListItem from '../FriendListItem'
+import { connect } from 'react-redux'
+import ConversationItem from '../ConversationItem'
 
-function OnlineList() {
+function OnlineList({ conversations }) {
+   const renderOnlineFriend = () => {
+      return conversations.map(c => <ConversationItem key={c._id} conversation={c} atOnlineList />)
+   }
+
    return (
-      <>
-         <List
-            subheader={
-               <ListSubheader component='div' id='nested-list-subheader'>
-                  Online friends
-               </ListSubheader>
-            }
-         >
-            <FriendListItem onlineList={true} />
-            <FriendListItem onlineList={true} />
-            <FriendListItem onlineList={true} />
-            <FriendListItem onlineList={true} />
-            <FriendListItem onlineList={true} />
-         </List>
-      </>
+      <List
+         style={{ padding: '8px 16px' }}
+         subheader={
+            <ListSubheader component='div' id='nested-list-subheader'>
+               Online friends
+            </ListSubheader>
+         }
+      >
+         {renderOnlineFriend()}
+      </List>
    )
 }
 
-export default OnlineList
+const mapState = state => ({
+   conversations: state.conversation.conversationList,
+})
+
+export default connect(mapState)(OnlineList)

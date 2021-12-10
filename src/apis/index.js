@@ -10,23 +10,20 @@ class Apis {
 
    getUser = async userId => axios.get(`${API}/users/${userId}`)
 
-   changeTheme = async (userId, themeIndex) =>
-      axios.put(`${API}/users/change-theme/${userId}/${themeIndex}`)
+   changeTheme = async themeIndex => axios.put(`${API}/users/change-theme/${themeIndex}`)
 
    getAllTaskRequest = async taskList => axios.post(`${API}/todo-list`, { taskList })
    addNewTask = async data => {
       console.log('addNewTask')
       return axios.post(`${API}/todo-list/add-task`, data)
    }
-   updateTodoList = async (userId, taskId) =>
-      axios.put(`${API}/users/update-todo-list/${userId}/${taskId}`)
+   updateTodoList = async taskId => axios.put(`${API}/users/update-todo-list/${taskId}`)
    deleteTask = async taskId => axios.delete(`${API}/todo-list/delete-task/${taskId}`)
    editTask = async data => axios.put(`${API}/todo-list/edit-task`, { data })
 
-   addFriendRequest = async (userId, curUserId) =>
-      axios.put(`${API}/users/add-friend/request/${userId}`, { curUserId })
-   addFriendResponse = async (userId, curUserId, value, notifyId) =>
-      axios.put(`${API}/users/add-friend/response/${userId}`, { curUserId, value, notifyId })
+   addFriendRequest = async userId => axios.put(`${API}/users/add-friend/request/${userId}`)
+   addFriendResponse = async (userId, value, notifyId) =>
+      axios.put(`${API}/users/add-friend/response/${userId}`, { value, notifyId })
 
    removeNotify = async (userRequestId, curUserId, curNotify) =>
       axios.put(`${API}/users/remove-notify`, { userRequestId, curUserId, curNotify })
@@ -37,7 +34,7 @@ class Apis {
 
    getNotifications = async notificationList =>
       axios.post(`${API}/notifications`, { notificationList })
-   seenNotifications = async userId => axios.put(`${API}/users/seen-notifications/${userId}`)
+   seenNotifications = async () => axios.put(`${API}/users/seen-notifications`)
 }
 
 export default new Apis()

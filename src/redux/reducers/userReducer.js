@@ -17,7 +17,6 @@ function useReducer(state = initState, action) {
          return { ...state, userProfile: payload }
 
       case types.CHANGE_THEME:
-         console.log('CHANGE_THEME: ', action.theme)
          Cookies.set('theme', JSON.stringify(action.theme))
          return {
             ...state,
@@ -33,6 +32,7 @@ function useReducer(state = initState, action) {
       case types.LOG_OUT:
          Cookies.remove('userId')
          Cookies.remove('theme')
+         localStorage.removeItem('user')
          return { ...state, userProfile: null, curUser: null }
 
       default:

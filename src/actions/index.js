@@ -18,9 +18,8 @@ class Actions {
 
    getAllTaskRequest = payload => ({ type: types.GET_ALL_TASK_REQUEST, payload })
    getAllTask = payload => ({ type: types.GET_ALL_TASK, payload })
-   addNewTaskRequest = (curUserId, payload) => ({
+   addNewTaskRequest = payload => ({
       type: types.ADD_NEW_TASK_REQUEST,
-      curUserId,
       payload,
    })
    updateTodoList = payload => ({ type: types.UPDATE_TODOLIST, payload })
@@ -29,6 +28,7 @@ class Actions {
    editTaskRequest = payload => ({ type: types.EDIT_TASK_REQUEST, payload })
    editTask = payload => ({ type: types.EDIT_TASK, payload })
 
+   setConversations = payload => ({ type: types.SET_CONVERSATIONS, payload })
    setCurConversation = payload => ({ type: types.SET_CUR_CONVERSATION, payload })
 
    getNotifications = payload => ({ type: types.GET_NOTIFICATIONS, payload })

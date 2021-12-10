@@ -33,7 +33,7 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Blog() {
+function Blog(author) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)

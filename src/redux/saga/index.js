@@ -5,6 +5,8 @@ import actions from '../../actions'
 
 function* createUserAndLogin({ payload }) {
    const res = yield call(apis.createUser, payload)
+   console.log('res.data123:', res.data)
+   localStorage.setItem('user', res.data.token)
    yield put(actions.showBackdrop())
    yield delay(350)
    if (res.status === 200) {
@@ -30,7 +32,7 @@ function* getUser({ userId }) {
 function* changeTheme({ payload }) {
    yield put(actions.showBackdrop())
    yield delay(350)
-   const res = yield call(apis.changeTheme, payload.userId, payload.themeIndex)
+   const res = yield call(apis.changeTheme, payload.themeIndex)
    if (res.status === 200) {
       yield put(actions.changeTheme(res.data.setting.theme))
    }
@@ -47,10 +49,10 @@ function* getAllTaskRequest({ payload }) {
    yield put(actions.hideBackdrop())
 }
 
-function* addTaskAndUpdateTodoList({ curUserId, payload }) {
+function* addTaskAndUpdateTodoList({ payload }) {
    const newTaskRes = yield call(apis.addNewTask, payload)
    if (newTaskRes.status === 200) {
-      const userUpdatedRes = yield call(apis.updateTodoList, curUserId, newTaskRes.data._id)
+      const userUpdatedRes = yield call(apis.updateTodoList, newTaskRes.data._id)
       if (userUpdatedRes.status === 200) {
          yield put(actions.updateTodoList(userUpdatedRes.data))
       }

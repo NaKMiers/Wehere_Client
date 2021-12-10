@@ -1,5 +1,7 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
@@ -11,13 +13,21 @@ import Backdrop from './commons/Backdrop'
 import theme from './commons/theme'
 import routes from './routes'
 
+// config firebase
+const config = {
+   apiKey: 'AIzaSyAgAqJjqEjGogBMuLgcB-Ys92xYsEqmRLA',
+   authDomain: 'wehere-7790e.firebaseapp.com',
+}
+firebase.initializeApp(config)
+
 function App({ curUser, actionCreators }) {
-   console.log('App')
+   // refresh login and
    useEffect(() => {
       const getUser = async () => {
          const userId = Cookies.get('userId')
          if (userId) {
             try {
+               console.log('getUser')
                const res = await apis.getUser(JSON.parse(userId))
                actionCreators.login(res.data)
                actionCreators.seenNotifications(res.data.seenNotifications)
@@ -29,6 +39,7 @@ function App({ curUser, actionCreators }) {
       getUser()
    }, [actionCreators, curUser?._id])
 
+   // get notifications
    useEffect(() => {
       const getNotifications = async () => {
          if (curUser?.notifications.length > 0) {
@@ -42,6 +53,23 @@ function App({ curUser, actionCreators }) {
       }
       getNotifications()
    }, [curUser?.notifications, actionCreators])
+
+   // handle firebase autho changed
+   useEffect(() => {
+      const unRegisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
+         if (!user) {
+            console.log('User is not login.')
+            return
+         }
+
+         // console.log('Logged in user: ', user.displayName)
+
+         const token = await user.getIdToken()
+         // console.log('Logged in user token: ', token)
+      })
+
+      return () => unRegisterAuthObserver()
+   }, [])
 
    return (
       <Router>

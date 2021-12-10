@@ -72,6 +72,7 @@ export default makeStyles(theme => ({
 
    chatContent: {
       padding: 24,
+      transition: 'height 0.3s ease-in-out',
    },
 
    chatInput: {
