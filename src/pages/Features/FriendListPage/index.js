@@ -1,6 +1,6 @@
 import { List, ListSubheader } from '@material-ui/core'
 import React from 'react'
-import FriendListItem from '../../../components/FriendListItem'
+import FriendListItem from '../../../components/Features/FriendListItem'
 import Header from '../../../components/Header'
 
 function FriendListPage() {

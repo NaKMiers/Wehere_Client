@@ -1,4 +1,4 @@
-import Blog from '../../../components/Blog'
+import Blog from '../../../components/Nav1/Blog'
 import Header from '../../../components/Header'
 
 function BlogPage() {

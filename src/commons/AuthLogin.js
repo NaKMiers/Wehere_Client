@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie'
 import { Redirect, Route } from 'react-router-dom'
 
 function AuthLogin({ children, ...rest }) {
@@ -6,7 +5,7 @@ function AuthLogin({ children, ...rest }) {
       <Route
          {...rest}
          render={({ location }) =>
-            !!Cookies.get('userId') ? (
+            !!localStorage.getItem('user') ? (
                children
             ) : (
                <Redirect

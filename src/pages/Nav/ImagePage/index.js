@@ -1,4 +1,4 @@
-import Image from '../../../components/Image'
+import Image from '../../../components/Nav1/Image'
 import Header from '../../../components/Header'
 
 function ImagePage() {

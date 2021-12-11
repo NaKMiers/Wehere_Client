@@ -25,13 +25,13 @@ import { Link, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
-import Blog from '../../../components/Blog'
+import Blog from '../../../components/Nav1/Blog'
 import Header from '../../../components/Header'
 import BlockIcon from '../../../components/Icons/BlockIcon'
 import HideUserIcon from '../../../components/Icons/HideUserIcon'
 import MoreIcon from '../../../components/Icons/MoreIcon'
-import Image from '../../../components/Image'
-import Video from '../../../components/Video'
+import Image from '../../../components/Nav1/Image'
+import Video from '../../../components/Nav1/Video'
 import useStyles from './styles'
 
 const Demo = styled('div')(({ theme }) => ({
@@ -40,6 +40,7 @@ const Demo = styled('div')(({ theme }) => ({
 
 function ProfilePage({ curUser, userProfile, actionCreators }) {
    const [isAllowAddFriends, setIsAllowAddFriends] = useState(true)
+   const [justUnf, setJustUnf] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -156,6 +157,13 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
       await apis.addFriendRequest(userProfile._id)
    }
 
+   const handleUnfriend = async () => {
+      setAnchorEl(null)
+      setIsAllowAddFriends(false)
+      setJustUnf(true)
+      await apis.unfriend(userProfile._id)
+   }
+
    return (
       <div>
          <Header />
@@ -182,7 +190,9 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                         onClick={handleAddFriendRequest}
                         disabled={isAllowAddFriends}
                      >
-                        {!userProfile?.friends.includes(curUser?._id) ? 'Add friend' : 'Friend'}
+                        {!userProfile?.friends.includes(curUser?._id) || justUnf
+                           ? 'Add friend'
+                           : 'Friend'}
                      </Button>
                      <Button className={styles.actionBtn} variant='contained'>
                         Messenger
@@ -198,9 +208,12 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                         open={open}
                         onClose={handleClose}
                      >
-                        <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                           Unfriend <HideUserIcon />
-                        </MenuItem>
+                        {userProfile?.friends.includes(curUser?._id) && !justUnf ? (
+                           <MenuItem className={styles.menuActionItem} onClick={handleUnfriend}>
+                              Unfriend <HideUserIcon />
+                           </MenuItem>
+                        ) : null}
+
                         <MenuItem className={styles.menuActionItem} onClick={handleClose}>
                            Block <BlockIcon style={{ marginLeft: 8 }} />
                         </MenuItem>

@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
 import Header from '../../../components/Header'
-import Chatbox from '../../../components/Messenger/Chatbox'
-import ConversationList from '../../../components/Messenger/ConversationList'
-import OnlineBar from '../../../components/Messenger/OnlineBar'
-import OnlineList from '../../../components/Messenger/OnlineList'
+import Chatbox from '../../../components/Nav2/Messenger/Chatbox'
+import ConversationList from '../../../components/Nav2/Messenger/ConversationList'
+import OnlineBar from '../../../components/Nav2/Messenger/OnlineBar'
+import OnlineList from '../../../components/Nav2/Messenger/OnlineList'
 
 function MessengerPage({ curUser, actionCreators }) {
    useEffect(() => {

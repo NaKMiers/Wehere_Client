@@ -1,10 +1,10 @@
 import { Route, Switch } from 'react-router-dom'
-import AuthorList from '../../../components/Musics/AuthorList'
+import AuthorList from '../../../components/Nav2/Musics/AuthorList'
 import Header from '../../../components/Header'
-import ListOptionMusicPage from '../../../components/Musics/ListOptionMusicPage'
-import PlayingBar from '../../../components/Musics/PlayingBar'
-import PlaylistList from '../../../components/Musics/PlaylistList'
-import SongList from '../../../components/Musics/SongList'
+import ListOptionMusicPage from '../../../components/Nav2/Musics/ListOptionMusicPage'
+import PlayingBar from '../../../components/Nav2/Musics/PlayingBar'
+import PlaylistList from '../../../components/Nav2/Musics/PlaylistList'
+import SongList from '../../../components/Nav2/Musics/SongList'
 
 function MusicPage() {
    return (

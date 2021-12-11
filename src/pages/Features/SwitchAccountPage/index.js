@@ -1,5 +1,5 @@
 import { List, ListSubheader } from '@material-ui/core'
-import AccountListItem from '../../../components/AccountListItem'
+import AccountListItem from '../../../components/Features/AccountListItem'
 import Header from '../../../components/Header'
 
 function SwitchAccountPage() {

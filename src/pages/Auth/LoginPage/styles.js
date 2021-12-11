@@ -20,14 +20,6 @@ export default makeStyles(theme => ({
       color: theme.palette.primary.text,
    },
 
-   otherLoginWrap: {
-      display: 'flex',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      alignItems: 'center',
-      marginTop: 8,
-   },
-
    subOptions: {
       display: 'flex',
       justifyContent: 'space-between',

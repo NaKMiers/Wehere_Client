@@ -5,8 +5,9 @@ class Apis {
    checkUser = async (username, email) => axios.post(`${API}/auth/check-user`, { username, email })
    createUser = async data => axios.post(`${API}/auth/create`, data)
 
-   checkLogin = async (usernameOrEmail, password) =>
+   login = async (usernameOrEmail, password) =>
       axios.post(`${API}/auth/login`, { usernameOrEmail, password })
+   signInWithSocial = async data => axios.post(`${API}/auth/sign-in-with-social`, data)
 
    getUser = async userId => axios.get(`${API}/users/${userId}`)
 
@@ -24,9 +25,9 @@ class Apis {
    addFriendRequest = async userId => axios.put(`${API}/users/add-friend/request/${userId}`)
    addFriendResponse = async (userId, value, notifyId) =>
       axios.put(`${API}/users/add-friend/response/${userId}`, { value, notifyId })
+   unfriend = async userId => axios.put(`${API}/users/un-friend/${userId}`)
 
-   removeNotify = async (userRequestId, curUserId, curNotify) =>
-      axios.put(`${API}/users/remove-notify`, { userRequestId, curUserId, curNotify })
+   removeNotify = async curNotifyId => axios.put(`${API}/users/remove-notify/${curNotifyId}`)
 
    getFriends = async friends => axios.post(`${API}/users/get-friends`, { friends })
 

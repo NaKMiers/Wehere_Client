@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../../../components/Header'
-import Short from '../../../components/Short'
+import Short from '../../../components/Nav1/Short'
 
 function ShortPage() {
    return (

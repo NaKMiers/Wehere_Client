@@ -1,6 +1,6 @@
 import { List } from '@material-ui/core'
-import DiaryListItem from '../../../components/DiaryListItem'
-import DiaryModal from '../../../components/DiaryModal'
+import DiaryListItem from '../../../components/Nav2/DiaryListItem'
+import DiaryModal from '../../../components/Nav2/DiaryModal'
 import Header from '../../../components/Header'
 
 const diaries = [

@@ -1,6 +1,6 @@
-import Blog from '../../../components/Blog'
-import Image from '../../../components/Image'
-import Video from '../../../components/Video'
+import Blog from '../../../components/Nav1/Blog'
+import Image from '../../../components/Nav1/Image'
+import Video from '../../../components/Nav1/Video'
 import Header from '../../../components/Header'
 
 function HomePage() {

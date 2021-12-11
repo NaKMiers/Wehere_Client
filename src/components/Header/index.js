@@ -93,7 +93,7 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                                  senderId: n.senderId,
                                  curUserId: curUser._id,
                                  value: true,
-                                 curNotify: n._id,
+                                 curNotifyId: n._id,
                               })
                            }
                         >
@@ -133,7 +133,7 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                               type: 'ADD_FRIEND_RESPONSE',
                               senderId: n.senderId,
                               curUserId: curUser._id,
-                              curNotify: n._id,
+                              curNotifyId: n._id,
                            })
                         }
                      >
@@ -146,18 +146,18 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                return undefined
          }
       })
-   const handleResponseNotification = async ({ type, senderId, curUserId, value, curNotify }) => {
+   const handleResponseNotification = async ({ type, senderId, curUserId, value, curNotifyId }) => {
       switch (type) {
          case 'ADD_FRIEND_REQUEST':
             console.log('ADD_FRIEND_REQUEST')
-            actionCreators.removeNotify(curNotify)
-            await apis.addFriendResponse(senderId, value, curNotify)
+            actionCreators.removeNotify(curNotifyId)
+            await apis.addFriendResponse(senderId, value, curNotifyId)
             break
 
-         case 'ADD_FRIEND_ACCEPT': // remove notify
-            console.log('ADD_FRIEND_ACCEPT')
-            actionCreators.removeNotify(curNotify)
-            await apis.removeNotify(senderId, curUserId, curNotify)
+         case 'ADD_FRIEND_RESPONSE': // remove notify
+            console.log('ADD_FRIEND_RESPONSE: ', curNotifyId)
+            actionCreators.removeNotify(curNotifyId)
+            await apis.removeNotify(curNotifyId)
             break
 
          default:

@@ -1,5 +1,5 @@
 import Header from '../../../components/Header'
-import Video from '../../../components/Video'
+import Video from '../../../components/Nav1/Video'
 
 function VideoPage() {
    return (

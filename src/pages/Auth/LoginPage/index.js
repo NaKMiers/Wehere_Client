@@ -1,12 +1,12 @@
-import { Button, TextField, Typography, Box } from '@material-ui/core'
+import { Button, TextField, Typography } from '@material-ui/core'
 import { useLayoutEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
+import SocialSignIn from '../../../components/Features/SocialSignIn'
 import useStyles from './styles'
-import GoogleSignIn from '../../../components/GoogleSignIn'
 
 function LoginPage({ curUser, actionCreators }) {
    const [usernameOrEmail, setUsernameOrEmail] = useState('')
@@ -38,9 +38,8 @@ function LoginPage({ curUser, actionCreators }) {
          setErrorPassword('Password is emtpy.')
       } else if (usernameOrEmail.length !== 0 && password.length !== 0 && type === 'submit') {
          try {
-            const res = await apis.checkLogin(usernameOrEmail, password)
-            console.log('res.data.token -- login: ', res.data.token)
-            localStorage.setItem('user', res.data.token)
+            const res = await apis.login(usernameOrEmail, password)
+            console.log('res.data: ', res.data)
             if (!res.data.userLogin) {
                setErrorUsernameOrEmail('Username or Email does not match.')
             } else if (!res.data.matchPassword) {
@@ -48,6 +47,7 @@ function LoginPage({ curUser, actionCreators }) {
                setErrorPassword('Password incorect.')
             } else {
                actionCreators.loginRequest(res.data.userLogin)
+               localStorage.setItem('user', res.data.token) // set localStorage('user') for JWT
                history.push('/')
             }
          } catch (err) {
@@ -109,10 +109,7 @@ function LoginPage({ curUser, actionCreators }) {
             </span>
          </div>
 
-         <Box className={styles.otherLoginWrap}>
-            <Typography>Login with socical account. </Typography>
-            <GoogleSignIn />
-         </Box>
+         <SocialSignIn />
       </div>
    )
 }

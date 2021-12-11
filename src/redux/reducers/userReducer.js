@@ -9,7 +9,6 @@ function useReducer(state = initState, action) {
    const { payload } = action
    switch (action.type) {
       case types.LOGIN:
-         Cookies.set('userId', JSON.stringify(payload._id))
          Cookies.set('theme', JSON.stringify(payload.setting.theme))
          return { ...state, curUser: payload }
 
@@ -30,7 +29,6 @@ function useReducer(state = initState, action) {
          return { ...state, curUser: payload }
 
       case types.LOG_OUT:
-         Cookies.remove('userId')
          Cookies.remove('theme')
          localStorage.removeItem('user')
          return { ...state, userProfile: null, curUser: null }
