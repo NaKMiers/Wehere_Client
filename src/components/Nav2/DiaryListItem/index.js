@@ -2,11 +2,15 @@ import { Box, IconButton, ListItem, Menu, MenuItem, Typography } from '@material
 import { useState } from 'react'
 import MoreIcon from '../../../components/Icons/MoreIcon'
 import DeleteIcon from '../../Icons/DeleteIcon'
+import DiaryModal from '../DiaryModal'
 import useStyles from './styles'
+import moment from 'moment'
+import apis from '../../../apis'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import actions from '../../../actions'
 
-function DiaryListItem({ title, desc, bgImg, createdAt }) {
-   const styles = useStyles()
-
+function DiaryListItem({ diary, handleOpenModal, actionCreators }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
    const handleClick = event => {
@@ -16,26 +20,41 @@ function DiaryListItem({ title, desc, bgImg, createdAt }) {
       setAnchorEl(null)
    }
 
-   const handleEditDiary = () => {
-      console.log('handleEditDiary')
+   const hanleDeleteDiary = async () => {
+      handleClose()
+      try {
+         const res = await apis.deleteDiary(diary._id)
+         actionCreators.deleteDiary(res.data._id)
+         console.log('resDel: ', res)
+      } catch (err) {
+         console.log(err)
+      }
    }
+
+   const styles = useStyles()
 
    return (
       <ListItem>
          <Box
-            style={{ backgroundImage: `url(${bgImg})` }}
+            style={{ backgroundImage: `url(${diary.background})` }}
             className={styles.diaryWrap}
             maxWidth='sm'
          >
-            <Typography className={styles.diaryTitle} variant='h5' onClick={handleEditDiary}>
-               {title}
+            <Typography
+               className={styles.diaryTitle}
+               variant='h5'
+               onClick={() => handleOpenModal(diary)}
+            >
+               {diary.title}
             </Typography>
             <IconButton aria-label='settings' className={styles.moreIconBtn} onClick={handleClick}>
                <MoreIcon rotate style={{ fontSize: 20 }} />
             </IconButton>
-            <Typography className={styles.diaryTime}>{createdAt}</Typography>
+            <Typography className={styles.diaryTime}>
+               {moment(diary.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+            </Typography>
             <Typography className={styles.diaryDesc} variant='subtitle1'>
-               {desc}
+               {diary.description}
             </Typography>
          </Box>
          <Menu
@@ -48,12 +67,18 @@ function DiaryListItem({ title, desc, bgImg, createdAt }) {
             }}
             className={styles.menu}
          >
-            <MenuItem className={styles.menuItem} onClick={handleClose}>
+            <MenuItem className={styles.menuItem} onClick={hanleDeleteDiary}>
                Delete <DeleteIcon />
             </MenuItem>
          </Menu>
+
+         <DiaryModal />
       </ListItem>
    )
 }
 
-export default DiaryListItem
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(null, mapDispatch)(DiaryListItem)

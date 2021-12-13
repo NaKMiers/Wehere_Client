@@ -1,14 +1,11 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
-   addDiaryBtnBox: {
-      position: 'fixed',
-      bottom: 28,
-      right: 32,
-   },
-   addDiaryBtn: {
-      background: theme.palette.primary.gradient,
-      color: theme.palette.primary.text,
+   '@global': {
+      '*::-webkit-scrollbar': {
+         width: 0,
+         height: 0,
+      },
    },
    diaryModal: {
       position: 'relative',
@@ -23,12 +20,18 @@ export default makeStyles(theme => ({
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      padding: '8px 16px 16px 16px',
+      padding: 16,
+      borderRadius: 8,
+   },
+   diaryBody: {
       borderRadius: 8,
       backgroundOrigin: 'content-box',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
+      '& .MuiBox-root': {
+         color: theme.palette.secondary.light,
+      },
    },
    modalTitle: {
       fontSize: 24,
@@ -40,11 +43,11 @@ export default makeStyles(theme => ({
       marginBottom: 8,
    },
    submitDiaryBtn: {
-      marginTop: 4,
+      marginTop: 16,
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
    },
-   inputTitleDiary: {
+   inputTitleAndDesc: {
       width: '100%',
       padding: '8px 0px',
       border: 'none',
@@ -53,6 +56,7 @@ export default makeStyles(theme => ({
       fontSize: 20,
       marginBottom: 8,
       background: 'transparent',
+      textAlign: 'center',
    },
    inputContentDiary: {
       height: '60vh',

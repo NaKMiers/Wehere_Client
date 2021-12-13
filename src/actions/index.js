@@ -35,6 +35,11 @@ class Actions {
    seenNotifications = value => ({ type: types.SEEN_NOTIFICATIONS, value })
    removeNotify = notifyId => ({ type: types.REMOVE_NOTIFY, notifyId })
 
+   getDiaries = payload => ({ type: types.GET_DIARIES, payload })
+   addDiary = payload => ({ type: types.ADD_DIARY, payload })
+   editDiary = payload => ({ type: types.EDIT_DIARY, payload })
+   deleteDiary = diaryId => ({ type: types.DELETE_DIARY, diaryId })
+
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })
 }

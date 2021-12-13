@@ -40,6 +40,7 @@ export default makeStyles(theme => ({
       whiteSpace: 'normal',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
+      cursor: 'pointer',
    },
    diaryDesc: {
       opacity: 0,

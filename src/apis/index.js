@@ -40,6 +40,12 @@ class Apis {
       axios.get(`${API}/conversations/get-one-conversation/${curUserId}/${friendId}`)
    getMessages = curCvsId => axios.get(`${API}/messages/${curCvsId}`)
    sendMessage = message => axios.post(`${API}/messages/new-message`, { message })
+
+   // diaries
+   getDiaries = () => axios.get(`${API}/diaries`)
+   createDiary = data => axios.post(`${API}/diaries/create`, data)
+   editDiary = (diaryId, data) => axios.put(`${API}/diaries/edit/${diaryId}`, data)
+   deleteDiary = diaryId => axios.delete(`${API}/diaries/delete/${diaryId}`)
 }
 
 export default new Apis()
