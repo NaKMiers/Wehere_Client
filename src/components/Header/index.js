@@ -149,13 +149,11 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
    const handleResponseNotification = async ({ type, senderId, curUserId, value, curNotifyId }) => {
       switch (type) {
          case 'ADD_FRIEND_REQUEST':
-            console.log('ADD_FRIEND_REQUEST')
             actionCreators.removeNotify(curNotifyId)
             await apis.addFriendResponse(senderId, value, curNotifyId)
             break
 
          case 'ADD_FRIEND_RESPONSE': // remove notify
-            console.log('ADD_FRIEND_RESPONSE: ', curNotifyId)
             actionCreators.removeNotify(curNotifyId)
             await apis.removeNotify(curNotifyId)
             break
@@ -168,8 +166,9 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
    return (
       <AppBar position='static' className={styles.header}>
          <Box className={styles.leftHeader}>
-            {!isShowSearchHeader && <Typography className={styles.wehereLogo}>Wehere</Typography>}
-            {isShowSearchHeader && (
+            {!isShowSearchHeader ? (
+               <Typography className={styles.wehereLogo}>Wehere</Typography>
+            ) : (
                <TextField
                   style={{ width: '80%' }}
                   placeholder='What you need...?'
@@ -188,18 +187,17 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
 
          <Box className={styles.navigation}>
             <Box className={styles.topHeader}>
-               {!isShowSearchHeader && (
+               {!isShowSearchHeader ? (
                   <Typography className={styles.wehereLogo}>Wehere</Typography>
-               )}
-
-               {isShowSearchHeader && (
+               ) : (
                   <TextField
-                     style={{ width: '80%' }}
+                     // style={{ width: '80%' }}
                      placeholder='What you need...?'
                      className={styles.searchTextField}
                      InputProps={{ className: styles.searchInput }}
                   />
                )}
+
                <Box className={styles.headerTopBtnWrap}>
                   <Button
                      className={styles.topHeaderBtn}
@@ -216,6 +214,9 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                         <NotificationIcon style={{ fontSize: 20 }} />
                      </Badge>
                   </Button>
+                  <Link to='/menu'>
+                     <Avatar className={styles.avatar} alt='Pi Pi' src={curUser?.avatar} />
+                  </Link>
                </Box>
             </Box>
 

@@ -15,7 +15,6 @@ function notificationReducer(state = initState, action) {
          return { ...state, seenNotifications: action.value }
 
       case types.REMOVE_NOTIFY:
-         console.log('REMOVE_NOTIFY')
          return {
             ...state,
             notificationList: state.notificationList.filter(n => n._id !== action.notifyId),

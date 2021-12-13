@@ -39,11 +39,9 @@ function LoginPage({ curUser, actionCreators }) {
       } else if (usernameOrEmail.length !== 0 && password.length !== 0 && type === 'submit') {
          try {
             const res = await apis.login(usernameOrEmail, password)
-            console.log('res.data: ', res.data)
             if (!res.data.userLogin) {
                setErrorUsernameOrEmail('Username or Email does not match.')
             } else if (!res.data.matchPassword) {
-               console.log(res.data)
                setErrorPassword('Password incorect.')
             } else {
                actionCreators.loginRequest(res.data.userLogin)

@@ -25,7 +25,7 @@ function ConversationItem({ onlineList, conversation, curUser, actionCreators, a
 
    useEffect(() => {
       const getFriend = async () => {
-         if (curUser) {
+         if (curUser?._id) {
             try {
                const friendId = conversation.members.find(m => m !== curUser._id)
                const res = await apis.getUser(friendId)
@@ -36,7 +36,7 @@ function ConversationItem({ onlineList, conversation, curUser, actionCreators, a
          }
       }
       getFriend()
-   }, [conversation.members, curUser])
+   }, [conversation.members, curUser?._id])
 
    const styles = useStyles()
 

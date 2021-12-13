@@ -50,12 +50,9 @@ function RegisterPage({ actionCreators }) {
          password &&
          passwordAgain
       ) {
-         console.log('OK')
          const data = { username, email, password, gender }
          actionCreators.createNewUser(data)
          history.push('/')
-      } else {
-         console.log('NOT OK')
       }
    }
 

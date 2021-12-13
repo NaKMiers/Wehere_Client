@@ -84,7 +84,7 @@ export default makeStyles(theme => ({
    headerTopBtnWrap: {
       display: 'flex',
       justifyContent: 'space-between',
-      width: '18%',
+      width: '35%',
    },
    topHeaderBtn: {
       padding: 10,

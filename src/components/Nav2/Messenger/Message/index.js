@@ -1,8 +1,9 @@
 import { Avatar, Box, Collapse, Typography } from '@material-ui/core'
 import { useState } from 'react'
+import { format } from 'timeago.js'
 import useStyles from './styles'
 
-function Message({ curUser }) {
+function Message({ message, own, curUserAvatar, curFriendAvatar }) {
    const styles = useStyles()
 
    const BoxTextMessage = () => {
@@ -13,24 +14,25 @@ function Message({ curUser }) {
                variant='body1'
                className={styles.textMessage}
                onClick={() => setOpenTimeMg(!isOpenTimeMg)}
+               style={{ background: own && '#eee' }}
             >
-               Nguyen Anh Khoa....
+               {message.text}
             </Typography>
             <Collapse in={isOpenTimeMg} timeout='auto' unmountOnExit>
-               <span className={styles.timeMessage}>1m ago</span>
+               <span className={styles.timeMessage}>{format(message.createdAt)}</span>
             </Collapse>
          </Box>
       )
    }
 
    return (
-      <Box
-         className={styles.message}
-         style={{ flexDirection: `${curUser ? 'row-reverse' : 'row'}` }}
-      >
-         <Avatar className={styles.avtMessage} src='https://bom.to/GBtMwW' alt='avt' />
+      <Box className={styles.message} style={{ flexDirection: `${own ? 'row-reverse' : 'row'}` }}>
+         <Avatar
+            className={styles.avtMessage}
+            src={own ? curUserAvatar : curFriendAvatar}
+            alt='avt'
+         />
          <Box className={styles.textMessageWrap}>
-            <BoxTextMessage />
             <BoxTextMessage />
          </Box>
       </Box>

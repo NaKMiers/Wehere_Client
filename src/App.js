@@ -19,7 +19,6 @@ function App({ curUser, actionCreators }) {
          if (userId) {
             try {
                const res = await apis.getUser()
-               console.log('resApp: ', res.data)
                actionCreators.login(res.data)
                actionCreators.seenNotifications(res.data.seenNotifications)
             } catch (err) {

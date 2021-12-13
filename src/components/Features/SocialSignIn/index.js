@@ -6,6 +6,7 @@ import { firebase } from '../../../commons/firebase'
 import useStyles from './styles'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
+import clsx from 'clsx'
 
 function SocialSignIn({ actionCreators }) {
    const styles = useStyles()
@@ -29,13 +30,21 @@ function SocialSignIn({ actionCreators }) {
       <Box className={styles.socialSignInWrap}>
          <Typography className={styles.title}>Login with socical account. </Typography>
          <Box className={styles.btnWrap}>
-            <Button variant='contained' className={styles.socialBtn} onClick={SocialSignIn}>
+            <Button
+               variant='contained'
+               className={clsx(styles.socialBtn, styles.btn1)}
+               onClick={SocialSignIn}
+            >
                <Avatar alt='google' className={styles.socialLogo}>
                   G
                </Avatar>
                <Typography className={styles.text}>Sign with google</Typography>
             </Button>
-            <Button variant='contained' className={styles.socialBtn}>
+            <Button
+               variant='contained'
+               className={clsx(styles.socialBtn, styles.btn2)}
+               onClick={SocialSignIn}
+            >
                <Avatar alt='facebook' className={styles.socialLogo}>
                   F
                </Avatar>

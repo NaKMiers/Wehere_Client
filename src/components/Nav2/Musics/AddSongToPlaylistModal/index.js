@@ -18,16 +18,16 @@ function AddSongToPlayListModal({ open, handleClose }) {
                   Add To Playlist
                </Typography>
                <List className={styles.playlistList}>
-                  <div onClick={() => console.log('12213321')}>
+                  <div>
                      <PlaylistListItem showMoreBtn={false} />
                   </div>
-                  <div onClick={() => console.log('12213321')}>
+                  <div>
                      <PlaylistListItem showMoreBtn={false} />
                   </div>
-                  <div onClick={() => console.log('12213321')}>
+                  <div>
                      <PlaylistListItem showMoreBtn={false} />
                   </div>
-                  <div onClick={() => console.log('12213321')}>
+                  <div>
                      <PlaylistListItem showMoreBtn={false} />
                   </div>
                </List>

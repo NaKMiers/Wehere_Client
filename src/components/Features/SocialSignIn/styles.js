@@ -18,15 +18,20 @@ export default makeStyles(theme => ({
       alignItems: 'center',
    },
    socialBtn: {
-      background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
       margin: '8px 4px 0px 4px',
       padding: 8,
       textTransform: 'none',
    },
+   btn1: {
+      background: 'linear-gradient(60deg, #db03e4, #35afff)',
+   },
+   btn2: {
+      background: 'linear-gradient(-60deg, #db03e4, #35afff)',
+   },
    socialLogo: {
-      marginRight: 8,
-      background: '#333333',
+      marginRight: 6,
+      background: 'rgba(51, 51, 51, 0.55)',
       border: `2px solid ${theme.border.main}`,
    },
    text: {

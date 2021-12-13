@@ -2,40 +2,44 @@ import { API } from '../constants'
 import axios from 'axios'
 
 class Apis {
-   checkUser = async (username, email) => axios.post(`${API}/auth/check-user`, { username, email })
-   createUser = async data => axios.post(`${API}/auth/create`, data)
-
-   login = async (usernameOrEmail, password) =>
+   // authentication
+   checkUser = (username, email) => axios.post(`${API}/auth/check-user`, { username, email })
+   createUser = data => axios.post(`${API}/auth/create`, data)
+   login = (usernameOrEmail, password) =>
       axios.post(`${API}/auth/login`, { usernameOrEmail, password })
-   signInWithSocial = async data => axios.post(`${API}/auth/sign-in-with-social`, data)
+   signInWithSocial = data => axios.post(`${API}/auth/sign-in-with-social`, data)
 
-   getUser = async userId => axios.get(`${API}/users/${userId}`)
+   getUser = userId => axios.get(`${API}/users/${userId}`)
 
-   changeTheme = async themeIndex => axios.put(`${API}/users/change-theme/${themeIndex}`)
+   changeTheme = themeIndex => axios.put(`${API}/users/change-theme/${themeIndex}`)
 
-   getAllTaskRequest = async taskList => axios.post(`${API}/todo-list`, { taskList })
-   addNewTask = async data => {
-      console.log('addNewTask')
-      return axios.post(`${API}/todo-list/add-task`, data)
-   }
-   updateTodoList = async taskId => axios.put(`${API}/users/update-todo-list/${taskId}`)
-   deleteTask = async taskId => axios.delete(`${API}/todo-list/delete-task/${taskId}`)
-   editTask = async data => axios.put(`${API}/todo-list/edit-task`, { data })
+   // todolist
+   getAllTaskRequest = taskList => axios.post(`${API}/todo-list`, { taskList })
+   addNewTask = data => axios.post(`${API}/todo-list/add-task`, data)
+   updateTodoList = taskId => axios.put(`${API}/users/update-todo-list/${taskId}`)
+   deleteTask = taskId => axios.delete(`${API}/todo-list/delete-task/${taskId}`)
+   editTask = data => axios.put(`${API}/todo-list/edit-task`, { data })
 
-   addFriendRequest = async userId => axios.put(`${API}/users/add-friend/request/${userId}`)
-   addFriendResponse = async (userId, value, notifyId) =>
+   // add friend and unfriend
+   addFriendRequest = userId => axios.put(`${API}/users/add-friend/request/${userId}`)
+   addFriendResponse = (userId, value, notifyId) =>
       axios.put(`${API}/users/add-friend/response/${userId}`, { value, notifyId })
-   unfriend = async userId => axios.put(`${API}/users/un-friend/${userId}`)
+   unfriend = userId => axios.put(`${API}/users/un-friend/${userId}`)
 
-   removeNotify = async curNotifyId => axios.put(`${API}/users/remove-notify/${curNotifyId}`)
+   // notifications
+   getNotifications = notificationList => axios.post(`${API}/notifications`, { notificationList })
+   seenNotifications = () => axios.put(`${API}/users/seen-notifications`)
+   removeNotify = curNotifyId => axios.put(`${API}/users/remove-notify/${curNotifyId}`)
 
-   getFriends = async friends => axios.post(`${API}/users/get-friends`, { friends })
+   getFriends = friends => axios.post(`${API}/users/get-friends`, { friends })
 
-   getConversation = async userId => axios.get(`${API}/conversations/${userId}`)
-
-   getNotifications = async notificationList =>
-      axios.post(`${API}/notifications`, { notificationList })
-   seenNotifications = async () => axios.put(`${API}/users/seen-notifications`)
+   // messenger
+   changeOnlineStatus = status => axios.put(`${API}/users/online-status`, { status })
+   getConversation = userId => axios.get(`${API}/conversations/${userId}`)
+   getOneConversation = (curUserId, friendId) =>
+      axios.get(`${API}/conversations/get-one-conversation/${curUserId}/${friendId}`)
+   getMessages = curCvsId => axios.get(`${API}/messages/${curCvsId}`)
+   sendMessage = message => axios.post(`${API}/messages/new-message`, { message })
 }
 
 export default new Apis()

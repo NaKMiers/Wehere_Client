@@ -12,7 +12,7 @@ import OnlineList from '../../../components/Nav2/Messenger/OnlineList'
 
 function MessengerPage({ curUser, actionCreators }) {
    useEffect(() => {
-      if (curUser) {
+      if (curUser?._id) {
          const getConversations = async () => {
             try {
                const res = await apis.getConversation(curUser._id)
@@ -23,7 +23,18 @@ function MessengerPage({ curUser, actionCreators }) {
          }
          getConversations()
       }
-   }, [curUser, actionCreators])
+   }, [curUser?._id, actionCreators])
+
+   useEffect(() => {
+      const changeOnlineStatus = async status => {
+         await apis.changeOnlineStatus(status)
+      }
+      changeOnlineStatus(true)
+
+      return () => {
+         changeOnlineStatus(false)
+      }
+   }, [])
 
    return (
       <>

@@ -58,7 +58,7 @@ function Image() {
          <Card className={styles.card}>
             <CardHeader
                avatar={
-                  <Link to='/profile/61a45bedb9727ce18f518f61' className={styles.linkToProfile}>
+                  <Link to='/profile/61b55ed8c8ba3a0f20c10c45' className={styles.linkToProfile}>
                      <Avatar alt='avt' src='https://bom.to/GBtMwW' />
                   </Link>
                }

@@ -21,7 +21,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import { styled } from '@material-ui/styles'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
@@ -53,6 +53,7 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
 
    const styles = useStyles()
    const localtion = useLocation()
+   const history = useHistory()
 
    useEffect(() => {
       const userId = localtion.pathname.split('/')[2]
@@ -164,6 +165,13 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
       await apis.unfriend(userProfile._id)
    }
 
+   const handleOpenConversation = async () => {
+      console.log('handleOpenConversation')
+      const res = await apis.getOneConversation(curUser._id, userProfile._id)
+      actionCreators.setCurConversation(res.data)
+      history.push(`/messenger/${userProfile._id}`)
+   }
+
    return (
       <div>
          <Header />
@@ -194,9 +202,14 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                            ? 'Add friend'
                            : 'Friend'}
                      </Button>
-                     <Button className={styles.actionBtn} variant='contained'>
+                     <Button
+                        className={styles.actionBtn}
+                        variant='contained'
+                        onClick={handleOpenConversation}
+                     >
                         Messenger
                      </Button>
+
                      <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
                         <MoreIcon style={{ color: '#fff' }} />
                      </Button>
