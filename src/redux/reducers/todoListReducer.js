@@ -18,7 +18,11 @@ function todoListReducer(state = initState, action) {
 
    switch (action.type) {
       case types.GET_ALL_TASK:
-         return payload
+         return [...payload]
+
+      case types.ADD_NEW_TASK:
+         return [...state, payload]
+
       case types.DELETE_TASK:
          const newTodoList = state.filter(task => task._id !== action.taskId)
          return newTodoList

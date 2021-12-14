@@ -9,14 +9,15 @@ class Apis {
       axios.post(`${API}/auth/login`, { usernameOrEmail, password })
    signInWithSocial = data => axios.post(`${API}/auth/sign-in-with-social`, data)
 
+   // users
    getUser = userId => axios.get(`${API}/users/${userId}`)
-
+   changePassword = (curPassword, newPassword) =>
+      axios.put(`${API}/users/change-password`, { curPassword, newPassword })
    changeTheme = themeIndex => axios.put(`${API}/users/change-theme/${themeIndex}`)
 
    // todolist
-   getAllTaskRequest = taskList => axios.post(`${API}/todo-list`, { taskList })
+   getAllTaskRequest = () => axios.post(`${API}/todo-list`)
    addNewTask = data => axios.post(`${API}/todo-list/add-task`, data)
-   updateTodoList = taskId => axios.put(`${API}/users/update-todo-list/${taskId}`)
    deleteTask = taskId => axios.delete(`${API}/todo-list/delete-task/${taskId}`)
    editTask = data => axios.put(`${API}/todo-list/edit-task`, { data })
 

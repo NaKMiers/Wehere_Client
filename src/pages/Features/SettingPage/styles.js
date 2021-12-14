@@ -29,6 +29,14 @@ export default makeStyles(theme => ({
       fontWeight: '500',
    },
 
+   changePWBtn: {
+      background: theme.palette.success.main,
+      color: theme.palette.success.text,
+      margin: '8px 0px 0px 8px',
+      padding: '6px 18px',
+      float: 'right',
+   },
+
    listBlockFrItem: {
       width: '100%',
       display: 'flex',

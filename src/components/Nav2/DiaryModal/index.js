@@ -39,7 +39,6 @@ const bgOptions = [
 ]
 
 function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators }) {
-   console.log('curDiary: ', curDiary)
    const [openCollapeEdit, setOpenCollapeEdit] = useState(false)
    const inputContentArea = useRef()
    const [title, setTitle] = useState('')
@@ -50,7 +49,6 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
    const styles = useStyles()
 
    useEffect(() => {
-      console.log(213)
       if (curDiary) {
          setTitle(() => curDiary.title)
          setContent(() => curDiary.content)

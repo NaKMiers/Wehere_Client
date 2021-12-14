@@ -45,10 +45,10 @@ function RegisterPage({ actionCreators }) {
          !errorEmail &&
          !errorPassword &&
          !errorPasswordAgain &&
-         username &&
-         email &&
-         password &&
-         passwordAgain
+         username.trim() &&
+         email.trim() &&
+         password.trim() &&
+         passwordAgain.trim()
       ) {
          const data = { username, email, password, gender }
          actionCreators.createNewUser(data)
@@ -93,7 +93,7 @@ function RegisterPage({ actionCreators }) {
             if (password.trim() === '') {
                setErrorPassword(() => 'Password is empty.')
             } else if (password.length < 6) {
-               setErrorPassword(() => 'Password must be at least 6 characters')
+               setErrorPassword(() => 'Password must be at least 6 characters.')
             }
             break
          case 'passwordAgain':

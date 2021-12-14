@@ -12,6 +12,7 @@ import {
    ListItemText,
    Paper,
    TextField,
+   Typography,
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
@@ -92,10 +93,10 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    }
 
    useEffect(() => {
-      if (!todoList.length) {
-         actionCreators.getAllTaskRequest(curUser?.todolist)
+      if (!todoList.length && curUser) {
+         actionCreators.getAllTaskRequest()
       }
-   }, [curUser?.todolist, actionCreators, todoList.length])
+   }, [curUser, actionCreators, todoList.length])
 
    useEffect(() => {
       setLeft(() => todoList.filter(task => task.status === 'ready'))
@@ -106,11 +107,12 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
       e.preventDefault()
       if (addNewTaskValue.trim() !== '') {
          actionCreators.addNewTaskRequest({
+            userId: curUser._id,
             title: addNewTaskValue.trim(),
             point: +newTaskPoint,
          })
          setAddNewTaskValue('')
-         setNewTaskPoint('')
+         setNewTaskPoint(1)
       }
    }
 
@@ -216,7 +218,7 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    return (
       <>
          <Header />
-         <div style={{ maxWidth: 960, padding: 24, margin: 'auto' }}>
+         <Box style={{ maxWidth: 960, padding: 24, margin: 'auto' }}>
             <form onSubmit={handleAddTask}>
                <Grid className={styles.addTaskWrap}>
                   <TextField
@@ -267,7 +269,11 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                      className={styles.pointTextField}
                      label='Point'
                      variant='outlined'
-                     onChange={e => setNewTaskPoint(e.target.value)}
+                     onChange={e =>
+                        setNewTaskPoint(
+                           e.target.value > 0 && e.target.value < 100 && e.target.value
+                        )
+                     }
                      value={newTaskPoint}
                   />
                   <Button
@@ -281,61 +287,69 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                </Grid>
             </form>
 
-            <Grid container spacing={2} justifyContent='center' alignItems='center'>
-               <Grid item xs={12}>
-                  {customList(left, 'Ready')}
-               </Grid>
+            {todoList.length ? (
+               <Grid container spacing={2} justifyContent='center' alignItems='center'>
+                  <Grid item xs={12}>
+                     {customList(left, 'Ready')}
+                  </Grid>
 
-               <Grid item xs={12}>
-                  <Grid container alignItems='center' className={styles.actionBtnWrap}>
-                     <Button
-                        className={styles.todoActionBtnUp}
-                        variant='outlined'
-                        size='small'
-                        onClick={handleAllLeft}
-                        disabled={right.length === 0}
-                        aria-label='move all right'
-                     >
-                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-up')} />
-                     </Button>
-                     <Button
-                        className={styles.todoActionBtnUp}
-                        variant='outlined'
-                        size='small'
-                        onClick={handleCheckedLeft}
-                        disabled={rightChecked.length === 0}
-                        aria-label='move selected right'
-                     >
-                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-up')} />
-                     </Button>
-                     <Button
-                        className={styles.todoActionBtnDown}
-                        variant='outlined'
-                        size='small'
-                        onClick={handleCheckedRight}
-                        disabled={leftChecked.length === 0}
-                        aria-label='move selected left'
-                     >
-                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-down')} />
-                     </Button>
-                     <Button
-                        className={styles.todoActionBtnDown}
-                        variant='outlined'
-                        size='small'
-                        onClick={handleAllRight}
-                        disabled={left.length === 0}
-                        aria-label='move all left'
-                     >
-                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-down')} />
-                     </Button>
+                  <Grid item xs={12}>
+                     <Grid container alignItems='center' className={styles.actionBtnWrap}>
+                        <Button
+                           className={styles.todoActionBtnUp}
+                           variant='outlined'
+                           size='small'
+                           onClick={handleAllLeft}
+                           disabled={right.length === 0}
+                           aria-label='move all right'
+                        >
+                           <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-up')} />
+                        </Button>
+                        <Button
+                           className={styles.todoActionBtnUp}
+                           variant='outlined'
+                           size='small'
+                           onClick={handleCheckedLeft}
+                           disabled={rightChecked.length === 0}
+                           aria-label='move selected right'
+                        >
+                           <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-up')} />
+                        </Button>
+                        <Button
+                           className={styles.todoActionBtnDown}
+                           variant='outlined'
+                           size='small'
+                           onClick={handleCheckedRight}
+                           disabled={leftChecked.length === 0}
+                           aria-label='move selected left'
+                        >
+                           <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-down')} />
+                        </Button>
+                        <Button
+                           className={styles.todoActionBtnDown}
+                           variant='outlined'
+                           size='small'
+                           onClick={handleAllRight}
+                           disabled={left.length === 0}
+                           aria-label='move all left'
+                        >
+                           <i
+                              className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-down')}
+                           />
+                        </Button>
+                     </Grid>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                     {customList(right, 'Completed')}
                   </Grid>
                </Grid>
-
-               <Grid item xs={12}>
-                  {customList(right, 'Completed')}
-               </Grid>
-            </Grid>
-         </div>
+            ) : (
+               <Typography className={styles.noTask}>
+                  No task yet, please add new task now.
+               </Typography>
+            )}
+         </Box>
       </>
    )
 }

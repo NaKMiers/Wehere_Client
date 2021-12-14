@@ -15,7 +15,7 @@ function FriendListItem() {
                </ListItemAvatar>
                <ListItemText primary='User1' />
             </Link>
-            <Button className={styles.friendBtn} variant='contained'>
+            <Button className={styles.unFriendBtn} variant='contained'>
                Unfriend
             </Button>
          </ListItem>

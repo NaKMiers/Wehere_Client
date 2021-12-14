@@ -5,15 +5,12 @@ export default makeStyles(theme => ({
       display: 'flex',
       width: '100%',
       textDecoration: 'none',
-      color: theme.palette.secondary.text,
-      alignItems: 'center'
+      color: theme.palette.default.text,
+      alignItems: 'center',
    },
-   avatar: {
-      // border: `3px  solid ${theme.border.light}`
-   },
-   friendBtn: {
+   unFriendBtn: {
       padding: '3px 16px',
       background: theme.palette.danger.gradient,
-      color: theme.palette.primary.text
-   }
+      color: theme.palette.danger.text,
+   },
 }))

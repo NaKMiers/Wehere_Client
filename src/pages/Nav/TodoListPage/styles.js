@@ -126,4 +126,8 @@ export default makeStyles(theme => ({
    todoActionBtnDown: {
       color: theme.palette.secondary.main,
    },
+
+   noTask: {
+      textAlign: 'center',
+   },
 }))

@@ -16,13 +16,13 @@ class Actions {
    changeTheme = theme => ({ type: types.CHANGE_THEME, theme })
    setTheme = theme => ({ type: types.SET_THEME, theme })
 
-   getAllTaskRequest = payload => ({ type: types.GET_ALL_TASK_REQUEST, payload })
+   getAllTaskRequest = () => ({ type: types.GET_ALL_TASK_REQUEST })
    getAllTask = payload => ({ type: types.GET_ALL_TASK, payload })
    addNewTaskRequest = payload => ({
       type: types.ADD_NEW_TASK_REQUEST,
       payload,
    })
-   updateTodoList = payload => ({ type: types.UPDATE_TODOLIST, payload })
+   addNewTask = payload => ({ type: types.ADD_NEW_TASK, payload })
    deleteTaskRequest = taskId => ({ type: types.DELETE_TASK_REQUEST, taskId })
    deleteTask = taskId => ({ type: types.DELETE_TASK, taskId })
    editTaskRequest = payload => ({ type: types.EDIT_TASK_REQUEST, payload })

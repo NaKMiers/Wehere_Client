@@ -18,13 +18,20 @@ const renderTheme = () => {
             },
             success: {
                main: '#00e676',
+               text: '#fff',
             },
             danger: {
                gradient: 'linear-gradient(45deg, #ff416c, #ff4b2b)',
                main: '#f44336',
+               text: '#fff',
             },
             warning: {
                main: '#ff6f00',
+               text: '#fff',
+            },
+            default: {
+               main: '#fff',
+               text: '#333',
             },
          },
          border: {

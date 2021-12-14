@@ -20,20 +20,79 @@ import themeList from '../../../commons/ThemeList'
 import { connect } from 'react-redux'
 import actions from '../../../actions'
 import { bindActionCreators } from 'redux'
+import apis from '../../../apis'
 
 function SettingPage({ curUser, actionCreators }) {
    const [openTheme, setOpenTheme] = useState(false)
    const [openChangePW, setOpenChangePW] = useState(false)
    const [openComments, setOpenComments] = useState(false)
    const [openBlockFriends, setOpenBlockFriends] = useState(false)
+
    const [currentPWValue, setCurrentPWValue] = useState('')
    const [newPWValue, setNewPWValue] = useState('')
    const [retypePWValue, setRetypePWValue] = useState('')
+
+   const [errorCurPW, setErrorCurPW] = useState('')
+   const [errorNewPw, setErrorNewPw] = useState('')
+   const [errorRetypePW, setErrorRetypePW] = useState('')
 
    const styles = useStyles()
 
    const handleChangeTheme = themeIndex => {
       actionCreators.changeThemeRequest({ themeIndex })
+   }
+
+   const handleValidate = type => {
+      console.log('type: ', type)
+      switch (type) {
+         case 'curPassword':
+            if (!currentPWValue.trim().length) {
+               setErrorCurPW('Current password is empty.')
+            } else {
+            }
+
+            break
+         case 'newPassword':
+            if (!newPWValue.trim().length) {
+               setErrorNewPw('Current password is empty.')
+            } else if (newPWValue.trim().length < 6) {
+               setErrorNewPw('Password must be at least 6 characters.')
+            }
+            break
+         case 'retypePassword':
+            if (!retypePWValue.trim().length) {
+               setErrorRetypePW('Current password is empty.')
+            } else if (newPWValue.trim() !== retypePWValue.trim()) {
+               setErrorRetypePW('Password does not match.')
+            }
+            break
+         default:
+            return
+      }
+   }
+
+   const handleChangePassword = async e => {
+      e.preventDefault()
+      if (
+         !errorCurPW &&
+         !errorNewPw &&
+         !errorRetypePW &&
+         currentPWValue.trim() &&
+         newPWValue.trim() &&
+         retypePWValue.trim()
+      ) {
+         try {
+            let res = await apis.changePassword(currentPWValue.trim(), newPWValue.trim())
+            console.log('res: ', res)
+            if (res.data.isChangePasswordSuccess) {
+               setOpenChangePW(false)
+            } else {
+               setErrorCurPW('Wrong password, please enter again.')
+            }
+         } catch (err) {
+            console.log(err)
+         }
+      }
    }
 
    return (
@@ -77,50 +136,74 @@ function SettingPage({ curUser, actionCreators }) {
                </Grid>
             </Collapse>
 
-            <ListItem onClick={() => setOpenChangePW(!openChangePW)}>
-               <ListItemText primary='Change Password' />
-               {openChangePW ? (
-                  <ExpandIcon rotate color='secondary' />
-               ) : (
-                  <ExpandIcon color='secondary' />
-               )}
-            </ListItem>
-            <Collapse style={{ marginLeft: 24 }} in={openChangePW} timeout='auto' unmountOnExit>
-               <form>
-                  <TextField
-                     style={{ width: '100%' }}
-                     name='currentPassword'
-                     className={styles.textField}
-                     id='filled-basic'
-                     label='Current Password'
-                     variant='filled'
-                     value={currentPWValue}
-                     onChange={e => setCurrentPWValue(e.target.value)}
-                  />
-                  <TextField
-                     style={{ width: '100%' }}
-                     name='newPassword'
-                     type='password'
-                     className={styles.textField}
-                     id='filled-basic'
-                     label='New Password'
-                     variant='filled'
-                     value={newPWValue}
-                     onChange={e => setNewPWValue(e.target.value)}
-                  />
-                  <TextField
-                     style={{ width: '100%' }}
-                     name='retypePassword'
-                     type='password'
-                     className={styles.textField}
-                     id='filled-basic'
-                     label='Password again'
-                     variant='filled'
-                     value={retypePWValue}
-                     onChange={e => setRetypePWValue(e.target.value)}
-                  />
-               </form>
-            </Collapse>
+            {curUser?.authType === 'local' && (
+               <>
+                  <ListItem onClick={() => setOpenChangePW(!openChangePW)}>
+                     <ListItemText primary='Change Password' />
+                     {openChangePW ? (
+                        <ExpandIcon rotate color='secondary' />
+                     ) : (
+                        <ExpandIcon color='secondary' />
+                     )}
+                  </ListItem>
+                  <Collapse
+                     style={{ marginLeft: 24 }}
+                     in={openChangePW}
+                     timeout='auto'
+                     unmountOnExit
+                  >
+                     <form onSubmit={handleChangePassword}>
+                        <TextField
+                           style={{ width: '100%' }}
+                           name='currentPassword'
+                           className={styles.textField}
+                           id='filled-basic'
+                           label='Current Password'
+                           variant='filled'
+                           value={currentPWValue}
+                           onChange={e => setCurrentPWValue(e.target.value)}
+                           onFocus={() => setErrorCurPW('')}
+                           onBlur={() => handleValidate('curPassword')}
+                           error={!!errorCurPW}
+                           helperText={errorCurPW}
+                        />
+                        <TextField
+                           style={{ width: '100%' }}
+                           name='newPassword'
+                           type='password'
+                           className={styles.textField}
+                           id='filled-basic'
+                           label='New Password'
+                           variant='filled'
+                           value={newPWValue}
+                           onChange={e => setNewPWValue(e.target.value)}
+                           onFocus={() => setErrorNewPw('')}
+                           onBlur={() => handleValidate('newPassword')}
+                           error={!!errorNewPw}
+                           helperText={errorNewPw}
+                        />
+                        <TextField
+                           style={{ width: '100%' }}
+                           name='retypePassword'
+                           type='password'
+                           className={styles.textField}
+                           id='filled-basic'
+                           label='Password again'
+                           variant='filled'
+                           value={retypePWValue}
+                           onChange={e => setRetypePWValue(e.target.value)}
+                           onFocus={() => setErrorRetypePW('')}
+                           onBlur={() => handleValidate('retypePassword')}
+                           error={!!errorRetypePW}
+                           helperText={errorRetypePW}
+                        />
+                        <Button type='submit' className={styles.changePWBtn}>
+                           Save
+                        </Button>
+                     </form>
+                  </Collapse>
+               </>
+            )}
 
             <ListItem onClick={() => setOpenComments(!openComments)}>
                <ListItemText primary='Comments' />

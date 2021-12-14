@@ -8,6 +8,5 @@ export default makeStyles(theme => ({
    },
    addDiaryBtn: {
       background: theme.palette.primary.gradient,
-      color: theme.palette.primary.text,
    },
 }))
