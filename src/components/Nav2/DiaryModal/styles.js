@@ -39,8 +39,8 @@ export default makeStyles(theme => ({
    },
    modalSubTitle: {
       fontSize: 10,
-      textAlign: 'center',
-      marginBottom: 8,
+      textAlign: 'right',
+      margin: '4px 8px 8px 8px',
    },
    submitDiaryBtn: {
       marginTop: 16,

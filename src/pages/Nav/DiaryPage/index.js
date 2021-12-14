@@ -18,6 +18,8 @@ function DiaryPage({ curUser, actionCreators, diaries }) {
    const handleOpenModal = diary => {
       if (diary) {
          setCurDiary(diary)
+      } else {
+         setCurDiary(null)
       }
       setOpen(true)
    }

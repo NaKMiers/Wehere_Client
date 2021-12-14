@@ -39,6 +39,7 @@ const bgOptions = [
 ]
 
 function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators }) {
+   console.log('curDiary: ', curDiary)
    const [openCollapeEdit, setOpenCollapeEdit] = useState(false)
    const inputContentArea = useRef()
    const [title, setTitle] = useState('')
@@ -49,14 +50,21 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
    const styles = useStyles()
 
    useEffect(() => {
+      console.log(213)
       if (curDiary) {
          setTitle(() => curDiary.title)
          setContent(() => curDiary.content)
          setDescription(() => curDiary.description)
          setTextColor(() => curDiary.textColor)
          setBackground(() => curDiary.background)
+      } else {
+         setTitle('')
+         setContent('')
+         setDescription('')
+         setTextColor('')
+         setBackground('')
       }
-   }, [curDiary])
+   }, [curDiary, open])
 
    const handleExpandEdit = () => {
       setOpenCollapeEdit(!openCollapeEdit)
@@ -135,8 +143,6 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
       handleCloseModal()
    }
 
-   console.log(123)
-
    return (
       <>
          <Fade in={open}>
@@ -150,25 +156,14 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
                <Paper className={styles.paper} variant='outlined'>
                   <Box
                      className={styles.diaryBody}
-                     style={{
-                        background: `url(${background})`,
-                     }}
+                     style={{ background: `url(${background}) no-repeat center / cover ` }}
                   >
-                     <Typography
-                        className={styles.modalTitle}
-                        id='modal-modal-title'
-                        variant='h6'
-                        component='h2'
-                        style={{ color: textColor }}
-                     >
-                        {curDiary ? 'Edit Diary' : 'New Diary'}
-                     </Typography>
                      <Typography
                         className={styles.modalSubTitle}
                         id='modal-modal-description'
                         style={{ color: textColor }}
                      >
-                        {moment(curDiary?.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+                        {curDiary && moment(curDiary?.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
                      </Typography>
 
                      <form className={styles.formContent}>
@@ -200,7 +195,7 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
                         />
                      </form>
 
-                     <div className={styles.editDiaryWrap}>
+                     <Box className={styles.editDiaryWrap}>
                         <ListItemButton onClick={handleExpandEdit}>
                            {openCollapeEdit ? (
                               <ExpandIcon rotate color='secondary' style={{ margin: 'auto' }} />
@@ -223,9 +218,7 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
                                  </Box>
                               </ListItem>
                               <ListItem className={styles.editDiaryItem}>
-                                 <p style={{ fontWeight: 'bold', color: textColor }}>
-                                    Background:{' '}
-                                 </p>
+                                 <p style={{ fontWeight: 'bold', color: textColor }}>Background:</p>
                                  <Box className={styles.editDiaryListBox}>
                                     <ButtonGroup
                                        className={styles.buttonGroupBg}
@@ -238,7 +231,7 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
                               </ListItem>
                            </List>
                         </Collapse>
-                     </div>
+                     </Box>
                   </Box>
                   <Button
                      variant='contained'
