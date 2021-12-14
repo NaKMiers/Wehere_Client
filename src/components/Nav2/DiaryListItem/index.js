@@ -25,7 +25,6 @@ function DiaryListItem({ diary, handleOpenModal, actionCreators }) {
       try {
          const res = await apis.deleteDiary(diary._id)
          actionCreators.deleteDiary(res.data._id)
-         console.log('resDel: ', res)
       } catch (err) {
          console.log(err)
       }

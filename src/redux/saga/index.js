@@ -5,7 +5,6 @@ import actions from '../../actions'
 
 function* createUserAndLogin({ payload }) {
    const res = yield call(apis.createUser, payload)
-   console.log('res.data123:', res.data)
    localStorage.setItem('user', res.data.token)
    yield put(actions.showBackdrop())
    yield delay(350)
@@ -51,7 +50,6 @@ function* getAllTaskRequest() {
 
 function* addNewTaskRequest({ payload }) {
    const newTaskRes = yield call(apis.addNewTask, payload)
-   console.log('newTaskRes: ', newTaskRes)
    if (newTaskRes.status === 200) {
       if (newTaskRes.status === 200) {
          yield put(actions.addNewTask(newTaskRes.data))

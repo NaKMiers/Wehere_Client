@@ -114,10 +114,8 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
       if (!curDiary) {
          // create diary
          if (title.trim() || content.trim() || description.trim()) {
-            console.log('submit')
             try {
                const res = await apis.createDiary(data)
-               console.log('resAdd: ', res)
                actionCreators.addDiary(res.data)
                setTitle('')
                setContent('')
@@ -132,7 +130,6 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
          // edit diary
          try {
             const res = await apis.editDiary(curDiary._id, data)
-            console.log('resSave: ', res)
             actionCreators.editDiary(res.data)
          } catch (err) {
             console.log(err)

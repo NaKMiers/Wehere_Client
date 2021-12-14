@@ -47,6 +47,8 @@ class Apis {
    createDiary = data => axios.post(`${API}/diaries/create`, data)
    editDiary = (diaryId, data) => axios.put(`${API}/diaries/edit/${diaryId}`, data)
    deleteDiary = diaryId => axios.delete(`${API}/diaries/delete/${diaryId}`)
+
+   getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })
 }
 
 export default new Apis()

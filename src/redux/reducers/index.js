@@ -6,6 +6,7 @@ import notification from './notificationReducer'
 import conversation from './conversationReducer'
 import diary from './diaryReducer'
 import friend from './friendsReducer'
+import account from './accountReducer'
 
 const reducers = combineReducers({
    user,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
    notification,
    conversation,
    diary,
+   account,
 })
 
 export default reducers

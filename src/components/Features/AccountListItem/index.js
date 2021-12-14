@@ -10,23 +10,37 @@ import {
    ListItemAvatar,
    ListItemText,
    Typography,
+   TextField,
 } from '@material-ui/core'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import { useState } from 'react'
 import ChangeIcon from '../../../components/Icons/ChangeIcon'
 import ExpandIcon from '../../../components/Icons/ExpandIcon'
 import useStyles from './styles'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
+import { useHistory } from 'react-router-dom'
+import apis from '../../../apis'
 
-function AccountListItem() {
+function AccountListItem({ account, actionCreators }) {
    const [isOpenRmBtn, setOpenRmBtn] = useState(false)
    const [isOpenDialogAcc, setOpenDialogAcc] = useState(false)
+   const [passwordValue, setPasswordValue] = useState('')
+
+   const [errorPassword, setErrorPassword] = useState('')
+
+   const styles = useStyles()
+   const history = useHistory()
 
    const handleClick = () => {
       setOpenRmBtn(!isOpenRmBtn)
    }
 
-   const handleOpen = type => {
-      setOpenDialogAcc(type)
+   const handleOpen = value => {
+      setOpenDialogAcc(value)
+      setPasswordValue('')
+      setErrorPassword('')
    }
 
    const handleClose = () => {
@@ -34,15 +48,56 @@ function AccountListItem() {
       setOpenRmBtn(false)
    }
 
-   const styles = useStyles()
+   const handleRemoveAccount = () => {
+      actionCreators.removeAccount(account._id)
+      setOpenDialogAcc(false)
+   }
+
+   const handleChangeAccount = async () => {
+      handleValidate()
+      if (passwordValue && !errorPassword) {
+         try {
+            const res = await apis.login(account.email, passwordValue.trim())
+            if (!res.data.matchPassword) {
+               setErrorPassword('Password incorect.')
+            } else {
+               actionCreators.loginRequest(res.data.userLogin)
+               localStorage.setItem('user', res.data.token) // set localStorage('user') for JWT
+
+               const accounts = JSON.parse(localStorage.getItem('accounts'))
+               if (!accounts) {
+                  actionCreators.addAccount(res.data.userLogin._id)
+               } else {
+                  if (!accounts.includes(res.data.userLogin._id)) {
+                     localStorage.setItem(
+                        'accounts',
+                        JSON.stringify([...accounts, res.data.userLogin._id])
+                     )
+                     actionCreators.addAccount(res.data.userLogin._id)
+                  }
+               }
+
+               history.push('/')
+            }
+         } catch (err) {
+            console.log(err)
+         }
+      }
+   }
+
+   const handleValidate = () => {
+      if (!passwordValue.trim()) {
+         setErrorPassword('Password is empty.')
+      }
+   }
 
    return (
       <>
          <ListItem className={styles.accountItem}>
             <ListItemAvatar>
-               <Avatar className={styles.avatar} alt='avt' src='https://bom.to/I9Gu9L'></Avatar>
+               <Avatar className={styles.avatar} alt='avt' src={account.avatar}></Avatar>
             </ListItemAvatar>
-            <ListItemText primary='Account 1' />
+            <ListItemText primary={account.username} />
             <Button
                className={styles.changeAccBtn}
                variant='contained'
@@ -71,13 +126,47 @@ function AccountListItem() {
                      ? 'Remove this account?'
                      : 'Change to this account.'}
                </Typography>
-               <Typography className={styles.dialogContent}>
-                  {isOpenDialogAcc === 'remove'
-                     ? "This action can't be restore."
-                     : 'This account will be change.'}
-               </Typography>
+               <Box className={styles.confirmPWWrap}>
+                  <Typography className={styles.dialogContent}>
+                     {isOpenDialogAcc === 'remove'
+                        ? "This action can't be restore."
+                        : account.authType === 'local' && 'Please enter password to continue.'}
+                  </Typography>
+
+                  {isOpenDialogAcc !== 'remove' ? (
+                     account.authType === 'local' ? (
+                        <TextField
+                           type='password'
+                           name='password'
+                           label='password...'
+                           variant='filled'
+                           className={styles.passwordInput}
+                           InputProps={{
+                              classes: { input: styles.inputTextField },
+                           }}
+                           value={passwordValue}
+                           onChange={e => setPasswordValue(e.target.value)}
+                           onBlur={() => handleValidate()}
+                           onFocus={() => setErrorPassword('')}
+                           error={!!errorPassword}
+                           helperText={errorPassword}
+                        />
+                     ) : (
+                        <Typography>
+                           You can't switch to this account, only for local accounts.
+                        </Typography>
+                     )
+                  ) : null}
+               </Box>
+
                <Box className={styles.dialogBtnWrap}>
-                  <Button variant='contained' className={styles.dialogRmBtn}>
+                  <Button
+                     variant='contained'
+                     className={styles.dialogRmBtn}
+                     onClick={
+                        isOpenDialogAcc === 'remove' ? handleRemoveAccount : handleChangeAccount
+                     }
+                  >
                      {isOpenDialogAcc === 'remove' ? 'Remove' : 'Change'}
                   </Button>
                   <Button
@@ -94,4 +183,8 @@ function AccountListItem() {
    )
 }
 
-export default AccountListItem
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(null, mapDispatch)(AccountListItem)

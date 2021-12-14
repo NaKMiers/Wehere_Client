@@ -47,9 +47,6 @@ function Chatbox({ curUser }) {
       if (curUser?._id) {
          socket.current.emit('addUser', curUser._id)
       }
-      socket.current.on('getUsers', users => {
-         console.log('users: ', users)
-      })
    }, [curUser?._id])
 
    // getCurFriend
@@ -85,7 +82,6 @@ function Chatbox({ curUser }) {
 
    // handleSendMessage
    const handleSendMessage = async messageValue => {
-      console.log('handleSendMessage')
       console.log(messageValue)
       const message = {
          conversationId: curCvs._id,

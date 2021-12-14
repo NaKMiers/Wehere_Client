@@ -46,6 +46,20 @@ function LoginPage({ curUser, actionCreators }) {
             } else {
                actionCreators.loginRequest(res.data.userLogin)
                localStorage.setItem('user', res.data.token) // set localStorage('user') for JWT
+
+               const accounts = JSON.parse(localStorage.getItem('accounts'))
+               if (!accounts) {
+                  actionCreators.addAccount(res.data.userLogin._id)
+               } else {
+                  if (!accounts.includes(res.data.userLogin._id)) {
+                     localStorage.setItem(
+                        'accounts',
+                        JSON.stringify([...accounts, res.data.userLogin._id])
+                     )
+                     actionCreators.addAccount(res.data.userLogin._id)
+                  }
+               }
+
                history.push('/')
             }
          } catch (err) {

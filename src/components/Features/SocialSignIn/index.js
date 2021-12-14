@@ -20,6 +20,20 @@ function SocialSignIn({ actionCreators }) {
 
          actionCreators.loginRequest(serverRes.data.userLogin)
          localStorage.setItem('user', serverRes.data.token) // set localStorage('user') for JWT
+
+         const accounts = JSON.parse(localStorage.getItem('accounts'))
+         if (!accounts) {
+            actionCreators.addAccount(serverRes.data.userLogin._id)
+         } else {
+            if (!accounts.includes(serverRes.data.userLogin._id)) {
+               localStorage.setItem(
+                  'accounts',
+                  JSON.stringify([...accounts, serverRes.data.userLogin._id])
+               )
+               actionCreators.addAccount(serverRes.data.userLogin._id)
+            }
+         }
+
          history.push('/')
       } catch (err) {
          console.log(err)

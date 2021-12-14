@@ -13,7 +13,6 @@ function FriendListItem({ friend, actionCreators }) {
    const handleUnfriend = async () => {
       try {
          const res = await apis.unfriend(friend._id)
-         console.log('res: ', res)
          actionCreators.unFriend(res.data.unfriendedId)
       } catch (err) {
          console.log(err)

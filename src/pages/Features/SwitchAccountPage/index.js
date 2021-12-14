@@ -1,8 +1,33 @@
 import { List, ListSubheader } from '@material-ui/core'
+import { useEffect, useState } from 'react'
 import AccountListItem from '../../../components/Features/AccountListItem'
 import Header from '../../../components/Header'
+import apis from '../../../apis'
+import { connect } from 'react-redux'
 
-function SwitchAccountPage() {
+function SwitchAccountPage({ curUser, accounts }) {
+   const [accountList, setAccountList] = useState([])
+
+   useEffect(() => {
+      const getAccounts = async () => {
+         try {
+            const res = await apis.getAccounts(accounts)
+            setAccountList(res.data)
+         } catch (err) {
+            console.log(err)
+         }
+      }
+      getAccounts()
+   }, [accounts])
+
+   const renderAccounts = () =>
+      accountList.map(acc => {
+         if (acc._id !== curUser._id) {
+            return <AccountListItem key={acc._id} account={acc} />
+         }
+         return null
+      })
+
    return (
       <>
          <Header />
@@ -16,12 +41,15 @@ function SwitchAccountPage() {
                </ListSubheader>
             }
          >
-            <AccountListItem />
-            <AccountListItem />
-            <AccountListItem />
+            {curUser && renderAccounts()}
          </List>
       </>
    )
 }
 
-export default SwitchAccountPage
+const mapState = state => ({
+   curUser: state.user.curUser,
+   accounts: state.account.accounts,
+})
+
+export default connect(mapState)(SwitchAccountPage)

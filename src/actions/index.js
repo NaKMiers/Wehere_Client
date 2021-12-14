@@ -43,6 +43,9 @@ class Actions {
    setFriends = payload => ({ type: types.SET_FRIENDS, payload })
    unFriend = friendId => ({ type: types.UN_FRIEND, friendId })
 
+   addAccount = accId => ({ type: types.ADD_ACCOUNT, accId })
+   removeAccount = accId => ({ type: types.REMOVE_ACCOUNT, accId })
+
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })
 }

@@ -43,7 +43,6 @@ function SettingPage({ curUser, actionCreators }) {
    }
 
    const handleValidate = type => {
-      console.log('type: ', type)
       switch (type) {
          case 'curPassword':
             if (!currentPWValue.trim().length) {
@@ -83,7 +82,6 @@ function SettingPage({ curUser, actionCreators }) {
       ) {
          try {
             let res = await apis.changePassword(currentPWValue.trim(), newPWValue.trim())
-            console.log('res: ', res)
             if (res.data.isChangePasswordSuccess) {
                setOpenChangePW(false)
             } else {
