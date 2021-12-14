@@ -32,7 +32,7 @@ class Apis {
    seenNotifications = () => axios.put(`${API}/users/seen-notifications`)
    removeNotify = curNotifyId => axios.put(`${API}/users/remove-notify/${curNotifyId}`)
 
-   getFriends = friends => axios.post(`${API}/users/get-friends`, { friends })
+   getFriends = () => axios.get(`${API}/users/get-friends`)
 
    // messenger
    changeOnlineStatus = status => axios.put(`${API}/users/online-status`, { status })

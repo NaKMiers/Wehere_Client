@@ -5,9 +5,11 @@ import todoList from './todoListReducer'
 import notification from './notificationReducer'
 import conversation from './conversationReducer'
 import diary from './diaryReducer'
+import friend from './friendsReducer'
 
 const reducers = combineReducers({
    user,
+   friend,
    showBackdrop,
    todoList,
    notification,

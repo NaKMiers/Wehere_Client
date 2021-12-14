@@ -40,6 +40,9 @@ class Actions {
    editDiary = payload => ({ type: types.EDIT_DIARY, payload })
    deleteDiary = diaryId => ({ type: types.DELETE_DIARY, diaryId })
 
+   setFriends = payload => ({ type: types.SET_FRIENDS, payload })
+   unFriend = friendId => ({ type: types.UN_FRIEND, friendId })
+
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })
 }

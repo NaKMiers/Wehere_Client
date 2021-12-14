@@ -159,14 +159,18 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    }
 
    const handleUnfriend = async () => {
-      setAnchorEl(null)
-      setIsAllowAddFriends(false)
-      setJustUnf(true)
-      await apis.unfriend(userProfile._id)
+      try {
+         const res = await apis.unfriend(userProfile._id)
+         actionCreators.unFriend(res.data.unfriendedId)
+         setAnchorEl(null)
+         setIsAllowAddFriends(false)
+         setJustUnf(true)
+      } catch (err) {
+         console.log(err)
+      }
    }
 
    const handleOpenConversation = async () => {
-      console.log('handleOpenConversation')
       const res = await apis.getOneConversation(curUser._id, userProfile._id)
       actionCreators.setCurConversation(res.data)
       history.push(`/messenger/${userProfile._id}`)
