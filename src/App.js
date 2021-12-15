@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Routes } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from './actions'
 import apis from './apis'
@@ -48,7 +48,7 @@ function App({ curUser, actionCreators }) {
       <Router>
          <ThemeProvider theme={theme[Cookies.get('theme') ? JSON.parse(Cookies.get('theme')) : 0]}>
             <CssBaseline />
-            <Switch>{routes}</Switch>
+            <Routes>{routes}</Routes>
             <Backdrop />
          </ThemeProvider>
       </Router>

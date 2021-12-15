@@ -10,7 +10,7 @@ import {
 import { FormControl } from '@mui/material'
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
@@ -29,7 +29,7 @@ function RegisterPage({ actionCreators }) {
    const [errorPasswordAgain, setErrorPasswordAgain] = useState('')
 
    const styles = useStyles()
-   const history = useHistory()
+   const navigate = useNavigate()
 
    const handleSubmit = async e => {
       e.preventDefault()
@@ -52,7 +52,7 @@ function RegisterPage({ actionCreators }) {
       ) {
          const data = { username, email, password, gender }
          actionCreators.createNewUser(data)
-         history.push('/')
+         navigate('/')
       }
    }
 

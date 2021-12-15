@@ -1,16 +1,16 @@
 import { Avatar, Box, Button, Typography } from '@material-ui/core'
+import clsx from 'clsx'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
 import apis from '../../../apis'
 import { firebase } from '../../../commons/firebase'
 import useStyles from './styles'
-import { bindActionCreators } from 'redux'
-import actions from '../../../actions'
-import clsx from 'clsx'
 
 function SocialSignIn({ actionCreators }) {
    const styles = useStyles()
-   const history = useHistory()
+   const navigate = useNavigate()
 
    const SocialSignIn = async () => {
       const googleProvider = new firebase.auth.GoogleAuthProvider()
@@ -34,7 +34,7 @@ function SocialSignIn({ actionCreators }) {
             }
          }
 
-         history.push('/')
+         navigate('/')
       } catch (err) {
          console.log(err)
       }

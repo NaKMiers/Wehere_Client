@@ -14,8 +14,8 @@ function ListOptionMusicPage() {
    return (
       <List>
          <ListItem onClick={() => setShowRecentlySongs(!isShowRecentlySongs)}>
-            <ListItemAvatar>
-               <Avatar className={styles.listItemAvt}>
+            <ListItemAvatar className={styles.listItemAvt}>
+               <Avatar className={styles.avatar}>
                   <i className={clsx(styles.listIcon, 'fad fa-clock')} />
                </Avatar>
             </ListItemAvatar>
@@ -35,8 +35,8 @@ function ListOptionMusicPage() {
          </Collapse>
          <ListItem>
             <Link to='/musics/songs' className={styles.link}>
-               <ListItemAvatar>
-                  <Avatar className={styles.listItemAvt}>
+               <ListItemAvatar className={styles.listItemAvt}>
+                  <Avatar className={styles.avatar}>
                      <i
                         className={clsx(styles.listIcon, 'fad fa-music')}
                         style={{ fontSize: 22 }}
@@ -48,8 +48,8 @@ function ListOptionMusicPage() {
          </ListItem>
          <ListItem>
             <Link to='/musics/playlists' className={styles.link}>
-               <ListItemAvatar>
-                  <Avatar className={styles.listItemAvt}>
+               <ListItemAvatar className={styles.listItemAvt}>
+                  <Avatar className={styles.avatar}>
                      <i
                         className={clsx(styles.listIcon, 'fad fa-th-list')}
                         style={{ fontSize: 22, marginLeft: 2 }}
@@ -61,8 +61,8 @@ function ListOptionMusicPage() {
          </ListItem>
          <ListItem>
             <Link to='/musics/authors' className={styles.link}>
-               <ListItemAvatar>
-                  <Avatar className={styles.listItemAvt}>
+               <ListItemAvatar className={styles.listItemAvt}>
+                  <Avatar className={styles.avatar}>
                      <i
                         className={clsx(styles.listIcon, 'fad fa-user')}
                         style={{ marginLeft: 2 }}

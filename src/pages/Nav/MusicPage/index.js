@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import AuthorList from '../../../components/Nav2/Musics/AuthorList'
 import Header from '../../../components/Header'
 import ListOptionMusicPage from '../../../components/Nav2/Musics/ListOptionMusicPage'
@@ -10,28 +10,40 @@ function MusicPage() {
    return (
       <>
          <Header />
-         <Switch>
-            <Route exact path='/musics'>
-               <div style={{ maxWidth: 960, padding: '0px 6px', margin: 'auto' }}>
-                  <ListOptionMusicPage />
-               </div>
-            </Route>
-            <Route path='/musics/songs'>
-               <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
-                  <SongList />
-               </div>
-            </Route>
-            <Route path='/musics/playlists'>
-               <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
-                  <PlaylistList />
-               </div>
-            </Route>
-            <Route path='/musics/authors'>
-               <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
-                  <AuthorList />
-               </div>
-            </Route>
-         </Switch>
+         <Routes>
+            <Route
+               path='/'
+               element={
+                  <div style={{ maxWidth: 960, padding: '0px 6px', margin: 'auto' }}>
+                     <ListOptionMusicPage />
+                  </div>
+               }
+            />
+            <Route
+               path='/songs'
+               element={
+                  <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
+                     <SongList />
+                  </div>
+               }
+            />
+            <Route
+               path='/playlists'
+               element={
+                  <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
+                     <PlaylistList />
+                  </div>
+               }
+            />
+            <Route
+               path='/authors/*'
+               element={
+                  <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
+                     <AuthorList />
+                  </div>
+               }
+            />
+         </Routes>
          <PlayingBar />
       </>
    )

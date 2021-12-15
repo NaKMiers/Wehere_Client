@@ -1,7 +1,7 @@
 import { Button, TextField, Typography } from '@material-ui/core'
 import { useLayoutEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
@@ -16,7 +16,7 @@ function LoginPage({ curUser, actionCreators }) {
    const [errorPassword, setErrorPassword] = useState('')
 
    const styles = useStyles()
-   const history = useHistory()
+   const navigate = useNavigate()
 
    const handleSubmit = async e => {
       e.preventDefault()
@@ -27,9 +27,9 @@ function LoginPage({ curUser, actionCreators }) {
 
    useLayoutEffect(() => {
       if (curUser) {
-         history.push('/')
+         navigate('/')
       }
-   }, [curUser, history])
+   }, [curUser, navigate])
 
    const handleValidate = async type => {
       if (type === 'usernameOrEmail' && usernameOrEmail.length === 0) {
@@ -60,7 +60,7 @@ function LoginPage({ curUser, actionCreators }) {
                   }
                }
 
-               history.push('/')
+               navigate('/')
             }
          } catch (err) {
             console.log(err)

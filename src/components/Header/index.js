@@ -221,43 +221,30 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
             </Box>
 
             <Toolbar className={styles.toolbar} ref={toolbarRef}>
-               <NavLink
-                  className={styles.headerItem}
-                  to='/'
-                  exact
-                  activeClassName={styles.selectedHome}
-               >
+               <NavLink className={styles.headerItem} to='/' activeclassname={styles.selectedHome}>
                   <HomeIcon />
                </NavLink>
-               <NavLink
-                  className={styles.headerItem}
-                  to='/blogs'
-                  exact
-                  activeClassName={styles.selected}
-               >
+               <NavLink className={styles.headerItem} to='/blogs' activeclassname={styles.selected}>
                   <AssignmentIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/images'
-                  exact
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <PhotoLibraryIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/videos'
-                  exact
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <VideoLibraryIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/shorts'
-                  exact
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <SlowMotionVideoIcon className={styles.headerIcon} />
                </NavLink>
@@ -278,38 +265,35 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                <NavLink
                   className={styles.headerItem}
                   to='/messenger'
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <ChatIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/musics'
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <LibraryMusicIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/events'
-                  exact
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <EmojiEventsIcon className={styles.headerIcon} style={{ fontSize: 40 }} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/todolist'
-                  exact
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <CheckBoxIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/diaries'
-                  exact
-                  activeClassName={styles.selected}
+                  activeclassname={styles.selected}
                >
                   <DiaryIcon style={{ fontSize: 30 }} />
                </NavLink>

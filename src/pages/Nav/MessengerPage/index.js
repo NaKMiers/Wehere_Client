@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { Typography, Box } from '@material-ui/core'
 import actions from '../../../actions'
@@ -43,32 +43,41 @@ function MessengerPage({ curUser, actionCreators, conversations }) {
    return (
       <>
          <Header />
-         <Switch>
-            <Route exact path='/messenger'>
-               <Box style={{ maxWidth: 960, margin: 'auto' }}>
-                  {conversations.length ? (
-                     <>
-                        <OnlineBar />
-                        <ConversationList />
-                     </>
-                  ) : (
-                     <Typography className={styles.noCvs}>
-                        No conversations yet, please make friends so we can chat.
-                     </Typography>
-                  )}
-               </Box>
-            </Route>
-            <Route exact path='/messenger/onlines'>
-               <Box style={{ maxWidth: 960, padding: '6px 8px', margin: 'auto' }}>
-                  <OnlineList />
-               </Box>
-            </Route>
-            <Route exact path='/messenger/:user'>
-               <Box style={{ maxWidth: 960, margin: 'auto' }}>
-                  <Chatbox />
-               </Box>
-            </Route>
-         </Switch>
+         <Routes>
+            <Route
+               path='/'
+               element={
+                  <Box style={{ maxWidth: 960, margin: 'auto' }}>
+                     {conversations.length ? (
+                        <>
+                           <OnlineBar />
+                           <ConversationList />
+                        </>
+                     ) : (
+                        <Typography className={styles.noCvs}>
+                           No conversations yet, please make friends so we can chat.
+                        </Typography>
+                     )}
+                  </Box>
+               }
+            />
+            <Route
+               path='/onlines'
+               element={
+                  <Box style={{ maxWidth: 960, padding: '6px 8px', margin: 'auto' }}>
+                     <OnlineList />
+                  </Box>
+               }
+            />
+            <Route
+               path='/:user'
+               element={
+                  <Box style={{ maxWidth: 960, margin: 'auto' }}>
+                     <Chatbox />
+                  </Box>
+               }
+            />
+         </Routes>
       </>
    )
 }

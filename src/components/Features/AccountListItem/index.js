@@ -20,7 +20,7 @@ import useStyles from './styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import apis from '../../../apis'
 
 function AccountListItem({ account, actionCreators }) {
@@ -31,7 +31,7 @@ function AccountListItem({ account, actionCreators }) {
    const [errorPassword, setErrorPassword] = useState('')
 
    const styles = useStyles()
-   const history = useHistory()
+   const navigate = useNavigate()
 
    const handleClick = () => {
       setOpenRmBtn(!isOpenRmBtn)
@@ -77,7 +77,7 @@ function AccountListItem({ account, actionCreators }) {
                   }
                }
 
-               history.push('/')
+               navigate('/')
             }
          } catch (err) {
             console.log(err)
