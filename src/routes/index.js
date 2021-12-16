@@ -29,104 +29,133 @@ import AuthLogin from '../commons/AuthLogin'
 const routes = [
    {
       path: '/',
-      element: <HomePage />,
+      exact: true,
+      component: () => <HomePage />,
    },
    {
       path: '/blogs',
-      element: <BlogPage />,
+      exact: true,
+      component: () => <BlogPage />,
    },
    {
       path: '/images',
-      element: <ImagePage />,
+      exact: true,
+      component: () => <ImagePage />,
    },
    {
       path: '/videos',
-      element: <VideoPage />,
+      exact: true,
+      component: () => <VideoPage />,
    },
    {
       path: '/shorts',
-      element: <ShortPage />,
+      exact: true,
+      component: () => <ShortPage />,
    },
    {
-      path: '/musics/*',
-      element: <MusicPage />,
+      path: '/musics',
+      exact: false,
+      component: () => <MusicPage />,
    },
    {
-      path: '/messenger/*',
-      element: <MessengerPage />,
+      path: '/messenger',
+      exact: false,
+      component: () => <MessengerPage />,
    },
    {
       path: '/events',
-      element: <EventPage />,
+      exact: true,
+      component: () => <EventPage />,
    },
    {
       path: '/todolist',
-      element: <TodoListPage />,
+      exact: true,
+      component: () => <TodoListPage />,
    },
    {
-      path: '/profile/*',
-      element: <ProfilePage />,
+      path: '/profile',
+      exact: false,
+      component: () => <ProfilePage />,
    },
    {
       path: '/friend-list',
-      element: <FriendListPage />,
+      exact: true,
+      component: () => <FriendListPage />,
    },
    {
       path: '/diaries',
-      element: <DiaryPage />,
+      exact: true,
+      component: () => <DiaryPage />,
    },
    {
       path: '/menu',
-      element: <MenuPage />,
+      exact: true,
+      component: () => <MenuPage />,
    },
    {
       path: '/menu/setting',
-      element: <SettingPage />,
+      exact: true,
+      component: () => <SettingPage />,
    },
    {
       path: '/menu/faq',
-      element: <FAQPage />,
+      exact: true,
+      component: () => <FAQPage />,
    },
    {
       path: '/menu/help-and-support',
-      element: <HelpAndSupportPage />,
+      exact: true,
+      component: () => <HelpAndSupportPage />,
    },
    {
       path: '/menu/sync',
-      element: <SyncPage />,
+      exact: true,
+      component: () => <SyncPage />,
    },
    {
       path: '/menu/switch-account',
-      element: <SwitchAccountPage />,
+      exact: true,
+      component: () => <SwitchAccountPage />,
    },
    {
       path: '/login',
-      element: <LoginPage />,
+      exact: true,
+      component: () => <LoginPage />,
    },
    {
       path: '/register',
-      element: <RegisterPage />,
+      exact: true,
+      component: () => <RegisterPage />,
    },
    {
       path: '/restore-password',
-      element: <RestorePasswordPage />,
+      exact: true,
+      component: () => <RestorePasswordPage />,
    },
    {
-      path: '/*',
-      element: <NotFoundPage />,
+      path: '/',
+      exact: true,
+      component: () => <NotFoundPage />,
    },
 ]
 
 const renderRoutes = routes =>
    routes.map(route => {
       if (['/login', '/register', '/restore-password'].includes(route.path)) {
-         return <Route key={route.path} path={route.path} element={route.element} />
+         return (
+            <Route
+               key={route.path}
+               exact={route.exact}
+               path={route.path}
+               component={route.component}
+            />
+         )
       } else {
-         return AuthLogin({
-            children: route.element,
-            key: route.path,
-            path: route.path,
-         })
+         return (
+            <AuthLogin key={route.path} path={route.path} exact={route.exact}>
+               {route.component()}
+            </AuthLogin>
+         )
       }
    })
 

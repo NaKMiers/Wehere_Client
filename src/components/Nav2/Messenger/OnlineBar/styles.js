@@ -29,4 +29,10 @@ export default makeStyles(theme => ({
       position: 'relative',
       minWidth: 32,
    },
+
+   noFriendOnline: {
+      fontSize: 18,
+      textAlign: 'center',
+      marginTop: 8,
+   },
 }))

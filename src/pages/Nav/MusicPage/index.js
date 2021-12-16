@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import AuthorList from '../../../components/Nav2/Musics/AuthorList'
 import Header from '../../../components/Header'
 import ListOptionMusicPage from '../../../components/Nav2/Musics/ListOptionMusicPage'
@@ -10,40 +10,47 @@ function MusicPage() {
    return (
       <>
          <Header />
-         <Routes>
+         <Switch>
             <Route
                path='/'
-               element={
+               exact={true}
+               component={
                   <div style={{ maxWidth: 960, padding: '0px 6px', margin: 'auto' }}>
                      <ListOptionMusicPage />
                   </div>
                }
             />
             <Route
-               path='/songs'
-               element={
+               path='/song
+                              exact={true}
+s'
+               component={
                   <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
                      <SongList />
                   </div>
                }
             />
             <Route
-               path='/playlists'
-               element={
+               path='/play
+                              exact={true}
+lists'
+               component={
                   <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
                      <PlaylistList />
                   </div>
                }
             />
             <Route
-               path='/authors/*'
-               element={
+               path='/auth
+                              exact={true}
+ors/*'
+               component={
                   <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
                      <AuthorList />
                   </div>
                }
             />
-         </Routes>
+         </Switch>
          <PlayingBar />
       </>
    )

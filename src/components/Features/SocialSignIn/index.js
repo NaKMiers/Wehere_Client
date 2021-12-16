@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Typography } from '@material-ui/core'
 import clsx from 'clsx'
 import { connect } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
@@ -10,7 +10,7 @@ import useStyles from './styles'
 
 function SocialSignIn({ actionCreators }) {
    const styles = useStyles()
-   const navigate = useNavigate()
+   const history = useHistory()
 
    const SocialSignIn = async () => {
       const googleProvider = new firebase.auth.GoogleAuthProvider()
@@ -20,7 +20,6 @@ function SocialSignIn({ actionCreators }) {
 
          actionCreators.loginRequest(serverRes.data.userLogin)
          localStorage.setItem('user', serverRes.data.token) // set localStorage('user') for JWT
-
          const accounts = JSON.parse(localStorage.getItem('accounts'))
          if (!accounts) {
             actionCreators.addAccount(serverRes.data.userLogin._id)
@@ -34,7 +33,7 @@ function SocialSignIn({ actionCreators }) {
             }
          }
 
-         navigate('/')
+         history.push('/')
       } catch (err) {
          console.log(err)
       }

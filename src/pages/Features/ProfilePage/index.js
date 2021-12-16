@@ -21,7 +21,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import { styled } from '@material-ui/styles'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
@@ -53,7 +53,7 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
 
    const styles = useStyles()
    const localtion = useLocation()
-   const navigate = useNavigate()
+   const history = useHistory()
 
    useEffect(() => {
       const userId = localtion.pathname.split('/')[2]
@@ -173,7 +173,7 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    const handleOpenConversation = async () => {
       const res = await apis.getOneConversation(curUser._id, userProfile._id)
       actionCreators.setCurConversation(res.data)
-      navigate(`/messenger/${userProfile._id}`)
+      history.push(`/messenger/${userProfile._id}`)
    }
 
    return (
