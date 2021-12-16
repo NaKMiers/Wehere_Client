@@ -1,8 +1,18 @@
-import { Avatar, Collapse, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
+import {
+   Avatar,
+   Collapse,
+   List,
+   ListItem,
+   ListItemAvatar,
+   ListItemText,
+   Button,
+} from '@material-ui/core'
+import { TextField } from '@mui/material'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ExpandIcon from '../../../Icons/ExpandIcon'
+import SearchIcon from '../../../Icons/SearchIcon'
 import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
@@ -13,6 +23,17 @@ function ListOptionMusicPage() {
 
    return (
       <List>
+         <ListItem>
+            <TextField
+               className={styles.searchTextField}
+               variant='standard'
+               placeholder='Search...'
+               InputProps={{ className: styles.searchInput }}
+            />
+            <Button className={styles.searchBtn}>
+               <SearchIcon />
+            </Button>
+         </ListItem>
          <ListItem onClick={() => setShowRecentlySongs(!isShowRecentlySongs)}>
             <ListItemAvatar className={styles.listItemAvt}>
                <Avatar className={styles.avatar}>

@@ -1,16 +1,15 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
 
-function SaveIcon({ color, style }) {
+function SaveChange({ color, style }) {
    const styles = makeStyles(theme => ({
       icon: {
          fontSize: 20,
          cursor: 'pointer',
          color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text,
-         marginLeft: 8,
       },
    }))()
-   return <i className={clsx(styles.icon, 'fad fa-bookmark')} style={style} />
+   return <i className={clsx(styles.icon, 'fad fa-save')} style={style} />
 }
 
-export default SaveIcon
+export default SaveChange

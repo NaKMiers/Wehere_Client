@@ -15,6 +15,8 @@ class Actions {
    changeThemeRequest = payload => ({ type: types.CHANGE_THEME_REQUEST, payload })
    changeTheme = theme => ({ type: types.CHANGE_THEME, theme })
    setTheme = theme => ({ type: types.SET_THEME, theme })
+   changeAvatar = payload => ({ type: types.CHANGE_AVATAR, payload })
+   changeBackground = payload => ({ type: types.CHANGE_BACKGROUND, payload })
 
    getAllTaskRequest = () => ({ type: types.GET_ALL_TASK_REQUEST })
    getAllTask = payload => ({ type: types.GET_ALL_TASK, payload })

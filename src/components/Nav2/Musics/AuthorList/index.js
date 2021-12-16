@@ -9,20 +9,18 @@ function AuthorList() {
 
    return (
       <Switch>
-         <Route
-            path='/'
-            exact={true}
-            component={
-               <List style={{ padding: 16 }}>
-                  <Typography className={styles.authorCount}>Author: 32</Typography>
-                  <AuthorListItem />
-                  <AuthorListItem />
-                  <AuthorListItem />
-                  <AuthorListItem />
-               </List>
-            }
-         />
-         <Route path='/:authorName' exact={true} component={<SongOfAuthor />} />
+         <Route path='/musics/authors' exact={true}>
+            <List style={{ padding: 16 }}>
+               <Typography className={styles.authorCount}>Author: 32</Typography>
+               <AuthorListItem />
+               <AuthorListItem />
+               <AuthorListItem />
+               <AuthorListItem />
+            </List>
+         </Route>
+         <Route path='/musics/authors/:authorName' exact={true}>
+            <SongOfAuthor />
+         </Route>
       </Switch>
    )
 }

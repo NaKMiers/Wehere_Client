@@ -31,6 +31,7 @@ const renderTheme = () => {
             },
             default: {
                main: '#fff',
+               secondary: '#333',
                text: '#333',
             },
          },

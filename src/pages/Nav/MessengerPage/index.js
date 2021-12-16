@@ -30,17 +30,6 @@ function MessengerPage({ curUser, actionCreators, conversations }) {
       }
    }, [curUser?._id, actionCreators])
 
-   useEffect(() => {
-      const changeOnlineStatus = async status => {
-         await apis.changeOnlineStatus(status)
-      }
-      changeOnlineStatus(true)
-
-      return () => {
-         changeOnlineStatus(false)
-      }
-   }, [])
-
    const styles = useStyles()
 
    return (

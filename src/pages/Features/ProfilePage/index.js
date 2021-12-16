@@ -5,6 +5,7 @@ import {
    ButtonGroup,
    CardMedia,
    Divider,
+   Fab,
    Grid,
    List,
    ListItem,
@@ -25,11 +26,13 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
-import Blog from '../../../components/Nav1/Blog'
 import Header from '../../../components/Header'
 import BlockIcon from '../../../components/Icons/BlockIcon'
+import CameraIcon from '../../../components/Icons/CameraIcon'
 import HideUserIcon from '../../../components/Icons/HideUserIcon'
 import MoreIcon from '../../../components/Icons/MoreIcon'
+import SaveChange from '../../../components/Icons/SaveChange'
+import Blog from '../../../components/Nav1/Blog'
 import Image from '../../../components/Nav1/Image'
 import Video from '../../../components/Nav1/Video'
 import useStyles from './styles'
@@ -42,6 +45,11 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    const [isAllowAddFriends, setIsAllowAddFriends] = useState(true)
    const [justUnf, setJustUnf] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
+   const [avatar, setAvatar] = useState('')
+   const [background, setBackground] = useState('')
+   const [isOpenSaveAvtBtn, setIsOpenSaveAvtBtn] = useState(false)
+   const [isOpenSaveBgBtn, setIsOpenSaveBgBtn] = useState(false)
+
    const open = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
@@ -176,6 +184,57 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
       history.push(`/messenger/${userProfile._id}`)
    }
 
+   const handleUpdateAvtAndBg = type => {
+      console.log('handleImportData')
+      const input = document.createElement('input')
+      input.type = 'file'
+      input.onchange = e => {
+         const reader = new FileReader()
+         reader.onloadend = () => {
+            if (type === 'avatar') {
+               setAvatar(reader.result)
+               setIsOpenSaveAvtBtn(true)
+            } else {
+               setBackground(reader.result)
+               setIsOpenSaveBgBtn(true)
+            }
+         }
+         reader.readAsDataURL(e.target.files[0])
+      }
+      input.click()
+   }
+
+   const handleSaveAvtAndBg = type => {
+      console.log('handleSaveAvtAndBg')
+      if (type === 'avatar') {
+         const updateAvatar = async () => {
+            try {
+               const res = await apis.updateAvatar(avatar)
+               console.log('res: ', res)
+               setAvatar('')
+               setIsOpenSaveAvtBtn(false)
+               actionCreators.changeAvatar(res.data.avatar)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+         updateAvatar()
+      } else {
+         const updateBackground = async () => {
+            try {
+               const res = await apis.updateBackground(background)
+               console.log('res: ', res)
+               setBackground('')
+               setIsOpenSaveBgBtn(false)
+               actionCreators.changeBackground(res.data.background)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+         updateBackground()
+      }
+   }
+
    return (
       <div>
          <Header />
@@ -185,10 +244,55 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                   height='300px'
                   className={styles.bgProfile}
                   component='img'
-                  image={userProfile?.background}
+                  image={
+                     background ||
+                     (curUser?._id !== userProfile?._id
+                        ? userProfile?.background
+                        : curUser?.background)
+                  }
                />
+               {curUser?._id === userProfile?._id &&
+                  (!isOpenSaveBgBtn ? (
+                     <Fab
+                        className={styles.updateBgBtn}
+                        onClick={_ => handleUpdateAvtAndBg('background')}
+                     >
+                        <CameraIcon color='secondary' />
+                     </Fab>
+                  ) : (
+                     <Fab
+                        className={styles.saveBgBtn}
+                        onClick={_ => handleSaveAvtAndBg('background')}
+                     >
+                        <SaveChange />
+                     </Fab>
+                  ))}
+
                <Box className={styles.avatarWrap}>
-                  <Avatar className={styles.avatar} alt='avt' src={userProfile?.avatar} />
+                  <CardMedia
+                     className={styles.avatar}
+                     component='img'
+                     image={
+                        avatar ||
+                        (curUser?._id !== userProfile?._id ? userProfile?.avatar : curUser?.avatar)
+                     }
+                  />
+                  {curUser?._id === userProfile?._id &&
+                     (!isOpenSaveAvtBtn ? (
+                        <Fab
+                           className={styles.updateAvtBtn}
+                           onClick={_ => handleUpdateAvtAndBg('avatar')}
+                        >
+                           <CameraIcon color='secondary' />
+                        </Fab>
+                     ) : (
+                        <Fab
+                           className={styles.saveBgBtn}
+                           onClick={_ => handleSaveAvtAndBg('avatar')}
+                        >
+                           <SaveChange />
+                        </Fab>
+                     ))}
                </Box>
                <Typography variant='h4' className={styles.name}>
                   {userProfile?.username}

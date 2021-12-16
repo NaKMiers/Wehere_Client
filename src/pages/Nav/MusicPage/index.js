@@ -11,45 +11,26 @@ function MusicPage() {
       <>
          <Header />
          <Switch>
-            <Route
-               path='/'
-               exact={true}
-               component={
-                  <div style={{ maxWidth: 960, padding: '0px 6px', margin: 'auto' }}>
-                     <ListOptionMusicPage />
-                  </div>
-               }
-            />
-            <Route
-               path='/song
-                              exact={true}
-s'
-               component={
-                  <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
-                     <SongList />
-                  </div>
-               }
-            />
-            <Route
-               path='/play
-                              exact={true}
-lists'
-               component={
-                  <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
-                     <PlaylistList />
-                  </div>
-               }
-            />
-            <Route
-               path='/auth
-                              exact={true}
-ors/*'
-               component={
-                  <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
-                     <AuthorList />
-                  </div>
-               }
-            />
+            <Route path='/musics' exact={true}>
+               <div style={{ maxWidth: 960, padding: '0px 6px', margin: 'auto' }}>
+                  <ListOptionMusicPage />
+               </div>
+            </Route>
+            <Route path='/musics/songs' exact={true}>
+               <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
+                  <SongList />
+               </div>
+            </Route>
+            <Route path='/musics/playlists' exact={true}>
+               <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
+                  <PlaylistList />
+               </div>
+            </Route>
+            <Route path='/musics/authors' exact={false}>
+               <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
+                  <AuthorList />
+               </div>
+            </Route>
          </Switch>
          <PlayingBar />
       </>

@@ -25,6 +25,14 @@ function useReducer(state = initState, action) {
             },
          }
 
+      case types.CHANGE_AVATAR:
+         console.log('CHANGE_AVATAR')
+         return { ...state, curUser: { ...state.curUser, avatar: payload } }
+
+      case types.CHANGE_BACKGROUND:
+         console.log('CHANGE_BACKGROUND')
+         return { ...state, curUser: { ...state.curUser, background: payload } }
+
       case types.UPDATE_TODOLIST:
          return { ...state, curUser: payload }
 

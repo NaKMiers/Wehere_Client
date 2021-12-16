@@ -6,8 +6,8 @@ function SearchIcon({ style }) {
       icon: {
          fontSize: 26,
          cursor: 'pointer',
-         color: theme.palette.primary.text
-      }
+         color: theme.palette.primary.text,
+      },
    }))()
 
    return <i className={clsx(styles.icon, 'fad fa-search')} style={style} />

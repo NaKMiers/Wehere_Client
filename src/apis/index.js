@@ -14,6 +14,8 @@ class Apis {
    changePassword = (curPassword, newPassword) =>
       axios.put(`${API}/users/change-password`, { curPassword, newPassword })
    changeTheme = themeIndex => axios.put(`${API}/users/change-theme/${themeIndex}`)
+   updateAvatar = avatar => axios.put(`${API}/users/update-avatar`, { avatar })
+   updateBackground = background => axios.put(`${API}/users/update-background`, { background })
 
    // todolist
    getAllTaskRequest = () => axios.post(`${API}/todo-list`)

@@ -28,4 +28,18 @@ export default makeStyles(theme => ({
       fontSize: 24,
       fontWeight: 300,
    },
+
+   searchTextField: {
+      width: '100%',
+      padding: 0,
+      margin: '0px 8px 0px 0px',
+   },
+   searchInput: {
+      color: theme.palette.primary.text,
+      padding: '2px 6px',
+   },
+   searchBtn: {
+      background: theme.palette.primary.gradient,
+      marginLeft: 16,
+   },
 }))

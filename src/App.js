@@ -44,6 +44,18 @@ function App({ curUser, actionCreators }) {
       getNotifications()
    }, [curUser?.notifications, actionCreators])
 
+   // change online status
+   useEffect(() => {
+      const changeOnlineStatus = async status => {
+         await apis.changeOnlineStatus(status)
+      }
+      changeOnlineStatus(true)
+
+      return () => {
+         changeOnlineStatus(false)
+      }
+   }, [])
+
    return (
       <Router>
          <ThemeProvider theme={theme[Cookies.get('theme') ? JSON.parse(Cookies.get('theme')) : 0]}>
