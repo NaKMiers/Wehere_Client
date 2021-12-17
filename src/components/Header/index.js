@@ -146,6 +146,7 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                return undefined
          }
       })
+
    const handleResponseNotification = async ({ type, senderId, curUserId, value, curNotifyId }) => {
       switch (type) {
          case 'ADD_FRIEND_REQUEST':
@@ -191,7 +192,6 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                   <Typography className={styles.wehereLogo}>Wehere</Typography>
                ) : (
                   <TextField
-                     // style={{ width: '80%' }}
                      placeholder='What you need...?'
                      className={styles.searchTextField}
                      InputProps={{ className: styles.searchInput }}
@@ -221,30 +221,30 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
             </Box>
 
             <Toolbar className={styles.toolbar} ref={toolbarRef}>
-               <NavLink className={styles.headerItem} to='/' activeclassname={styles.selectedHome}>
+               <NavLink className={styles.headerItem} to='/' activeClassName={styles.selectedHome}>
                   <HomeIcon />
                </NavLink>
-               <NavLink className={styles.headerItem} to='/blogs' activeclassname={styles.selected}>
+               <NavLink className={styles.headerItem} to='/blogs' activeClassName={styles.selected}>
                   <AssignmentIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/images'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <PhotoLibraryIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/videos'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <VideoLibraryIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/shorts'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <SlowMotionVideoIcon className={styles.headerIcon} />
                </NavLink>
@@ -265,35 +265,35 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                <NavLink
                   className={styles.headerItem}
                   to='/messenger'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <ChatIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/musics'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <LibraryMusicIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/events'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <EmojiEventsIcon className={styles.headerIcon} style={{ fontSize: 40 }} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/todolist'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <CheckBoxIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink
                   className={styles.headerItem}
                   to='/diaries'
-                  activeclassname={styles.selected}
+                  activeClassName={styles.selected}
                >
                   <DiaryIcon style={{ fontSize: 30 }} />
                </NavLink>

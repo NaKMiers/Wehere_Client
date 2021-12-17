@@ -50,6 +50,11 @@ class Apis {
    editDiary = (diaryId, data) => axios.put(`${API}/diaries/edit/${diaryId}`, data)
    deleteDiary = diaryId => axios.delete(`${API}/diaries/delete/${diaryId}`)
 
+   // images
+   postImageStatus = data => axios.post(`${API}/images/post`, data)
+   postBlogStatus = data => axios.post(`${API}/blogs/post`, data)
+   postVideoStatus = data => axios.post(`${API}/videos/post`, data)
+
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })
 }
 
