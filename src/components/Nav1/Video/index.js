@@ -72,11 +72,12 @@ function Video() {
             <iframe
                width='100%'
                height='400'
-               src='https://www.youtube.com/embed/N-hhPRa_iaA'
+               src='https://www.youtube.com/embed/HOGfrOK9a84'
                title='YouTube video player'
                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                allowFullScreen
             />
+
             <CardContent>
                <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together

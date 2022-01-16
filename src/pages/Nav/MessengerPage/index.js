@@ -15,6 +15,19 @@ import { useState } from 'react'
 
 function MessengerPage({ curUser, actionCreators, conversations }) {
    const [isNoCvs, setIsNoCvs] = useState(true)
+
+   // change online status
+   useEffect(() => {
+      const changeOnlineStatus = async status => {
+         await apis.changeOnlineStatus(status)
+      }
+      changeOnlineStatus(true)
+
+      return () => {
+         changeOnlineStatus(false)
+      }
+   }, [])
+
    useEffect(() => {
       if (curUser?._id) {
          const getConversations = async () => {

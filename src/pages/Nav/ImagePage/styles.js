@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
-   addDiaryBtnBox: {
+   addImageBtnBox: {
       position: 'fixed',
       bottom: 28,
       right: 32,
    },
-   addDiaryBtn: {
+   addImageBtn: {
       background: theme.palette.primary.gradient,
    },
 }))

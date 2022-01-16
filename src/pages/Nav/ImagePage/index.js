@@ -22,8 +22,8 @@ function ImagePage({ curUser }) {
             <Image />
          </div>
          <ImageModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
-         <Box className={styles.addDiaryBtnBox} onClick={handleOpenModal}>
-            <Fab aria-label='add' className={styles.addDiaryBtn}>
+         <Box className={styles.addImageBtnBox} onClick={handleOpenModal}>
+            <Fab aria-label='add' className={styles.addImageBtn}>
                <AddIcon />
             </Fab>
          </Box>
