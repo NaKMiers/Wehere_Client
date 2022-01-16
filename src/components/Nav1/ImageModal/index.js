@@ -21,6 +21,7 @@ import apis from '../../../apis'
 
 function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
+   const [imageListPreview, setImageListPreview] = useState([])
    const [imageList, setImageList] = useState([])
 
    const styles = useStyles()
@@ -29,52 +30,71 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
       const input = document.createElement('input')
       input.type = 'file'
       input.onchange = e => {
+         const files = e.target.files
          const reader = new FileReader()
-         reader.onloadend = () => {
+         reader.onload = () => {
             if (index >= 0) {
-               setImageList(
-                  imageList.map((image, i) => {
+               setImageListPreview(
+                  imageListPreview.map((image, i) => {
                      if (i !== index) return image
                      return reader.result
                   })
                )
+               setImageList(
+                  imageListPreview.map((image, i) => {
+                     if (i !== index) return image
+                     return files[0]
+                  })
+               )
             } else {
-               setImageList([...imageList, reader.result])
+               setImageListPreview([...imageListPreview, reader.result])
+               setImageList([...imageList, files[0]])
             }
          }
-         reader.readAsDataURL(e.target.files[0])
+         reader.readAsDataURL(files[0])
       }
       input.click()
    }
 
    const handleRemoveImage = index => {
+      setImageListPreview(imageListPreview.filter((image, i) => i !== index))
       setImageList(imageList.filter((image, i) => i !== index))
    }
 
    const handleClear = () => {
       setStatusValue('')
+      setImageListPreview([])
       setImageList([])
    }
 
    const handlePostImageStatus = e => {
       e.preventDefault()
       const postImageStatus = async () => {
+         let data = new FormData()
+         data.append('statusText', statusValue)
+         for (let i = 0; i < imageList.length; i++) {
+            data.append('image', imageList[i])
+         }
+
          try {
-            await apis.postImageStatus({
-               statusText: statusValue,
-               images: imageList,
-            })
-            handleClear()
-            handleCloseModal()
+            const res = await apis.postImageStatus(data)
+            if (res.status === 200) {
+               handleClear()
+               handleCloseModal()
+            }
          } catch (err) {
+            alert('Post image status unsuccessfully. Please try again.')
             console.log(err)
          }
       }
       postImageStatus()
    }
 
+   console.log('imageList: ', imageList)
+   console.log('imageListPreview: ', imageListPreview)
+
    const renderImageItem = () =>
-      imageList.map((image, i) => (
+      imageListPreview.map((image, i) => (
          <Box key={i} className={styles.imageItemWrap}>
             <CardMedia className={styles.imageItem} component='img' alt='image' image={image} />
             <Box className={styles.actionImgBtns}>
@@ -113,10 +133,11 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
                         />
 
                         <Box className={styles.imagesList}>
-                           {!!imageList.length && (
+                           {!!imageListPreview.length && (
                               <>
                                  <Typography className={styles.amountImages}>
-                                    {imageList.length} {imageList.length === 1 ? 'image' : 'images'}
+                                    {imageListPreview.length}{' '}
+                                    {imageListPreview.length === 1 ? 'image' : 'images'}
                                  </Typography>
                                  {renderImageItem()}
                               </>

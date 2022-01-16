@@ -44,12 +44,13 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
    const handleClear = () => {
       setStatusValue('')
       setVideo(null)
+      videoReview(null)
    }
 
    const handlePostVideoStatus = e => {
       e.preventDefault()
       const postVideoStatus = async () => {
-         var data = new FormData()
+         let data = new FormData()
          data.append('video', video)
          data.append('statusText', statusValue)
 
@@ -60,7 +61,7 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
                handleCloseModal()
             }
          } catch (err) {
-            alert('Post video unsuccessfully. Please try again.')
+            alert('Post video status unsuccessfully. Please try again.')
             console.log(err)
          }
       }
