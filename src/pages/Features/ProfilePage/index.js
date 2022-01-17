@@ -67,9 +67,9 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
 
    const renderTabs = () => {
       if (currentTab === 'info') {
-         return <InfoTab />
+         return <InfoTab userProfile={userProfile} />
       } else if (currentTab === 'friends') {
-         return <FriendsTab />
+         return <FriendsTab userProfile={userProfile} curUser={curUser} />
       } else {
          return <PostsTab userProfile={userProfile} />
       }

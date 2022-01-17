@@ -37,6 +37,15 @@ export default makeStyles(theme => ({
       textDecoration: 'none',
    },
 
+   videoWrap: {
+      margin: '0px 12px',
+   },
+
+   videoItem: {
+      width: '100%',
+      borderRadius: 8,
+   },
+
    menu: {
       '& .MuiPaper-root': {
          background: theme.palette.secondary.main,

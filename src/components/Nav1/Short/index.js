@@ -15,8 +15,9 @@ import ShareIcon from '../../../components/Icons/ShareIcon'
 import Comment from '../../Comment'
 import useStyles from './styles'
 import { API } from '../../../constants'
+import moment from 'moment'
 
-function Short({ short, author }) {
+function Short({ shortPost, author }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenComments, setOpenComments] = useState(false)
    const open = Boolean(anchorEl)
@@ -39,8 +40,8 @@ function Short({ short, author }) {
          <Card className={styles.card}>
             <CardHeader
                avatar={
-                  <Link to='/profile/user1' className={styles.linkToProfile}>
-                     <Avatar alt='avt' src='https://bom.to/TBnSyu' />
+                  <Link to={`/profile/${author._id}`} className={styles.linkToProfile}>
+                     <Avatar alt='avt' src={author.avatar} />
                   </Link>
                }
                action={
@@ -48,11 +49,11 @@ function Short({ short, author }) {
                      <MoreIcon rotate />
                   </IconButton>
                }
-               title='Shrimp and Chorizo Paella'
-               subheader='September 14, 2016'
+               title={author.username}
+               subheader={moment(shortPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
             />
             <Box className={styles.shortWrapItem}>
-               <video className={styles.shortItem} src={`${API}/${short.short}`} controls />
+               <video className={styles.shortItem} src={`${API}/${shortPost.short}`} controls />
             </Box>
             <CardActions
                disableSpacing

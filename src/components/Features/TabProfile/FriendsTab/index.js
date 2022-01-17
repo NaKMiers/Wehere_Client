@@ -1,55 +1,36 @@
-import {
-   Avatar,
-   Box,
-   Button,
-   List,
-   ListItem,
-   ListItemAvatar,
-   ListItemText,
-} from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Box, List } from '@material-ui/core'
+import { useEffect, useState } from 'react'
+import apis from '../../../../apis'
+import FriendsTabItem from './FriendsTabItem'
 import useStyles from './styles'
 
-function FriendsTab() {
+function FriendsTab({ userProfile, curUser }) {
+   const [friends, setFriends] = useState([])
+
    const styles = useStyles()
+
+   useEffect(() => {
+      const getFriends = async () => {
+         if (userProfile?._id) {
+            try {
+               const res = await apis.getFriends(userProfile.friends)
+               setFriends(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getFriends()
+   }, [userProfile?._id, userProfile.friends])
+
+   const renderFriends = () =>
+      friends
+         .filter(f => f._id !== curUser._id)
+         .map(f => <FriendsTabItem key={f._id} friend={f} curUser={curUser} />)
 
    return (
       <Box className={styles.tab}>
-         <List>
-            <ListItem className={styles.friendListItem}>
-               <Link className={styles.linkFriendListItem} to='/profile/user1'>
-                  <ListItemAvatar>
-                     <Avatar alt='avt' src='https://bom.to/tIyuw5' />
-                  </ListItemAvatar>
-                  <ListItemText primary='User1' />
-               </Link>
-               <Button className={styles.friendBtn} variant='contained'>
-                  Add Friend
-               </Button>
-            </ListItem>
-            <ListItem className={styles.friendListItem}>
-               <Link className={styles.linkFriendListItem} to='/profile/user2'>
-                  <ListItemAvatar>
-                     <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary='User2' />
-               </Link>
-               <Button className={styles.friendBtn} variant='contained'>
-                  Add Friend
-               </Button>
-            </ListItem>
-            <ListItem className={styles.friendListItem}>
-               <Link className={styles.linkFriendListItem} to='/profile/user3'>
-                  <ListItemAvatar>
-                     <Avatar alt='avt' src='https://bom.to/tIyuw5'></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary='User3' />
-               </Link>
-               <Button className={styles.friendBtn} variant='contained'>
-                  Add Friend
-               </Button>
-            </ListItem>
-         </List>
+         <List>{renderFriends()}</List>
       </Box>
    )
 }

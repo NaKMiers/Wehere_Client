@@ -7,6 +7,7 @@ export default makeStyles(theme => ({
       marginBottom: 24,
       margin: 'auto',
       boxShadow: 'rgba(0, 0, 0, 0.3) 0px 0px 4px 0px',
+      borderRadius: 8,
    },
    icon: {
       color: theme.palette.primary.text,
@@ -17,6 +18,20 @@ export default makeStyles(theme => ({
 
    linkToProfile: {
       textDecoration: 'none',
+   },
+
+   imageWrap: {
+      maxHeight: 480,
+      overflow: 'scroll',
+      padding: '0px 12px',
+   },
+
+   imageItem: {
+      borderRadius: 8,
+      cursor: 'pointer',
+      '&:last-child': {
+         marginTop: 12,
+      },
    },
 
    menu: {

@@ -9,6 +9,7 @@ import {
    MenuItem,
    styled,
    Typography,
+   Box,
 } from '@material-ui/core'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -23,6 +24,7 @@ import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
 import { API } from '../../../constants'
 import { memo } from 'react'
+import moment from 'moment'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -35,7 +37,7 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Video({ video, author }) {
+function Video({ videoPost, author }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
@@ -59,8 +61,8 @@ function Video({ video, author }) {
          <Card className={styles.card}>
             <CardHeader
                avatar={
-                  <Link to='/profile/user1' className={styles.linkToProfile}>
-                     <Avatar al='avt' src='https://bom.to/GBtMwW' />
+                  <Link to={`/profile/${author._id}`} className={styles.linkToProfile}>
+                     <Avatar alt='avt' src={author.avatar} />
                   </Link>
                }
                action={
@@ -68,10 +70,13 @@ function Video({ video, author }) {
                      <MoreIcon rotate />
                   </IconButton>
                }
-               title='Shrimp and Chorizo Paella'
-               subheader='September 14, 2016'
+               title={author.username}
+               subheader={moment(videoPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
             />
-            <video width='100%' height='400' src={`${API}/${video.video}`} controls />
+
+            <Box className={styles.videoWrap}>
+               <video className={styles.videoItem} src={`${API}/${videoPost.video}`} controls />
+            </Box>
 
             <CardContent>
                <Typography variant='body2'>

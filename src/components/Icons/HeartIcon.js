@@ -6,8 +6,8 @@ function HeartIcon({ liked, style }) {
    const styles = makeStyles(theme => ({
       icon: {
          fontSize: 26,
-         color: liked ? theme.palette.danger.main : '#fff'
-      }
+         color: liked ? theme.palette.danger.main : '#fff',
+      },
    }))()
 
    return <i className={clsx(styles.icon, 'fad fa-heart-circle')} style={style} />

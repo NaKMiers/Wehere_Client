@@ -31,16 +31,16 @@ function PostsTab({ userProfile }) {
       posts.map(post => {
          switch (post.type) {
             case 'blog':
-               return <Blog blog={post} author={userProfile} />
+               return <Blog blogPost={post} author={userProfile} />
 
             case 'image':
-               return <Image image={post} author={userProfile} />
+               return <Image imagePost={post} author={userProfile} />
 
             case 'video':
-               return <Video video={post} author={userProfile} />
+               return <Video videoPost={post} author={userProfile} />
 
             case 'short':
-               return <Short short={post} author={userProfile} />
+               return <Short shortPost={post} author={userProfile} />
 
             default:
                return null

@@ -1,7 +1,8 @@
 import { Box, Grid, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
-import CakeIcon from '@material-ui/icons/Cake'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import HomeIcon from '@material-ui/icons/Home'
+import GenderIcon from '../../../Icons/GenderIcon'
+import CakeIcon from '../../../Icons/CakeIcon'
+import HeartIcon from '../../../Icons/HeartIcon'
+import HomeIcon from '../../../Icons/HomeIcon'
 import { styled } from '@material-ui/styles'
 import useStyles from './styles'
 
@@ -9,7 +10,7 @@ const Demo = styled('div')(({ theme }) => ({
    backgroundColor: theme.palette.background.paper,
 }))
 
-function InfoTab() {
+function InfoTab({ userProfile }) {
    const styles = useStyles()
 
    return (
@@ -19,21 +20,27 @@ function InfoTab() {
                <List>
                   <ListItem>
                      <ListItemIcon>
-                        <CakeIcon />
+                        <GenderIcon color='secondary' />
                      </ListItemIcon>
-                     <ListItemText primary='14/09/2004' />
+                     <ListItemText primary={userProfile?.gender} />
                   </ListItem>
                   <ListItem>
                      <ListItemIcon>
-                        <FavoriteIcon />
+                        <CakeIcon color='secondary' />
                      </ListItemIcon>
-                     <ListItemText primary='Single' />
+                     <ListItemText primary={userProfile?.birthdate} />
                   </ListItem>
                   <ListItem>
                      <ListItemIcon>
-                        <HomeIcon />
+                        <HeartIcon liked />
                      </ListItemIcon>
-                     <ListItemText primary='Vinh Long' />
+                     <ListItemText primary={userProfile?.maritalStatus} />
+                  </ListItem>
+                  <ListItem>
+                     <ListItemIcon>
+                        <HomeIcon style={{ fontSize: 27, marginLeft: -2 }} color='secondary' type />
+                     </ListItemIcon>
+                     <ListItemText primary={userProfile?.live} />
                   </ListItem>
                </List>
             </Demo>

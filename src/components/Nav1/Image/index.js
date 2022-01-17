@@ -10,6 +10,7 @@ import {
    MenuItem,
    styled,
    Typography,
+   Box,
 } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -23,6 +24,7 @@ import SaveIcon from '../../Icons/SaveIcon'
 import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
 import { API } from '../../../constants'
+import moment from 'moment'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -35,8 +37,8 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Image({ image, author }) {
-   console.log(image.images[0])
+function Image({ imagePost, author }) {
+   console.log(author)
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
@@ -55,13 +57,24 @@ function Image({ image, author }) {
    }
 
    const styles = useStyles()
+
+   const renderImageItem = () =>
+      imagePost.images.map(img => (
+         <CardMedia
+            className={styles.imageItem}
+            component='img'
+            image={`${API}/${img}`}
+            alt='image'
+         />
+      ))
+
    return (
       <>
          <Card className={styles.card}>
             <CardHeader
                avatar={
-                  <Link to='/profile/61b55ed8c8ba3a0f20c10c45' className={styles.linkToProfile}>
-                     <Avatar alt='avt' src='https://bom.to/GBtMwW' />
+                  <Link to={`/profile/${author._id}`} className={styles.linkToProfile}>
+                     <Avatar alt='avatar' src={author.avatar} />
                   </Link>
                }
                action={
@@ -69,10 +82,11 @@ function Image({ image, author }) {
                      <MoreIcon rotate />
                   </IconButton>
                }
-               title='Shrimp and Chorizo Paella'
-               subheader='September 14, 2016'
+               title={author.username}
+               subheader={moment(imagePost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
             />
-            <CardMedia component='img' image={`${API}/${image.images[0]}`} alt='Paella dish' />
+            <Box className={styles.imageWrap}>{renderImageItem()}</Box>
+
             <CardContent>
                <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together
