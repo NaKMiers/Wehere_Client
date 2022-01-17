@@ -21,6 +21,7 @@ import SaveIcon from '../../Icons/SaveIcon'
 import ShareIcon from '../../Icons/ShareIcon'
 import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
+import { API } from '../../../constants'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -33,7 +34,7 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Blog(author) {
+function Blog({ blog, author }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
@@ -70,14 +71,7 @@ function Blog(author) {
                subheader='September 14, 2016'
             />
             <CardContent>
-               <Typography variant='body2'>
-                  This impressive paella is a perfect party dish and a fun meal to cook together
-                  with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                  This impressive paella is a perfect party dish and a fun meal to cook together
-                  with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                  This impressive paella is a perfect party dish and a fun meal to cook together
-                  with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-               </Typography>
+               <Typography variant='body2'>{blog.statusText}</Typography>
             </CardContent>
             <CardActions disableSpacing>
                <IconButton aria-label='add to favorites'>

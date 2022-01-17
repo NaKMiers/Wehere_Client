@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardHeader from '@material-ui/core/CardHeader'
-import CardMedia from '@material-ui/core/CardMedia'
 import IconButton from '@material-ui/core/IconButton'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -15,8 +14,9 @@ import SaveIcon from '../../../components/Icons/SaveIcon'
 import ShareIcon from '../../../components/Icons/ShareIcon'
 import Comment from '../../Comment'
 import useStyles from './styles'
+import { API } from '../../../constants'
 
-function Short() {
+function Short({ short, author }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenComments, setOpenComments] = useState(false)
    const open = Boolean(anchorEl)
@@ -51,17 +51,13 @@ function Short() {
                title='Shrimp and Chorizo Paella'
                subheader='September 14, 2016'
             />
-            <CardMedia
-               className={styles.cardMedia}
-               component='img'
-               height='194'
-               image='images/short169.jpg'
-               alt='Paella dish'
-            />
+            <Box className={styles.shortWrapItem}>
+               <video className={styles.shortItem} src={`${API}/${short.short}`} controls />
+            </Box>
             <CardActions
                disableSpacing
                className={styles.cardActions}
-               style={{ bottom: `${isOpenComments ? 280 : 64}px` }}
+               style={{ bottom: `${isOpenComments ? 290 : 124}px` }}
             >
                <IconButton aria-label='add to favorites'>
                   <HeartIcon style={{ fontSize: 33 }} />

@@ -10,7 +10,6 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
       position: 'relative',
-      height: 'calc(100vh - 64px)',
       display: 'flex',
       flexDirection: 'column ',
       maxWidth: 480,
@@ -24,9 +23,14 @@ export default makeStyles(theme => ({
    menuIcon: {
       marginLeft: 8,
    },
-   cardMedia: {
-      height: '100%',
+   shortWrapItem: {
+      padding: '0px 12px 8px 12px',
    },
+   shortItem: {
+      width: '100%',
+      borderRadius: 8,
+   },
+
    cardActions: {
       position: 'absolute',
       display: 'flex',

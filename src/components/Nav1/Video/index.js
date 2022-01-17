@@ -21,6 +21,8 @@ import MoreIcon from '../../../components/Icons/MoreIcon'
 import ShareIcon from '../../../components/Icons/ShareIcon'
 import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
+import { API } from '../../../constants'
+import { memo } from 'react'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -33,7 +35,7 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Video() {
+function Video({ video, author }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
@@ -69,14 +71,7 @@ function Video() {
                title='Shrimp and Chorizo Paella'
                subheader='September 14, 2016'
             />
-            <iframe
-               width='100%'
-               height='400'
-               src='https://www.youtube.com/embed/HOGfrOK9a84'
-               title='YouTube video player'
-               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-               allowFullScreen
-            />
+            <video width='100%' height='400' src={`${API}/${video.video}`} controls />
 
             <CardContent>
                <Typography variant='body2'>
@@ -124,4 +119,4 @@ function Video() {
    )
 }
 
-export default Video
+export default memo(Video)

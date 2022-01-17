@@ -22,6 +22,7 @@ import MoreIcon from '../../../components/Icons/MoreIcon'
 import SaveIcon from '../../Icons/SaveIcon'
 import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
+import { API } from '../../../constants'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -34,7 +35,8 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Image() {
+function Image({ image, author }) {
+   console.log(image.images[0])
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
@@ -70,7 +72,7 @@ function Image() {
                title='Shrimp and Chorizo Paella'
                subheader='September 14, 2016'
             />
-            <CardMedia component='img' image='/images/cute4k.jpg' alt='Paella dish' />
+            <CardMedia component='img' image={`${API}/${image.images[0]}`} alt='Paella dish' />
             <CardContent>
                <Typography variant='body2'>
                   This impressive paella is a perfect party dish and a fun meal to cook together
