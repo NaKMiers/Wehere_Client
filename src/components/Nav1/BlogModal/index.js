@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Fade, Modal, Paper, Typography } from '@material-ui/core'
+import { Box, Button, ButtonGroup, Modal, Paper, Typography } from '@material-ui/core'
 import { TextareaAutosize } from '@mui/material'
 import { useState } from 'react'
 import { connect } from 'react-redux'
@@ -33,33 +33,31 @@ function BlogModal({ curUser, open, handleCloseModal, actionCreators }) {
 
    return (
       <>
-         <Fade in={open}>
-            <Modal open onClose={handleCloseModal} className={styles.blogModal}>
-               <Paper className={styles.paper}>
-                  <form onSubmit={handlePostImageStatus}>
-                     <Typography className={styles.title}>Post New Blog</Typography>
-                     <Box className={styles.blogBoxWrap}>
-                        <TextareaAutosize
-                           placeholder='Status...'
-                           minRows={5}
-                           className={styles.statusText}
-                           value={statusValue}
-                           onChange={e => setStatusValue(e.target.value)}
-                        />
+         <Modal open={open} onClose={handleCloseModal} className={styles.blogModal}>
+            <Paper className={styles.paper}>
+               <form onSubmit={handlePostImageStatus}>
+                  <Typography className={styles.title}>Post New Blog</Typography>
+                  <Box className={styles.blogBoxWrap}>
+                     <TextareaAutosize
+                        placeholder='Status...'
+                        minRows={5}
+                        className={styles.statusText}
+                        value={statusValue}
+                        onChange={e => setStatusValue(e.target.value)}
+                     />
 
-                        <ButtonGroup variant='text' className={styles.actionBtnWrap}>
-                           <Button onClick={handleClear}>
-                              Clear <TrashIcon color='secondary' style={{ marginLeft: 8 }} />
-                           </Button>
-                        </ButtonGroup>
-                     </Box>
-                     <Button type='submit' className={styles.postBtn}>
-                        Post
-                     </Button>
-                  </form>
-               </Paper>
-            </Modal>
-         </Fade>
+                     <ButtonGroup variant='text' className={styles.actionBtnWrap}>
+                        <Button onClick={handleClear}>
+                           Clear <TrashIcon color='secondary' style={{ marginLeft: 8 }} />
+                        </Button>
+                     </ButtonGroup>
+                  </Box>
+                  <Button type='submit' className={styles.postBtn}>
+                     Post
+                  </Button>
+               </form>
+            </Paper>
+         </Modal>
       </>
    )
 }

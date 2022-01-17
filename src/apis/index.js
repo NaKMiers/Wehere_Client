@@ -57,6 +57,9 @@ class Apis {
    postShortStatus = data => axios.post(`${API}/shorts/post`, data)
 
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })
+
+   // profile page
+   getAllPosts = userId => axios.get(`${API}/users/get-all-posts/${userId}`)
 }
 
 export default new Apis()

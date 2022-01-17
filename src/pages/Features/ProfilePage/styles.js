@@ -83,16 +83,6 @@ export default makeStyles(theme => ({
       padding: '6px 8px',
    },
 
-   fiendListItem: {
-      display: 'flex',
-      justifyContent: 'space-between',
-   },
-   linkFiendListItem: {
-      display: 'flex',
-      textDecoration: 'none',
-      width: 'calc(100% - 114px)',
-      color: theme.palette.secondary.text,
-   },
    addFriendBtn: {
       background: theme.palette.secondary.main,
       color: theme.palette.primary.text,
@@ -130,14 +120,5 @@ export default makeStyles(theme => ({
       border: 'none',
       fontWeight: 'bold',
       padding: '6px 16px',
-   },
-   friendBtn: {
-      padding: '2px 8px',
-      background: theme.palette.secondary.main,
-      color: theme.palette.primary.text,
-   },
-   tab: {
-      borderTop: `3px solid ${theme.border.dark}`,
-      width: '100%',
    },
 }))
