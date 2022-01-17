@@ -9,33 +9,34 @@ import useStyles from './styles'
 import { useState } from 'react'
 import apis from '../../../apis'
 
-function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
+function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
-   const [video, setVideo] = useState(null)
-   const [videoReview, setVideoReview] = useState(null)
+   const [short, setShort] = useState(null)
+   const [shortReview, setShortReview] = useState(null)
 
    const styles = useStyles()
 
-   const handleUploadVideo = () => {
+   const handleUploadshort = () => {
       const input = document.createElement('input')
       input.type = 'file'
       input.onchange = e => {
          const reader = new FileReader()
          reader.onloadend = () => {
-            setVideoReview(reader.result)
+            setShortReview(reader.result)
          }
 
-         const video = e.target.files[0]
-         if (video.type.startsWith('video')) {
+         const short = e.target.files[0]
+         console.log('shortFile: ', short)
+         if (short.type.startsWith('video')) {
             // smaller then 100MB
-            if (video.size <= 104857600) {
-               reader.readAsDataURL(video)
-               setVideo(video)
+            if (short.size <= 104857600) {
+               reader.readAsDataURL(short)
+               setShort(short)
             } else {
-               alert('This video size must be less than 100Mb')
+               alert('This short size must be less than 100Mb')
             }
          } else {
-            alert('This is not a video, please choose a video to continue.')
+            alert('This is not a short, please choose a short to continue.')
          }
       }
       input.click()
@@ -43,46 +44,46 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
 
    const handleClear = () => {
       setStatusValue('')
-      setVideo(null)
-      setVideoReview(null)
+      setShort(null)
+      setShortReview(null)
    }
 
-   const handlePostVideoStatus = e => {
+   const handlePostshortStatus = e => {
       e.preventDefault()
-      const postVideoStatus = async () => {
+      const postShortStatus = async () => {
          let data = new FormData()
-         data.append('video', video)
+         data.append('short', short)
          data.append('statusText', statusValue)
 
          try {
-            const res = await apis.postVideoStatus(data)
+            const res = await apis.postShortStatus(data)
             console.log('res: ', res)
             if (res.status === 200) {
                handleClear()
                handleCloseModal()
             }
          } catch (err) {
-            alert('Post video status unsuccessfully. Please try again.')
+            alert('Post short status unsuccessfully. Please try again.')
             console.log(err)
          }
       }
-      postVideoStatus()
+      postShortStatus()
    }
 
-   const renderVideo = () => (
-      <Box className={styles.videoItemWrap}>
-         {video && <video className={styles.videoItem} src={videoReview} controls />}
+   const rendershort = () => (
+      <Box className={styles.shortItemWrap}>
+         {short && <video className={styles.shortItem} src={shortReview} controls />}
       </Box>
    )
 
    return (
       <>
          <Fade in={open}>
-            <Modal open onClose={handleCloseModal} className={styles.videoModal}>
+            <Modal open onClose={handleCloseModal} className={styles.ShortModal}>
                <Paper className={styles.paper}>
-                  <form onSubmit={handlePostVideoStatus}>
-                     <Typography className={styles.title}>Post New Video</Typography>
-                     <Box className={styles.videoBoxWrap}>
+                  <form onSubmit={handlePostshortStatus}>
+                     <Typography className={styles.title}>Post New Short</Typography>
+                     <Box className={styles.shortBoxWrap}>
                         <TextareaAutosize
                            placeholder='Status...'
                            minRows={2}
@@ -91,9 +92,9 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
                            onChange={e => setStatusValue(e.target.value)}
                         />
 
-                        <Box className={styles.videosList}>{renderVideo()}</Box>
+                        <Box className={styles.shortsList}>{rendershort()}</Box>
                         <ButtonGroup variant='text' className={styles.actionBtnWrap}>
-                           <Button onClick={handleUploadVideo}>
+                           <Button onClick={handleUploadshort}>
                               Upload <UploadIcon color='secondary' style={{ marginLeft: 8 }} />
                            </Button>
                            <Button onClick={handleClear}>
@@ -116,4 +117,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(VideoModal)
+export default connect(null, mapDispatch)(ShortModal)

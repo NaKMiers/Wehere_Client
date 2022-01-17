@@ -54,6 +54,7 @@ class Apis {
    postBlogStatus = data => axios.post(`${API}/blogs/post`, data)
    postImageStatus = data => axios.post(`${API}/images/post`, data)
    postVideoStatus = data => axios.post(`${API}/videos/post`, data)
+   postShortStatus = data => axios.post(`${API}/shorts/post`, data)
 
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })
 }
