@@ -12,8 +12,7 @@ function FriendsTabItem({ friend, curUser }) {
 
    const handleUnfriend = async () => {
       try {
-         const res = await apis.unfriend(friend._id)
-         console.log('res-unfrind: ', res.data)
+         await apis.unfriend(friend._id)
          setJustUnf(true)
       } catch (err) {
          console.log(err)

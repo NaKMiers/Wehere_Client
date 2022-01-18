@@ -18,8 +18,8 @@ function VideoPage({ curUser }) {
       <>
          <Header />
          <div style={{ padding: 24 }}>
-            <Video />
-            <Video />
+            {/* <Video />
+            <Video /> */}
          </div>
          <VideoModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
          <Box className={styles.addVideoBtnBox} onClick={handleOpenModal}>

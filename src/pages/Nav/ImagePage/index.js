@@ -18,8 +18,8 @@ function ImagePage({ curUser }) {
       <>
          <Header />
          <div style={{ padding: 24 }}>
-            <Image />
-            <Image />
+            {/* <Image />
+            <Image /> */}
          </div>
          <ImageModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
          <Box className={styles.addImageBtnBox} onClick={handleOpenModal}>

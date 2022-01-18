@@ -38,7 +38,6 @@ const ExpandMore = styled(props => {
 }))
 
 function Image({ imagePost, author }) {
-   console.log(author)
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
@@ -59,12 +58,13 @@ function Image({ imagePost, author }) {
    const styles = useStyles()
 
    const renderImageItem = () =>
-      imagePost.images.map(img => (
+      imagePost.images.map((img, i) => (
          <CardMedia
             className={styles.imageItem}
             component='img'
             image={`${API}/${img}`}
             alt='image'
+            key={i}
          />
       ))
 

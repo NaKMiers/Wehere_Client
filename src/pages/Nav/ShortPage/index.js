@@ -18,8 +18,8 @@ function ShortPage({ curUser }) {
       <>
          <Header />
          <div style={{ padding: 24 }}>
-            <Short />
-            <Short />
+            {/* <Short />
+            <Short /> */}
          </div>
          <ShortModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
          <Box className={styles.addShortBtnBox} onClick={handleOpenModal}>

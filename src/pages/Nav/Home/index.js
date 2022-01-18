@@ -8,13 +8,19 @@ function HomePage() {
       <>
          <Header />
          <div style={{ padding: 24 }}>
-            <Blog />
+            {/* <Blog />
             <Image />
             <Video />
             <Blog />
             <Image />
             <Video />
+            <Video /
+            <Image />
             <Video />
+            <Blog />
+            <Image />
+            <Video />
+            <Video /> */}
          </div>
       </>
    )
