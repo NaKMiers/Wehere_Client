@@ -37,7 +37,6 @@ function OnlineBar({ conversations, curUser }) {
                cvsIndex = i
             }
          })
-         console.log(cvsIndex)
 
          return (
             <OnlineBarItem

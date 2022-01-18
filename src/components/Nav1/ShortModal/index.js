@@ -26,7 +26,6 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
          }
 
          const short = e.target.files[0]
-         console.log('shortFile: ', short)
          if (short.type.startsWith('video')) {
             // smaller then 100MB
             if (short.size <= 104857600) {
@@ -57,7 +56,6 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
 
          try {
             const res = await apis.postShortStatus(data)
-            console.log('res: ', res)
             if (res.status === 200) {
                handleClear()
                handleCloseModal()

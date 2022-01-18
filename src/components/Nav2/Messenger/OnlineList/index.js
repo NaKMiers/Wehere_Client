@@ -35,7 +35,6 @@ function OnlineList({ conversations, curUser }) {
                cvsIndex = i
             }
          })
-         console.log(cvsIndex)
 
          return (
             <ConversationItem

@@ -7,6 +7,10 @@ import conversation from './conversationReducer'
 import diary from './diaryReducer'
 import friend from './friendsReducer'
 import account from './accountReducer'
+import blog from './blogReducer'
+import image from './imageReducer'
+import video from './videoReducer'
+import short from './shortReducer'
 
 const reducers = combineReducers({
    user,
@@ -17,6 +21,10 @@ const reducers = combineReducers({
    conversation,
    diary,
    account,
+   blog,
+   image,
+   video,
+   short,
 })
 
 export default reducers

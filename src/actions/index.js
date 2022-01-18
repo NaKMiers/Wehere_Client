@@ -48,6 +48,11 @@ class Actions {
    addAccount = accId => ({ type: types.ADD_ACCOUNT, accId })
    removeAccount = accId => ({ type: types.REMOVE_ACCOUNT, accId })
 
+   setBlogs = payload => ({ type: types.SET_BLOGS, payload })
+   setImages = payload => ({ type: types.SET_IMAGES, payload })
+   setVideos = payload => ({ type: types.SET_VIDEOS, payload })
+   setShorts = payload => ({ type: types.SET_SHORTS, payload })
+
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })
 }

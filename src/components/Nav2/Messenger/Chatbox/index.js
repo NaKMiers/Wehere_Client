@@ -82,7 +82,6 @@ function Chatbox({ curUser }) {
 
    // handleSendMessage
    const handleSendMessage = async messageValue => {
-      console.log(messageValue)
       const message = {
          conversationId: curCvs._id,
          sender: curUser._id,

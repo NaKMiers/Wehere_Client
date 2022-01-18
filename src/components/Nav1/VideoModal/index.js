@@ -56,7 +56,6 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
 
          try {
             const res = await apis.postVideoStatus(data)
-            console.log('res: ', res)
             if (res.status === 200) {
                handleClear()
                handleCloseModal()

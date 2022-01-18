@@ -11,6 +11,19 @@ import Backdrop from './commons/Backdrop'
 import theme from './commons/theme'
 import routes from './routes'
 
+const shuffle = array => {
+   let currentIndex = array.length,
+      randomIndex
+
+   while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
+      ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+   }
+
+   return array
+}
+
 function App({ curUser, actionCreators }) {
    // refresh login and
    useEffect(() => {
@@ -43,6 +56,62 @@ function App({ curUser, actionCreators }) {
       }
       getNotifications()
    }, [curUser?.notifications, actionCreators])
+
+   // get blogs newfeed
+   useEffect(() => {
+      const getBlogsNewfeed = async () => {
+         try {
+            const res = await apis.getBlogsNewfeed()
+            const data = shuffle(res.data)
+            actionCreators.setBlogs(data)
+         } catch (err) {
+            console.log(err)
+         }
+      }
+      getBlogsNewfeed()
+   }, [actionCreators])
+
+   // get images newfeed
+   useEffect(() => {
+      const getImagesNewfeed = async () => {
+         try {
+            const res = await apis.getImagesNewfeed()
+            const data = shuffle(res.data)
+            actionCreators.setImages(data)
+         } catch (err) {
+            console.log(err)
+         }
+      }
+      getImagesNewfeed()
+   }, [actionCreators])
+
+   // get videos newfeed
+   useEffect(() => {
+      const getVideosNewfeed = async () => {
+         try {
+            const res = await apis.getVideosNewfeed()
+            const data = shuffle(res.data)
+            actionCreators.setVideos(data)
+         } catch (err) {
+            console.log(err)
+         }
+      }
+      getVideosNewfeed()
+   }, [actionCreators])
+
+   // get shorts newfeed
+   useEffect(() => {
+      const getShortsNewfeed = async () => {
+         try {
+            const res = await apis.getShortsNewfeed()
+            const data = shuffle(res.data)
+            actionCreators.setShorts(data)
+         } catch (err) {
+            console.log(err)
+         }
+      }
+      getShortsNewfeed()
+   }, [actionCreators])
 
    return (
       <Router>

@@ -1,23 +1,14 @@
-import {
-   Box,
-   Button,
-   ButtonGroup,
-   CardMedia,
-   Fade,
-   Modal,
-   Paper,
-   Typography,
-} from '@material-ui/core'
+import { Box, Button, ButtonGroup, CardMedia, Modal, Paper, Typography } from '@material-ui/core'
 import { TextareaAutosize } from '@mui/material'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
-import UploadIcon from '../../Icons/UploadIcon'
-import TrashIcon from '../../Icons/TrashIcon'
-import SyncIcon from '../../Icons/SyncIcon'
-import useStyles from './styles'
-import { useState } from 'react'
 import apis from '../../../apis'
+import SyncIcon from '../../Icons/SyncIcon'
+import TrashIcon from '../../Icons/TrashIcon'
+import UploadIcon from '../../Icons/UploadIcon'
+import useStyles from './styles'
 
 function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
@@ -51,7 +42,13 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
                setImageList([...imageList, files[0]])
             }
          }
-         reader.readAsDataURL(files[0])
+         if (!files[0].type.startsWith('image')) {
+            alert('This is must be an image.')
+         } else if (files[0].type.size > 15728640) {
+            alert('Image size must be less than or equal to 15MB.')
+         } else {
+            reader.readAsDataURL(files[0])
+         }
       }
       input.click()
    }
@@ -90,9 +87,6 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
       postImageStatus()
    }
 
-   console.log('imageList: ', imageList)
-   console.log('imageListPreview: ', imageListPreview)
-
    const renderImageItem = () =>
       imageListPreview.map((image, i) => (
          <Box key={i} className={styles.imageItemWrap}>
@@ -118,47 +112,45 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
 
    return (
       <>
-         <Fade in={open}>
-            <Modal open onClose={handleCloseModal} className={styles.imageModal}>
-               <Paper className={styles.paper}>
-                  <form onSubmit={handlePostImageStatus}>
-                     <Typography className={styles.title}>Post New Image</Typography>
-                     <Box className={styles.imageBoxWrap}>
-                        <TextareaAutosize
-                           placeholder='Status...'
-                           minRows={2}
-                           className={styles.statusText}
-                           value={statusValue}
-                           onChange={e => setStatusValue(e.target.value)}
-                        />
+         <Modal open={open} onClose={handleCloseModal} className={styles.imageModal}>
+            <Paper className={styles.paper}>
+               <form onSubmit={handlePostImageStatus}>
+                  <Typography className={styles.title}>Post New Image</Typography>
+                  <Box className={styles.imageBoxWrap}>
+                     <TextareaAutosize
+                        placeholder='Status...'
+                        minRows={2}
+                        className={styles.statusText}
+                        value={statusValue}
+                        onChange={e => setStatusValue(e.target.value)}
+                     />
 
-                        <Box className={styles.imagesList}>
-                           {!!imageListPreview.length && (
-                              <>
-                                 <Typography className={styles.amountImages}>
-                                    {imageListPreview.length}{' '}
-                                    {imageListPreview.length === 1 ? 'image' : 'images'}
-                                 </Typography>
-                                 {renderImageItem()}
-                              </>
-                           )}
-                        </Box>
-                        <ButtonGroup variant='text' className={styles.actionBtnWrap}>
-                           <Button onClick={() => handleUpdateAvtAndBg()}>
-                              Upload <UploadIcon color='secondary' style={{ marginLeft: 8 }} />
-                           </Button>
-                           <Button onClick={handleClear}>
-                              Clear <TrashIcon color='secondary' style={{ marginLeft: 8 }} />
-                           </Button>
-                        </ButtonGroup>
+                     <Box className={styles.imagesList}>
+                        {!!imageListPreview.length && (
+                           <>
+                              <Typography className={styles.amountImages}>
+                                 {imageListPreview.length}{' '}
+                                 {imageListPreview.length === 1 ? 'image' : 'images'}
+                              </Typography>
+                              {renderImageItem()}
+                           </>
+                        )}
                      </Box>
-                     <Button type='submit' className={styles.postBtn}>
-                        Post
-                     </Button>
-                  </form>
-               </Paper>
-            </Modal>
-         </Fade>
+                     <ButtonGroup variant='text' className={styles.actionBtnWrap}>
+                        <Button onClick={() => handleUpdateAvtAndBg()}>
+                           Upload <UploadIcon color='secondary' style={{ marginLeft: 8 }} />
+                        </Button>
+                        <Button onClick={handleClear}>
+                           Clear <TrashIcon color='secondary' style={{ marginLeft: 8 }} />
+                        </Button>
+                     </ButtonGroup>
+                  </Box>
+                  <Button type='submit' className={styles.postBtn}>
+                     Post
+                  </Button>
+               </form>
+            </Paper>
+         </Modal>
       </>
    )
 }

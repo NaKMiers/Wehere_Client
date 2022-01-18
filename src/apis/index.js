@@ -56,12 +56,15 @@ class Apis {
 
    // images
    postImageStatus = data => axios.post(`${API}/images/post`, data)
+   getImagesNewfeed = () => axios.get(`${API}/images/get-images-newfeed`)
 
    // videos
    postVideoStatus = data => axios.post(`${API}/videos/post`, data)
+   getVideosNewfeed = () => axios.get(`${API}/videos/get-videos-newfeed`)
 
    //shorts
    postShortStatus = data => axios.post(`${API}/shorts/post`, data)
+   getShortsNewfeed = () => axios.get(`${API}/shorts/get-shorts-newfeed`)
 
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })
 

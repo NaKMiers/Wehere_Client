@@ -28,6 +28,7 @@ export default makeStyles(theme => ({
    },
    shortItem: {
       width: '100%',
+      maxHeight: 600,
       borderRadius: 8,
    },
 

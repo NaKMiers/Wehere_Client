@@ -17,7 +17,6 @@ function PostsTab({ userProfile }) {
          if (userProfile?._id) {
             try {
                const res = await apis.getAllPosts(userProfile._id)
-               console.log('res-get-all-posts: ', res.data)
                setPosts(res.data)
             } catch (err) {
                console.log(err)

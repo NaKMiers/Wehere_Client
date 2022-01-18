@@ -1,29 +1,59 @@
 import Blog from '../../../components/Nav1/Blog'
 import Image from '../../../components/Nav1/Image'
 import Video from '../../../components/Nav1/Video'
+import Short from '../../../components/Nav1/Short'
 import Header from '../../../components/Header'
+import { connect } from 'react-redux'
 
-function HomePage() {
+const shuffle = array => {
+   let currentIndex = array.length,
+      randomIndex
+
+   while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
+      ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+   }
+
+   return array
+}
+
+function HomePage({ blogs, images, videos, shorts }) {
+   const renderHome = () => {
+      const renderedBlogs = blogs.map(b => (
+         <Blog key={b.blog._id} blogPost={b.blog} author={b.author} />
+      ))
+      const renderedImages = images.map(img => (
+         <Image key={img.image._id} imagePost={img.image} author={img.author} />
+      ))
+      const renderedVideos = videos.map(v => (
+         <Video key={v.video._id} videoPost={v.video} author={v.author} />
+      ))
+      const renderedShorts = shorts.map(s => (
+         <Short key={s.short._id} shortPost={s.short} author={s.author} />
+      ))
+
+      const posts = shuffle(
+         [].concat(renderedBlogs, renderedImages, renderedVideos, renderedShorts)
+      )
+
+      return posts
+   }
+   renderHome()
+
    return (
       <>
          <Header />
-         <div style={{ padding: 24 }}>
-            {/* <Blog />
-            <Image />
-            <Video />
-            <Blog />
-            <Image />
-            <Video />
-            <Video /
-            <Image />
-            <Video />
-            <Blog />
-            <Image />
-            <Video />
-            <Video /> */}
-         </div>
+         <div style={{ padding: 24 }}>{renderHome()}</div>
       </>
    )
 }
 
-export default HomePage
+const mapState = state => ({
+   blogs: state.blog.blogs,
+   images: state.image.images,
+   videos: state.video.videos,
+   shorts: state.short.shorts,
+})
+
+export default connect(mapState, null)(HomePage)
