@@ -66,6 +66,9 @@ class Apis {
    postShortStatus = data => axios.post(`${API}/shorts/post`, data)
    getShortsNewfeed = () => axios.get(`${API}/shorts/get-shorts-newfeed`)
 
+   // musics
+   addSong = data => axios.post(`${API}/musics/add`, data)
+
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })
 
    // profile page

@@ -1,8 +1,99 @@
-import { Button, Modal, Paper, TextField, Typography, Fade } from '@material-ui/core'
+import {
+   Button,
+   Modal,
+   Paper,
+   TextField,
+   Typography,
+   Fade,
+   Box,
+   CardMedia,
+} from '@material-ui/core'
+import { useState } from 'react'
 import useStyles from './styles'
+import apis from '../../../../apis'
 
 function AddNewSongModal({ open, handleClose }) {
+   const [songName, setSongName] = useState()
+   const [author, setAuthor] = useState()
+   const [song, setSong] = useState(null)
+   const [songPreview, setSongPreview] = useState(null)
+   const [fileName, setFileName] = useState(null)
+   const [thumb, setThumb] = useState(null)
+   const [thumbPreview, setThumbPreview] = useState(null)
+
    const styles = useStyles()
+
+   const handleUploadSong = () => {
+      const input = document.createElement('input')
+      input.type = 'file'
+      input.onchange = e => {
+         const file = e.target.files[0]
+         const reader = new FileReader()
+         reader.onload = () => {
+            // console.log('reader.result: ', reader.result)
+            setSongPreview(reader.result)
+         }
+
+         if (!file.type.startsWith('audio')) {
+            alert('This must to a audio.')
+         } else if (file.size > 52428800) {
+            alert('This must to less than or equal to 50MB')
+         } else {
+            setFileName(file.name)
+            setSong(file)
+            reader.readAsDataURL(file)
+         }
+      }
+      input.click()
+   }
+
+   const handleUploadThumb = () => {
+      const input = document.createElement('input')
+      input.type = 'file'
+      input.onchange = e => {
+         const file = e.target.files[0]
+         const reader = new FileReader()
+         reader.onload = () => {
+            setThumbPreview(reader.result)
+         }
+
+         if (!file.type.startsWith('image')) {
+            alert('This must to a image.')
+         } else if (file.size > 5242880) {
+            alert('This must to less than or equal to 5MB')
+         } else {
+            setThumb(file)
+            reader.readAsDataURL(file)
+         }
+      }
+      input.click()
+   }
+
+   console.log('song: ', song)
+
+   const handleAddSong = e => {
+      e.preventDefault()
+      const addSong = async () => {
+         let data = new FormData()
+         data.append('songName', songName)
+         data.append('author', author)
+         data.append('song', song)
+         data.append('song', thumb)
+
+         try {
+            console.log('handleAddSong')
+            const res = await apis.addSong(data)
+            console.log('res-song: ', res.data)
+         } catch (err) {
+            // alert('Post image status unsuccessfully. Please try again.')
+            console.log(err)
+         }
+      }
+      addSong()
+   }
+
+   console.log('song:', song)
+   console.log('thumb:', thumb)
 
    return (
       <Fade in={open}>
@@ -16,12 +107,13 @@ function AddNewSongModal({ open, handleClose }) {
                <Typography variant='h5' className={styles.heading}>
                   Add New Song
                </Typography>
-               <form className={styles.form}>
+               <form className={styles.form} onSubmit={handleAddSong}>
                   <TextField
                      className={styles.textField}
                      id='filled-search'
                      label='Song Name'
                      variant='filled'
+                     onChange={e => setSongName(e.target.value)}
                   />
 
                   <TextField
@@ -29,18 +121,42 @@ function AddNewSongModal({ open, handleClose }) {
                      id='filled-search'
                      label='Author'
                      variant='filled'
+                     onChange={e => setAuthor(e.target.value)}
                   />
 
-                  <label htmlFor='audio' className={styles.label}>
-                     Select Audio
-                  </label>
-                  <TextField className={styles.textFieldFile} id='audio' type='file' />
+                  {songPreview && (
+                     <Box className={styles.audioWrap}>
+                        <audio className={styles.audio} src={songPreview} controls autoPlay />
+                     </Box>
+                  )}
+                  <Box className={styles.fileAndThumbWrap}>
+                     <Box className={styles.selectSongWrap}>
+                        <Button className={styles.selectSongBtn} onClick={handleUploadSong}>
+                           Select Song
+                        </Button>
+                        <Typography variant='body2' className={styles.fileName}>
+                           {fileName}
+                        </Typography>
+                     </Box>
+                     <Box className={styles.selectThumbWrap}>
+                        <Button className={styles.selectThumbBtn} onClick={handleUploadThumb}>
+                           Thumbnail
+                        </Button>
+                        {thumbPreview && (
+                           <Box className={styles.thumbFrame}>
+                              <CardMedia
+                                 className={styles.thumbnail}
+                                 component='img'
+                                 height='194'
+                                 image={thumbPreview}
+                                 alt='thumbnail'
+                              />
+                           </Box>
+                        )}
+                     </Box>
+                  </Box>
 
-                  <label htmlFor='avt' className={styles.label}>
-                     Select Avatar
-                  </label>
-                  <TextField className={styles.textFieldFile} id='avt' type='file' />
-                  <Button className={styles.submitBtn} type='button' variant='contained'>
+                  <Button className={styles.submitBtn} type='submit' variant='contained'>
                      Add
                   </Button>
                </form>
