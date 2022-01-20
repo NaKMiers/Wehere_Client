@@ -40,12 +40,10 @@ function* changeTheme({ payload }) {
 
 function* getAllTaskRequest() {
    const taskListRes = yield call(apis.getAllTaskRequest)
-   yield put(actions.showBackdrop())
    yield delay(350)
    if (taskListRes.status === 200) {
       yield put(actions.getAllTask(taskListRes.data))
    }
-   yield put(actions.hideBackdrop())
 }
 
 function* addNewTaskRequest({ payload }) {

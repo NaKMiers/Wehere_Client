@@ -11,6 +11,7 @@ import blog from './blogReducer'
 import image from './imageReducer'
 import video from './videoReducer'
 import short from './shortReducer'
+import music from './musicReducer'
 
 const reducers = combineReducers({
    user,
@@ -25,6 +26,7 @@ const reducers = combineReducers({
    image,
    video,
    short,
+   music,
 })
 
 export default reducers

@@ -11,8 +11,11 @@ import {
 import { useState } from 'react'
 import useStyles from './styles'
 import apis from '../../../../apis'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import actions from '../../../../actions'
 
-function AddNewSongModal({ open, handleClose }) {
+function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
    const [songName, setSongName] = useState()
    const [author, setAuthor] = useState()
    const [song, setSong] = useState(null)
@@ -81,25 +84,33 @@ function AddNewSongModal({ open, handleClose }) {
          data.append('song', thumb)
 
          try {
-            console.log('handleAddSong')
             const res = await apis.addSong(data)
-            console.log('res-song: ', res.data)
+            actionCreators.addNewSong(res.data)
+            handleClear()
+            handleCloseModal()
          } catch (err) {
-            // alert('Post image status unsuccessfully. Please try again.')
+            alert('Add new song unsuccessfully. Please try again.')
             console.log(err)
          }
       }
       addSong()
    }
 
-   console.log('song:', song)
-   console.log('thumb:', thumb)
+   const handleClear = () => {
+      setSongName()
+      setAuthor()
+      setSong(null)
+      setSongPreview(null)
+      setFileName(null)
+      setThumb(null)
+      setThumbPreview(null)
+   }
 
    return (
       <Fade in={open}>
          <Modal
             open
-            onClose={() => handleClose(false)}
+            onClose={() => handleCloseModal()}
             aria-labelledby='modal-modal-title'
             aria-describedby='modal-modal-description'
          >
@@ -166,4 +177,8 @@ function AddNewSongModal({ open, handleClose }) {
    )
 }
 
-export default AddNewSongModal
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(null, mapDispatch)(AddNewSongModal)

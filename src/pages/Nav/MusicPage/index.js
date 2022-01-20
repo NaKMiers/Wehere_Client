@@ -5,8 +5,41 @@ import ListOptionMusicPage from '../../../components/Nav2/Musics/ListOptionMusic
 import PlayingBar from '../../../components/Nav2/Musics/PlayingBar'
 import PlaylistList from '../../../components/Nav2/Musics/PlaylistList'
 import SongList from '../../../components/Nav2/Musics/SongList'
+import { useEffect } from 'react'
+import apis from '../../../apis'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
 
-function MusicPage() {
+function MusicPage({ curUser, actionCreators }) {
+   useEffect(() => {
+      const getMySongList = async () => {
+         if (curUser?._id) {
+            try {
+               const res = await apis.getMySongList()
+               actionCreators.setMySongList(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getMySongList()
+   }, [curUser?._id, actionCreators])
+
+   useEffect(() => {
+      const getMyPlaylistList = async () => {
+         if (curUser?._id) {
+            try {
+               const res = await apis.getMyPlaylistList()
+               actionCreators.setMyPlaylistList(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getMyPlaylistList()
+   }, [curUser?._id, actionCreators])
+
    return (
       <>
          <Header />
@@ -37,4 +70,11 @@ function MusicPage() {
    )
 }
 
-export default MusicPage
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(MusicPage)

@@ -278,13 +278,21 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                   />
                   <Button
                      type='submit'
-                     className={styles.addTaskBtn}
+                     className={styles.addTaskBtn1}
                      color='primary'
                      variant='contained'
                   >
                      Add
                   </Button>
                </Grid>
+               <Button
+                  type='submit'
+                  className={styles.addTaskBtn2}
+                  color='primary'
+                  variant='contained'
+               >
+                  Add
+               </Button>
             </form>
 
             {todoList.length ? (

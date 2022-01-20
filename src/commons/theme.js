@@ -42,7 +42,7 @@ const renderTheme = () => {
             highlight: '#4f00bc',
          },
          favoriteIcon: {
-            main: '#fff',
+            main: '#ddd',
             liked: '#f44336',
          },
          message: {

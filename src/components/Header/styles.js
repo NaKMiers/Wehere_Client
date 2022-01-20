@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
          padding: '0px 9px 8px 1px',
          width: '183.3333333%',
          transition: 'margin 0.5s ease-in-out',
-         '@media (min-width: 780px)': {
+         '@media (min-width: 781px)': {
             padding: '8px 8px 8px 8px',
          },
       },
@@ -31,7 +31,7 @@ export default makeStyles(theme => ({
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: 6,
-      '@media (min-width: 780px)': {
+      '@media (min-width: 781px)': {
          display: 'none',
       },
    },

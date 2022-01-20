@@ -1,17 +1,21 @@
 import { useState } from 'react'
+import { connect } from 'react-redux'
 import { Button, List, Typography } from '@material-ui/core'
 import SongListItem from '../SongListItem'
 import AddNewSongModal from '../AddNewSongModal'
 import useStyles from './styles'
 
-function SongList() {
+function SongList({ songList }) {
    const [isOpenAddNewSongModal, setOpenAddNewSongModal] = useState(false)
 
-   const handleClose = () => {
+   const handleCloseModal = () => {
       setOpenAddNewSongModal(false)
    }
 
    const styles = useStyles()
+
+   const renderSongList = () => songList.map(s => <SongListItem key={s._id} song={s} />)
+
    return (
       <>
          <List component='div' disablePadding style={{ padding: 16 }}>
@@ -24,16 +28,16 @@ function SongList() {
             </Button>
             <Typography className={styles.songCount}>Songs: 256</Typography>
 
-            <SongListItem />
-            <SongListItem />
-            <SongListItem />
-            <SongListItem />
-            <SongListItem />
+            {renderSongList()}
          </List>
 
-         <AddNewSongModal open={isOpenAddNewSongModal} handleClose={handleClose} />
+         <AddNewSongModal open={isOpenAddNewSongModal} handleCloseModal={handleCloseModal} />
       </>
    )
 }
 
-export default SongList
+const mapState = state => ({
+   songList: state.music.mySongList,
+})
+
+export default connect(mapState, null)(SongList)

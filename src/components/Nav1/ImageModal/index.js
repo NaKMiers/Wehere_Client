@@ -74,11 +74,9 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
          }
 
          try {
-            const res = await apis.postImageStatus(data)
-            if (res.status === 200) {
-               handleClear()
-               handleCloseModal()
-            }
+            await apis.postImageStatus(data)
+            handleClear()
+            handleCloseModal()
          } catch (err) {
             alert('Post image status unsuccessfully. Please try again.')
             console.log(err)

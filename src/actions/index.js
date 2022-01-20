@@ -53,6 +53,11 @@ class Actions {
    setVideos = payload => ({ type: types.SET_VIDEOS, payload })
    setShorts = payload => ({ type: types.SET_SHORTS, payload })
 
+   addNewSong = payload => ({ type: types.ADD_NEW_SONG, payload })
+   setMySongList = payload => ({ type: types.SET_MY_SONG_LIST, payload })
+   addNewPlaylist = payload => ({ type: types.ADD_NEW_PLAYLIST, payload })
+   setMyPlaylistList = payload => ({ type: types.SET_MY_PLAYLIST_LIST, payload })
+
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })
 }

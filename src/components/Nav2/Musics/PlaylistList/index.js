@@ -1,17 +1,23 @@
-import { Button, List, Typography } from '@material-ui/core'
+import { Button, List, Typography, Box } from '@material-ui/core'
 import PlaylistListItem from './PlaylistListItem'
 import useStyles from './styles'
 import AddNewPlaylistModal from '../AddNewPlaylistModal'
 import { useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actions from '../../../../actions'
 
-function PlaylistList() {
+function PlaylistList({ playlistList }) {
    const [isOpenAddNewPLModal, setOpenAddNewPLModal] = useState(false)
 
-   const handleClose = () => {
+   const handleCloseModal = () => {
       setOpenAddNewPLModal(false)
    }
 
    const styles = useStyles()
+
+   const renderPlaylists = () =>
+      playlistList.map(p => <PlaylistListItem key={p._id} playlist={p} />)
 
    return (
       <>
@@ -25,14 +31,20 @@ function PlaylistList() {
             </Button>
             <Typography className={styles.playlistCount}>Playlist: 3</Typography>
 
-            <PlaylistListItem />
-            <PlaylistListItem />
-            <PlaylistListItem />
+            <Box className={styles.playlistListWrap}>{renderPlaylists()}</Box>
          </List>
 
-         <AddNewPlaylistModal open={isOpenAddNewPLModal} handleClose={handleClose} />
+         <AddNewPlaylistModal open={isOpenAddNewPLModal} handleCloseModal={handleCloseModal} />
       </>
    )
 }
 
-export default PlaylistList
+const mapState = state => ({
+   playlistList: state.music.myPlaylistList,
+})
+
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(PlaylistList)

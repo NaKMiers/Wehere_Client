@@ -67,7 +67,10 @@ class Apis {
    getShortsNewfeed = () => axios.get(`${API}/shorts/get-shorts-newfeed`)
 
    // musics
-   addSong = data => axios.post(`${API}/musics/add`, data)
+   addSong = data => axios.post(`${API}/musics/add-song`, data)
+   getMySongList = () => axios.get(`${API}/musics/get-my-song-list`)
+   addPlaylist = data => axios.post(`${API}/musics/add-playlist`, data)
+   getMyPlaylistList = () => axios.get(`${API}/musics/get-my-playlist-list`)
 
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })
 

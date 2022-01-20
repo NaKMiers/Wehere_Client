@@ -6,7 +6,7 @@ function HeartIcon({ liked, style }) {
    const styles = makeStyles(theme => ({
       icon: {
          fontSize: 26,
-         color: liked ? theme.palette.danger.main : '#fff',
+         color: liked ? theme.palette.danger.main : theme.favoriteIcon.main,
       },
    }))()
 

@@ -9,52 +9,55 @@ export default makeStyles(theme => ({
       transform: 'translate(-50%, -50%)',
       outline: 'none',
       borderRadius: 8,
-      overflow: 'hidden'
+      overflow: 'hidden',
    },
 
    form: {
-      padding: '8px 16px 24px 16px'
+      padding: '8px 16px 24px 16px',
    },
    heading: {
       padding: '8px 16px',
       textAlign: 'center',
       background: theme.palette.primary.gradient,
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    textField: {
       width: '100%',
-      marginBottom: 16
+      marginBottom: 16,
    },
 
    searchForm: {
       display: 'flex',
-      padding: '0px 12px'
+      padding: '0px 12px',
    },
 
    searchSongInput: {
       width: '100%',
       outline: 'none',
-      border: 'none'
+      border: 'none',
    },
    searchBtn: {
       padding: '6px 14px',
       minWidth: 0,
       background: theme.palette.primary.gradient,
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    searchIcon: {
-      fontSize: 16
+      fontSize: 16,
    },
 
    songList: {
       height: 400,
       padding: 0,
-      overflow: 'scroll'
+      overflow: 'scroll',
+   },
+   songItemWrap: {
+      borderRadius: 8,
    },
 
    submitBtn: {
       width: '100%',
       background: theme.palette.primary.gradient,
-      color: theme.palette.primary.text
-   }
+      color: theme.palette.primary.text,
+   },
 }))

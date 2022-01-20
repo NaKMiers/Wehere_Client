@@ -10,10 +10,16 @@ export default makeStyles(theme => ({
       fontSize: 22,
       color: theme.palette.secondary.main,
    },
-   playlistAvt: {
+   playlistThumb: {
       width: 140,
       borderRadius: 8,
       overflow: 'hidden',
+   },
+   subThumbPL: {
+      height: 70,
+   },
+   subThumbPlSingle: {
+      height: 140,
    },
    playlistName: {
       fontWeight: 'bold',

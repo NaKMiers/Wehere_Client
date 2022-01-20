@@ -7,8 +7,9 @@ import HeartIcon from '../../../Icons/HeartIcon'
 import MoreIcon from '../../../../components/Icons/MoreIcon'
 import AddSongToPlayListModal from '../AddSongToPlaylistModal'
 import useStyles from './styles'
+import { API } from '../../../../constants'
 
-function SongListItem({ showActionBtn = true }) {
+function SongListItem({ isInPlayListModal = false, song }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenAddToPLModal, setOpenAddToPLModal] = useState(false)
    const open = Boolean(anchorEl)
@@ -26,20 +27,21 @@ function SongListItem({ showActionBtn = true }) {
    }
 
    const styles = useStyles()
+
    return (
       <ListItem className={styles.listItem}>
          <ListItemButton style={{ borderRadius: 8 }}>
-            <Avatar className={styles.songImg} src='https://bom.to/anjho0' />
-            <ListItemText primary='So Am i' secondary='Ava Max' />
+            <Avatar className={styles.songImg} src={`${API}/${song.thumb}`} />
+            <ListItemText primary={song.songName} secondary={song.author} />
          </ListItemButton>
 
-         {showActionBtn && (
+         {!isInPlayListModal && (
             <Box className={styles.boxButton}>
                <span className={styles.button} onClick={handleClick}>
                   <MoreIcon color='secondary' />
                </span>
                <span className={styles.button}>
-                  <HeartIcon liked />
+                  <HeartIcon liked={song.favorite} />
                </span>
             </Box>
          )}

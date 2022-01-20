@@ -11,17 +11,33 @@ export default makeStyles(theme => ({
       marginRight: 16,
    },
    pointTextField: {
-      width: '10%',
+      maxWidth: '10%',
+      '@media (max-width: 780px)': {
+         maxWidth: '20%',
+      },
    },
    inputTextField: {
       padding: '14px 16px',
       borderBottom: `2px solid ${theme.border.dark}`,
    },
-   addTaskBtn: {
+   addTaskBtn1: {
       marginLeft: 16,
       height: 47,
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
+      '@media (max-width: 780px)': {
+         display: 'none',
+      },
+   },
+   addTaskBtn2: {
+      width: '100%',
+      height: 36,
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text,
+      marginBottom: 16,
+      '@media (min-width: 781px)': {
+         display: 'none',
+      },
    },
 
    taskListItem: {

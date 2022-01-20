@@ -1,59 +1,106 @@
-import { Button, Fade, List, Modal, Paper, TextField, Typography, Box } from '@material-ui/core'
+import { Box, Button, List, Modal, Paper, TextField, Typography } from '@material-ui/core'
+import { useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actions from '../../../../actions'
+import apis from '../../../../apis'
 import SearchIcon from '../../../Icons/SearchIcon'
 import SongListItem from '../SongListItem'
 import useStyle from './styles'
 
-function AddNewPlaylistModal({ open, handleClose }) {
+function AddNewPlaylistModal({ open, handleCloseModal, songList, actionCreators }) {
+   const [playlistName, setPlaylistName] = useState('')
+   const [selectSongs, setSelectSongs] = useState([])
+
    const styles = useStyle()
 
-   return (
-      <Fade in={open}>
-         <Modal
-            open
-            onClose={() => handleClose(false)}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'
+   console.log('selectSongs: ', selectSongs)
+
+   const renderSongList = () =>
+      songList.map(s => (
+         <Box
+            key={s._id}
+            className={styles.songItemWrap}
+            style={{ background: selectSongs.includes(s._id) && '#eee' }}
+            onClick={() => {
+               if (selectSongs.includes(s._id)) {
+                  setSelectSongs(selectSongs.filter(id => id !== s._id))
+               } else {
+                  setSelectSongs([...selectSongs, s._id])
+               }
+            }}
          >
-            <Paper className={styles.paper}>
-               <Typography variant='h5' className={styles.heading}>
-                  Add New Playlist
-               </Typography>
-               <Box className={styles.form}>
-                  <TextField
-                     className={styles.textField}
-                     id='filled-search'
-                     label='Playlist Name'
-                     variant='filled'
+            <SongListItem song={s} isInPlayListModal />
+         </Box>
+      ))
+
+   const handleAddNewPlaylist = async () => {
+      try {
+         const res = await apis.addPlaylist({ playlistName, songs: selectSongs })
+         actionCreators.addNewPlaylist(res.data)
+         handleCloseModal()
+         handleClear()
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
+   const handleClear = () => {
+      setPlaylistName('')
+      setSelectSongs([])
+   }
+
+   return (
+      <Modal
+         open={open}
+         onClose={() => handleCloseModal()}
+         aria-labelledby='modal-modal-title'
+         aria-describedby='modal-modal-description'
+      >
+         <Paper className={styles.paper}>
+            <Typography variant='h5' className={styles.heading}>
+               Add New Playlist
+            </Typography>
+            <Box className={styles.form}>
+               <TextField
+                  className={styles.textField}
+                  id='filled-search'
+                  label='Playlist Name'
+                  variant='filled'
+                  value={playlistName}
+                  onChange={e => setPlaylistName(e.target.value)}
+               />
+
+               <form className={styles.searchForm} onSubmit={e => e.preventDefault()}>
+                  <input
+                     placeholder='What you need to search ?'
+                     className={styles.searchSongInput}
                   />
-
-                  <form className={styles.searchForm} onSubmit={e => e.preventDefault()}>
-                     <input
-                        placeholder='What you need to search ?'
-                        className={styles.searchSongInput}
-                     />
-                     <Button className={styles.searchBtn}>
-                        <SearchIcon style={{ fontSize: 16 }} />
-                     </Button>
-                  </form>
-                  <List className={styles.songList}>
-                     <SongListItem showActionBtn={false} />
-                     <SongListItem showActionBtn={false} />
-                     <SongListItem showActionBtn={false} />
-                     <SongListItem showActionBtn={false} />
-                     <SongListItem showActionBtn={false} />
-                     <SongListItem showActionBtn={false} />
-                     <SongListItem showActionBtn={false} />
-                     <SongListItem showActionBtn={false} />
-                  </List>
-
-                  <Button className={styles.submitBtn} type='button' variant='contained'>
-                     Add
+                  <Button className={styles.searchBtn}>
+                     <SearchIcon style={{ fontSize: 16 }} />
                   </Button>
-               </Box>
-            </Paper>
-         </Modal>
-      </Fade>
+               </form>
+               <List className={styles.songList}>{renderSongList()}</List>
+
+               <Button
+                  className={styles.submitBtn}
+                  variant='contained'
+                  onClick={handleAddNewPlaylist}
+               >
+                  Add
+               </Button>
+            </Box>
+         </Paper>
+      </Modal>
    )
 }
 
-export default AddNewPlaylistModal
+const mapState = state => ({
+   songList: state.music.mySongList,
+})
+
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(AddNewPlaylistModal)
