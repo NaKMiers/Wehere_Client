@@ -1,44 +1,105 @@
 import { Avatar, Box, Button, Collapse, IconButton, Typography } from '@material-ui/core'
-import LinearProgress from '@mui/material/LinearProgress'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import HeartIcon from '../../../../components/Icons/HeartIcon'
 import ExpandIcon from '../../../../components/Icons/ExpandIcon'
+import HeartIcon from '../../../../components/Icons/HeartIcon'
+import { API } from '../../../../constants'
 import useStyles from './styles'
 
-function PlayingBar() {
+function PlayingBar({ songPlaying, recentlyList }) {
    const [isShowPlayingBarCenter, setShowPlayingBarCenter] = useState(false)
+   const [playing, setPlaying] = useState(false)
+   const [currentTime, setCurrentTime] = useState(0)
+   const audioRef = useRef(new Audio(`${API}/${songPlaying?.song}`))
 
    const handleShowPlayingBarCenter = () => {
       setShowPlayingBarCenter(!isShowPlayingBarCenter)
    }
    const styles = useStyles()
 
+   console.log('recentlyList: ', recentlyList)
+
+   useEffect(() => {
+      if (songPlaying?.song !== recentlyList?.[recentlyList.length - 2]?.song) {
+         const audio = new Audio(`${API}/${songPlaying.song}`)
+         audio.ontimeupdate = () => setCurrentTime((audio.currentTime / audio.duration) * 100)
+         audio.play().catch(err => {
+            console.log('err: ', err)
+            audio.pause()
+         })
+         setPlaying(true)
+         audioRef.current = audio
+      }
+   }, [songPlaying?.song, recentlyList])
+
+   const handlePlayPause = () => {
+      if (songPlaying?.song) {
+         if (playing) {
+            console.log('pause')
+            audioRef.current.pause()
+            setPlaying(false)
+         } else {
+            console.log('play')
+            audioRef.current.play()
+            setPlaying(true)
+         }
+      }
+   }
+
+   const showDuration = () => {
+      const audioDuration = audioRef.current.duration
+      const minute = Math.floor(audioDuration / 60) || 0
+      const second = Math.floor(audioDuration - minute * 60) || 0
+      return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
+   }
+
+   const showCurrentTime = () => {
+      const audioCurrentTime = audioRef.current.currentTime
+      const minute = Math.floor(audioCurrentTime / 60) || 0
+      const second = Math.floor(audioCurrentTime - minute * 60) || 0
+      return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
+   }
+
+   const handleSeek = e => {
+      console.log('handleSeek')
+      const valueOnProgressBar = e.target.value
+      console.log('valueOnProgressBar: ', valueOnProgressBar)
+      setCurrentTime(valueOnProgressBar)
+      const valueOnAudioRef = (audioRef.current.duration / 100) * e.target.value
+      audioRef.current.currentTime = valueOnAudioRef
+   }
+
    return (
       <Box className={styles.playingBar}>
-         <Box className={styles.playingBarTop}>
-            <Box className={styles.aboutName} onClick={handleShowPlayingBarCenter}>
-               <Typography variant='body1' style={{ marginRight: 8 }}>
-                  Ava Max:
-               </Typography>
-               <Typography variant='body1'>So Am I</Typography>
-            </Box>
-            <IconButton className={styles.favoriteBtn}>
-               <HeartIcon />
-            </IconButton>
-         </Box>
-         <Collapse in={isShowPlayingBarCenter} timeout='auto' unmountOnExit>
-            <Box className={styles.playingBarCenter}>
-               <Typography variant='body1'>00:14</Typography>
-               <LinearProgress
-                  variant='determinate'
-                  value={20}
-                  className={styles.processPlayingBar}
-               />
-               <Typography variant='body1'>4:19</Typography>
-            </Box>
-         </Collapse>
+         {songPlaying?.song && (
+            <>
+               <Box className={styles.playingBarTop}>
+                  <Box className={styles.aboutName} onClick={handleShowPlayingBarCenter}>
+                     <Typography variant='body1' style={{ marginRight: 8 }}>
+                        {songPlaying?.author}:
+                     </Typography>
+                     <Typography variant='body1'>{songPlaying?.songName}</Typography>
+                  </Box>
+                  <IconButton className={styles.favoriteBtn}>
+                     <HeartIcon />
+                  </IconButton>
+               </Box>
+               <Collapse in={isShowPlayingBarCenter} timeout='auto' unmountOnExit>
+                  <Box className={styles.playingBarCenter}>
+                     <Typography variant='body1'>{showCurrentTime()}</Typography>
+                     <input
+                        type='range'
+                        className={styles.processPlayingBar}
+                        onChange={handleSeek}
+                        value={currentTime}
+                     />
+                     <Typography variant='body1'>{showDuration()}</Typography>
+                  </Box>
+               </Collapse>
+            </>
+         )}
 
          <Box className={styles.playingBarBottom}>
             <Button className={styles.menuMusicBtn}>
@@ -57,11 +118,17 @@ function PlayingBar() {
                   <IconButton className={styles.audioBtn}>
                      <i className={clsx(styles.audioIcon, 'fad fa-step-backward')} />
                   </IconButton>
-                  <IconButton className={styles.audioBtn}>
+                  <IconButton className={styles.audioBtn} onClick={handlePlayPause}>
                      <Avatar
-                        className={styles.playBtn}
+                        className={clsx(styles.playBtn, {
+                           [styles.pause]: !songPlaying?.song || !playing,
+                        })}
                         alt='Remy Sharp'
-                        src='https://bom.to/dCLmY5'
+                        src={
+                           songPlaying?.song
+                              ? `${API}/${songPlaying?.thumb}`
+                              : 'https://bom.so/zAxyke'
+                        }
                      />
                   </IconButton>
                   <IconButton className={styles.audioBtn}>
@@ -77,4 +144,9 @@ function PlayingBar() {
    )
 }
 
-export default PlayingBar
+const mapState = state => ({
+   songPlaying: state.music.songPlaying,
+   recentlyList: state.music.recentlyList,
+})
+
+export default connect(mapState)(PlayingBar)

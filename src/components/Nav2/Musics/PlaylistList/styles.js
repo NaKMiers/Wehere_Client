@@ -23,7 +23,7 @@ export default makeStyles(theme => ({
    playlistListWrap: {
       overflow: 'scroll',
       position: 'absolute',
-      top: 76,
+      top: 100,
       bottom: 'calc(-100vh + 300px)',
       left: 24,
       right: 24,

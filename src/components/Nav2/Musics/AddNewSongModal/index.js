@@ -72,8 +72,6 @@ function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
       input.click()
    }
 
-   console.log('song: ', song)
-
    const handleAddSong = e => {
       e.preventDefault()
       const addSong = async () => {
@@ -97,8 +95,8 @@ function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
    }
 
    const handleClear = () => {
-      setSongName()
-      setAuthor()
+      setSongName('')
+      setAuthor('')
       setSong(null)
       setSongPreview(null)
       setFileName(null)
@@ -125,6 +123,7 @@ function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
                      label='Song Name'
                      variant='filled'
                      onChange={e => setSongName(e.target.value)}
+                     value={songName}
                   />
 
                   <TextField
@@ -133,6 +132,7 @@ function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
                      label='Author'
                      variant='filled'
                      onChange={e => setAuthor(e.target.value)}
+                     value={author}
                   />
 
                   {songPreview && (

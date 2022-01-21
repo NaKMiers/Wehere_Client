@@ -1,13 +1,13 @@
-import { Box, Button, ButtonGroup, Fade, Modal, Paper, Typography } from '@material-ui/core'
+import { Box, Button, ButtonGroup, Modal, Paper, Typography } from '@material-ui/core'
 import { TextareaAutosize } from '@mui/material'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
-import UploadIcon from '../../Icons/UploadIcon'
-import TrashIcon from '../../Icons/TrashIcon'
-import useStyles from './styles'
-import { useState } from 'react'
 import apis from '../../../apis'
+import TrashIcon from '../../Icons/TrashIcon'
+import UploadIcon from '../../Icons/UploadIcon'
+import useStyles from './styles'
 
 function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
@@ -76,37 +76,35 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
 
    return (
       <>
-         <Fade in={open}>
-            <Modal open onClose={handleCloseModal} className={styles.videoModal}>
-               <Paper className={styles.paper}>
-                  <form onSubmit={handlePostVideoStatus}>
-                     <Typography className={styles.title}>Post New Video</Typography>
-                     <Box className={styles.videoBoxWrap}>
-                        <TextareaAutosize
-                           placeholder='Status...'
-                           minRows={2}
-                           className={styles.statusText}
-                           value={statusValue}
-                           onChange={e => setStatusValue(e.target.value)}
-                        />
+         <Modal open={open} onClose={handleCloseModal} className={styles.videoModal}>
+            <Paper className={styles.paper}>
+               <form onSubmit={handlePostVideoStatus}>
+                  <Typography className={styles.title}>Post New Video</Typography>
+                  <Box className={styles.videoBoxWrap}>
+                     <TextareaAutosize
+                        placeholder='Status...'
+                        minRows={2}
+                        className={styles.statusText}
+                        value={statusValue}
+                        onChange={e => setStatusValue(e.target.value)}
+                     />
 
-                        <Box className={styles.videosList}>{renderVideo()}</Box>
-                        <ButtonGroup variant='text' className={styles.actionBtnWrap}>
-                           <Button onClick={handleUploadVideo}>
-                              Upload <UploadIcon color='secondary' style={{ marginLeft: 8 }} />
-                           </Button>
-                           <Button onClick={handleClear}>
-                              Clear <TrashIcon color='secondary' style={{ marginLeft: 8 }} />
-                           </Button>
-                        </ButtonGroup>
-                     </Box>
-                     <Button type='submit' className={styles.postBtn}>
-                        Post
-                     </Button>
-                  </form>
-               </Paper>
-            </Modal>
-         </Fade>
+                     <Box className={styles.videosList}>{renderVideo()}</Box>
+                     <ButtonGroup variant='text' className={styles.actionBtnWrap}>
+                        <Button onClick={handleUploadVideo}>
+                           Upload <UploadIcon color='secondary' style={{ marginLeft: 8 }} />
+                        </Button>
+                        <Button onClick={handleClear}>
+                           Clear <TrashIcon color='secondary' style={{ marginLeft: 8 }} />
+                        </Button>
+                     </ButtonGroup>
+                  </Box>
+                  <Button type='submit' className={styles.postBtn}>
+                     Post
+                  </Button>
+               </form>
+            </Paper>
+         </Modal>
       </>
    )
 }

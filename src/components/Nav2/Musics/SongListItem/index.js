@@ -8,8 +8,11 @@ import MoreIcon from '../../../../components/Icons/MoreIcon'
 import AddSongToPlayListModal from '../AddSongToPlaylistModal'
 import useStyles from './styles'
 import { API } from '../../../../constants'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actions from '../../../../actions'
 
-function SongListItem({ isInPlayListModal = false, song }) {
+function SongListItem({ isInPlayListModal = false, song, actionCreators }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenAddToPLModal, setOpenAddToPLModal] = useState(false)
    const open = Boolean(anchorEl)
@@ -28,9 +31,15 @@ function SongListItem({ isInPlayListModal = false, song }) {
 
    const styles = useStyles()
 
+   const handlePlaySong = () => {
+      console.log('song-playing: ', song)
+      actionCreators.setPlayingSong(song)
+      actionCreators.setRecentlyList(song)
+   }
+
    return (
       <ListItem className={styles.listItem}>
-         <ListItemButton style={{ borderRadius: 8 }}>
+         <ListItemButton style={{ borderRadius: 8 }} onClick={handlePlaySong}>
             <Avatar className={styles.songImg} src={`${API}/${song.thumb}`} />
             <ListItemText primary={song.songName} secondary={song.author} />
          </ListItemButton>
@@ -75,4 +84,8 @@ function SongListItem({ isInPlayListModal = false, song }) {
    )
 }
 
-export default SongListItem
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(null, mapDispatch)(SongListItem)

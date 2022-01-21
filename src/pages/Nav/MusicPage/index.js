@@ -1,15 +1,14 @@
-import { Switch, Route } from 'react-router-dom'
-import AuthorList from '../../../components/Nav2/Musics/AuthorList'
-import Header from '../../../components/Header'
-import ListOptionMusicPage from '../../../components/Nav2/Musics/ListOptionMusicPage'
-import PlayingBar from '../../../components/Nav2/Musics/PlayingBar'
-import PlaylistList from '../../../components/Nav2/Musics/PlaylistList'
-import SongList from '../../../components/Nav2/Musics/SongList'
 import { useEffect } from 'react'
-import apis from '../../../apis'
 import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
+import apis from '../../../apis'
+import Header from '../../../components/Header'
+import AuthorList from '../../../components/Nav2/Musics/AuthorList'
+import ListOptionMusicPage from '../../../components/Nav2/Musics/ListOptionMusicPage'
+import PlaylistList from '../../../components/Nav2/Musics/PlaylistList'
+import SongList from '../../../components/Nav2/Musics/SongList'
 
 function MusicPage({ curUser, actionCreators }) {
    useEffect(() => {
@@ -65,7 +64,6 @@ function MusicPage({ curUser, actionCreators }) {
                </div>
             </Route>
          </Switch>
-         <PlayingBar />
       </>
    )
 }

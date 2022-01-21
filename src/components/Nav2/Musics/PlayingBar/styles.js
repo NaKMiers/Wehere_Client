@@ -37,8 +37,13 @@ export default makeStyles(theme => ({
       borderBottom: `1px solid ${theme.border.light}`,
    },
    processPlayingBar: {
-      width: '75%',
+      borderRadius: 8,
+      width: '80%',
       cursor: 'pointer',
+      opacity: 0.9,
+      '&:hover': {
+         opacity: 1,
+      },
    },
    playingBarBottom: {
       display: 'flex',
@@ -73,5 +78,23 @@ export default makeStyles(theme => ({
       width: 50,
       height: 50,
       border: `3px solid ${theme.border.main}`,
+      animation: '$rotate 8s linear infinite',
+      animationPlayState: 'running',
+      '&:hover': {
+         opacity: 0.9,
+      },
+   },
+
+   pause: {
+      animationPlayState: 'paused',
+   },
+
+   '@keyframes rotate': {
+      '0%': {
+         transform: 'rotate(0deg)',
+      },
+      '100%': {
+         transform: 'rotate(360deg)',
+      },
    },
 }))

@@ -9,6 +9,7 @@ import actions from './actions'
 import apis from './apis'
 import Backdrop from './commons/Backdrop'
 import theme from './commons/theme'
+import PlayingBar from './components/Nav2/Musics/PlayingBar'
 import routes from './routes'
 
 const shuffle = array => {
@@ -126,6 +127,8 @@ function App({ curUser, actionCreators }) {
          <ThemeProvider theme={theme[Cookies.get('theme') ? JSON.parse(Cookies.get('theme')) : 0]}>
             <CssBaseline />
             <Switch>{routes}</Switch>
+            <PlayingBar />
+
             <Backdrop />
          </ThemeProvider>
       </Router>
