@@ -2,11 +2,11 @@ import { Button, CardMedia, Grid, ListItem, Menu, MenuItem, Typography } from '@
 import { ListItemButton } from '@mui/material'
 import { Box } from '@mui/system'
 import { memo, useState } from 'react'
-import DeleteIcon from '../../../../../components/Icons/DeleteIcon'
-import EditIcon from '../../../../../components/Icons/EditIcon'
-import MoreIcon from '../../../../../components/Icons/MoreIcon'
+import DeleteIcon from '../../../Icons/DeleteIcon'
+import EditIcon from '../../../Icons/EditIcon'
+import MoreIcon from '../../../Icons/MoreIcon'
 import useStyles from './styles'
-import { API } from '../../../../../constants'
+import { API } from '../../../../constants'
 
 function PlaylistListItem({ playlist, showMoreBtn = true }) {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -18,8 +18,6 @@ function PlaylistListItem({ playlist, showMoreBtn = true }) {
       setAnchorEl(null)
    }
    const styles = useStyles()
-
-   // console.log('playlist: ', playlist)
 
    const renderPlaylistThumb = () => {
       if (playlist?.thumbs.length !== 4) {

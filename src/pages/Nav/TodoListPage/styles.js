@@ -1,6 +1,11 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
+   todoListPage: {
+      maxWidth: 960,
+      padding: '24px 24px 78px 24px',
+      margin: 'auto',
+   },
    addTaskWrap: {
       display: 'flex',
       justifyContent: 'space-between',

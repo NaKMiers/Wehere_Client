@@ -20,7 +20,7 @@ function MusicPage() {
                   <SongList />
                </div>
             </Route>
-            <Route path='/musics/playlists' exact={true}>
+            <Route path='/musics/playlists' exact={false}>
                <div style={{ maxWidth: 960, padding: 8, margin: 'auto' }}>
                   <PlaylistList />
                </div>

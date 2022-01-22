@@ -218,7 +218,7 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    return (
       <>
          <Header />
-         <Box style={{ maxWidth: 960, padding: 24, margin: 'auto' }}>
+         <Box className={styles.todoListPage}>
             <form onSubmit={handleAddTask}>
                <Grid className={styles.addTaskWrap}>
                   <TextField

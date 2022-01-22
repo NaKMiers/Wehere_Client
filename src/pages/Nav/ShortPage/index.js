@@ -1,8 +1,7 @@
-import { Box, Fab } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
-import AddIcon from '../../../components/Icons/AddIcon'
 import Short from '../../../components/Nav1/Short'
 import ShortModal from '../../../components/Nav1/ShortModal'
 import useStyles from './styles'
@@ -20,13 +19,15 @@ function ShortPage({ curUser, shorts }) {
    return (
       <>
          <Header />
-         <div style={{ padding: 24 }}>{renderShorts()}</div>
+
+         <div className={styles.shortPage}>
+            <Button className={styles.addNewShortBtn} onClick={handleOpenModal}>
+               Add New Short
+            </Button>
+            {renderShorts()}
+         </div>
+
          <ShortModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
-         <Box className={styles.addShortBtnBox} onClick={handleOpenModal}>
-            <Fab aria-label='add' className={styles.addShortBtn}>
-               <AddIcon />
-            </Fab>
-         </Box>
       </>
    )
 }

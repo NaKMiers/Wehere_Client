@@ -1,8 +1,7 @@
-import { Box, Fab } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
-import AddIcon from '../../../components/Icons/AddIcon'
 import Blog from '../../../components/Nav1/Blog'
 import BlogModal from '../../../components/Nav1/BlogModal'
 import useStyles from './styles'
@@ -21,15 +20,14 @@ function BlogPage({ curUser, blogs }) {
    return (
       <>
          <Header />
-
-         <div style={{ padding: 24 }}>{renderBlogs()}</div>
+         <div className={styles.blogPage}>
+            <Button className={styles.addNewBlogBtn} onClick={handleOpenModal}>
+               Add New Blog
+            </Button>
+            {renderBlogs()}
+         </div>
 
          <BlogModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
-         <Box className={styles.addDiaryBtnBox} onClick={handleOpenModal}>
-            <Fab aria-label='add' className={styles.addDiaryBtn}>
-               <AddIcon />
-            </Fab>
-         </Box>
       </>
    )
 }

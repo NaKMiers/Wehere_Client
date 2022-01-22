@@ -1,8 +1,7 @@
-import { Box, Fab } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
-import AddIcon from '../../../components/Icons/AddIcon'
 import Image from '../../../components/Nav1/Image'
 import ImageModal from '../../../components/Nav1/ImageModal'
 import useStyles from './styles'
@@ -21,14 +20,14 @@ function ImagePage({ curUser, images }) {
       <>
          <Header />
 
-         <div style={{ padding: 24 }}>{renderImages()}</div>
+         <div className={styles.imagePage}>
+            <Button className={styles.addNewImageBtn} onClick={handleOpenModal}>
+               Add New Images
+            </Button>
+            {renderImages()}
+         </div>
 
          <ImageModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
-         <Box className={styles.addImageBtnBox} onClick={handleOpenModal}>
-            <Fab aria-label='add' className={styles.addImageBtn}>
-               <AddIcon />
-            </Fab>
-         </Box>
       </>
    )
 }

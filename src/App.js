@@ -138,11 +138,27 @@ function App({ curUser, actionCreators }) {
       getMySongList()
    }, [curUser?._id, actionCreators])
 
+   // get my playlist list
+   useEffect(() => {
+      const getMyPlaylistList = async () => {
+         if (curUser?._id) {
+            try {
+               const res = await apis.getMyPlaylistList()
+               actionCreators.setMyPlaylistList(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getMyPlaylistList()
+   }, [curUser?._id, actionCreators])
+
    return (
       <Router>
          <ThemeProvider theme={theme[Cookies.get('theme') ? JSON.parse(Cookies.get('theme')) : 0]}>
             <CssBaseline />
             <Switch>{routes}</Switch>
+
             <PlayingBar />
 
             <Backdrop />

@@ -32,9 +32,10 @@ function SongListItem({ isInPlayListModal = false, song, actionCreators }) {
    const styles = useStyles()
 
    const handlePlaySong = () => {
-      console.log('song-playing: ', song)
-      actionCreators.setPlayingSong(song)
-      actionCreators.setRecentlyList(song)
+      if (!isInPlayListModal) {
+         actionCreators.setPlayingSong(song)
+         actionCreators.setRecentlyList(song)
+      }
    }
 
    return (

@@ -21,11 +21,11 @@ export default makeStyles(theme => ({
    },
 
    playlistListWrap: {
+      height: 'calc(100vh - 250px)',
       overflow: 'scroll',
-      position: 'absolute',
-      top: 100,
-      bottom: 'calc(-100vh + 300px)',
-      left: 24,
-      right: 24,
+   },
+
+   link: {
+      textDecoration: 'none',
    },
 }))

@@ -10,16 +10,23 @@ import {
 import { TextField } from '@mui/material'
 import clsx from 'clsx'
 import { useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import actions from '../../../../actions'
 import ExpandIcon from '../../../Icons/ExpandIcon'
 import SearchIcon from '../../../Icons/SearchIcon'
 import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
-function ListOptionMusicPage() {
+function ListOptionMusicPage({ recentlyList, actionCreators }) {
    const [isShowRecentlySongs, setShowRecentlySongs] = useState(true)
 
    const styles = useStyles()
+
+   const renderRecentlyList = () => recentlyList.map(s => <SongListItem key={s._id} song={s} />)
+
+   console.log('recentlyList: ', recentlyList)
 
    return (
       <List>
@@ -49,9 +56,7 @@ function ListOptionMusicPage() {
          </ListItem>
          <Collapse in={isShowRecentlySongs} timeout='auto' unmountOnExit>
             <List className={styles.recentlyList} component='div' disablePadding>
-               {/* <SongListItem />
-               <SongListItem />
-               <SongListItem /> */}
+               {renderRecentlyList()}
             </List>
          </Collapse>
          <ListItem>
@@ -97,4 +102,10 @@ function ListOptionMusicPage() {
    )
 }
 
-export default ListOptionMusicPage
+const mapState = state => ({
+   recentlyList: state.music.recentlyList,
+})
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+export default connect(mapState, mapDispatch)(ListOptionMusicPage)

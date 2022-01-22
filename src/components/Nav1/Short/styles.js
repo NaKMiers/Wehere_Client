@@ -12,7 +12,7 @@ export default makeStyles(theme => ({
       position: 'relative',
       display: 'flex',
       flexDirection: 'column ',
-      maxWidth: 480,
+      maxWidth: 560,
       marginBottom: 24,
       margin: 'auto',
       boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.3)',

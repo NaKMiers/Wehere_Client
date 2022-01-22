@@ -68,9 +68,9 @@ export default makeStyles(theme => ({
    },
    groupActionBtn: {
       position: 'absolute',
-      bottom: '-120px',
+      bottom: '-108px',
       left: '50%',
-      width: '75%',
+      width: '78%',
       transform: 'translateX(-50%)',
       display: 'flex',
       justifyContent: 'center',
@@ -79,16 +79,18 @@ export default makeStyles(theme => ({
       background: theme.palette.secondary.dark,
       color: '#fff',
       fontWeight: 'bold',
-      margin: '0 4px',
+      margin: '0px 4px',
       padding: '6px 8px',
+      height: 37,
    },
 
    addFriendBtn: {
       background: theme.palette.secondary.main,
       color: theme.palette.primary.text,
       fontWeight: 'bold',
-      margin: '0 4px',
+      margin: '0px 4px',
       padding: '6px 8px',
+      height: 37,
    },
 
    menuAction: {
@@ -112,6 +114,7 @@ export default makeStyles(theme => ({
       display: 'flex',
       flexDirection: 'column',
       width: '100%',
+      marginTop: -10,
    },
    tabButtonsWrap: {
       margin: '8px 0 8px 0',

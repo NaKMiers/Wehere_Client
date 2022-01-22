@@ -9,6 +9,7 @@ import {
    MenuItem,
    Typography,
 } from '@material-ui/core'
+import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -257,11 +258,13 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                )}
                <Divider style={{ marginTop: 10 }} />
             </Box>
-            <Box
-               className={styles.bottomProfile}
-               style={{ marginTop: curUser?._id === userProfile?._id && '4%' }}
-            >
-               <Box className={styles.tabsList}>
+            <Box className={styles.bottomProfile}>
+               <Box
+                  className={clsx(styles.tabsList, {
+                     [styles.myTabsList]: curUser?._id === userProfile?._id,
+                  })}
+                  style={{ marginTop: curUser?._id === userProfile?._id && '-66px' }}
+               >
                   <ButtonGroup
                      variant='text'
                      aria-label='text button group'

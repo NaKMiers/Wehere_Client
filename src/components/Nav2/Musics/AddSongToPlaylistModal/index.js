@@ -1,5 +1,5 @@
 import { Fade, List, Modal, Paper, Typography } from '@material-ui/core'
-import PlaylistListItem from '../PlaylistList/PlaylistListItem'
+import PlaylistListItem from '../PlaylistListItem'
 import useStyles from './styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'

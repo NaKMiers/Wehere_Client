@@ -1,8 +1,7 @@
-import { Box, Fab } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
-import AddIcon from '../../../components/Icons/AddIcon'
 import Video from '../../../components/Nav1/Video'
 import VideoModal from '../../../components/Nav1/VideoModal'
 import useStyles from './styles'
@@ -22,14 +21,14 @@ function VideoPage({ curUser, videos }) {
       <>
          <Header />
 
-         <div style={{ padding: 24 }}>{renderVideos()}</div>
+         <div className={styles.videoPage}>
+            <Button className={styles.addNewVideoBtn} onClick={handleOpenModal}>
+               Add New Video
+            </Button>
+            {renderVideos()}
+         </div>
 
          <VideoModal curUser={curUser} open={open} handleCloseModal={handleCloseModal} />
-         <Box className={styles.addVideoBtnBox} onClick={handleOpenModal}>
-            <Fab aria-label='add' className={styles.addVideoBtn}>
-               <AddIcon />
-            </Fab>
-         </Box>
       </>
    )
 }

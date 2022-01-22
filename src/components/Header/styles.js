@@ -14,7 +14,6 @@ export default makeStyles(theme => ({
       },
    },
    header: {
-      position: 'fixed',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -107,6 +106,7 @@ export default makeStyles(theme => ({
 
    selectedHome: {
       transform: 'scale(1.25)',
+      marginTop: -2,
    },
 
    selected: {

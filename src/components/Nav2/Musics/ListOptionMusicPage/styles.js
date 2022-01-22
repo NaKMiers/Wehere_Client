@@ -17,6 +17,8 @@ export default makeStyles(theme => ({
    },
    recentlyList: {
       marginLeft: 24,
+      maxHeight: 288,
+      overflow: 'scroll',
    },
    expandedIcon: {
       fontSize: 20,

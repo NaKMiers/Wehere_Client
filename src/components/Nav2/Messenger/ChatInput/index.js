@@ -18,7 +18,6 @@ function ChatInput({ curUser, curCvs, handleSendMessage }) {
    const styles = useStyles()
 
    const handleClickEmoji = emoji => {
-      setOpenEmojiTable(false)
       setMessageValue(messageValue + emoji)
    }
    const renderEmoji = () => {

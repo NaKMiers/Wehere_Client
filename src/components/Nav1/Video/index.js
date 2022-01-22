@@ -79,10 +79,7 @@ function Video({ videoPost, author }) {
             </Box>
 
             <CardContent>
-               <Typography variant='body2'>
-                  This impressive paella is a perfect party dish and a fun meal to cook together
-                  with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-               </Typography>
+               <Typography variant='body2'>{videoPost.statusText}</Typography>
             </CardContent>
             <CardActions disableSpacing>
                <IconButton aria-label='add to favorites'>

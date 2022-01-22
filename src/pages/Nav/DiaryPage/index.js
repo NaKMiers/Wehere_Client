@@ -1,15 +1,13 @@
-import { List } from '@material-ui/core'
-import DiaryListItem from '../../../components/Nav2/DiaryListItem'
-import DiaryModal from '../../../components/Nav2/DiaryModal'
-import Header from '../../../components/Header'
-import { Box, Fab } from '@mui/material'
-import AddIcon from '../../../components/Icons/AddIcon'
-import useStyles from './styles'
+import { Button, List } from '@material-ui/core'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
+import Header from '../../../components/Header'
+import DiaryListItem from '../../../components/Nav2/DiaryListItem'
+import DiaryModal from '../../../components/Nav2/DiaryModal'
+import useStyles from './styles'
 
 function DiaryPage({ curUser, actionCreators, diaries }) {
    const [open, setOpen] = useState(false)
@@ -41,7 +39,11 @@ function DiaryPage({ curUser, actionCreators, diaries }) {
    return (
       <>
          <Header />
-         <List style={{ maxWidth: 960, padding: '16px 8px', margin: 'auto' }}>
+
+         <List className={styles.diaryPage}>
+            <Button className={styles.addNewDiaryBtn} onClick={() => handleOpenModal(null)}>
+               Add New Diary
+            </Button>
             {diaries.map((d, i) => (
                <DiaryListItem
                   key={i}
@@ -57,11 +59,6 @@ function DiaryPage({ curUser, actionCreators, diaries }) {
             handleCloseModal={handleCloseModal}
             curDiary={curDiary}
          />
-         <Box className={styles.addDiaryBtnBox} onClick={() => handleOpenModal(null)}>
-            <Fab aria-label='add' className={styles.addDiaryBtn}>
-               <AddIcon />
-            </Fab>
-         </Box>
       </>
    )
 }

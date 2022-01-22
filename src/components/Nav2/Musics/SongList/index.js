@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { Button, List, Typography } from '@material-ui/core'
+import { Button, List, Typography, Box } from '@material-ui/core'
 import SongListItem from '../SongListItem'
 import AddNewSongModal from '../AddNewSongModal'
 import useStyles from './styles'
@@ -28,7 +28,7 @@ function SongList({ songList }) {
             </Button>
             <Typography className={styles.songCount}>Songs: 256</Typography>
 
-            {renderSongList()}
+            <Box className={styles.songList}>{renderSongList()}</Box>
          </List>
 
          <AddNewSongModal open={isOpenAddNewSongModal} handleCloseModal={handleCloseModal} />

@@ -1,11 +1,13 @@
 import { Button, List, Typography, Box } from '@material-ui/core'
-import PlaylistListItem from './PlaylistListItem'
+import PlaylistListItem from '../PlaylistListItem'
 import useStyles from './styles'
 import AddNewPlaylistModal from '../AddNewPlaylistModal'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
+import { Link, Route, Switch } from 'react-router-dom'
+import SongInPlaylist from '../SongInPlaylist'
 
 function PlaylistList({ playlistList }) {
    const [isOpenAddNewPLModal, setOpenAddNewPLModal] = useState(false)
@@ -17,25 +19,33 @@ function PlaylistList({ playlistList }) {
    const styles = useStyles()
 
    const renderPlaylists = () =>
-      playlistList.map(p => <PlaylistListItem key={p._id} playlist={p} />)
+      playlistList.map(p => (
+         <Link key={p._id} to={`/musics/playlists/${p._id}`} className={styles.link}>
+            <PlaylistListItem key={p._id} playlist={p} />
+         </Link>
+      ))
 
    return (
-      <>
-         <List style={{ padding: 16 }}>
-            <Button
-               variant='contained'
-               className={styles.newPlaylistBtn}
-               onClick={() => setOpenAddNewPLModal(true)}
-            >
-               New Playlist
-            </Button>
-            <Typography className={styles.playlistCount}>Playlist: 3</Typography>
+      <Switch>
+         <Route path='/musics/playlists' exact={true}>
+            <List style={{ padding: 16 }}>
+               <Button
+                  variant='contained'
+                  className={styles.newPlaylistBtn}
+                  onClick={() => setOpenAddNewPLModal(true)}
+               >
+                  New Playlist
+               </Button>
+               <Typography className={styles.playlistCount}>Playlist: 3</Typography>
 
-            <Box className={styles.playlistListWrap}>{renderPlaylists()}</Box>
-         </List>
-
-         <AddNewPlaylistModal open={isOpenAddNewPLModal} handleCloseModal={handleCloseModal} />
-      </>
+               <Box className={styles.playlistListWrap}>{renderPlaylists()}</Box>
+            </List>
+            <AddNewPlaylistModal open={isOpenAddNewPLModal} handleCloseModal={handleCloseModal} />
+         </Route>
+         <Route path='/musics/playlists/:playlistId' exact={true}>
+            <SongInPlaylist />
+         </Route>
+      </Switch>
    )
 }
 

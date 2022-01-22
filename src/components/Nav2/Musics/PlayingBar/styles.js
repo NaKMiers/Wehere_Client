@@ -1,28 +1,27 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
-   // '@global': {
-   //    '*::-webkit-scrollbar': {
-   //       width: 0,
-   //       height: 0,
-   //    },
-   // },
+   '@global': {
+      '*::-webkit-scrollbar': {
+         width: 0,
+         height: 0,
+      },
+   },
    playingBar: {
       position: 'fixed',
-      bottom: 0,
+      bottom: -56,
       left: 0,
       right: 0,
+      transition: 'all 0.4s ease-in-out',
       background: theme.palette.primary.gradient,
       '&:hover $playingBarTop': {
          '@media (max-width: 780px)': {
             display: 'flex',
          },
       },
-      // '&:hover $audioBtnCenter': {
-      //    '@media (max-width: 780px)': {
-      //       display: 'none',
-      //    },
-      // },
+   },
+   playingBarActive: {
+      bottom: 0,
    },
    playingBarTop: {
       display: 'none',
@@ -109,11 +108,6 @@ export default makeStyles(theme => ({
          display: 'none',
       },
    },
-   volumnBar: {
-      width: 100,
-      height: 4,
-      marginRight: 14,
-   },
    favoriteBtnBottom: {
       padding: 0,
       color: theme.favoriteIcon.main,
@@ -132,17 +126,27 @@ export default makeStyles(theme => ({
    },
    audioBtnCenter: {
       position: 'absolute',
-      top: 0,
+      top: '-52px',
       left: '50%',
       transform: 'translate(-50%, -50%)',
+      transition: 'all 0.4s ease-in-out',
+      '&:hover': {
+         top: -60,
+      },
+   },
+   audioBtnCenterActive: {
+      top: 0,
+      '&:hover': {
+         top: -6,
+      },
    },
    audioBtnPrev: {
       color: theme.palette.primary.text,
-      margin: '0px 62px 0px 8px',
+      margin: '0px 58px 0px 8px',
    },
    audioBtnNext: {
       color: theme.palette.primary.text,
-      margin: '0px 8px 0px 62px',
+      margin: '0px 8px 0px 58px',
    },
    audioIcon: {
       fontSize: 28,
