@@ -14,6 +14,7 @@ export default makeStyles(theme => ({
       },
    },
    header: {
+      position: 'fixed',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',

@@ -26,6 +26,7 @@ const shuffle = array => {
 }
 
 function App({ curUser, actionCreators }) {
+   console.log('app')
    // refresh login and
    useEffect(() => {
       const getUser = async () => {
@@ -121,6 +122,21 @@ function App({ curUser, actionCreators }) {
       }
       getShortsNewfeed()
    }, [actionCreators, curUser?._id])
+
+   // get song list
+   useEffect(() => {
+      const getMySongList = async () => {
+         if (curUser?._id) {
+            try {
+               const res = await apis.getMySongList()
+               actionCreators.setMySongList(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getMySongList()
+   }, [curUser?._id, actionCreators])
 
    return (
       <Router>

@@ -221,7 +221,12 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
             </Box>
 
             <Toolbar className={styles.toolbar} ref={toolbarRef}>
-               <NavLink className={styles.headerItem} to='/' activeClassName={styles.selectedHome}>
+               <NavLink
+                  className={styles.headerItem}
+                  to='/'
+                  exact
+                  activeClassName={styles.selectedHome}
+               >
                   <HomeIcon />
                </NavLink>
                <NavLink className={styles.headerItem} to='/blogs' activeClassName={styles.selected}>

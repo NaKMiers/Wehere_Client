@@ -1,21 +1,31 @@
-import { Avatar, Box, Button, Collapse, IconButton, Typography } from '@material-ui/core'
+import {
+   Avatar,
+   Box,
+   Button,
+   Collapse,
+   IconButton,
+   LinearProgress,
+   Typography,
+} from '@material-ui/core'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import actions from '../../../../actions'
 import ExpandIcon from '../../../../components/Icons/ExpandIcon'
 import HeartIcon from '../../../../components/Icons/HeartIcon'
 import { API } from '../../../../constants'
 import useStyles from './styles'
 
-function PlayingBar({ songPlaying, recentlyList }) {
-   const [isShowPlayingBarCenter, setShowPlayingBarCenter] = useState(false)
+function PlayingBar({ songPlaying, recentlyList, mySongList, actionCreators }) {
+   const [isShowPlayingBarTop, setShowPlayingBarTop] = useState(false)
    const [playing, setPlaying] = useState(false)
    const [currentTime, setCurrentTime] = useState(0)
    const audioRef = useRef(new Audio(`${API}/${songPlaying?.song}`))
 
    const handleShowPlayingBarCenter = () => {
-      setShowPlayingBarCenter(!isShowPlayingBarCenter)
+      setShowPlayingBarTop(!isShowPlayingBarTop)
    }
    const styles = useStyles()
 
@@ -30,6 +40,7 @@ function PlayingBar({ songPlaying, recentlyList }) {
             audio.pause()
          })
          setPlaying(true)
+
          audioRef.current = audio
       }
    }, [songPlaying?.song, recentlyList])
@@ -44,6 +55,13 @@ function PlayingBar({ songPlaying, recentlyList }) {
             console.log('play')
             audioRef.current.play()
             setPlaying(true)
+         }
+      } else {
+         if (mySongList) {
+            console.log('mySongList: ', mySongList)
+            const randomSong = mySongList[Math.floor(Math.random() * mySongList.length)]
+            console.log(randomSong)
+            actionCreators.setPlayingSong(randomSong)
          }
       }
    }
@@ -64,82 +82,89 @@ function PlayingBar({ songPlaying, recentlyList }) {
 
    const handleSeek = e => {
       console.log('handleSeek')
-      const valueOnProgressBar = e.target.value
-      console.log('valueOnProgressBar: ', valueOnProgressBar)
+      const valueOnProgressBar = +e.target.value
       setCurrentTime(valueOnProgressBar)
-      const valueOnAudioRef = (audioRef.current.duration / 100) * e.target.value
+      const valueOnAudioRef = (audioRef.current.duration / 100) * +e.target.value
       audioRef.current.currentTime = valueOnAudioRef
    }
 
    return (
       <Box className={styles.playingBar}>
-         {songPlaying?.song && (
-            <>
-               <Box className={styles.playingBarTop}>
-                  <Box className={styles.aboutName} onClick={handleShowPlayingBarCenter}>
-                     <Typography variant='body1' style={{ marginRight: 8 }}>
-                        {songPlaying?.author}:
-                     </Typography>
-                     <Typography variant='body1'>{songPlaying?.songName}</Typography>
+         <Box className={styles.playingBarBottom}>
+            <Box className={styles.subPlayBarBottom}>
+               <Box className={styles.aboutNameBottom} onClick={handleShowPlayingBarCenter}>
+                  <Typography variant='body1' className={styles.aboutNameBody} title='adasdas'>
+                     {songPlaying?.author}: {songPlaying?.songName}
+                  </Typography>
+               </Box>
+               <Box className={styles.audioBtnGroup}>
+                  <Box>
+                     <IconButton className={styles.audioBtn}>
+                        <i className={clsx(styles.audioIcon, 'fad fa-random')} />
+                     </IconButton>
+                     <IconButton className={styles.audioBtnPrev}>
+                        <i className={clsx(styles.audioIcon, 'fad fa-step-backward')} />
+                     </IconButton>
+                     <IconButton className={styles.audioBtnCenter} onClick={handlePlayPause}>
+                        <Avatar
+                           style={{ filter: songPlaying?.song && !playing && 'grayscale(0.5)' }}
+                           className={clsx(styles.playBtn, {
+                              [styles.pause]: !songPlaying?.song || !playing,
+                           })}
+                           alt='Remy Sharp'
+                           src={
+                              songPlaying?.song
+                                 ? `${API}/${songPlaying?.thumb}`
+                                 : 'https://bom.so/zAxyke'
+                           }
+                        />
+                     </IconButton>
+                     <IconButton className={styles.audioBtnNext}>
+                        <i className={clsx(styles.audioIcon, 'fad fa-step-forward')} />
+                     </IconButton>
+                     <IconButton className={styles.audioBtn}>
+                        <i className={clsx(styles.audioIcon, 'fad fa-repeat')} />
+                     </IconButton>
                   </Box>
-                  <IconButton className={styles.favoriteBtn}>
+               </Box>
+               <Box className={styles.timeStateBottom} onClick={handleShowPlayingBarCenter}>
+                  <Typography variant='body1'>
+                     {showCurrentTime()}/{showDuration()}
+                  </Typography>
+                  <IconButton className={styles.favoriteBtnBottom}>
                      <HeartIcon />
                   </IconButton>
                </Box>
-               <Collapse in={isShowPlayingBarCenter} timeout='auto' unmountOnExit>
-                  <Box className={styles.playingBarCenter}>
-                     <Typography variant='body1'>{showCurrentTime()}</Typography>
-                     <input
-                        type='range'
-                        className={styles.processPlayingBar}
-                        onChange={handleSeek}
-                        value={currentTime}
-                     />
-                     <Typography variant='body1'>{showDuration()}</Typography>
-                  </Box>
-               </Collapse>
-            </>
-         )}
-
-         <Box className={styles.playingBarBottom}>
-            <Button className={styles.menuMusicBtn}>
-               <Link to='/musics'>
-                  <ExpandIcon
-                     color='primary'
-                     style={{ transform: 'rotate(-90deg)', fontSize: 26 }}
-                  />
-               </Link>
-            </Button>
-            <Box className={styles.audioBtnGroup}>
-               <Box>
-                  <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-random')} />
-                  </IconButton>
-                  <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-step-backward')} />
-                  </IconButton>
-                  <IconButton className={styles.audioBtn} onClick={handlePlayPause}>
-                     <Avatar
-                        className={clsx(styles.playBtn, {
-                           [styles.pause]: !songPlaying?.song || !playing,
-                        })}
-                        alt='Remy Sharp'
-                        src={
-                           songPlaying?.song
-                              ? `${API}/${songPlaying?.thumb}`
-                              : 'https://bom.so/zAxyke'
-                        }
-                     />
-                  </IconButton>
-                  <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-step-forward')} />
-                  </IconButton>
-                  <IconButton className={styles.audioBtn}>
-                     <i className={clsx(styles.audioIcon, 'fad fa-repeat')} />
-                  </IconButton>
-               </Box>
             </Box>
+            <Box className={styles.processPlayingBarWrap}>
+               <input
+                  type='range'
+                  className={styles.processPlayingBar}
+                  onChange={handleSeek}
+                  value={currentTime}
+               />
+            </Box>
+            {playing && (
+               <LinearProgress
+                  variant='determinate'
+                  value={currentTime}
+                  className={styles.processPlayingBarBottom}
+               />
+            )}
          </Box>
+         {songPlaying?.song && (
+            <Box className={styles.playingBarTop}>
+               <Box className={styles.aboutName} onClick={handleShowPlayingBarCenter}>
+                  <Typography variant='body1' style={{ marginRight: 8 }}>
+                     {songPlaying?.author}:
+                  </Typography>
+                  <Typography variant='body1'>{songPlaying?.songName}</Typography>
+               </Box>
+               <IconButton className={styles.favoriteBtn}>
+                  <HeartIcon />
+               </IconButton>
+            </Box>
+         )}
       </Box>
    )
 }
@@ -147,6 +172,11 @@ function PlayingBar({ songPlaying, recentlyList }) {
 const mapState = state => ({
    songPlaying: state.music.songPlaying,
    recentlyList: state.music.recentlyList,
+   mySongList: state.music.mySongList,
 })
 
-export default connect(mapState)(PlayingBar)
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(PlayingBar)
