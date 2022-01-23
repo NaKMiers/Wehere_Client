@@ -59,6 +59,9 @@ class Actions {
    setMyPlaylistList = payload => ({ type: types.SET_MY_PLAYLIST_LIST, payload })
    setPlayingSong = payload => ({ type: types.SET_PLAYING_SONG, payload })
    setRecentlyList = payload => ({ type: types.SET_RECENTLY_LIST, payload })
+   setPlayingPlayList = payload => ({ type: types.SET_PLAYING_PLAYLIST, payload })
+   setRandomSongList = payload => ({ type: types.SET_RANDOM_SONG_LIST, payload })
+   setCurPlaylistId = payload => ({ type: types.SET_CUR_PLAYLIST_ID, payload })
 
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })

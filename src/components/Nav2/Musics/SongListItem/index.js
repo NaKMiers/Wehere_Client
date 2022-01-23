@@ -5,6 +5,7 @@ import AddIcon from '../../../../components/Icons/AddIcon'
 import DeleteIcon from '../../../Icons/DeleteIcon'
 import HeartIcon from '../../../Icons/HeartIcon'
 import MoreIcon from '../../../../components/Icons/MoreIcon'
+import BlockIcon from '../../../../components/Icons/BlockIcon'
 import AddSongToPlayListModal from '../AddSongToPlaylistModal'
 import useStyles from './styles'
 import { API } from '../../../../constants'
@@ -12,7 +13,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
 
-function SongListItem({ isInPlayListModal = false, song, actionCreators }) {
+function SongListItem({
+   isInPlayListModal = false,
+   song,
+   playlist,
+   songsInPlaylist,
+   curPlayistId,
+   actionCreators,
+}) {
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenAddToPLModal, setOpenAddToPLModal] = useState(false)
    const open = Boolean(anchorEl)
@@ -35,7 +43,28 @@ function SongListItem({ isInPlayListModal = false, song, actionCreators }) {
       if (!isInPlayListModal) {
          actionCreators.setPlayingSong(song)
          actionCreators.setRecentlyList(song)
+         if (playlist._id !== curPlayistId) {
+            console.log('okokokok')
+            actionCreators.setPlayingPlayList(songsInPlaylist)
+            actionCreators.setCurPlaylistId(playlist._id)
+
+            // const randomSongList = makeRandomList(songsInPlaylist)
+            // actionCreators.setRandomSongList(randomSongList)
+         }
       }
+   }
+
+   const makeRandomList = array => {
+      let currentIndex = array.length,
+         randomIndex
+
+      while (currentIndex !== 0) {
+         randomIndex = Math.floor(Math.random() * currentIndex)
+         currentIndex--
+         ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+      }
+
+      return array
    }
 
    return (
@@ -72,12 +101,20 @@ function SongListItem({ isInPlayListModal = false, song, actionCreators }) {
                horizontal: 'left',
             }}
          >
-            <MenuItem onClick={handleAddToPlayList} className={styles.menuItem}>
-               Add To Playlist <AddIcon circle style={{ marginLeft: 8 }} />
-            </MenuItem>
-            <MenuItem onClick={handleDeletSong} className={styles.menuItem}>
-               Delete <DeleteIcon />
-            </MenuItem>
+            {!playlist && (
+               <MenuItem onClick={handleAddToPlayList} className={styles.menuItem}>
+                  Add To Playlist <AddIcon circle style={{ marginLeft: 8 }} />
+               </MenuItem>
+            )}
+            {!playlist ? (
+               <MenuItem onClick={handleDeletSong} className={styles.menuItem}>
+                  Delete <DeleteIcon />
+               </MenuItem>
+            ) : (
+               <MenuItem onClick={handleDeletSong} className={styles.menuItem}>
+                  Remove <BlockIcon style={{ marginLeft: 6 }} />
+               </MenuItem>
+            )}
          </Menu>
 
          <AddSongToPlayListModal open={isOpenAddToPLModal} handleClose={setOpenAddToPLModal} />
@@ -85,8 +122,12 @@ function SongListItem({ isInPlayListModal = false, song, actionCreators }) {
    )
 }
 
+const mapState = state => ({
+   curPlayistId: state.music.curPlayistId,
+})
+
 const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(SongListItem)
+export default connect(mapState, mapDispatch)(SongListItem)

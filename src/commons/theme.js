@@ -35,6 +35,9 @@ const renderTheme = () => {
                text: '#333',
             },
          },
+         glow: {
+            main: '#0ff',
+         },
          border: {
             light: '#ddd',
             dark: '#333',

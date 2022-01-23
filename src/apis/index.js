@@ -72,6 +72,7 @@ class Apis {
    addPlaylist = data => axios.post(`${API}/musics/add-playlist`, data)
    getMyPlaylistList = () => axios.get(`${API}/musics/get-my-playlist-list`)
    getPlaylist = playlistId => axios.get(`${API}/musics/get-playlist/${playlistId}`)
+   getSongListInPlaylist = data => axios.post(`${API}/musics/get-songList-in-playlist`, data)
 
    // accounts
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })

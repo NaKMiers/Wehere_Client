@@ -20,6 +20,9 @@ export default makeStyles(theme => ({
          },
       },
    },
+   hidePlayingBar: {
+      display: 'none',
+   },
    playingBarActive: {
       bottom: 0,
    },
@@ -152,6 +155,10 @@ export default makeStyles(theme => ({
       fontSize: 28,
       fontWeight: 300,
    },
+   audioBtnActive: {
+      textShadow: `0px 2px 15px ${theme.glow.main}`,
+   },
+
    playBtn: {
       width: 75,
       height: 75,

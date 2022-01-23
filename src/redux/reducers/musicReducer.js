@@ -6,6 +6,8 @@ const initState = {
    songPlaying: {},
    recentlyList: [],
    playlistPlaying: [],
+   randomSongList: [],
+   curPlayistId: '',
 }
 
 function musicReducer(state = initState, action) {
@@ -29,6 +31,15 @@ function musicReducer(state = initState, action) {
 
       case types.SET_RECENTLY_LIST:
          return { ...state, recentlyList: [...state.recentlyList, payload] }
+
+      case types.SET_PLAYING_PLAYLIST:
+         return { ...state, playlistPlaying: payload }
+
+      case types.SET_RANDOM_SONG_LIST:
+         return { ...state, randomSongList: payload }
+
+      case types.SET_CUR_PLAYLIST_ID:
+         return { ...state, curPlayistId: payload }
 
       default:
          return state

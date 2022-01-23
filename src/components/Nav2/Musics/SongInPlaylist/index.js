@@ -1,16 +1,18 @@
-import { Box, Button, CardMedia, Grid, List, ListItem, Typography } from '@material-ui/core'
-import { useLocation, useParams } from 'react-router-dom'
+import { Box, Button, CardMedia, Grid, ListItem, Typography } from '@material-ui/core'
+import { ListItemButton } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
-import useStyles from './styles'
-import { API } from '../../../../constants'
-import { ListItemButton } from '@mui/material'
-import { connect } from 'react-redux'
-import { useEffect, useState } from 'react'
 import apis from '../../../../apis'
+import { API } from '../../../../constants'
+import SongListItem from '../SongListItem'
+import useStyles from './styles'
 
 function SongInPlaylist({ myPlaylistList, mySongList }) {
-   const [playlist, setPlaylist] = useState()
+   const [playlist, setPlaylist] = useState({})
+   const [songList, setSongList] = useState([])
 
    let { playlistId } = useParams()
    const styles = useStyles()
@@ -29,7 +31,19 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
       getPlaylist()
    }, [playlistId])
 
-   // useEffect(() => {}, [])
+   useEffect(() => {
+      const getSongListInPlaylist = async () => {
+         if (playlist.songs) {
+            try {
+               const res = await apis.getSongListInPlaylist(playlist.songs)
+               setSongList(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getSongListInPlaylist()
+   }, [playlist.songs])
 
    const renderPlaylistThumb = () => {
       if (playlist?._id) {
@@ -59,7 +73,10 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
       }
    }
 
-   // const renderSongList = () => songList.map(s => <SongListItem key={s._id} song={s} />)
+   const renderSongList = () =>
+      songList.map(s => (
+         <SongListItem key={s._id} song={s} playlist={playlist} songsInPlaylist={songList} />
+      ))
    return (
       <Box>
          <ListItem>
@@ -72,30 +89,15 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
             <Button className={styles.playlistBtn}>
                <Box>
                   <Typography variant='h5' className={styles.playlistName}>
-                     {/* {playlist?.playlistName} */}
+                     {playlist?.playlistName}
                   </Typography>
                   <Typography variant='body1' className={styles.songCount}>
-                     {/* Songs: {playlist?.songs.length} */}
+                     Songs: {playlist?.songs?.length}
                   </Typography>
                </Box>
             </Button>
          </ListItem>
-         <List component='div' disablePadding style={{ padding: 16 }}>
-            <Typography className={styles.songCount}>Songs: 256</Typography>
-
-            {/* <List component='div' disablePadding style={{ padding: 16 }}>
-               <Button
-                  variant='contained'
-                  className={styles.newSong}
-                  onClick={() => setOpenAddNewSongModal(true)}
-               >
-                  Add To My Songs
-               </Button>
-               <Typography className={styles.songCount}>Songs: 256</Typography>
-
-               <Box className={styles.songList}>{renderSongList()}</Box>
-            </List> */}
-         </List>
+         <Box className={styles.songList}>{renderSongList()}</Box>
       </Box>
    )
 }
