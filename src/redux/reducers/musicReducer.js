@@ -8,9 +8,11 @@ const initState = {
    playlistPlaying: [],
    randomSongList: [],
    curPlayistId: '',
+   playingAt: '',
 }
 
 function musicReducer(state = initState, action) {
+   let index = -1
    const { payload } = action
 
    switch (action.type) {
@@ -40,6 +42,30 @@ function musicReducer(state = initState, action) {
 
       case types.SET_CUR_PLAYLIST_ID:
          return { ...state, curPlayistId: payload }
+
+      case types.SET_PLAYING_AT:
+         return { ...state, playingAt: payload }
+
+      case types.REMOVE_SONG_FROM_PLAYLIST:
+         let playlistId = action.playlistId
+         let songId = action.songId
+         console.log('playlistId: ', playlistId)
+         console.log('songId: ', songId)
+         const playlistMatchId = state.myPlaylistList.find((p, i) => {
+            if (p._id === playlistId) {
+               index = i
+               return true
+            }
+            return false
+         })
+         const songsInPLMatchUpdated = playlistMatchId.songs.filter(id => id !== songId)
+         console.log('songsInPLMatchUpdated: ', songsInPLMatchUpdated)
+
+         if (index !== -1) {
+            state.myPlaylistList[index].songs = songsInPLMatchUpdated
+            console.log(state.myPlaylistList[index].songs)
+         }
+         return { ...state }
 
       default:
          return state

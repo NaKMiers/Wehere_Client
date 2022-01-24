@@ -1,21 +1,13 @@
-import { List, Typography } from '@material-ui/core'
-import { Switch, Route } from 'react-router-dom'
-import AuthorListItem from '../AuthorListItem'
+import { CardMedia, List } from '@material-ui/core'
+import { Route, Switch } from 'react-router-dom'
 import SongOfAuthor from '../SongOfAuthor'
-import useStyles from './styles'
 
 function AuthorList() {
-   const styles = useStyles()
-
    return (
       <Switch>
          <Route path='/musics/authors' exact={true}>
             <List style={{ padding: 16 }}>
-               <Typography className={styles.authorCount}>Author: 32</Typography>
-               <AuthorListItem />
-               <AuthorListItem />
-               <AuthorListItem />
-               <AuthorListItem />
+               <CardMedia component='img' image='https://bom.so/T8sqO0' alt='inage' />
             </List>
          </Route>
          <Route path='/musics/authors/:authorName' exact={true}>

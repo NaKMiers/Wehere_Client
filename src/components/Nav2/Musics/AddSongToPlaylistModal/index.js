@@ -1,21 +1,43 @@
-import { Fade, List, Modal, Paper, Typography } from '@material-ui/core'
+import { Fade, List, Modal, Paper, Typography, Box } from '@material-ui/core'
 import PlaylistListItem from '../PlaylistListItem'
 import useStyles from './styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
+import { useState } from 'react'
+import apis from '../../../../apis'
 
-function AddSongToPlayListModal({ open, handleClose, playlistList }) {
+function AddSongToPlayListModal({ open, handleCloseModal, playlistList, song }) {
+   const [error, setError] = useState('')
    const styles = useStyles()
 
+   const handleAddSongToPlaylist = async playlist => {
+      console.log('song: ', song)
+      if (!playlist.songs.includes(song._id)) {
+         try {
+            await apis.addSongToPlaylist(playlist._id, song._id)
+            handleCloseModal()
+         } catch (err) {
+            console.log(err)
+         }
+         setError('')
+      } else {
+         setError('This song is available in this Playlist')
+      }
+   }
+
    const renderPlaylists = () =>
-      playlistList.map(p => <PlaylistListItem key={p._id} playlist={p} showMoreBtn={false} />)
+      playlistList.map(p => (
+         <Box key={p._id} onClick={() => handleAddSongToPlaylist(p)}>
+            <PlaylistListItem playlist={p} />
+         </Box>
+      ))
 
    return (
       <Fade in={open}>
          <Modal
             open
-            onClose={() => handleClose(false)}
+            onClose={handleCloseModal}
             aria-labelledby='modal-modal-title'
             aria-describedby='modal-modal-description'
          >
@@ -23,6 +45,7 @@ function AddSongToPlayListModal({ open, handleClose, playlistList }) {
                <Typography variant='h5' className={styles.heading}>
                   Add To Playlist
                </Typography>
+               <span className={styles.errorMessage}>{error}</span>
                <List className={styles.playlistList}>{renderPlaylists()}</List>
             </Paper>
          </Modal>

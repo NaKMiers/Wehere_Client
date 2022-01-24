@@ -1,4 +1,13 @@
-import { Box, Button, CardMedia, Grid, ListItem, Typography } from '@material-ui/core'
+import {
+   Box,
+   Button,
+   CardMedia,
+   Grid,
+   ListItem,
+   Menu,
+   MenuItem,
+   Typography,
+} from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
@@ -7,12 +16,24 @@ import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
 import apis from '../../../../apis'
 import { API } from '../../../../constants'
+import DeleteIcon from '../../../Icons/DeleteIcon'
+import EditIcon from '../../../Icons/EditIcon'
+import MoreIcon from '../../../Icons/MoreIcon'
 import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
 function SongInPlaylist({ myPlaylistList, mySongList }) {
    const [playlist, setPlaylist] = useState({})
    const [songList, setSongList] = useState([])
+
+   const [anchorEl, setAnchorEl] = useState(null)
+   const open = Boolean(anchorEl)
+   const handleClick = event => {
+      setAnchorEl(event.currentTarget)
+   }
+   const handleClose = () => {
+      setAnchorEl(null)
+   }
 
    let { playlistId } = useParams()
    const styles = useStyles()
@@ -96,6 +117,28 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
                   </Typography>
                </Box>
             </Button>
+
+            <Box className={styles.moreBtn} onClick={handleClick}>
+               <MoreIcon rotate color='secondary' />
+            </Box>
+
+            <Menu
+               id='basic-menu'
+               anchorEl={anchorEl}
+               open={open}
+               onClose={handleClose}
+               MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+               }}
+               className={styles.menu}
+            >
+               <MenuItem onClick={handleClose} className={styles.menuItem}>
+                  Edit <EditIcon />
+               </MenuItem>
+               <MenuItem onClick={handleClose} className={styles.menuItem}>
+                  Delete <DeleteIcon />
+               </MenuItem>
+            </Menu>
          </ListItem>
          <Box className={styles.songList}>{renderSongList()}</Box>
       </Box>

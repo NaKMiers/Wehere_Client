@@ -15,10 +15,13 @@ import actions from '../../../../actions'
 
 function SongListItem({
    isInPlayListModal = false,
+   mySongList,
    song,
+   songPlaying,
    playlist,
    songsInPlaylist,
    curPlayistId,
+   playingAt,
    actionCreators,
 }) {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -28,9 +31,12 @@ function SongListItem({
       setAnchorEl(event.currentTarget)
    }
 
-   const handleAddToPlayList = () => {
+   const handleOpenModal = () => {
       setAnchorEl(null)
       setOpenAddToPLModal(true)
+   }
+   const handleCloseModal = () => {
+      setOpenAddToPLModal(false)
    }
 
    const handleDeletSong = () => {
@@ -40,21 +46,33 @@ function SongListItem({
    const styles = useStyles()
 
    const handlePlaySong = () => {
-      if (!isInPlayListModal) {
+      console.log(songPlaying._id)
+      if (!isInPlayListModal && songPlaying._id !== song._id) {
+         let randomSongList
          actionCreators.setPlayingSong(song)
          actionCreators.setRecentlyList(song)
-         if (playlist._id !== curPlayistId) {
-            console.log('okokokok')
-            actionCreators.setPlayingPlayList(songsInPlaylist)
-            actionCreators.setCurPlaylistId(playlist._id)
 
-            // const randomSongList = makeRandomList(songsInPlaylist)
-            // actionCreators.setRandomSongList(randomSongList)
+         // play in mySongList
+         if (!playlist?._id && playingAt !== 'mySongList') {
+            actionCreators.setPlayingAt('mySongList')
+
+            randomSongList = makeRandomList(mySongList)
+            actionCreators.setRandomSongList(randomSongList)
+         }
+
+         // play in playlist
+         if (playlist?._id && playlist?._id !== curPlayistId) {
+            actionCreators.setPlayingAt('playlist')
+            actionCreators.setPlayingPlayList(songsInPlaylist)
+            actionCreators.setCurPlaylistId(playlist?._id)
+
+            randomSongList = makeRandomList(songsInPlaylist)
+            actionCreators.setRandomSongList(randomSongList)
          }
       }
    }
-
-   const makeRandomList = array => {
+   const makeRandomList = originalArray => {
+      let array = [...originalArray]
       let currentIndex = array.length,
          randomIndex
 
@@ -65,6 +83,12 @@ function SongListItem({
       }
 
       return array
+   }
+
+   const handleRemoveSongFromPlaylist = () => {
+      console.log('asdasdsdsad')
+      actionCreators.removeSongFromPlaylist(playlist._id, song._id)
+      setAnchorEl(null)
    }
 
    return (
@@ -102,7 +126,7 @@ function SongListItem({
             }}
          >
             {!playlist && (
-               <MenuItem onClick={handleAddToPlayList} className={styles.menuItem}>
+               <MenuItem onClick={handleOpenModal} className={styles.menuItem}>
                   Add To Playlist <AddIcon circle style={{ marginLeft: 8 }} />
                </MenuItem>
             )}
@@ -111,19 +135,26 @@ function SongListItem({
                   Delete <DeleteIcon />
                </MenuItem>
             ) : (
-               <MenuItem onClick={handleDeletSong} className={styles.menuItem}>
+               <MenuItem onClick={handleRemoveSongFromPlaylist} className={styles.menuItem}>
                   Remove <BlockIcon style={{ marginLeft: 6 }} />
                </MenuItem>
             )}
          </Menu>
 
-         <AddSongToPlayListModal open={isOpenAddToPLModal} handleClose={setOpenAddToPLModal} />
+         <AddSongToPlayListModal
+            open={isOpenAddToPLModal}
+            handleCloseModal={handleCloseModal}
+            song={song}
+         />
       </ListItem>
    )
 }
 
 const mapState = state => ({
+   songPlaying: state.music.songPlaying,
+   mySongList: state.music.mySongList,
    curPlayistId: state.music.curPlayistId,
+   playingAt: state.music.playingAt,
 })
 
 const mapDispatch = dispatch => ({

@@ -12,7 +12,8 @@ import theme from './commons/theme'
 import PlayingBar from './components/Nav2/Musics/PlayingBar'
 import routes from './routes'
 
-const shuffle = array => {
+const shuffle = originalArray => {
+   let array = [...originalArray]
    let currentIndex = array.length,
       randomIndex
 

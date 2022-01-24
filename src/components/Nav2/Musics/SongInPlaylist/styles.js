@@ -47,4 +47,23 @@ export default makeStyles(theme => ({
          height: 'calc(50vh + 80px)',
       },
    },
+
+   moreBtn: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      cursor: 'pointer',
+      padding: 12,
+   },
+
+   menu: {
+      '& .MuiPaper-root': {
+         background: theme.palette.secondary.main,
+         color: theme.palette.primary.text,
+      },
+   },
+   menuItem: {
+      padding: '6px 12px',
+      minHeight: 0,
+   },
 }))

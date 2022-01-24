@@ -16,12 +16,17 @@ export default makeStyles(theme => ({
       borderRadius: 8,
       outline: 'none',
       paddingBottom: 10,
+      textAlign: 'center',
    },
    heading: {
       padding: 8,
       textAlign: 'center',
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
+   },
+   errorMessage: {
+      color: theme.palette.danger.main,
+      lineHeight: 2,
    },
    playlistList: {
       width: 300,

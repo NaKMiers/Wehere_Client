@@ -1,7 +1,6 @@
 import { Avatar, Box, IconButton, LinearProgress, Typography } from '@material-ui/core'
-import { AudiotrackRounded } from '@material-ui/icons'
 import clsx from 'clsx'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -34,42 +33,22 @@ function PlayingBar({
    }
    const styles = useStyles()
 
-   useEffect(() => {
-      if (songPlaying?.song !== recentlyList?.[recentlyList.length - 2]?.song) {
-         audioRef.current.ontimeupdate = () =>
-            setCurrentTime((audioRef.current.currentTime / audioRef.current.duration) * 100)
-         audioRef.current.onended = () => {
-            console.log('ended')
-            if (!repeat) {
-               if (!random) {
-               } else {
-               }
-            }
-         }
-         audioRef.current.play().catch(err => {
-            console.log('err: ', err)
-            audioRef.current.pause()
-         })
-         setPlaying(true)
-      }
-   }, [songPlaying?.song, recentlyList, repeat, random])
-
    const handlePlayPause = () => {
       if (songPlaying?.song) {
          if (playing) {
-            console.log('pause')
             audioRef.current.pause()
             setPlaying(false)
          } else {
-            console.log('play')
             audioRef.current.play()
             setPlaying(true)
          }
       } else {
+         // play random music in mySongList if songPlay is not exist
          if (mySongList) {
             const randomSong = mySongList[Math.floor(Math.random() * mySongList.length)]
             actionCreators.setPlayingSong(randomSong)
             actionCreators.setRecentlyList(randomSong)
+            actionCreators.setPlayingAt('mySongList')
          }
       }
    }
@@ -98,72 +77,60 @@ function PlayingBar({
       setRepeat(!repeat)
       audioRef.current.loop = !repeat
    }
-
    const handleRandom = () => {
       console.log('handleRandom')
+      // if (!random) {
+      //    const randomSongList = makeRandomList(
+      //       !playlistPlaying.length ? mySongList : playlistPlaying
+      //    )
+      //    actionCreators.setRandomSongList(randomSongList)
+      // }
       setRandom(!random)
-      if (!random) {
-         const randomSongList = makeRandomList(
-            !playlistPlaying.length ? mySongList : playlistPlaying
-         )
-         actionCreators.setRandomSongList(randomSongList)
-      }
-   }
-   const makeRandomList = array => {
-      let currentIndex = array.length,
-         randomIndex
-
-      while (currentIndex !== 0) {
-         randomIndex = Math.floor(Math.random() * currentIndex)
-         currentIndex--
-         ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
-      }
-
-      return array
    }
 
-   const handleNextSong = () => {
+   const handleNextSong = useCallback(() => {
       console.log('handleNextSong')
+      let index
+      let nextSong
       if (!random) {
          if (!playlistPlaying.length) {
             console.log('listening in mySongList')
-            let index = findIndexSong(mySongList, songPlaying._id)
-            const nextSong = mySongList[index + 1] || mySongList[0]
-            actionCreators.setPlayingSong(nextSong)
+            index = findIndexSong(mySongList, songPlaying._id)
+            nextSong = mySongList[index + 1] || mySongList[0]
          } else {
             console.log('listening in playlist')
-            let index = findIndexSong(playlistPlaying, songPlaying._id)
-            const nextSong = playlistPlaying[index + 1] || playlistPlaying[0]
-            actionCreators.setPlayingSong(nextSong)
+            index = findIndexSong(playlistPlaying, songPlaying._id)
+            nextSong = playlistPlaying[index + 1] || playlistPlaying[0]
          }
       } else {
          console.log('listening in randomSongList')
-         let index = findIndexSong(randomSongList, songPlaying._id)
-         const nextSong = randomSongList[index + 1] || randomSongList[0]
-         actionCreators.setPlayingSong(nextSong)
+         index = findIndexSong(randomSongList, songPlaying._id)
+         nextSong = randomSongList[index + 1] || randomSongList[0]
       }
-   }
+      actionCreators.setPlayingSong(nextSong)
+      actionCreators.setRecentlyList(nextSong)
+   }, [actionCreators, mySongList, songPlaying._id, playlistPlaying, random, randomSongList])
    const handlePrevSong = () => {
       console.log('handlePrevSong')
+      let index
+      let prevSong
       if (!random) {
          if (!playlistPlaying.length) {
             console.log('listening in mySongList')
-            let index = findIndexSong(mySongList, songPlaying._id)
-            const prevSong = mySongList[index - 1] || mySongList[mySongList.length - 1]
-            actionCreators.setPlayingSong(prevSong)
+            index = findIndexSong(mySongList, songPlaying._id)
+            prevSong = mySongList[index - 1] || mySongList[mySongList.length - 1]
          } else {
             console.log('listening in playlist')
-            let index = findIndexSong(playlistPlaying, songPlaying._id)
-            const prevSong =
-               playlistPlaying[index - 1] || playlistPlaying[playlistPlaying.length - 1]
-            actionCreators.setPlayingSong(prevSong)
+            index = findIndexSong(playlistPlaying, songPlaying._id)
+            prevSong = playlistPlaying[index - 1] || playlistPlaying[playlistPlaying.length - 1]
          }
       } else {
          console.log('listening in randomSongList')
-         let index = findIndexSong(randomSongList, songPlaying._id)
-         const prevSong = randomSongList[index - 1] || randomSongList[randomSongList.length - 1]
-         actionCreators.setPlayingSong(prevSong)
+         index = findIndexSong(randomSongList, songPlaying._id)
+         prevSong = randomSongList[index - 1] || randomSongList[randomSongList.length - 1]
       }
+      actionCreators.setPlayingSong(prevSong)
+      actionCreators.setRecentlyList(prevSong)
    }
    const findIndexSong = (list, songId) => {
       let index = -1
@@ -174,6 +141,24 @@ function PlayingBar({
       })
       return index
    }
+
+   useEffect(() => {
+      if (songPlaying?.song !== recentlyList?.[recentlyList.length - 2]?.song) {
+         audioRef.current.ontimeupdate = () =>
+            setCurrentTime((audioRef.current.currentTime / audioRef.current.duration) * 100)
+         audioRef.current.onended = () => {
+            console.log('ended')
+            if (!repeat) {
+               handleNextSong()
+            }
+         }
+         audioRef.current.play().catch(err => {
+            console.log('err: ', err)
+            audioRef.current.pause()
+         })
+         setPlaying(true)
+      }
+   }, [songPlaying?.song, recentlyList, repeat, handleNextSong])
 
    return (
       <Box

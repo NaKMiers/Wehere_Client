@@ -1,22 +1,11 @@
-import { Button, CardMedia, Grid, ListItem, Menu, MenuItem, Typography } from '@material-ui/core'
+import { Button, CardMedia, Grid, ListItem, Typography } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
 import { Box } from '@mui/system'
-import { memo, useState } from 'react'
-import DeleteIcon from '../../../Icons/DeleteIcon'
-import EditIcon from '../../../Icons/EditIcon'
-import MoreIcon from '../../../Icons/MoreIcon'
-import useStyles from './styles'
+import { memo } from 'react'
 import { API } from '../../../../constants'
+import useStyles from './styles'
 
-function PlaylistListItem({ playlist, showMoreBtn = true }) {
-   const [anchorEl, setAnchorEl] = useState(null)
-   const open = Boolean(anchorEl)
-   const handleClick = event => {
-      setAnchorEl(event.currentTarget)
-   }
-   const handleClose = () => {
-      setAnchorEl(null)
-   }
+function PlaylistListItem({ playlist }) {
    const styles = useStyles()
 
    const renderPlaylistThumb = () => {
@@ -63,30 +52,6 @@ function PlaylistListItem({ playlist, showMoreBtn = true }) {
                </Typography>
             </Box>
          </Button>
-
-         {showMoreBtn && (
-            <Box className={styles.moreBtn} onClick={handleClick}>
-               <MoreIcon rotate color='secondary' />
-            </Box>
-         )}
-
-         <Menu
-            id='basic-menu'
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-               'aria-labelledby': 'basic-button',
-            }}
-            className={styles.menu}
-         >
-            <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Edit <EditIcon />
-            </MenuItem>
-            <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Delete <DeleteIcon />
-            </MenuItem>
-         </Menu>
       </ListItem>
    )
 }

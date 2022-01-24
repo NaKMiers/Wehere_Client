@@ -5,7 +5,8 @@ import Short from '../../../components/Nav1/Short'
 import Header from '../../../components/Header'
 import { connect } from 'react-redux'
 
-const shuffle = array => {
+const shuffle = originalArray => {
+   let array = [...originalArray]
    let currentIndex = array.length,
       randomIndex
 
