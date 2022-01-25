@@ -54,6 +54,8 @@ export default makeStyles(theme => ({
       right: 0,
       cursor: 'pointer',
       padding: 12,
+      marginTop: 8,
+      marginRight: 8,
    },
 
    menu: {

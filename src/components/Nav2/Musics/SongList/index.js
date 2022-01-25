@@ -18,7 +18,7 @@ function SongList({ songList }) {
 
    return (
       <>
-         <List component='div' disablePadding style={{ padding: 16 }}>
+         <List component='div' disablePadding className={styles.songListWrap}>
             <Button
                variant='contained'
                className={styles.newSong}
@@ -26,7 +26,7 @@ function SongList({ songList }) {
             >
                Add To My Songs
             </Button>
-            <Typography className={styles.songCount}>Songs: 256</Typography>
+            <Typography className={styles.songCount}>Songs: {songList.length}</Typography>
 
             <Box className={styles.songList}>{renderSongList()}</Box>
          </List>

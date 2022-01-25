@@ -11,7 +11,7 @@ import {
 import { ListItemButton } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
 import apis from '../../../../apis'
@@ -22,9 +22,12 @@ import MoreIcon from '../../../Icons/MoreIcon'
 import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
-function SongInPlaylist({ myPlaylistList, mySongList }) {
+function SongInPlaylist({ myPlaylistList, mySongList, actionCreators }) {
+   let { playlistId } = useParams()
    const [playlist, setPlaylist] = useState({})
    const [songList, setSongList] = useState([])
+   const [songsRemoved, setSongsRemoved] = useState([])
+   const history = useHistory()
 
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
@@ -35,7 +38,15 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
       setAnchorEl(null)
    }
 
-   let { playlistId } = useParams()
+   const handleRemoveSong = async songId => {
+      try {
+         const res = await apis.removeSongFromPlaylist(playlist._id, songId)
+         setSongsRemoved([...songsRemoved, res.data.songId])
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
    const styles = useStyles()
 
    useEffect(() => {
@@ -66,6 +77,17 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
       getSongListInPlaylist()
    }, [playlist.songs])
 
+   const handleDeletePlaylist = async () => {
+      console.log('handleDeletePlaylist')
+      try {
+         const res = await apis.deletePlaylist(playlist._id)
+         history.push('/musics/playlists')
+         actionCreators.deletePlaylist(res.data.deletedPlaylistId)
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
    const renderPlaylistThumb = () => {
       if (playlist?._id) {
          if (playlist.thumbs.length !== 4) {
@@ -95,9 +117,20 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
    }
 
    const renderSongList = () =>
-      songList.map(s => (
-         <SongListItem key={s._id} song={s} playlist={playlist} songsInPlaylist={songList} />
-      ))
+      songList.map(s => {
+         if (!songsRemoved.includes(s._id)) {
+            return (
+               <SongListItem
+                  key={s._id}
+                  song={s}
+                  playlist={playlist}
+                  songsInPlaylist={songList}
+                  handleRemoveSong={handleRemoveSong}
+               />
+            )
+         }
+         return null
+      })
    return (
       <Box>
          <ListItem>
@@ -135,7 +168,7 @@ function SongInPlaylist({ myPlaylistList, mySongList }) {
                <MenuItem onClick={handleClose} className={styles.menuItem}>
                   Edit <EditIcon />
                </MenuItem>
-               <MenuItem onClick={handleClose} className={styles.menuItem}>
+               <MenuItem onClick={handleDeletePlaylist} className={styles.menuItem}>
                   Delete <DeleteIcon />
                </MenuItem>
             </Menu>

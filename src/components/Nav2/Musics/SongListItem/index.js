@@ -1,6 +1,6 @@
 import { Avatar, Box, ListItem, ListItemText, Menu, MenuItem } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AddIcon from '../../../../components/Icons/AddIcon'
 import DeleteIcon from '../../../Icons/DeleteIcon'
 import HeartIcon from '../../../Icons/HeartIcon'
@@ -12,6 +12,7 @@ import { API } from '../../../../constants'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
+import apis from '../../../../apis'
 
 function SongListItem({
    isInPlayListModal = false,
@@ -22,11 +23,22 @@ function SongListItem({
    songsInPlaylist,
    curPlayistId,
    playingAt,
+   handleRemoveSong,
    actionCreators,
 }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenAddToPLModal, setOpenAddToPLModal] = useState(false)
    const open = Boolean(anchorEl)
+   const [favorite, setFavorite] = useState(song?.favorite)
+
+   const styles = useStyles()
+
+   useEffect(() => {
+      return () => {
+         setFavorite(!favorite)
+      }
+   }, [song?.favorite, favorite])
+
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
@@ -39,11 +51,15 @@ function SongListItem({
       setOpenAddToPLModal(false)
    }
 
-   const handleDeletSong = () => {
+   const handleDeleteSong = async () => {
+      try {
+         const res = await apis.deleteSong(song._id)
+         actionCreators.deleteSong(res.data.deletedSongId)
+      } catch (err) {
+         console.log(err)
+      }
       setAnchorEl(null)
    }
-
-   const styles = useStyles()
 
    const handlePlaySong = () => {
       console.log(songPlaying._id)
@@ -85,10 +101,13 @@ function SongListItem({
       return array
    }
 
-   const handleRemoveSongFromPlaylist = () => {
-      console.log('asdasdsdsad')
-      actionCreators.removeSongFromPlaylist(playlist._id, song._id)
-      setAnchorEl(null)
+   const handleMarkFavoriteSong = async () => {
+      try {
+         await apis.markFavoriteSong(song._id, !favorite)
+         setFavorite(!favorite)
+      } catch (err) {
+         console.log(err)
+      }
    }
 
    return (
@@ -103,8 +122,8 @@ function SongListItem({
                <span className={styles.button} onClick={handleClick}>
                   <MoreIcon color='secondary' />
                </span>
-               <span className={styles.button}>
-                  <HeartIcon liked={song.favorite} />
+               <span className={styles.button} onClick={handleMarkFavoriteSong}>
+                  <HeartIcon liked={favorite} />
                </span>
             </Box>
          )}
@@ -131,11 +150,11 @@ function SongListItem({
                </MenuItem>
             )}
             {!playlist ? (
-               <MenuItem onClick={handleDeletSong} className={styles.menuItem}>
+               <MenuItem onClick={handleDeleteSong} className={styles.menuItem}>
                   Delete <DeleteIcon />
                </MenuItem>
             ) : (
-               <MenuItem onClick={handleRemoveSongFromPlaylist} className={styles.menuItem}>
+               <MenuItem onClick={() => handleRemoveSong(song._id)} className={styles.menuItem}>
                   Remove <BlockIcon style={{ marginLeft: 6 }} />
                </MenuItem>
             )}

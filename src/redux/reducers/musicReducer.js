@@ -4,15 +4,25 @@ const initState = {
    myPlaylistList: [],
    authorList: [],
    songPlaying: {},
-   recentlyList: [],
+   recentlyList: getRecentSongList() || [],
    playlistPlaying: [],
    randomSongList: [],
    curPlayistId: '',
    playingAt: '',
 }
 
+if (!JSON.parse(localStorage.getItem('recentlyList'))) {
+   localStorage.setItem('recentlyList', JSON.stringify([]))
+}
+
+function getRecentSongList() {
+   return JSON.parse(localStorage.getItem('recentlyList'))
+}
+function setRecentlyList(newRecentlyList) {
+   return localStorage.setItem('recentlyList', JSON.stringify(newRecentlyList))
+}
+
 function musicReducer(state = initState, action) {
-   let index = -1
    const { payload } = action
 
    switch (action.type) {
@@ -32,9 +42,34 @@ function musicReducer(state = initState, action) {
          return { ...state, songPlaying: payload }
 
       case types.SET_RECENTLY_LIST:
-         return { ...state, recentlyList: [...state.recentlyList, payload] }
+         let index = -1
+         let newRecentlyList
+         const putOnTop = (index, array) => {
+            let result = array.splice(index, 1)
+
+            const newAr = result.concat(array)
+            return newAr
+         }
+
+         // find index of payload in recentlylist
+         state.recentlyList.forEach((s, i) => {
+            if (s._id === payload._id) {
+               index = i
+            }
+         })
+
+         if (index !== -1) {
+            newRecentlyList = putOnTop(index, state.recentlyList)
+         } else {
+            newRecentlyList = [payload, ...state.recentlyList]
+         }
+
+         setRecentlyList(newRecentlyList)
+
+         return { ...state, recentlyList: newRecentlyList }
 
       case types.SET_PLAYING_PLAYLIST:
+         console.log('wassadasdsad: ', payload)
          return { ...state, playlistPlaying: payload }
 
       case types.SET_RANDOM_SONG_LIST:
@@ -46,27 +81,14 @@ function musicReducer(state = initState, action) {
       case types.SET_PLAYING_AT:
          return { ...state, playingAt: payload }
 
-      case types.REMOVE_SONG_FROM_PLAYLIST:
-         let playlistId = action.playlistId
-         let songId = action.songId
-         console.log('playlistId: ', playlistId)
-         console.log('songId: ', songId)
-         const playlistMatchId = state.myPlaylistList.find((p, i) => {
-            if (p._id === playlistId) {
-               index = i
-               return true
-            }
-            return false
-         })
-         const songsInPLMatchUpdated = playlistMatchId.songs.filter(id => id !== songId)
-         console.log('songsInPLMatchUpdated: ', songsInPLMatchUpdated)
+      case types.DELETE_SONG:
+         return { ...state, mySongList: state.mySongList.filter(s => s._id !== action.songId) }
 
-         if (index !== -1) {
-            state.myPlaylistList[index].songs = songsInPLMatchUpdated
-            console.log(state.myPlaylistList[index].songs)
+      case types.DELETE_PLAYLIST:
+         return {
+            ...state,
+            myPlaylistList: state.myPlaylistList.filter(p => p._id !== action.playlistId),
          }
-         return { ...state }
-
       default:
          return state
    }

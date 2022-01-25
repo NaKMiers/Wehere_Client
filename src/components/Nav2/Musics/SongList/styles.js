@@ -20,6 +20,10 @@ export default makeStyles(theme => ({
       marginBottom: 8,
    },
 
+   songListWrap: {
+      padding: 16,
+      textAlign: 'center',
+   },
    songList: {
       height: 'calc(100vh - 250px)',
       overflow: 'scroll',

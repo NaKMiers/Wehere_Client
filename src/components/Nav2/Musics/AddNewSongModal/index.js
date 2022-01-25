@@ -16,8 +16,8 @@ import { connect } from 'react-redux'
 import actions from '../../../../actions'
 
 function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
-   const [songName, setSongName] = useState()
-   const [author, setAuthor] = useState()
+   const [songName, setSongName] = useState('')
+   const [author, setAuthor] = useState('')
    const [song, setSong] = useState(null)
    const [songPreview, setSongPreview] = useState(null)
    const [fileName, setFileName] = useState(null)

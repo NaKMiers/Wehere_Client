@@ -10,6 +10,7 @@ export default makeStyles(theme => ({
       outline: 'none',
       borderRadius: 8,
       overflow: 'hidden',
+      minHeight: 10,
    },
 
    form: {
@@ -47,7 +48,8 @@ export default makeStyles(theme => ({
    },
 
    songList: {
-      height: 400,
+      minHeight: 24,
+      maxHeight: 400,
       padding: 0,
       overflow: 'scroll',
    },

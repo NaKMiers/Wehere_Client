@@ -10,6 +10,7 @@ export default makeStyles(theme => ({
       padding: 0,
       borderRadius: 8,
       overflow: 'hidden',
+      outline: 'none',
    },
    heading: {
       padding: '8px 16px',

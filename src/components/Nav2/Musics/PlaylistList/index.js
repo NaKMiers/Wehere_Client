@@ -36,7 +36,9 @@ function PlaylistList({ playlistList }) {
                >
                   New Playlist
                </Button>
-               <Typography className={styles.playlistCount}>Playlist: 3</Typography>
+               <Typography className={styles.playlistCount}>
+                  Playlist: {playlistList.length}
+               </Typography>
 
                <Box className={styles.playlistListWrap}>{renderPlaylists()}</Box>
             </List>

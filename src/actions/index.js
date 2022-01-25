@@ -63,11 +63,8 @@ class Actions {
    setRandomSongList = payload => ({ type: types.SET_RANDOM_SONG_LIST, payload })
    setCurPlaylistId = payload => ({ type: types.SET_CUR_PLAYLIST_ID, payload })
    setPlayingAt = payload => ({ type: types.SET_PLAYING_AT, payload })
-   removeSongFromPlaylist = (playlistId, songId) => ({
-      type: types.REMOVE_SONG_FROM_PLAYLIST,
-      playlistId,
-      songId,
-   })
+   deleteSong = songId => ({ type: types.DELETE_SONG, songId })
+   deletePlaylist = playlistId => ({ type: types.DELETE_PLAYLIST, playlistId })
 
    showBackdrop = () => ({ type: types.SHOW_BACKDROP })
    hideBackdrop = () => ({ type: types.HIDE_BACKDROP })

@@ -14,8 +14,6 @@ function AddNewPlaylistModal({ open, handleCloseModal, songList, actionCreators 
 
    const styles = useStyle()
 
-   console.log('selectSongs: ', selectSongs)
-
    const renderSongList = () =>
       songList.map(s => (
          <Box

@@ -19,7 +19,13 @@ import SearchIcon from '../../../Icons/SearchIcon'
 import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
-function ListOptionMusicPage({ recentlyList, actionCreators }) {
+function ListOptionMusicPage({
+   recentlyList,
+   mySongList,
+   myPlaylistList,
+   authorList,
+   actionCreators,
+}) {
    const [isShowRecentlySongs, setShowRecentlySongs] = useState(true)
 
    const styles = useStyles()
@@ -69,7 +75,7 @@ function ListOptionMusicPage({ recentlyList, actionCreators }) {
                      />
                   </Avatar>
                </ListItemAvatar>
-               <ListItemText primary='My Songs' secondary='216 songs' />
+               <ListItemText primary='My Songs' secondary={`${mySongList.length}: songs`} />
             </Link>
          </ListItem>
          <ListItem>
@@ -82,7 +88,10 @@ function ListOptionMusicPage({ recentlyList, actionCreators }) {
                      />
                   </Avatar>
                </ListItemAvatar>
-               <ListItemText primary='My Playlists' secondary='3 playlists' />
+               <ListItemText
+                  primary='My Playlists'
+                  secondary={`${myPlaylistList.length}: playlists`}
+               />
             </Link>
          </ListItem>
          <ListItem>
@@ -95,7 +104,7 @@ function ListOptionMusicPage({ recentlyList, actionCreators }) {
                      />
                   </Avatar>
                </ListItemAvatar>
-               <ListItemText primary='Authors' secondary='32 authors' />
+               <ListItemText primary='Authors' secondary={`${authorList.length}: author`} />
             </Link>
          </ListItem>
       </List>
@@ -104,6 +113,9 @@ function ListOptionMusicPage({ recentlyList, actionCreators }) {
 
 const mapState = state => ({
    recentlyList: state.music.recentlyList,
+   mySongList: state.music.mySongList,
+   myPlaylistList: state.music.myPlaylistList,
+   authorList: state.music.authorList,
 })
 const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),

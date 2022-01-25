@@ -75,6 +75,12 @@ class Apis {
    getSongListInPlaylist = data => axios.post(`${API}/musics/get-songList-in-playlist`, data)
    addSongToPlaylist = (playlistId, songId) =>
       axios.post(`${API}/musics/add-song-to-playlist`, { playlistId, songId })
+   removeSongFromPlaylist = (playlistId, songId) =>
+      axios.patch(`${API}/musics/remove-song-from-playlist`, { playlistId, songId })
+   markFavoriteSong = (songId, value) =>
+      axios.patch(`${API}/musics/mark-favorite-song`, { songId, value })
+   deleteSong = songId => axios.delete(`${API}/musics/delete-song/${songId}`)
+   deletePlaylist = playlistId => axios.delete(`${API}/musics/delete-playlist/${playlistId}`)
 
    // accounts
    getAccounts = accountList => axios.post(`${API}/users/get-accounts`, { accountList })

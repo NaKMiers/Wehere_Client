@@ -2,11 +2,15 @@ import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
 import React from 'react'
 
-function HeartIcon({ liked, style }) {
+function HeartIcon({ liked, green, style }) {
    const styles = makeStyles(theme => ({
       icon: {
          fontSize: 26,
-         color: liked ? theme.palette.danger.main : theme.favoriteIcon.main,
+         color: liked
+            ? green
+               ? theme.palette.success.main
+               : theme.palette.danger.main
+            : theme.favoriteIcon.main,
       },
    }))()
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
+import apis from '../../../../apis'
 import HeartIcon from '../../../../components/Icons/HeartIcon'
 import { API } from '../../../../constants'
 import useStyles from './styles'
@@ -19,6 +20,7 @@ function PlayingBar({
 }) {
    const [isShowPlayingBarTop, setShowPlayingBarTop] = useState(false)
    const [playing, setPlaying] = useState(true)
+   const [favorite, setFavorite] = useState(false)
    const [currentTime, setCurrentTime] = useState(0)
    const audioRef = useRef(null)
    const currentUrl = useLocation().pathname
@@ -49,6 +51,9 @@ function PlayingBar({
             actionCreators.setPlayingSong(randomSong)
             actionCreators.setRecentlyList(randomSong)
             actionCreators.setPlayingAt('mySongList')
+
+            const randomSongList = makeRandomList(mySongList)
+            actionCreators.setRandomSongList(randomSongList)
          }
       }
    }
@@ -86,6 +91,19 @@ function PlayingBar({
       //    actionCreators.setRandomSongList(randomSongList)
       // }
       setRandom(!random)
+   }
+   const makeRandomList = originalArray => {
+      let array = [...originalArray]
+      let currentIndex = array.length,
+         randomIndex
+
+      while (currentIndex !== 0) {
+         randomIndex = Math.floor(Math.random() * currentIndex)
+         currentIndex--
+         ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+      }
+
+      return array
    }
 
    const handleNextSong = useCallback(() => {
@@ -142,6 +160,15 @@ function PlayingBar({
       return index
    }
 
+   const handleMarkFavoriteSong = async () => {
+      try {
+         await apis.markFavoriteSong(songPlaying._id, !favorite)
+         setFavorite(!favorite)
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
    useEffect(() => {
       if (songPlaying?.song !== recentlyList?.[recentlyList.length - 2]?.song) {
          audioRef.current.ontimeupdate = () =>
@@ -156,9 +183,10 @@ function PlayingBar({
             console.log('err: ', err)
             audioRef.current.pause()
          })
+         setFavorite(songPlaying?.favorite)
          setPlaying(true)
       }
-   }, [songPlaying?.song, recentlyList, repeat, handleNextSong])
+   }, [songPlaying?.song, songPlaying?.favorite, recentlyList, repeat, handleNextSong])
 
    return (
       <Box
@@ -231,8 +259,15 @@ function PlayingBar({
                      <Typography variant='body1'>
                         {showCurrentTime()}/{showDuration()}
                      </Typography>
-                     <IconButton className={styles.favoriteBtnBottom}>
-                        <HeartIcon />
+                     <IconButton
+                        className={styles.favoriteBtnBottom}
+                        onClick={handleMarkFavoriteSong}
+                     >
+                        <HeartIcon
+                           liked={favorite}
+                           green
+                           style={{ border: '1px solid #fff', borderRadius: '50%' }}
+                        />
                      </IconButton>
                   </Box>
                )}
