@@ -22,6 +22,7 @@ import SaveIcon from '../../Icons/SaveIcon'
 import ShareIcon from '../../Icons/ShareIcon'
 import useStyles from './styles'
 import moment from 'moment'
+import { connect } from 'react-redux'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -34,9 +35,11 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Blog({ blogPost, author }) {
+function Blog({ blogPost, author, curUser }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
+   const [expanded, setExpanded] = useState(false)
+   const [liked, setLiked] = useState(blogPost.heart.includes(curUser._id))
    const open = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
@@ -45,8 +48,6 @@ function Blog({ blogPost, author }) {
       setAnchorEl(null)
       setOpenShareModal(false)
    }
-
-   const [expanded, setExpanded] = useState(false)
 
    const handleExpandClick = () => {
       setExpanded(!expanded)
@@ -74,8 +75,8 @@ function Blog({ blogPost, author }) {
                <Typography variant='body2'>{blogPost.statusText}</Typography>
             </CardContent>
             <CardActions disableSpacing>
-               <IconButton aria-label='add to favorites'>
-                  <HeartIcon />
+               <IconButton aria-label='add to favorites' onClick={() => setLiked(!liked)}>
+                  <HeartIcon liked={liked} />
                </IconButton>
                <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
@@ -103,9 +104,11 @@ function Blog({ blogPost, author }) {
                'aria-labelledby': 'basic-button',
             }}
          >
-            <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Delete <DeleteIcon />
-            </MenuItem>
+            {curUser?._id === author._id && (
+               <MenuItem onClick={handleClose} className={styles.menuItem}>
+                  Delete <DeleteIcon />
+               </MenuItem>
+            )}
             <MenuItem onClick={handleClose} className={styles.menuItem}>
                Save <SaveIcon />
             </MenuItem>
@@ -114,4 +117,8 @@ function Blog({ blogPost, author }) {
    )
 }
 
-export default Blog
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+
+export default connect(mapState)(Blog)

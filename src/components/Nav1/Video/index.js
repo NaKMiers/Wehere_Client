@@ -25,6 +25,7 @@ import useStyles from './styles'
 import { API } from '../../../constants'
 import { memo } from 'react'
 import moment from 'moment'
+import { connect } from 'react-redux'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -37,9 +38,10 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Video({ videoPost, author }) {
+function Video({ videoPost, author, curUser }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
+   const [liked, setLiked] = useState(videoPost.heart.includes(curUser._id))
    const open = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
@@ -82,8 +84,8 @@ function Video({ videoPost, author }) {
                <Typography variant='body2'>{videoPost.statusText}</Typography>
             </CardContent>
             <CardActions disableSpacing>
-               <IconButton aria-label='add to favorites'>
-                  <HeartIcon />
+               <IconButton aria-label='add to favorites' onClick={() => setLiked(!liked)}>
+                  <HeartIcon liked={liked} />
                </IconButton>
                <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
@@ -110,9 +112,11 @@ function Video({ videoPost, author }) {
                'aria-labelledby': 'basic-button',
             }}
          >
-            <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Delete <DeleteIcon />
-            </MenuItem>
+            {curUser?._id === author._id && (
+               <MenuItem onClick={handleClose} className={styles.menuItem}>
+                  Delete <DeleteIcon />
+               </MenuItem>
+            )}
             <MenuItem onClick={handleClose} className={styles.menuItem}>
                Save <SaveIcon />
             </MenuItem>
@@ -121,4 +125,8 @@ function Video({ videoPost, author }) {
    )
 }
 
-export default memo(Video)
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+
+export default connect(mapState)(memo(Video))

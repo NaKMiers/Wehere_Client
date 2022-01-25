@@ -16,10 +16,13 @@ import Comment from '../../Comment'
 import useStyles from './styles'
 import { API } from '../../../constants'
 import moment from 'moment'
+import { connect } from 'react-redux'
 
-function Short({ shortPost, author }) {
+function Short({ shortPost, author, curUser }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenComments, setOpenComments] = useState(false)
+   const [liked, setLiked] = useState(shortPost.heart.includes(curUser._id))
+
    const open = Boolean(anchorEl)
 
    const handleClick = event => {
@@ -60,14 +63,14 @@ function Short({ shortPost, author }) {
                className={styles.cardActions}
                style={{ bottom: `${isOpenComments ? 290 : 124}px` }}
             >
-               <IconButton aria-label='add to favorites'>
-                  <HeartIcon style={{ fontSize: 33 }} />
+               <IconButton aria-label='add to favorites' onClick={() => setLiked(!liked)}>
+                  <HeartIcon liked={liked} />
                </IconButton>
                <IconButton aria-label='share'>
-                  <ShareIcon style={{ fontSize: 30 }} />
+                  <ShareIcon style={{ fontSize: 24 }} />
                </IconButton>
                <IconButton aria-label='share' onClick={handleOpenComment}>
-                  <ReplyIcon style={{ fontSize: 28 }} />
+                  <ReplyIcon style={{ fontSize: 22 }} />
                </IconButton>
             </CardActions>
             <Collapse
@@ -91,9 +94,11 @@ function Short({ shortPost, author }) {
                'aria-labelledby': 'basic-button',
             }}
          >
-            <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Delete <DeleteIcon />
-            </MenuItem>
+            {curUser?._id === author._id && (
+               <MenuItem onClick={handleClose} className={styles.menuItem}>
+                  Delete <DeleteIcon />
+               </MenuItem>
+            )}
             <MenuItem onClick={handleClose} className={styles.menuItem}>
                Save <SaveIcon />
             </MenuItem>
@@ -102,4 +107,8 @@ function Short({ shortPost, author }) {
    )
 }
 
-export default Short
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+
+export default connect(mapState)(Short)

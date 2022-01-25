@@ -25,6 +25,7 @@ import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
 import { API } from '../../../constants'
 import moment from 'moment'
+import { connect } from 'react-redux'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -37,9 +38,10 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Image({ imagePost, author }) {
+function Image({ imagePost, author, curUser }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
+   const [liked, setLiked] = useState(imagePost.heart.includes(curUser._id))
    const open = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
@@ -91,8 +93,8 @@ function Image({ imagePost, author }) {
                <Typography variant='body2'>{imagePost.statusText}</Typography>
             </CardContent>
             <CardActions disableSpacing>
-               <IconButton aria-label='add to favorites'>
-                  <HeartIcon />
+               <IconButton aria-label='add to favorites' onClick={() => setLiked(!liked)}>
+                  <HeartIcon liked={liked} />
                </IconButton>
                <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
@@ -119,9 +121,11 @@ function Image({ imagePost, author }) {
                'aria-labelledby': 'basic-button',
             }}
          >
-            <MenuItem onClick={handleClose} className={styles.menuItem}>
-               Delete <DeleteIcon />
-            </MenuItem>
+            {curUser?._id === author._id && (
+               <MenuItem onClick={handleClose} className={styles.menuItem}>
+                  Delete <DeleteIcon />
+               </MenuItem>
+            )}
             <MenuItem onClick={handleClose} className={styles.menuItem}>
                Save <SaveIcon />
             </MenuItem>
@@ -130,4 +134,8 @@ function Image({ imagePost, author }) {
    )
 }
 
-export default Image
+const mapState = state => ({
+   curUser: state.user.curUser,
+})
+
+export default connect(mapState)(Image)
