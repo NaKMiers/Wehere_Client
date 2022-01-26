@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../../../../../actions'
 import useStyles from './styles'
 
-function OnlineBarItem({ friend, conversation, actionCreators }) {
+function OnlineBarItem({ friend, isOnline, conversation, actionCreators }) {
    // const [onlineFriend, setOnlineFriend] = useState(null)
 
    const styles = useStyles()
@@ -14,7 +14,7 @@ function OnlineBarItem({ friend, conversation, actionCreators }) {
       actionCreators.setCurConversation(conversation)
    }
 
-   return friend ? (
+   return friend && isOnline ? (
       <Button className={styles.userOnlineBtn} onClick={handleOpenConversation}>
          <Link to={`/messenger/${friend._id}`} className={styles.link}>
             <Avatar className={styles.avatar} src={friend.avatar} alt='avt' />

@@ -16,6 +16,12 @@ export default makeStyles(theme => ({
       textDecoration: 'none',
    },
 
+   heartCount: {
+      fontSize: 14,
+      color: theme.palette.primary.text,
+      marginLeft: 4,
+   },
+
    menu: {
       '& .MuiPaper-root': {
          background: theme.palette.secondary.main,

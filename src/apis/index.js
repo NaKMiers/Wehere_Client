@@ -53,18 +53,26 @@ class Apis {
    // blogs
    postBlogStatus = data => axios.post(`${API}/blogs/post`, data)
    getBlogsNewfeed = () => axios.get(`${API}/blogs/get-blogs-newfeed`)
+   likeBlogStatus = (blogId, userId, value) =>
+      axios.patch(`${API}/blogs/like`, { blogId, userId, value })
 
    // images
    postImageStatus = data => axios.post(`${API}/images/post`, data)
    getImagesNewfeed = () => axios.get(`${API}/images/get-images-newfeed`)
+   likeImageStatus = (imageId, userId, value) =>
+      axios.patch(`${API}/images/like`, { imageId, userId, value })
 
    // videos
    postVideoStatus = data => axios.post(`${API}/videos/post`, data)
    getVideosNewfeed = () => axios.get(`${API}/videos/get-videos-newfeed`)
+   likeVideoStatus = (videoId, userId, value) =>
+      axios.patch(`${API}/videos/like`, { videoId, userId, value })
 
    //shorts
    postShortStatus = data => axios.post(`${API}/shorts/post`, data)
    getShortsNewfeed = () => axios.get(`${API}/shorts/get-shorts-newfeed`)
+   likeShortStatus = (shortId, userId, value) =>
+      axios.patch(`${API}/shorts/like`, { shortId, userId, value })
 
    // musics
    addSong = data => axios.post(`${API}/musics/add-song`, data)

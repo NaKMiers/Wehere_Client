@@ -11,6 +11,11 @@ export default makeStyles(theme => ({
    icon: {
       color: theme.palette.primary.text,
    },
+   heartCount: {
+      fontSize: 14,
+      color: theme.palette.primary.text,
+      marginLeft: 4,
+   },
    menuIcon: {
       marginLeft: 8,
    },

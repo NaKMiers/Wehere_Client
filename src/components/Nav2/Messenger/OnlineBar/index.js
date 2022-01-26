@@ -42,7 +42,7 @@ function OnlineBar({ conversations, curUser }) {
             <OnlineBarItem
                key={f._id}
                friend={f}
-               atOnlineList
+               isOnline={f.online}
                conversation={conversations[cvsIndex]}
             />
          )

@@ -15,17 +15,18 @@ import {
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ExpandIcon from '../../Icons/ExpandIcon'
-import ShareIcon from '../../Icons/ShareIcon'
-import Comment from '../../Comment'
+// import ShareIcon from '../../Icons/ShareIcon'
+// import Comment from '../../Comment'
 import DeleteIcon from '../../Icons/DeleteIcon'
 import HeartIcon from '../../../components/Icons/HeartIcon'
 import MoreIcon from '../../../components/Icons/MoreIcon'
 import SaveIcon from '../../Icons/SaveIcon'
-import ShareMolal from '../../../components/Features/ShareModal'
+// import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
 import { API } from '../../../constants'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import apis from '../../../apis'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -39,16 +40,17 @@ const ExpandMore = styled(props => {
 }))
 
 function Image({ imagePost, author, curUser }) {
-   const [isOpenShareModal, setOpenShareModal] = useState(false)
+   // const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
-   const [liked, setLiked] = useState(imagePost.heart.includes(curUser._id))
+   const [liked, setLiked] = useState(imagePost.hearts.includes(curUser._id))
+   const [heartCount, setHeartCount] = useState(imagePost.hearts.length)
    const open = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
    const handleClose = () => {
       setAnchorEl(null)
-      setOpenShareModal(false)
+      // setOpenShareModal(false)
    }
 
    const [expanded, setExpanded] = useState(false)
@@ -58,6 +60,17 @@ function Image({ imagePost, author, curUser }) {
    }
 
    const styles = useStyles()
+
+   const handleLikeImage = async () => {
+      console.log('handleLikeImage')
+      try {
+         await apis.likeImageStatus(imagePost._id, curUser._id, !liked)
+      } catch (err) {
+         console.log(err)
+      }
+      setLiked(!liked)
+      setHeartCount(!liked ? heartCount + 1 : heartCount - 1)
+   }
 
    const renderImageItem = () =>
       imagePost.images.map((img, i) => (
@@ -88,17 +101,17 @@ function Image({ imagePost, author, curUser }) {
                subheader={moment(imagePost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
             />
             <Box className={styles.imageWrap}>{renderImageItem()}</Box>
-
             <CardContent>
                <Typography variant='body2'>{imagePost.statusText}</Typography>
             </CardContent>
             <CardActions disableSpacing>
-               <IconButton aria-label='add to favorites' onClick={() => setLiked(!liked)}>
+               <IconButton aria-label='add to favorites' onClick={handleLikeImage}>
                   <HeartIcon liked={liked} />
+                  <span className={styles.heartCount}>{heartCount}</span>
                </IconButton>
-               <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
+               {/* <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
-               </IconButton>
+               </IconButton> */}
                <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}
@@ -108,9 +121,11 @@ function Image({ imagePost, author, curUser }) {
                   <ExpandIcon style={{ marginRight: 1 }} />
                </ExpandMore>
             </CardActions>
-            <Comment expanded={expanded} />
+            {/* <Comment expanded={expanded} /> */}
          </Card>
-         <ShareMolal open={isOpenShareModal} handleClose={handleClose} />
+
+         {/* <ShareMolal open={isOpenShareModal} handleClose={handleClose} /> */}
+
          <Menu
             className={styles.menu}
             id='basic-menu'

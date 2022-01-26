@@ -31,6 +31,11 @@ export default makeStyles(theme => ({
       maxHeight: 600,
       borderRadius: 8,
    },
+   heartCount: {
+      fontSize: 14,
+      color: theme.palette.primary.text,
+      marginLeft: 4,
+   },
 
    cardActions: {
       position: 'absolute',

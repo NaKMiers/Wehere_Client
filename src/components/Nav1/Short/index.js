@@ -9,19 +9,24 @@ import { Link } from 'react-router-dom'
 import DeleteIcon from '../../../components/Icons/DeleteIcon'
 import HeartIcon from '../../../components/Icons/HeartIcon'
 import MoreIcon from '../../../components/Icons/MoreIcon'
-import ReplyIcon from '../../../components/Icons/ReplyIcon'
+// import ReplyIcon from '../../../components/Icons/ReplyIcon'
 import SaveIcon from '../../../components/Icons/SaveIcon'
-import ShareIcon from '../../../components/Icons/ShareIcon'
-import Comment from '../../Comment'
+// import ShareIcon from '../../../components/Icons/ShareIcon'
+// import ShareMolal from '../../../components/Features/ShareModal'
+// import Comment from '../../Comment'
 import useStyles from './styles'
 import { API } from '../../../constants'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import apis from '../../../apis'
 
 function Short({ shortPost, author, curUser }) {
+   // const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
-   const [isOpenComments, setOpenComments] = useState(false)
-   const [liked, setLiked] = useState(shortPost.heart.includes(curUser._id))
+   // const [isOpenComments, setOpenComments] = useState(false)
+   const [isOpenComments] = useState(false)
+   const [liked, setLiked] = useState(shortPost.hearts.includes(curUser._id))
+   const [heartCount, setHeartCount] = useState(shortPost.hearts.length)
 
    const open = Boolean(anchorEl)
 
@@ -30,12 +35,23 @@ function Short({ shortPost, author, curUser }) {
    }
    const handleClose = () => {
       setAnchorEl(null)
+      // setOpenShareModal(false)
    }
 
-   const handleOpenComment = () => {
-      setOpenComments(!isOpenComments)
-   }
+   // const handleOpenComment = () => {
+   //    setOpenComments(!isOpenComments)
+   // }
 
+   const handleLikeShort = async () => {
+      console.log('handleLikeShort')
+      try {
+         await apis.likeShortStatus(shortPost._id, curUser._id, !liked)
+      } catch (err) {
+         console.log(err)
+      }
+      setLiked(!liked)
+      setHeartCount(!liked ? heartCount + 1 : heartCount - 1)
+   }
    const styles = useStyles()
 
    return (
@@ -63,15 +79,16 @@ function Short({ shortPost, author, curUser }) {
                className={styles.cardActions}
                style={{ bottom: `${isOpenComments ? 290 : 124}px` }}
             >
-               <IconButton aria-label='add to favorites' onClick={() => setLiked(!liked)}>
+               <IconButton aria-label='add to favorites' onClick={handleLikeShort}>
                   <HeartIcon liked={liked} />
+                  <span className={styles.heartCount}>{heartCount}</span>
                </IconButton>
-               <IconButton aria-label='share'>
+               {/* <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon style={{ fontSize: 24 }} />
-               </IconButton>
-               <IconButton aria-label='share' onClick={handleOpenComment}>
+               </IconButton> */}
+               {/* <IconButton aria-label='share' onClick={handleOpenComment}>
                   <ReplyIcon style={{ fontSize: 22 }} />
-               </IconButton>
+               </IconButton> */}
             </CardActions>
             <Collapse
                className={styles.commentCollapse}
@@ -79,11 +96,14 @@ function Short({ shortPost, author, curUser }) {
                timeout='auto'
                unmountOnExit
             >
-               <Box className={styles.commentWrap}>
+               {/* <Box className={styles.commentWrap}>
                   <Comment expanded={true} />
-               </Box>
+               </Box> */}
             </Collapse>
          </Card>
+
+         {/* <ShareMolal open={isOpenShareModal} handleClose={handleClose} /> */}
+
          <Menu
             className={styles.menu}
             id='basic-menu'
