@@ -11,6 +11,8 @@ export default makeStyles(theme => ({
       width: 480,
       borderRadius: 8,
       overflow: 'hidden',
+      textAlign: 'center',
+      outline: 'none',
    },
    title: {
       fontSize: 24,
@@ -18,6 +20,10 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
       padding: '6px 16px',
+   },
+   error: {
+      color: theme.palette.danger.main,
+      margin: '6px 6px 0px 6px',
    },
    videoBoxWrap: {
       display: 'flex',

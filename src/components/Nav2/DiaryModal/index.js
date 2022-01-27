@@ -20,23 +20,7 @@ import apis from '../../../apis'
 import ExpandIcon from '../../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 import moment from 'moment'
-
-const textColorOptions = ['#f44336', '#2196f3', '#4caf50', '#F2F7F7', '#f57eeb', '#ffeb3b', '#333']
-const bgOptions = [
-   'https://images.pexels.com/photos/2179483/pexels-photo-2179483.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/3274903/pexels-photo-3274903.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/1624600/pexels-photo-1624600.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/4337198/pexels-photo-4337198.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/531321/pexels-photo-531321.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/1198817/pexels-photo-1198817.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-   'https://images.pexels.com/photos/3310691/pexels-photo-3310691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-   'https://images.pexels.com/photos/2850287/pexels-photo-2850287.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-   'https://images.pexels.com/photos/4210037/pexels-photo-4210037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-   'https://images.pexels.com/photos/1553962/pexels-photo-1553962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-]
+import { bgOptions, textColorOptions } from '../../../commons/bg&textDiaryList'
 
 function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators }) {
    const [openCollapeEdit, setOpenCollapeEdit] = useState(false)
@@ -55,12 +39,6 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
          setDescription(() => curDiary.description)
          setTextColor(() => curDiary.textColor)
          setBackground(() => curDiary.background)
-      } else {
-         setTitle('')
-         setContent('')
-         setDescription('')
-         setTextColor('')
-         setBackground('')
       }
    }, [curDiary, open])
 
@@ -138,12 +116,23 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
       handleCloseModal()
    }
 
+   const handleClose = () => {
+      if (curDiary) {
+         setTitle('')
+         setContent('')
+         setDescription('')
+         setTextColor('')
+         setBackground('')
+      }
+      handleCloseModal()
+   }
+
    return (
       <>
          <Fade in={open}>
             <Modal
                open
-               onClose={handleCloseModal}
+               onClose={handleClose}
                className={styles.diaryModal}
                aria-labelledby='modal-modal-title'
                aria-describedby='modal-modal-description'

@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
    '@global': {
       '*::-webkit-scrollbar': {
-         width: 0,
-         height: 0,
+         height: 10,
       },
    },
    diaryModal: {

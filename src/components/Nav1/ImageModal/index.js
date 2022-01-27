@@ -14,6 +14,7 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
    const [imageListPreview, setImageListPreview] = useState([])
    const [imageList, setImageList] = useState([])
+   const [error, setError] = useState('')
 
    const styles = useStyles()
 
@@ -73,13 +74,17 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
             data.append('image', imageList[i])
          }
 
-         try {
-            await apis.postImageStatus(data)
-            handleClear()
-            handleCloseModal()
-         } catch (err) {
-            alert('Post image status unsuccessfully. Please try again.')
-            console.log(err)
+         if (statusValue.trim() && imageList.length) {
+            try {
+               await apis.postImageStatus(data)
+               handleClear()
+               handleCloseModal()
+            } catch (err) {
+               alert('Post image status unsuccessfully. Please try again.')
+               console.log(err)
+            }
+         } else {
+            setError('Drum text or empty image, please enter text and upload images to continue.')
          }
       }
       postImageStatus()
@@ -112,8 +117,11 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
       <>
          <Modal open={open} onClose={handleCloseModal} className={styles.imageModal}>
             <Paper className={styles.paper}>
+               <Typography className={styles.title}>Post New Image</Typography>
+               <Typography variant='subtitle2' className={styles.error}>
+                  {error}
+               </Typography>
                <form onSubmit={handlePostImageStatus}>
-                  <Typography className={styles.title}>Post New Image</Typography>
                   <Box className={styles.imageBoxWrap}>
                      <TextareaAutosize
                         placeholder='Status...'
@@ -121,6 +129,7 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
                         className={styles.statusText}
                         value={statusValue}
                         onChange={e => setStatusValue(e.target.value)}
+                        onFocus={() => setError('')}
                      />
 
                      <Box className={styles.imagesList}>

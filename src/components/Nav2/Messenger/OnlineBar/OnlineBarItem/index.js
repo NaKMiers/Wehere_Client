@@ -6,8 +6,6 @@ import actions from '../../../../../actions'
 import useStyles from './styles'
 
 function OnlineBarItem({ friend, isOnline, conversation, actionCreators }) {
-   // const [onlineFriend, setOnlineFriend] = useState(null)
-
    const styles = useStyles()
 
    const handleOpenConversation = () => {

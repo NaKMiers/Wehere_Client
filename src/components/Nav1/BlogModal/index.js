@@ -1,15 +1,13 @@
 import { Box, Button, ButtonGroup, Modal, Paper, Typography } from '@material-ui/core'
 import { TextareaAutosize } from '@mui/material'
 import { useState } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import actions from '../../../actions'
 import apis from '../../../apis'
 import TrashIcon from '../../Icons/TrashIcon'
 import useStyles from './styles'
 
-function BlogModal({ curUser, open, handleCloseModal, actionCreators }) {
+function BlogModal({ open, handleCloseModal }) {
    const [statusValue, setStatusValue] = useState('')
+   const [error, setError] = useState('')
 
    const styles = useStyles()
 
@@ -20,12 +18,16 @@ function BlogModal({ curUser, open, handleCloseModal, actionCreators }) {
    const handlePostImageStatus = e => {
       e.preventDefault()
       const postImageStatus = async () => {
-         try {
-            await apis.postBlogStatus({ statusText: statusValue })
-            handleClear()
-            handleCloseModal()
-         } catch (err) {
-            console.log(err)
+         if (statusValue.trim()) {
+            try {
+               await apis.postBlogStatus({ statusText: statusValue })
+               handleClear()
+               handleCloseModal()
+            } catch (err) {
+               console.log(err)
+            }
+         } else {
+            setError('Drum text, please enter text to continue.')
          }
       }
       postImageStatus()
@@ -35,15 +37,19 @@ function BlogModal({ curUser, open, handleCloseModal, actionCreators }) {
       <>
          <Modal open={open} onClose={handleCloseModal} className={styles.blogModal}>
             <Paper className={styles.paper}>
+               <Typography className={styles.title}>Post New Blog</Typography>
+               <Typography variant='subtitle2' className={styles.error}>
+                  {error}
+               </Typography>
                <form onSubmit={handlePostImageStatus}>
-                  <Typography className={styles.title}>Post New Blog</Typography>
                   <Box className={styles.blogBoxWrap}>
                      <TextareaAutosize
                         placeholder='Status...'
-                        minRows={5}
+                        minRows={3}
                         className={styles.statusText}
                         value={statusValue}
                         onChange={e => setStatusValue(e.target.value)}
+                        onFocus={() => setError('')}
                      />
 
                      <ButtonGroup variant='text' className={styles.actionBtnWrap}>
@@ -62,8 +68,4 @@ function BlogModal({ curUser, open, handleCloseModal, actionCreators }) {
    )
 }
 
-const mapDispatch = dispatch => ({
-   actionCreators: bindActionCreators(actions, dispatch),
-})
-
-export default connect(null, mapDispatch)(BlogModal)
+export default BlogModal

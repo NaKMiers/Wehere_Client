@@ -13,6 +13,7 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
    const [short, setShort] = useState(null)
    const [shortReview, setShortReview] = useState(null)
+   const [error, setError] = useState('')
 
    const styles = useStyles()
 
@@ -54,15 +55,19 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
          data.append('short', short)
          data.append('statusText', statusValue)
 
-         try {
-            const res = await apis.postShortStatus(data)
-            if (res.status === 200) {
-               handleClear()
-               handleCloseModal()
+         if (statusValue.trim() && short) {
+            try {
+               const res = await apis.postShortStatus(data)
+               if (res.status === 200) {
+                  handleClear()
+                  handleCloseModal()
+               }
+            } catch (err) {
+               alert('Post short status unsuccessfully. Please try again.')
+               console.log(err)
             }
-         } catch (err) {
-            alert('Post short status unsuccessfully. Please try again.')
-            console.log(err)
+         } else {
+            setError('Drum text or empty short, please enter text and upload short to continue.')
          }
       }
       postShortStatus()
@@ -78,8 +83,11 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
       <>
          <Modal open={open} onClose={handleCloseModal} className={styles.ShortModal}>
             <Paper className={styles.paper}>
+               <Typography className={styles.title}>Post New Short</Typography>
+               <Typography variant='subtitle2' className={styles.error}>
+                  {error}
+               </Typography>
                <form onSubmit={handlePostshortStatus}>
-                  <Typography className={styles.title}>Post New Short</Typography>
                   <Box className={styles.shortBoxWrap}>
                      <TextareaAutosize
                         placeholder='Status...'
@@ -87,6 +95,7 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
                         className={styles.statusText}
                         value={statusValue}
                         onChange={e => setStatusValue(e.target.value)}
+                        onFocus={() => setError('')}
                      />
 
                      <Box className={styles.shortsList}>{rendershort()}</Box>

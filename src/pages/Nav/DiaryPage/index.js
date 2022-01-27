@@ -12,7 +12,10 @@ import useStyles from './styles'
 function DiaryPage({ curUser, actionCreators, diaries }) {
    const [open, setOpen] = useState(false)
    const [curDiary, setCurDiary] = useState(null)
-   const handleCloseModal = () => setOpen(false)
+   const handleCloseModal = () => {
+      setOpen(false)
+      setCurDiary(null)
+   }
    const handleOpenModal = diary => {
       if (diary) {
          setCurDiary(diary)

@@ -28,11 +28,13 @@ export default makeStyles(theme => ({
       alignItems: 'center',
       position: 'relative',
       minWidth: 32,
+      border: 'none',
    },
 
    noFriendOnline: {
       fontSize: 18,
       textAlign: 'center',
       marginTop: 8,
+      color: theme.border.light,
    },
 }))

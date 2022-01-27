@@ -20,7 +20,7 @@ function OnlineBar({ conversations, curUser }) {
             const friendList = conversations.map(c => c.members.find(m => m !== curUser._id))
             try {
                const res = await apis.getFriends(friendList)
-               setFriends(res.data)
+               setFriends(res.data.filter(f => f.online))
             } catch (err) {
                console.log(err)
             }
@@ -47,6 +47,8 @@ function OnlineBar({ conversations, curUser }) {
             />
          )
       })
+
+   console.log(friends)
 
    return (
       <List className={styles.onlineBar}>

@@ -13,6 +13,7 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
    const [video, setVideo] = useState(null)
    const [videoReview, setVideoReview] = useState(null)
+   const [error, setError] = useState('')
 
    const styles = useStyles()
 
@@ -54,15 +55,19 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
          data.append('video', video)
          data.append('statusText', statusValue)
 
-         try {
-            const res = await apis.postVideoStatus(data)
-            if (res.status === 200) {
-               handleClear()
-               handleCloseModal()
+         if (statusValue.trim() && video) {
+            try {
+               const res = await apis.postVideoStatus(data)
+               if (res.status === 200) {
+                  handleClear()
+                  handleCloseModal()
+               }
+            } catch (err) {
+               alert('Post video status unsuccessfully. Please try again.')
+               console.log(err)
             }
-         } catch (err) {
-            alert('Post video status unsuccessfully. Please try again.')
-            console.log(err)
+         } else {
+            setError('Drum text or empty video, please enter text and upload video to continue.')
          }
       }
       postVideoStatus()
@@ -78,8 +83,11 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
       <>
          <Modal open={open} onClose={handleCloseModal} className={styles.videoModal}>
             <Paper className={styles.paper}>
+               <Typography className={styles.title}>Post New Video</Typography>
+               <Typography variant='subtitle2' className={styles.error}>
+                  {error}
+               </Typography>
                <form onSubmit={handlePostVideoStatus}>
-                  <Typography className={styles.title}>Post New Video</Typography>
                   <Box className={styles.videoBoxWrap}>
                      <TextareaAutosize
                         placeholder='Status...'
@@ -87,6 +95,7 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
                         className={styles.statusText}
                         value={statusValue}
                         onChange={e => setStatusValue(e.target.value)}
+                        onFocus={() => setError('')}
                      />
 
                      <Box className={styles.videosList}>{renderVideo()}</Box>

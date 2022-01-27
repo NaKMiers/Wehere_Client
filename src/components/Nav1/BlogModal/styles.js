@@ -6,11 +6,12 @@ export default makeStyles(theme => ({
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      minHeight: 200,
       maxWidth: '90%',
       width: 480,
       borderRadius: 8,
       overflow: 'hidden',
+      textAlign: 'center',
+      outline: 'none',
    },
    title: {
       fontSize: 24,
@@ -18,6 +19,10 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
       padding: '6px 16px',
+   },
+   error: {
+      color: theme.palette.danger.main,
+      margin: '6px 6px 0px 6px',
    },
    blogBoxWrap: {
       display: 'flex',
@@ -30,7 +35,7 @@ export default makeStyles(theme => ({
       fontSize: 16,
       resize: 'none',
       padding: '8px 0px',
-      maxHeight: 150,
+      maxHeight: 500,
       overflow: 'scroll',
    },
 
