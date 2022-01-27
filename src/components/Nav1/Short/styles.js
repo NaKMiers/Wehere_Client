@@ -34,7 +34,6 @@ export default makeStyles(theme => ({
    heartCount: {
       fontSize: 14,
       color: theme.palette.primary.text,
-      marginLeft: 4,
    },
 
    cardActions: {

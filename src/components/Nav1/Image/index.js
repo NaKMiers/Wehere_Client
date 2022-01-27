@@ -15,13 +15,13 @@ import {
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ExpandIcon from '../../Icons/ExpandIcon'
-// import ShareIcon from '../../Icons/ShareIcon'
-// import Comment from '../../Comment'
+import ShareIcon from '../../Icons/ShareIcon'
+import Comment from '../../Comment'
 import DeleteIcon from '../../Icons/DeleteIcon'
 import HeartIcon from '../../../components/Icons/HeartIcon'
 import MoreIcon from '../../../components/Icons/MoreIcon'
 import SaveIcon from '../../Icons/SaveIcon'
-// import ShareMolal from '../../../components/Features/ShareModal'
+import ShareMolal from '../../../components/Features/ShareModal'
 import useStyles from './styles'
 import { API } from '../../../constants'
 import moment from 'moment'
@@ -40,17 +40,17 @@ const ExpandMore = styled(props => {
 }))
 
 function Image({ imagePost, author, curUser }) {
-   // const [isOpenShareModal, setOpenShareModal] = useState(false)
+   const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
-   const [liked, setLiked] = useState(imagePost.hearts.includes(curUser._id))
-   const [heartCount, setHeartCount] = useState(imagePost.hearts.length)
+   const [liked, setLiked] = useState(imagePost?.hearts.includes(curUser?._id))
+   const [heartCount, setHeartCount] = useState(imagePost?.hearts.length)
    const open = Boolean(anchorEl)
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
    const handleClose = () => {
       setAnchorEl(null)
-      // setOpenShareModal(false)
+      setOpenShareModal(false)
    }
 
    const [expanded, setExpanded] = useState(false)
@@ -109,9 +109,9 @@ function Image({ imagePost, author, curUser }) {
                   <HeartIcon liked={liked} />
                   <span className={styles.heartCount}>{heartCount}</span>
                </IconButton>
-               {/* <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
+               <IconButton aria-label='share' onClick={() => setOpenShareModal(!isOpenShareModal)}>
                   <ShareIcon />
-               </IconButton> */}
+               </IconButton>
                <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}
@@ -121,10 +121,10 @@ function Image({ imagePost, author, curUser }) {
                   <ExpandIcon style={{ marginRight: 1 }} />
                </ExpandMore>
             </CardActions>
-            {/* <Comment expanded={expanded} /> */}
+            <Comment expanded={expanded} />
          </Card>
 
-         {/* <ShareMolal open={isOpenShareModal} handleClose={handleClose} /> */}
+         <ShareMolal open={isOpenShareModal} handleClose={handleClose} />
 
          <Menu
             className={styles.menu}
