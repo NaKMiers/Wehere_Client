@@ -13,7 +13,7 @@ import OnlineList from '../../../components/Nav2/Messenger/OnlineList'
 import useStyles from './styles'
 import { useState } from 'react'
 
-function MessengerPage({ curUser, actionCreators, conversations }) {
+function MessengerPage({ conversations, curUser, actionCreators }) {
    const [isNoCvs, setIsNoCvs] = useState(true)
 
    // change online status
@@ -58,9 +58,11 @@ function MessengerPage({ curUser, actionCreators, conversations }) {
                            <ConversationList />
                         </>
                      ) : (
-                        <Typography className={styles.noCvs}>
-                           No conversations yet, please make friends so we can chat.
-                        </Typography>
+                        <Box className={styles.noCvsWrap}>
+                           <Typography className={styles.noCvs}>
+                              No conversations yet, please make friends so we can chat.
+                           </Typography>
+                        </Box>
                      ))}
                </Box>
             </Route>

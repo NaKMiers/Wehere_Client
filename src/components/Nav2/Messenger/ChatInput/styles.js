@@ -19,7 +19,7 @@ export default makeStyles(theme => ({
       padding: '0px 12px',
       borderBottom: `3px solid ${theme.border.main}`,
       boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0)',
-      transition: 'margin 0.3s ease-in-out',
+      transition: 'margin 0.2s ease-in-out',
    },
    inputTextField: {
       flexGrow: '1',

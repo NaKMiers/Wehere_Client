@@ -25,6 +25,14 @@ export default makeStyles(theme => ({
       overflow: 'scroll',
    },
 
+   noPlaylistWrap: {
+      textAlign: 'center',
+   },
+   noPlaylist: {
+      fontSize: 32,
+      color: theme.border.light,
+   },
+
    link: {
       textDecoration: 'none',
    },

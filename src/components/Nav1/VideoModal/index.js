@@ -58,10 +58,9 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
          if (statusValue.trim() && video) {
             try {
                const res = await apis.postVideoStatus(data)
-               if (res.status === 200) {
-                  handleClear()
-                  handleCloseModal()
-               }
+               actionCreators.addVideo(res.data)
+               handleClear()
+               handleCloseModal()
             } catch (err) {
                alert('Post video status unsuccessfully. Please try again.')
                console.log(err)

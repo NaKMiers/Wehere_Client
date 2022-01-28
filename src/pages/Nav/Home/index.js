@@ -4,20 +4,7 @@ import Video from '../../../components/Nav1/Video'
 import Short from '../../../components/Nav1/Short'
 import Header from '../../../components/Header'
 import { connect } from 'react-redux'
-
-const shuffle = originalArray => {
-   let array = [...originalArray]
-   let currentIndex = array.length,
-      randomIndex
-
-   while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-      ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
-   }
-
-   return array
-}
+import { makeRandomList } from '../../../commons/utils'
 
 function HomePage({ blogs, images, videos, shorts }) {
    const renderHome = () => {
@@ -34,13 +21,12 @@ function HomePage({ blogs, images, videos, shorts }) {
          <Short key={s.short._id} shortPost={s.short} author={s.author} />
       ))
 
-      const posts = shuffle(
+      const posts = makeRandomList(
          [].concat(renderedBlogs, renderedImages, renderedVideos, renderedShorts)
       )
 
       return posts
    }
-   renderHome()
 
    return (
       <>

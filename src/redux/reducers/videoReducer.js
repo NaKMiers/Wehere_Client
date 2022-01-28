@@ -10,6 +10,12 @@ function videoReducer(state = initState, action) {
       case types.SET_VIDEOS:
          return { ...state, videos: payload }
 
+      case types.ADD_VIDEO:
+         return { ...state, videos: [payload, ...state.videos] }
+
+      case types.DELETE_VIDEO:
+         return { ...state, videos: state.videos.filter(v => v.video._id !== action.videoId) }
+
       default:
          return state
    }

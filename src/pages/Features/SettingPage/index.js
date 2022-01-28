@@ -234,41 +234,41 @@ function SettingPage({ curUser, actionCreators }) {
             <Collapse style={{ marginLeft: 24 }} in={openBlockFriends} timeout='auto' unmountOnExit>
                <List component='div' disablePadding>
                   <ListItem className={styles.listBlockFrItem}>
-                     <Link to='/profile/user1' className={styles.linkBlockFriend}>
+                     <Link to={`/profile/${curUser?._id}`} className={styles.linkBlockFriend}>
                         <ListItemAvatar>
                            <Avatar
                               className={styles.userAvt}
                               alt='avt'
-                              src='https://bom.to/WWExNT'
+                              src='https://bom.so/oyM6lT'
                            />
                         </ListItemAvatar>
-                        <ListItemText primary='User1' />
+                        <ListItemText primary='aaa' />
                      </Link>
                      <Switch />
                   </ListItem>
                   <ListItem className={styles.listBlockFrItem}>
-                     <Link to='/profile/user1' className={styles.linkBlockFriend}>
+                     <Link to={`/profile/${curUser?._id}`} className={styles.linkBlockFriend}>
                         <ListItemAvatar>
                            <Avatar
                               className={styles.userAvt}
                               alt='avt'
-                              src='https://bom.to/WWExNT'
+                              src='https://bom.so/BRmiik'
                            />
                         </ListItemAvatar>
-                        <ListItemText primary='User1' />
+                        <ListItemText primary='bbb' />
                      </Link>
                      <Switch />
                   </ListItem>
                   <ListItem className={styles.listBlockFrItem}>
-                     <Link to='/profile/user1' className={styles.linkBlockFriend}>
+                     <Link to={`/profile/${curUser?._id}`} className={styles.linkBlockFriend}>
                         <ListItemAvatar>
                            <Avatar
                               className={styles.userAvt}
                               alt='avt'
-                              src='https://bom.to/WWExNT'
+                              src='https://bom.so/W1tQGo'
                            />
                         </ListItemAvatar>
-                        <ListItemText primary='User1' />
+                        <ListItemText primary='ccc' />
                      </Link>
                      <Switch />
                   </ListItem>

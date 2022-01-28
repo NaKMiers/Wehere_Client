@@ -20,7 +20,7 @@ import apis from '../../../apis'
 import ExpandIcon from '../../../components/Icons/ExpandIcon'
 import useStyles from './styles'
 import moment from 'moment'
-import { bgOptions, textColorOptions } from '../../../commons/bg&textDiaryList'
+import { bgOptions, textColorOptions } from '../../../commons/commonLists'
 
 function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators }) {
    const [openCollapeEdit, setOpenCollapeEdit] = useState(false)

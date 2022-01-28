@@ -35,8 +35,7 @@ export default makeStyles(theme => ({
       fontSize: 16,
       resize: 'none',
       padding: '8px 0px',
-      maxHeight: 500,
-      overflow: 'scroll',
+      maxHeight: '55vh',
    },
 
    actionBtnWrap: {

@@ -76,7 +76,8 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
 
          if (statusValue.trim() && imageList.length) {
             try {
-               await apis.postImageStatus(data)
+               const res = await apis.postImageStatus(data)
+               actionCreators.addImage(res.data)
                handleClear()
                handleCloseModal()
             } catch (err) {

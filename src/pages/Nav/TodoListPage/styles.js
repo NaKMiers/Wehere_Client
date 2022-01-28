@@ -133,6 +133,9 @@ export default makeStyles(theme => ({
       left: '50%',
       transform: 'translate(-50%, -50%)',
    },
+   important: {
+      background: theme.palette.primary.main,
+   },
    actionBtnWrap: {
       margin: 'auto',
       maxWidth: 360,

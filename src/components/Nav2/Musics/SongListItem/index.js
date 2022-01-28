@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
 import apis from '../../../../apis'
+import { makeRandomList } from '../../../../commons/utils'
 
 function SongListItem({
    isInPlayListModal = false,
@@ -24,6 +25,7 @@ function SongListItem({
    curPlayistId,
    playingAt,
    handleRemoveSong,
+   inRecentlyList,
    actionCreators,
 }) {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -87,19 +89,6 @@ function SongListItem({
          }
       }
    }
-   const makeRandomList = originalArray => {
-      let array = [...originalArray]
-      let currentIndex = array.length,
-         randomIndex
-
-      while (currentIndex !== 0) {
-         randomIndex = Math.floor(Math.random() * currentIndex)
-         currentIndex--
-         ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
-      }
-
-      return array
-   }
 
    const handleMarkFavoriteSong = async () => {
       try {
@@ -120,11 +109,13 @@ function SongListItem({
          {!isInPlayListModal && (
             <Box className={styles.boxButton}>
                <span className={styles.button} onClick={handleClick}>
-                  <MoreIcon color='secondary' />
+                  <MoreIcon color='secondary' rotate={inRecentlyList} />
                </span>
-               <span className={styles.button} onClick={handleMarkFavoriteSong}>
-                  <HeartIcon liked={favorite} />
-               </span>
+               {!inRecentlyList && (
+                  <span className={styles.button} onClick={handleMarkFavoriteSong}>
+                     <HeartIcon liked={favorite} />
+                  </span>
+               )}
             </Box>
          )}
 
@@ -150,9 +141,11 @@ function SongListItem({
                </MenuItem>
             )}
             {!playlist ? (
-               <MenuItem onClick={handleDeleteSong} className={styles.menuItem}>
-                  Delete <DeleteIcon />
-               </MenuItem>
+               !inRecentlyList && (
+                  <MenuItem onClick={handleDeleteSong} className={styles.menuItem}>
+                     Delete <DeleteIcon />
+                  </MenuItem>
+               )
             ) : (
                <MenuItem onClick={() => handleRemoveSong(song._id)} className={styles.menuItem}>
                   Remove <BlockIcon style={{ marginLeft: 6 }} />

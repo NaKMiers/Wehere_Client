@@ -16,8 +16,17 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient,
       '&:hover $playingBarTop': {
          '@media (max-width: 780px)': {
-            display: 'flex',
+            height: 40,
+            visibility: 'visible',
          },
+      },
+      '&:hover $processPlayingBarWrap': {
+         height: 10,
+         opacity: 1,
+         marginTop: -4,
+      },
+      '&:hover $processPlayingBarBottom': {
+         opacity: 0,
       },
    },
    hidePlayingBar: {
@@ -27,13 +36,15 @@ export default makeStyles(theme => ({
       bottom: 0,
    },
    playingBarTop: {
-      display: 'none',
+      display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: '0 16px',
-      height: 40,
+      height: 0,
+      visibility: 'hidden',
       borderBottom: `1px solid ${theme.border.light}`,
       cursor: 'pointer',
+      transition: 'all 0.2s ease-in-out',
    },
    aboutName: {
       display: 'flex',
@@ -70,14 +81,6 @@ export default makeStyles(theme => ({
    playingBarBottom: {
       display: 'flex',
       flexDirection: 'column',
-      '&:hover $processPlayingBarWrap': {
-         height: 10,
-         opacity: 1,
-         marginTop: -4,
-      },
-      '&:hover $processPlayingBarBottom': {
-         opacity: 0,
-      },
    },
    subPlayBarBottom: {
       display: 'flex',
@@ -89,7 +92,7 @@ export default makeStyles(theme => ({
       display: 'flex',
       color: theme.palette.primary.text,
       padding: '8px 0px',
-      width: '30%',
+      width: '28%',
       overflow: 'hidden',
       alignItems: 'center',
       '@media (max-width: 780px)': {
@@ -103,7 +106,7 @@ export default makeStyles(theme => ({
    },
    timeStateBottom: {
       color: theme.palette.primary.text,
-      width: '30%',
+      width: '28%',
       display: 'flex',
       justifyContent: 'flex-end',
       alignItems: 'center',
@@ -126,6 +129,15 @@ export default makeStyles(theme => ({
       color: theme.palette.primary.text,
       margin: '0px 8px',
       padding: 8,
+      '@media (min-width:781px) and (max-width: 798px)': {
+         margin: '0px 4px',
+      },
+      '@media (max-width: 368px)': {
+         margin: '0px 4px',
+      },
+      '@media (max-width: 345px)': {
+         margin: '0px 0px',
+      },
    },
    audioBtnCenter: {
       position: 'absolute',
@@ -146,10 +158,28 @@ export default makeStyles(theme => ({
    audioBtnPrev: {
       color: theme.palette.primary.text,
       margin: '0px 58px 0px 8px',
+      '@media (min-width:781px) and (max-width: 798px)': {
+         margin: '0px 54px 0px 8px',
+      },
+      '@media (max-width: 368px)': {
+         margin: '0px 54px 0px 8px',
+      },
+      '@media (max-width: 345px)': {
+         margin: '0px 50px 0px 8px',
+      },
    },
    audioBtnNext: {
       color: theme.palette.primary.text,
       margin: '0px 8px 0px 58px',
+      '@media (min-width:781px) and (max-width: 798px)': {
+         margin: '0px 8px 0px 54px',
+      },
+      '@media (max-width: 368px)': {
+         margin: '0px 8px 0px 54px',
+      },
+      '@media (max-width: 345px)': {
+         margin: '0px 8px 0px 50px',
+      },
    },
    audioIcon: {
       fontSize: 28,
@@ -186,8 +216,9 @@ export default makeStyles(theme => ({
       opacity: 0,
       marginTop: -7,
       justifyContent: 'center',
+      alignItems: 'center',
       marginBottom: 6,
-      transition: 'height 0.2s ease-in-out',
+      transition: 'all 0.2s ease-in-out',
    },
 
    processPlayingBarBottom: {

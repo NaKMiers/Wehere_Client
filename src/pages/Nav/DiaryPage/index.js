@@ -1,4 +1,4 @@
-import { Button, List } from '@material-ui/core'
+import { Box, Button, List, Typography } from '@material-ui/core'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -39,6 +39,16 @@ function DiaryPage({ curUser, actionCreators, diaries }) {
       getDiaries()
    }, [actionCreators])
 
+   const renderDiaryItem = () =>
+      diaries.map((d, i) => (
+         <DiaryListItem
+            key={i}
+            diary={d}
+            createdAt={d.createdAt}
+            handleOpenModal={handleOpenModal}
+         />
+      ))
+
    return (
       <>
          <Header />
@@ -47,14 +57,15 @@ function DiaryPage({ curUser, actionCreators, diaries }) {
             <Button className={styles.addNewDiaryBtn} onClick={() => handleOpenModal(null)}>
                Add New Diary
             </Button>
-            {diaries.map((d, i) => (
-               <DiaryListItem
-                  key={i}
-                  diary={d}
-                  createdAt={d.createdAt}
-                  handleOpenModal={handleOpenModal}
-               />
-            ))}
+            {diaries.length ? (
+               renderDiaryItem()
+            ) : (
+               <Box className={styles.noDiaryWrap}>
+                  <Typography className={styles.noDiary}>
+                     No diary, please add a new diary.
+                  </Typography>
+               </Box>
+            )}
          </List>
          <DiaryModal
             curUser={curUser}

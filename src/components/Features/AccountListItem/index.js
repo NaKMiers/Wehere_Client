@@ -22,6 +22,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import { useHistory } from 'react-router-dom'
 import apis from '../../../apis'
+import { API } from '../../../constants'
 
 function AccountListItem({ account, actionCreators }) {
    const [isOpenRmBtn, setOpenRmBtn] = useState(false)
@@ -95,7 +96,11 @@ function AccountListItem({ account, actionCreators }) {
       <>
          <ListItem className={styles.accountItem}>
             <ListItemAvatar>
-               <Avatar className={styles.avatar} alt='avt' src={account.avatar}></Avatar>
+               <Avatar
+                  className={styles.avatar}
+                  alt='avt'
+                  src={`${API}/${account.avatar}`}
+               ></Avatar>
             </ListItemAvatar>
             <ListItemText primary={account.username} />
             <Button
@@ -160,15 +165,17 @@ function AccountListItem({ account, actionCreators }) {
                </Box>
 
                <Box className={styles.dialogBtnWrap}>
-                  <Button
-                     variant='contained'
-                     className={styles.dialogRmBtn}
-                     onClick={
-                        isOpenDialogAcc === 'remove' ? handleRemoveAccount : handleChangeAccount
-                     }
-                  >
-                     {isOpenDialogAcc === 'remove' ? 'Remove' : 'Change'}
-                  </Button>
+                  {account.authType === 'local' && (
+                     <Button
+                        variant='contained'
+                        className={styles.dialogRmBtn}
+                        onClick={
+                           isOpenDialogAcc === 'remove' ? handleRemoveAccount : handleChangeAccount
+                        }
+                     >
+                        {isOpenDialogAcc === 'remove' ? 'Remove' : 'Change'}
+                     </Button>
+                  )}
                   <Button
                      onClick={handleClose}
                      variant='contained'

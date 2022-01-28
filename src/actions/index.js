@@ -49,9 +49,20 @@ class Actions {
    removeAccount = accId => ({ type: types.REMOVE_ACCOUNT, accId })
 
    setBlogs = payload => ({ type: types.SET_BLOGS, payload })
+   addBlog = payload => ({ type: types.ADD_BLOG, payload })
+   deleteBlog = blogId => ({ type: types.DELETE_BLOG, blogId })
+
    setImages = payload => ({ type: types.SET_IMAGES, payload })
+   addImage = payload => ({ type: types.ADD_IMAGE, payload })
+   deleteImage = imageId => ({ type: types.DELETE_IMAGE, imageId })
+
    setVideos = payload => ({ type: types.SET_VIDEOS, payload })
+   addVideo = payload => ({ type: types.ADD_VIDEO, payload })
+   deleteVideo = videoId => ({ type: types.DELETE_VIDEO, videoId })
+
    setShorts = payload => ({ type: types.SET_SHORTS, payload })
+   addShort = payload => ({ type: types.ADD_SHORT, payload })
+   deleteShort = shortId => ({ type: types.DELETE_SHORT, shortId })
 
    addNewSong = payload => ({ type: types.ADD_NEW_SONG, payload })
    setMySongList = payload => ({ type: types.SET_MY_SONG_LIST, payload })

@@ -19,6 +19,10 @@ export default makeStyles(theme => ({
       fontSize: 15,
       marginBottom: 8,
    },
+   nosongs: {
+      fontSize: 32,
+      color: theme.border.light,
+   },
 
    songListWrap: {
       padding: 16,

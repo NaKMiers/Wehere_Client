@@ -175,9 +175,10 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                               <EditIcon className={styles.editTaskIcon} />
                            </IconButton>
                            <div
-                              className={styles.pointWrap}
+                              className={clsx(styles.pointWrap, {
+                                 [styles.important]: task.important,
+                              })}
                               onClick={e => handleMarkImportant(task, e, task.important)}
-                              style={{ background: task.important && '#f44336' }}
                            >
                               <span className={styles.point}>{task.point}</span>
                            </div>

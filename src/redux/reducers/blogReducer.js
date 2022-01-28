@@ -10,6 +10,12 @@ function blogReducer(state = initState, action) {
       case types.SET_BLOGS:
          return { ...state, blogs: payload }
 
+      case types.ADD_BLOG:
+         return { ...state, blogs: [payload, ...state.blogs] }
+
+      case types.DELETE_BLOG:
+         return { ...state, blogs: state.blogs.filter(b => b.blog._id !== action.blogId) }
+
       default:
          return state
    }

@@ -59,19 +59,44 @@ export default makeStyles(theme => ({
       width: 44,
       height: 44,
    },
-   name: {
+   nameAdnGroupActionsWrap: {
       position: 'absolute',
-      top: '108.5%',
-      width: '100%',
+      bottom: -100,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      '@media (min-width: 781px)': {
+         bottom: -116,
+      },
+      '@media (min-width: 464px) and (max-width: 600px)': {
+         bottom: -106,
+      },
+      '@media (min-width: 601px) and (max-width: 780px)': {
+         bottom: -108,
+      },
+   },
+   myUsername: {
+      position: 'absolute',
+      bottom: -60,
+      left: '50%',
+      transform: 'translate(-50%)',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      '@media (min-width: 781px)': {
+         bottom: -76,
+      },
+      '@media (min-width: 464px) and (max-width: 600px)': {
+         bottom: -66,
+      },
+      '@media (min-width: 601px) and (max-width: 780px)': {
+         bottom: -68,
+      },
+   },
+   username: {
       textAlign: 'center',
       fontWeight: 'bold',
+      marginBottom: 4,
    },
    groupActionBtn: {
-      position: 'absolute',
-      bottom: '-108px',
-      left: '50%',
-      width: '78%',
-      transform: 'translateX(-50%)',
       display: 'flex',
       justifyContent: 'center',
    },
@@ -107,7 +132,7 @@ export default makeStyles(theme => ({
    bottomProfile: {
       margin: 'auto',
       maxWidth: 960,
-      marginTop: 114,
+      marginTop: 108,
       padding: 16,
    },
    tabsList: {

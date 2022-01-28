@@ -2,6 +2,7 @@ import { Avatar, Button, ListItem, ListItemAvatar, ListItemText } from '@materia
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import apis from '../../../../../apis'
+import { API } from '../../../../../constants'
 import useStyles from './styles'
 
 function FriendsTabItem({ friend, curUser }) {
@@ -29,7 +30,7 @@ function FriendsTabItem({ friend, curUser }) {
       <ListItem className={styles.friendListItem}>
          <Link className={styles.linkFriendListItem} to={`/profile/${friend._id}`}>
             <ListItemAvatar>
-               <Avatar alt='avt' src={friend.avatar} />
+               <Avatar alt='avt' src={`${API}/${friend.avatar}`} />
             </ListItemAvatar>
             <ListItemText primary={friend.username} />
          </Link>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../../actions'
+import { API } from '../../../../../constants'
 import useStyles from './styles'
 
 function OnlineBarItem({ friend, isOnline, conversation, actionCreators }) {
@@ -15,7 +16,7 @@ function OnlineBarItem({ friend, isOnline, conversation, actionCreators }) {
    return friend && isOnline ? (
       <Button className={styles.userOnlineBtn} onClick={handleOpenConversation}>
          <Link to={`/messenger/${friend._id}`} className={styles.link}>
-            <Avatar className={styles.avatar} src={friend.avatar} alt='avt' />
+            <Avatar className={styles.avatar} src={`${API}/${friend.avatar}`} alt='avt' />
             <Badge variant='dot' color='primary' className={styles.badge} />
          </Link>
       </Button>

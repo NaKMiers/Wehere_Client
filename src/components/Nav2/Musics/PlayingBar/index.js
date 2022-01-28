@@ -9,6 +9,7 @@ import apis from '../../../../apis'
 import HeartIcon from '../../../../components/Icons/HeartIcon'
 import { API } from '../../../../constants'
 import useStyles from './styles'
+import { makeRandomList } from '../../../../commons/utils'
 
 function PlayingBar({
    songPlaying,
@@ -84,26 +85,7 @@ function PlayingBar({
    }
    const handleRandom = () => {
       console.log('handleRandom')
-      // if (!random) {
-      //    const randomSongList = makeRandomList(
-      //       !playlistPlaying.length ? mySongList : playlistPlaying
-      //    )
-      //    actionCreators.setRandomSongList(randomSongList)
-      // }
       setRandom(!random)
-   }
-   const makeRandomList = originalArray => {
-      let array = [...originalArray]
-      let currentIndex = array.length,
-         randomIndex
-
-      while (currentIndex !== 0) {
-         randomIndex = Math.floor(Math.random() * currentIndex)
-         currentIndex--
-         ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
-      }
-
-      return array
    }
 
    const handleNextSong = useCallback(() => {
@@ -180,7 +162,6 @@ function PlayingBar({
             }
          }
          audioRef.current.play().catch(err => {
-            console.log('err: ', err)
             audioRef.current.pause()
          })
          setFavorite(songPlaying?.favorite)
@@ -252,7 +233,7 @@ function PlayingBar({
                   </Box>
                </Box>
 
-               <audio ref={audioRef} src={`${API}/${songPlaying?.song}`} autoPlay />
+               <audio ref={audioRef} src={`${API}/${songPlaying?.song}`} />
 
                {songPlaying?.song && (
                   <Box className={styles.timeStateBottom} onClick={handleShowPlayingBarCenter}>
@@ -263,11 +244,7 @@ function PlayingBar({
                         className={styles.favoriteBtnBottom}
                         onClick={handleMarkFavoriteSong}
                      >
-                        <HeartIcon
-                           liked={favorite}
-                           green
-                           style={{ border: '1px solid #fff', borderRadius: '50%' }}
-                        />
+                        <HeartIcon liked={favorite} green />
                      </IconButton>
                   </Box>
                )}
@@ -282,7 +259,7 @@ function PlayingBar({
                   />
                </Box>
             )}
-            {playing && (
+            {songPlaying?.song && (
                <LinearProgress
                   variant='determinate'
                   value={currentTime}
@@ -290,19 +267,19 @@ function PlayingBar({
                />
             )}
          </Box>
-         {songPlaying?.song && (
-            <Box className={styles.playingBarTop}>
-               <Box className={styles.aboutName} onClick={handleShowPlayingBarCenter}>
-                  <Typography variant='body1' style={{ marginRight: 8 }}>
-                     {songPlaying?.author}:
-                  </Typography>
-                  <Typography variant='body1'>{songPlaying?.songName}</Typography>
-               </Box>
-               <IconButton className={styles.favoriteBtn}>
-                  <HeartIcon />
-               </IconButton>
+         {/* {songPlaying?.song && ( */}
+         <Box className={styles.playingBarTop}>
+            <Box className={styles.aboutName} onClick={handleShowPlayingBarCenter}>
+               <Typography variant='body1' style={{ marginRight: 8 }}>
+                  {songPlaying?.author}:
+               </Typography>
+               <Typography variant='body1'>{songPlaying?.songName}</Typography>
             </Box>
-         )}
+            <IconButton className={styles.favoriteBtn}>
+               <HeartIcon />
+            </IconButton>
+         </Box>
+         {/* )} */}
       </Box>
    )
 }

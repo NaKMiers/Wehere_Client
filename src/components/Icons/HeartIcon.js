@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
 import React from 'react'
 
-function HeartIcon({ liked, green, style }) {
+function HeartIcon({ liked, green, style, secondary, noborder }) {
    const styles = makeStyles(theme => ({
       icon: {
          fontSize: 26,
@@ -10,7 +10,12 @@ function HeartIcon({ liked, green, style }) {
             ? green
                ? theme.palette.success.main
                : theme.palette.danger.main
+            : secondary
+            ? theme.palette.secondary.main
             : theme.favoriteIcon.main,
+         cursor: 'pointer',
+         border: !noborder && '1px solid #fff',
+         borderRadius: '50%',
       },
    }))()
 

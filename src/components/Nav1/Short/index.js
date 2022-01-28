@@ -19,8 +19,11 @@ import { API } from '../../../constants'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import apis from '../../../apis'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
+import { memo } from 'react'
 
-function Short({ shortPost, author, curUser }) {
+function Short({ shortPost, author, curUser, actionCreators }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const [isOpenComments, setOpenComments] = useState(false)
@@ -51,6 +54,20 @@ function Short({ shortPost, author, curUser }) {
       setLiked(!liked)
       setHeartCount(!liked ? heartCount + 1 : heartCount - 1)
    }
+
+   const handleDeleteShort = async () => {
+      console.log('handleDeleteShort')
+
+      try {
+         const res = await apis.deleteShortStatus(shortPost._id)
+         console.log('res-deleteShort: ', res.data)
+         actionCreators.deleteShort(res.data._id)
+      } catch (err) {
+         console.log(err)
+      }
+      setAnchorEl(null)
+   }
+
    const styles = useStyles()
 
    return (
@@ -59,7 +76,7 @@ function Short({ shortPost, author, curUser }) {
             <CardHeader
                avatar={
                   <Link to={`/profile/${author._id}`} className={styles.linkToProfile}>
-                     <Avatar alt='avt' src={author.avatar} />
+                     <Avatar alt='avt' src={`${API}/${author.avatar}`} />
                   </Link>
                }
                action={
@@ -68,7 +85,11 @@ function Short({ shortPost, author, curUser }) {
                   </IconButton>
                }
                title={author.username}
-               subheader={moment(shortPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+               subheader={
+                  <span className={styles.subheader}>
+                     {moment(shortPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+                  </span>
+               }
             />
             <Box className={styles.shortWrapItem}>
                <video className={styles.shortItem} src={`${API}/${shortPost.short}`} controls />
@@ -114,7 +135,7 @@ function Short({ shortPost, author, curUser }) {
             }}
          >
             {curUser?._id === author._id && (
-               <MenuItem onClick={handleClose} className={styles.menuItem}>
+               <MenuItem onClick={handleDeleteShort} className={styles.menuItem}>
                   Delete <DeleteIcon />
                </MenuItem>
             )}
@@ -130,4 +151,8 @@ const mapState = state => ({
    curUser: state.user.curUser,
 })
 
-export default connect(mapState)(Short)
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(memo(Short))

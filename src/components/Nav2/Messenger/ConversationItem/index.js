@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
 import apis from '../../../../apis'
 import MoreIcon from '../../../../components/Icons/MoreIcon'
+import { API } from '../../../../constants'
 import HideUserIcon from '../../../Icons/HideUserIcon'
 import MarkReadIcon from '../../../Icons/MarkReadIcon'
 import RemoveIcon from '../../../Icons/RemoveIcon'
@@ -52,7 +53,7 @@ function ConversationItem({ onlineList, conversation, curUser, actionCreators, a
                className={styles.link}
                onClick={handleOpenConversation}
             >
-               <Avatar className={styles.avatar} src={friend.avatar} alt='avt' />
+               <Avatar className={styles.avatar} src={`${API}/${friend.avatar}`} alt='avt' />
                <Badge
                   variant='dot'
                   className={styles.badge}

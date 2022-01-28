@@ -58,10 +58,9 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
          if (statusValue.trim() && short) {
             try {
                const res = await apis.postShortStatus(data)
-               if (res.status === 200) {
-                  handleClear()
-                  handleCloseModal()
-               }
+               actionCreators.addShort(res.data)
+               handleClear()
+               handleCloseModal()
             } catch (err) {
                alert('Post short status unsuccessfully. Please try again.')
                console.log(err)

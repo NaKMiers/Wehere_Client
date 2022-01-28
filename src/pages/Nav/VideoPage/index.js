@@ -7,6 +7,7 @@ import VideoModal from '../../../components/Nav1/VideoModal'
 import useStyles from './styles'
 
 function VideoPage({ curUser, videos }) {
+   console.log('VideoPage')
    const [open, setOpen] = useState(false)
 
    const handleCloseModal = () => setOpen(false)

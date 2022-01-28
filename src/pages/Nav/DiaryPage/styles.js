@@ -21,4 +21,11 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
    },
+   noDiaryWrap: {
+      textAlign: 'center',
+   },
+   noDiary: {
+      fontSize: 36,
+      color: theme.border.light,
+   },
 }))

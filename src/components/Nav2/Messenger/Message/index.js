@@ -1,6 +1,7 @@
 import { Avatar, Box, Collapse, Typography } from '@material-ui/core'
 import { useState } from 'react'
 import { format } from 'timeago.js'
+import { API } from '../../../../constants'
 import useStyles from './styles'
 
 function Message({ message, own, curUserAvatar, curFriendAvatar }) {
@@ -29,7 +30,7 @@ function Message({ message, own, curUserAvatar, curFriendAvatar }) {
       <Box className={styles.message} style={{ flexDirection: `${own ? 'row-reverse' : 'row'}` }}>
          <Avatar
             className={styles.avtMessage}
-            src={own ? curUserAvatar : curFriendAvatar}
+            src={own ? `${API}/${curUserAvatar}` : `${API}/${curFriendAvatar}`}
             alt='avt'
          />
          <Box className={styles.textMessageWrap}>

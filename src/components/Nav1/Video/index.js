@@ -27,6 +27,8 @@ import { memo } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import apis from '../../../apis'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -39,7 +41,7 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Video({ videoPost, author, curUser }) {
+function Video({ videoPost, author, curUser, actionCreators }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const [liked, setLiked] = useState(videoPost?.hearts.includes(curUser?._id))
@@ -70,14 +72,28 @@ function Video({ videoPost, author, curUser }) {
       setHeartCount(!liked ? heartCount + 1 : heartCount - 1)
    }
 
+   const handleDeleteVideo = async () => {
+      console.log('handleDeleteVideo')
+
+      try {
+         const res = await apis.deleteVideoStatus(videoPost._id)
+         console.log('res-deleteVideo: ', res.data)
+         actionCreators.deleteVideo(res.data._id)
+      } catch (err) {
+         console.log(err)
+      }
+      setAnchorEl(null)
+   }
+
    const styles = useStyles()
+
    return (
       <>
          <Card className={styles.card}>
             <CardHeader
                avatar={
                   <Link to={`/profile/${author._id}`} className={styles.linkToProfile}>
-                     <Avatar alt='avt' src={author.avatar} />
+                     <Avatar alt='avt' src={`${API}/${author.avatar}`} />
                   </Link>
                }
                action={
@@ -86,7 +102,11 @@ function Video({ videoPost, author, curUser }) {
                   </IconButton>
                }
                title={author.username}
-               subheader={moment(videoPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+               subheader={
+                  <span className={styles.subheader}>
+                     {moment(videoPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+                  </span>
+               }
             />
 
             <Box className={styles.videoWrap}>
@@ -130,7 +150,7 @@ function Video({ videoPost, author, curUser }) {
             }}
          >
             {curUser?._id === author._id && (
-               <MenuItem onClick={handleClose} className={styles.menuItem}>
+               <MenuItem onClick={handleDeleteVideo} className={styles.menuItem}>
                   Delete <DeleteIcon />
                </MenuItem>
             )}
@@ -146,4 +166,8 @@ const mapState = state => ({
    curUser: state.user.curUser,
 })
 
-export default connect(mapState)(memo(Video))
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(memo(Video))

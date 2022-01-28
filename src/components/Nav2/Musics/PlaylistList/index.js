@@ -36,13 +36,25 @@ function PlaylistList({ playlistList }) {
                >
                   New Playlist
                </Button>
-               <Typography className={styles.playlistCount}>
-                  Playlist: {playlistList.length}
-               </Typography>
-
-               <Box className={styles.playlistListWrap}>{renderPlaylists()}</Box>
+               {playlistList.length ? (
+                  <>
+                     <Typography className={styles.playlistCount}>
+                        Playlist: {playlistList.length}
+                     </Typography>
+                     <Box className={styles.playlistListWrap}>{renderPlaylists()}</Box>
+                  </>
+               ) : (
+                  <Box className={styles.noPlaylistWrap}>
+                     <Typography className={styles.noPlaylist}>
+                        No playlists, please create a new playlists.
+                     </Typography>
+                  </Box>
+               )}
+               <AddNewPlaylistModal
+                  open={isOpenAddNewPLModal}
+                  handleCloseModal={handleCloseModal}
+               />
             </List>
-            <AddNewPlaylistModal open={isOpenAddNewPLModal} handleCloseModal={handleCloseModal} />
          </Route>
          <Route path='/musics/playlists/:playlistId' exact={true}>
             <SongInPlaylist />

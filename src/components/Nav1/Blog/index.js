@@ -24,6 +24,10 @@ import useStyles from './styles'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import apis from '../../../apis'
+import { API } from '../../../constants'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
+import { memo } from 'react'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -36,7 +40,7 @@ const ExpandMore = styled(props => {
    }),
 }))
 
-function Blog({ blogPost, author, curUser }) {
+function Blog({ blogPost, author, curUser, actionCreators }) {
    const [isOpenShareModal, setOpenShareModal] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const [expanded, setExpanded] = useState(false)
@@ -67,6 +71,19 @@ function Blog({ blogPost, author, curUser }) {
       setHeartCount(!liked ? heartCount + 1 : heartCount - 1)
    }
 
+   const handleDeleteBlog = async () => {
+      console.log('handleDeleteBlog')
+
+      try {
+         const res = await apis.deleteBlogStatus(blogPost._id)
+         console.log('res-deleteBlog: ', res.data)
+         actionCreators.deleteBlog(res.data._id)
+      } catch (err) {
+         console.log(err)
+      }
+      setAnchorEl(null)
+   }
+
    const styles = useStyles()
    return (
       <>
@@ -74,7 +91,7 @@ function Blog({ blogPost, author, curUser }) {
             <CardHeader
                avatar={
                   <Link to={`/profile/${author._id}`} className={styles.linkToProfile}>
-                     <Avatar alt='avt' src={author.avatar} />
+                     <Avatar alt='avt' src={`${API}/${author.avatar}`} />
                   </Link>
                }
                action={
@@ -83,10 +100,16 @@ function Blog({ blogPost, author, curUser }) {
                   </IconButton>
                }
                title={author.username}
-               subheader={moment(blogPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+               subheader={
+                  <span className={styles.subheader}>
+                     {moment(blogPost.createdAt).format('MM/DD/YYYY - hh:mm:ss a')}
+                  </span>
+               }
             />
             <CardContent>
-               <Typography variant='body2'>{blogPost.statusText}</Typography>
+               <Typography variant='body2' className={styles.statusText}>
+                  {blogPost.statusText}
+               </Typography>
             </CardContent>
             <CardActions disableSpacing>
                <IconButton aria-label='add to favorites' onClick={handleLikeBlog}>
@@ -122,7 +145,7 @@ function Blog({ blogPost, author, curUser }) {
             }}
          >
             {curUser?._id === author._id && (
-               <MenuItem onClick={handleClose} className={styles.menuItem}>
+               <MenuItem onClick={handleDeleteBlog} className={styles.menuItem}>
                   Delete <DeleteIcon />
                </MenuItem>
             )}
@@ -138,4 +161,8 @@ const mapState = state => ({
    curUser: state.user.curUser,
 })
 
-export default connect(mapState)(Blog)
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(mapState, mapDispatch)(memo(Blog))

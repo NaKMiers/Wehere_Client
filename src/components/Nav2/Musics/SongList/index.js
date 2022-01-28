@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, List, Typography, Box } from '@material-ui/core'
 import SongListItem from '../SongListItem'
@@ -7,10 +7,11 @@ import useStyles from './styles'
 
 function SongList({ songList }) {
    const [isOpenAddNewSongModal, setOpenAddNewSongModal] = useState(false)
-
    const handleCloseModal = () => {
       setOpenAddNewSongModal(false)
    }
+
+   useLayoutEffect(() => {}, [songList])
 
    const styles = useStyles()
 
@@ -26,7 +27,13 @@ function SongList({ songList }) {
             >
                Add To My Songs
             </Button>
-            <Typography className={styles.songCount}>Songs: {songList.length}</Typography>
+            {songList.length ? (
+               <Typography className={styles.songCount}>Songs: {songList.length}</Typography>
+            ) : (
+               <Typography className={styles.nosongs}>
+                  Song list is empty. Please add new songs.
+               </Typography>
+            )}
 
             <Box className={styles.songList}>{renderSongList()}</Box>
          </List>

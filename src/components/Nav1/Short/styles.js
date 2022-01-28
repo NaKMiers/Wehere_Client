@@ -17,6 +17,10 @@ export default makeStyles(theme => ({
       margin: 'auto',
       boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.3)',
    },
+   subheader: {
+      color: theme.palette.secondary.light,
+      opacity: 0.8,
+   },
    icon: {
       color: theme.palette.primary.text,
    },

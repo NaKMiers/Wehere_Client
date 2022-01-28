@@ -7,7 +7,6 @@ export default makeStyles(theme => ({
       },
    },
    diaryModal: {
-      position: 'relative',
       transition: 'display 0.2s ease-in-out',
    },
    paper: {
@@ -58,7 +57,7 @@ export default makeStyles(theme => ({
       textAlign: 'center',
    },
    inputContentDiary: {
-      height: '60vh',
+      height: '50vh',
       width: '100%',
       resize: 'none',
       border: `3px solid ${theme.border.dark}`,

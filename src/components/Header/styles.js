@@ -119,12 +119,17 @@ export default makeStyles(theme => ({
          color: theme.palette.primary.text,
       },
    },
-   menuItem: {
+   leftNotifyWrap: {
+      display: 'flex',
+      alignItems: 'center',
+   },
+   notifyItem: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: '6px 12px',
       minHeight: 0,
+      maxWidth: '100%',
    },
 
    menuBtnWrap: {
@@ -133,9 +138,11 @@ export default makeStyles(theme => ({
       alignItems: 'center',
    },
 
-   usernameItem: {
-      marginLeft: 4,
-      marginRight: 36,
+   messageNotify: {
+      marginLeft: 8,
+      marginRight: 16,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
    },
 
    menuAcceptBtn: {
@@ -150,5 +157,9 @@ export default makeStyles(theme => ({
       background: theme.palette.danger.main,
       color: theme.palette.primary.text,
       marginLeft: 2,
+   },
+
+   link: {
+      textDecoration: 'none',
    },
 }))

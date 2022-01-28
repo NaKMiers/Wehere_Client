@@ -14,8 +14,8 @@ class Apis {
    changePassword = (curPassword, newPassword) =>
       axios.put(`${API}/users/change-password`, { curPassword, newPassword })
    changeTheme = themeIndex => axios.put(`${API}/users/change-theme/${themeIndex}`)
-   updateAvatar = avatar => axios.put(`${API}/users/update-avatar`, { avatar })
-   updateBackground = background => axios.put(`${API}/users/update-background`, { background })
+   updateAvatar = data => axios.put(`${API}/users/update-avatar`, data)
+   updateBackground = data => axios.put(`${API}/users/update-background`, data)
 
    // todolist
    getAllTaskRequest = () => axios.post(`${API}/todo-list`)
@@ -55,24 +55,28 @@ class Apis {
    getBlogsNewfeed = () => axios.get(`${API}/blogs/get-blogs-newfeed`)
    likeBlogStatus = (blogId, userId, value) =>
       axios.patch(`${API}/blogs/like`, { blogId, userId, value })
+   deleteBlogStatus = blogId => axios.delete(`${API}/blogs/delete-blog/${blogId}`)
 
    // images
    postImageStatus = data => axios.post(`${API}/images/post`, data)
    getImagesNewfeed = () => axios.get(`${API}/images/get-images-newfeed`)
    likeImageStatus = (imageId, userId, value) =>
       axios.patch(`${API}/images/like`, { imageId, userId, value })
+   deleteImageStatus = imageId => axios.delete(`${API}/images/delete-image/${imageId}`)
 
    // videos
    postVideoStatus = data => axios.post(`${API}/videos/post`, data)
    getVideosNewfeed = () => axios.get(`${API}/videos/get-videos-newfeed`)
    likeVideoStatus = (videoId, userId, value) =>
       axios.patch(`${API}/videos/like`, { videoId, userId, value })
+   deleteVideoStatus = videoId => axios.delete(`${API}/videos/delete-video/${videoId}`)
 
    //shorts
    postShortStatus = data => axios.post(`${API}/shorts/post`, data)
    getShortsNewfeed = () => axios.get(`${API}/shorts/get-shorts-newfeed`)
    likeShortStatus = (shortId, userId, value) =>
       axios.patch(`${API}/shorts/like`, { shortId, userId, value })
+   deleteShortStatus = shortId => axios.delete(`${API}/shorts/delete-short/${shortId}`)
 
    // musics
    addSong = data => axios.post(`${API}/musics/add-song`, data)

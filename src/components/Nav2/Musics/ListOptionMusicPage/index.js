@@ -30,7 +30,8 @@ function ListOptionMusicPage({
 
    const styles = useStyles()
 
-   const renderRecentlyList = () => recentlyList.map(s => <SongListItem key={s._id} song={s} />)
+   const renderRecentlyList = () =>
+      recentlyList.map(s => <SongListItem key={s._id} song={s} inRecentlyList />)
 
    console.log('recentlyList: ', recentlyList)
 

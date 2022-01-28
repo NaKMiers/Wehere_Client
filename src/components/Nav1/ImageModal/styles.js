@@ -6,7 +6,6 @@ export default makeStyles(theme => ({
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      minHeight: 200,
       maxWidth: '90%',
       width: 480,
       borderRadius: 8,
@@ -44,6 +43,7 @@ export default makeStyles(theme => ({
       maxHeight: 300,
       overflow: 'scroll',
       borderRadius: 8,
+      marginTop: 8,
    },
    imageItemWrap: {
       position: 'relative',

@@ -4,6 +4,11 @@ export default makeStyles(theme => ({
    friendListItem: {
       display: 'flex',
       justifyContent: 'space-between',
+      borderRadius: 8,
+      borderBottom: `1px solid ${theme.border.light}`,
+      '&:hover': {
+         background: theme.palette.secondary.light,
+      },
    },
 
    linkFriendListItem: {

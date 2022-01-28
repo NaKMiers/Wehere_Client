@@ -25,6 +25,7 @@ import CameraIcon from '../../../components/Icons/CameraIcon'
 import HideUserIcon from '../../../components/Icons/HideUserIcon'
 import MoreIcon from '../../../components/Icons/MoreIcon'
 import SaveChange from '../../../components/Icons/SaveChange'
+import { API } from '../../../constants'
 import useStyles from './styles'
 
 function ProfilePage({ curUser, userProfile, actionCreators }) {
@@ -32,7 +33,9 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    const [justUnf, setJustUnf] = useState(false)
    const [anchorEl, setAnchorEl] = useState(null)
    const [avatar, setAvatar] = useState('')
+   const [avatarReview, setAvatarReview] = useState('')
    const [background, setBackground] = useState('')
+   const [backgroundReview, setBackgroundReview] = useState()
    const [isOpenSaveAvtBtn, setIsOpenSaveAvtBtn] = useState(false)
    const [isOpenSaveBgBtn, setIsOpenSaveBgBtn] = useState(false)
 
@@ -104,17 +107,31 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
       const input = document.createElement('input')
       input.type = 'file'
       input.onchange = e => {
+         const file = e.target.files[0]
          const reader = new FileReader()
          reader.onloadend = () => {
             if (type === 'avatar') {
-               setAvatar(reader.result)
+               setAvatarReview(reader.result)
                setIsOpenSaveAvtBtn(true)
             } else {
-               setBackground(reader.result)
+               setBackgroundReview(reader.result)
                setIsOpenSaveBgBtn(true)
             }
          }
-         reader.readAsDataURL(e.target.files[0])
+         if (file.type.startsWith('image')) {
+            if (file.size <= 10485760) {
+               reader.readAsDataURL(file)
+               if (type === 'avatar') {
+                  setAvatar(file)
+               } else {
+                  setBackground(file)
+               }
+            } else {
+               alert('Image size must less than or equal to 10MB')
+            }
+         } else {
+            alert('This is must an image.')
+         }
       }
       input.click()
    }
@@ -123,10 +140,13 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
       console.log('handleSaveAvtAndBg')
       if (type === 'avatar') {
          const updateAvatar = async () => {
+            let data = new FormData()
+            data.append('avatar', avatar)
+
             try {
-               const res = await apis.updateAvatar(avatar)
-               console.log('res: ', res)
+               const res = await apis.updateAvatar(data)
                setAvatar('')
+               setAvatarReview('')
                setIsOpenSaveAvtBtn(false)
                actionCreators.changeAvatar(res.data.avatar)
             } catch (err) {
@@ -136,10 +156,13 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
          updateAvatar()
       } else {
          const updateBackground = async () => {
+            let data = new FormData()
+            data.append('background', background)
+
             try {
-               const res = await apis.updateBackground(background)
-               console.log('res: ', res)
+               const res = await apis.updateBackground(data)
                setBackground('')
+               setBackgroundReview('')
                setIsOpenSaveBgBtn(false)
                actionCreators.changeBackground(res.data.background)
             } catch (err) {
@@ -160,10 +183,10 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                   className={styles.bgProfile}
                   component='img'
                   image={
-                     background ||
+                     backgroundReview ||
                      (curUser?._id !== userProfile?._id
-                        ? userProfile?.background
-                        : curUser?.background)
+                        ? `${API}/${userProfile?.background}`
+                        : `${API}/${curUser?.background}`)
                   }
                />
                {curUser?._id === userProfile?._id &&
@@ -188,8 +211,10 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                      className={styles.avatar}
                      component='img'
                      image={
-                        avatar ||
-                        (curUser?._id !== userProfile?._id ? userProfile?.avatar : curUser?.avatar)
+                        avatarReview ||
+                        (curUser?._id !== userProfile?._id
+                           ? `${API}/${userProfile?.avatar}`
+                           : `${API}/${curUser?.avatar}`)
                      }
                   />
                   {curUser?._id === userProfile?._id &&
@@ -209,51 +234,64 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
                         </Fab>
                      ))}
                </Box>
-               <Typography variant='h4' className={styles.name}>
-                  {userProfile?.username}
-               </Typography>
+
+               {curUser?._id === userProfile?._id && (
+                  <Typography variant='h4' className={styles.myUsername}>
+                     {userProfile?.username}
+                  </Typography>
+               )}
 
                {curUser?._id !== userProfile?._id && (
-                  <Box className={styles.groupActionBtn}>
-                     <Button
-                        className={styles.addFriendBtn}
-                        variant='contained'
-                        onClick={handleAddFriendRequest}
-                        disabled={isAllowAddFriends}
-                     >
-                        {!userProfile?.friends.includes(curUser?._id) || justUnf
-                           ? 'Add friend'
-                           : 'Friend'}
-                     </Button>
-                     <Button
-                        className={styles.actionBtn}
-                        variant='contained'
-                        onClick={handleOpenConversation}
-                     >
-                        Messenger
-                     </Button>
+                  <Box className={styles.nameAdnGroupActionsWrap}>
+                     <Typography variant='h4' className={styles.username}>
+                        {userProfile?.username}
+                     </Typography>
 
-                     <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
-                        <MoreIcon style={{ color: '#fff' }} />
-                     </Button>
+                     <Box className={styles.groupActionBtn}>
+                        <Button
+                           className={styles.addFriendBtn}
+                           variant='contained'
+                           onClick={handleAddFriendRequest}
+                           disabled={isAllowAddFriends}
+                        >
+                           {!userProfile?.friends.includes(curUser?._id) || justUnf
+                              ? 'Add friend'
+                              : 'Friend'}
+                        </Button>
+                        <Button
+                           className={styles.actionBtn}
+                           variant='contained'
+                           onClick={handleOpenConversation}
+                        >
+                           Messenger
+                        </Button>
 
-                     <Menu
-                        className={styles.menuAction}
-                        id='basic-menu'
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                     >
-                        {userProfile?.friends.includes(curUser?._id) && !justUnf ? (
-                           <MenuItem className={styles.menuActionItem} onClick={handleUnfriend}>
-                              Unfriend <HideUserIcon />
+                        <Button
+                           className={styles.actionBtn}
+                           variant='contained'
+                           onClick={handleClick}
+                        >
+                           <MoreIcon style={{ color: '#fff' }} />
+                        </Button>
+
+                        <Menu
+                           className={styles.menuAction}
+                           id='basic-menu'
+                           anchorEl={anchorEl}
+                           open={open}
+                           onClose={handleClose}
+                        >
+                           {userProfile?.friends.includes(curUser?._id) && !justUnf ? (
+                              <MenuItem className={styles.menuActionItem} onClick={handleUnfriend}>
+                                 Unfriend <HideUserIcon />
+                              </MenuItem>
+                           ) : null}
+
+                           <MenuItem className={styles.menuActionItem} onClick={handleClose}>
+                              Block <BlockIcon style={{ marginLeft: 8 }} />
                            </MenuItem>
-                        ) : null}
-
-                        <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                           Block <BlockIcon style={{ marginLeft: 8 }} />
-                        </MenuItem>
-                     </Menu>
+                        </Menu>
+                     </Box>
                   </Box>
                )}
                <Divider style={{ marginTop: 10 }} />

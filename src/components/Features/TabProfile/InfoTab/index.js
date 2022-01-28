@@ -32,7 +32,7 @@ function InfoTab({ userProfile }) {
                   </ListItem>
                   <ListItem>
                      <ListItemIcon>
-                        <HeartIcon liked />
+                        <HeartIcon secondary noborder />
                      </ListItemIcon>
                      <ListItemText primary={userProfile?.maritalStatus} />
                   </ListItem>

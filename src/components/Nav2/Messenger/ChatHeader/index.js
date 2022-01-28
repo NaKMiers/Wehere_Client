@@ -6,6 +6,7 @@ import SettingIcon from '../../../../components/Icons/SettingIcon'
 import SettingChat from '../SettingChat'
 import useStyles from './styles'
 import { format } from 'timeago.js'
+import { API } from '../../../../constants'
 
 function ChatHeader({ curFriend }) {
    const [anchorEl, setAnchorEl] = useState(null)
@@ -31,7 +32,7 @@ function ChatHeader({ curFriend }) {
       <>
          <Box className={styles.chatHeader}>
             <Link to={`/profile/${curFriend._id}`} className={styles.avtLink}>
-               <Avatar className={styles.avt} alt='avt' src={curFriend.avatar}></Avatar>
+               <Avatar className={styles.avt} alt='avt' src={`${API}/${curFriend.avatar}`}></Avatar>
                <Badge
                   className={styles.badge}
                   color='primary'

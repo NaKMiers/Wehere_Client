@@ -4,8 +4,11 @@ import { useState } from 'react'
 import apis from '../../../apis'
 import TrashIcon from '../../Icons/TrashIcon'
 import useStyles from './styles'
+import { bindActionCreators } from 'redux'
+import actions from '../../../actions'
+import { connect } from 'react-redux'
 
-function BlogModal({ open, handleCloseModal }) {
+function BlogModal({ open, handleCloseModal, actionCreators }) {
    const [statusValue, setStatusValue] = useState('')
    const [error, setError] = useState('')
 
@@ -20,7 +23,8 @@ function BlogModal({ open, handleCloseModal }) {
       const postImageStatus = async () => {
          if (statusValue.trim()) {
             try {
-               await apis.postBlogStatus({ statusText: statusValue })
+               const res = await apis.postBlogStatus({ statusText: statusValue })
+               actionCreators.addBlog(res.data)
                handleClear()
                handleCloseModal()
             } catch (err) {
@@ -50,6 +54,7 @@ function BlogModal({ open, handleCloseModal }) {
                         value={statusValue}
                         onChange={e => setStatusValue(e.target.value)}
                         onFocus={() => setError('')}
+                        styles={{ overflow: 'srcoll' }}
                      />
 
                      <ButtonGroup variant='text' className={styles.actionBtnWrap}>
@@ -68,4 +73,8 @@ function BlogModal({ open, handleCloseModal }) {
    )
 }
 
-export default BlogModal
+const mapDispatch = dispatch => ({
+   actionCreators: bindActionCreators(actions, dispatch),
+})
+
+export default connect(null, mapDispatch)(BlogModal)

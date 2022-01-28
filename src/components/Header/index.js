@@ -27,6 +27,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../actions'
 import apis from '../../apis'
+import { API } from '../../constants'
 import DiaryIcon from '../Icons/DiaryIcon'
 import ExpandIcon from '../Icons/ExpandIcon'
 import HomeIcon from '../Icons/HomeIcon'
@@ -75,14 +76,16 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
       actionCreators.seenNotifications(true)
    }
 
-   const renderMenuItem = () =>
+   const renderNotidyItem = () =>
       notifications.map((n, i) => {
          switch (n.type) {
             case 'ADD_FRIEND_REQUEST':
                return (
-                  <MenuItem key={i} onClick={handleClose} className={styles.menuItem}>
-                     <Avatar src={n.senderAvt} alt='avt' />
-                     <Typography className={styles.usernameItem}>{n.senderUsername}</Typography>
+                  <MenuItem key={i} onClick={handleClose} className={styles.notifyItem}>
+                     <Box className={styles.leftNotifyWrap}>
+                        <Avatar src={`${API}/${n.senderAvt}`} alt='avt' />
+                        <Typography className={styles.messageNotify}>{n.senderUsername}</Typography>
+                     </Box>
                      <Box className={styles.menuBtnWrap}>
                         <IconButton
                            variant='contained'
@@ -120,9 +123,9 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
 
             case 'ADD_FRIEND_RESPONSE':
                return (
-                  <MenuItem key={i} onClick={handleClose} className={styles.menuItem}>
-                     <Avatar src={n.senderAvt} alt='avt' />
-                     <Typography className={styles.usernameItem}>
+                  <MenuItem key={i} onClick={handleClose} className={styles.notifyItem}>
+                     <Avatar src={`${API}/${n.senderAvt}`} alt='avt' />
+                     <Typography className={styles.messageNotify}>
                         {n.senderUsername} has accepted your friend request.
                      </Typography>
                      <IconButton
@@ -168,7 +171,9 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
       <AppBar position='static' className={styles.header}>
          <Box className={styles.leftHeader}>
             {!isShowSearchHeader ? (
-               <Typography className={styles.wehereLogo}>Wehere</Typography>
+               <Link to='/' className={styles.link}>
+                  <Typography className={styles.wehereLogo}>Wehere</Typography>
+               </Link>
             ) : (
                <TextField
                   style={{ width: '80%' }}
@@ -215,7 +220,11 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                      </Badge>
                   </Button>
                   <Link to='/menu'>
-                     <Avatar className={styles.avatar} alt='Pi Pi' src={curUser?.avatar} />
+                     <Avatar
+                        className={styles.avatar}
+                        alt='Pi Pi'
+                        src={`${API}/${curUser?.avatar}`}
+                     />
                   </Link>
                </Box>
             </Box>
@@ -309,7 +318,11 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
             {curUser && (
                <>
                   <Link to='/menu'>
-                     <Avatar className={styles.avatar} alt='Pi Pi' src={curUser?.avatar} />
+                     <Avatar
+                        className={styles.avatar}
+                        alt='Pi Pi'
+                        src={`${API}/${curUser?.avatar}`}
+                     />
                   </Link>
                   <Typography className={styles.username}>{curUser?.username}</Typography>
                   <Button className={styles.topHeaderBtn} onClick={handleOpenMenuNotification}>
@@ -332,7 +345,7 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
             onClose={handleClose}
             className={styles.menu}
          >
-            {renderMenuItem()}
+            {renderNotidyItem()}
          </Menu>
       </AppBar>
    )
