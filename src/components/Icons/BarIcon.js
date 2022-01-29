@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function BarIcon({ color, className, style }) {
    const styles = makeStyles(theme => ({
@@ -14,4 +15,4 @@ function BarIcon({ color, className, style }) {
    return <i className={clsx(className, styles.icon, 'fas fa-bars')} style={style} />
 }
 
-export default BarIcon
+export default memo(BarIcon)

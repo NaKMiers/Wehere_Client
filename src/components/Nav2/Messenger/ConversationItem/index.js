@@ -1,5 +1,5 @@
 import { Avatar, Badge, Box, ListItem, ListItemText, Menu, MenuItem } from '@material-ui/core'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -15,6 +15,8 @@ import useStyles from './styles'
 function ConversationItem({ onlineList, conversation, curUser, actionCreators, atOnlineList }) {
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
+   const styles = useStyles()
+
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
@@ -39,37 +41,33 @@ function ConversationItem({ onlineList, conversation, curUser, actionCreators, a
       getFriend()
    }, [conversation.members, curUser?._id])
 
-   const styles = useStyles()
-
    const handleOpenConversation = () => {
       actionCreators.setCurConversation(conversation)
    }
 
    const listItem = (
-      <>
-         <ListItem className={styles.onlineUserBtn}>
-            <Link
-               to={`/messenger/${friend._id}`}
-               className={styles.link}
-               onClick={handleOpenConversation}
-            >
-               <Avatar className={styles.avatar} src={`${API}/${friend.avatar}`} alt='avt' />
-               <Badge
-                  variant='dot'
-                  className={styles.badge}
-                  color='primary'
-                  invisible={!friend.online}
-               />
-               <ListItemText
-                  primary={friend.username}
-                  secondary='5p before'
-                  className={styles.userName}
-               />
-            </Link>
-            <Box className={styles.moreBtn} onClick={handleClick}>
-               <MoreIcon rotate color='secondary' />
-            </Box>
-         </ListItem>
+      <ListItem className={styles.onlineUserBtn}>
+         <Link
+            to={`/messenger/${friend._id}`}
+            className={styles.link}
+            onClick={handleOpenConversation}
+         >
+            <Avatar className={styles.avatar} src={`${API}/${friend.avatar}`} alt='avt' />
+            <Badge
+               variant='dot'
+               className={styles.badge}
+               color='primary'
+               invisible={!friend.online}
+            />
+            <ListItemText
+               primary={friend.username}
+               secondary='5p before'
+               className={styles.userName}
+            />
+         </Link>
+         <Box className={styles.moreBtn} onClick={handleClick}>
+            <MoreIcon rotate color='secondary' />
+         </Box>
          <Menu
             id='basic-menu'
             anchorEl={anchorEl}
@@ -92,7 +90,7 @@ function ConversationItem({ onlineList, conversation, curUser, actionCreators, a
                </MenuItem>
             )}
          </Menu>
-      </>
+      </ListItem>
    )
 
    return !atOnlineList ? listItem : friend?.online ? listItem : null
@@ -106,4 +104,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(ConversationItem)
+export default connect(mapState, mapDispatch)(memo(ConversationItem))

@@ -1,5 +1,5 @@
 import { List, ListSubheader, Typography, Box } from '@material-ui/core'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import AccountListItem from '../../../components/Features/AccountListItem'
 import Header from '../../../components/Header'
 import apis from '../../../apis'
@@ -32,7 +32,6 @@ function SwitchAccountPage({ curUser, accounts }) {
          return null
       })
 
-   console.log('accountList.length: ', accountList.length)
    return (
       <>
          <Header />
@@ -68,4 +67,4 @@ const mapState = state => ({
    accounts: state.account.accounts,
 })
 
-export default connect(mapState)(SwitchAccountPage)
+export default connect(mapState)(memo(SwitchAccountPage))

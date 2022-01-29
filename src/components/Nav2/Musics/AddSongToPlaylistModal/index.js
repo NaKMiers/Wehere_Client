@@ -4,7 +4,7 @@ import useStyles from './styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import apis from '../../../../apis'
 
 function AddSongToPlayListModal({ open, handleCloseModal, playlistList, song }) {
@@ -61,4 +61,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(AddSongToPlayListModal)
+export default connect(mapState, mapDispatch)(memo(AddSongToPlayListModal))

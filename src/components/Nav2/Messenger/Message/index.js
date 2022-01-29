@@ -1,5 +1,5 @@
 import { Avatar, Box, Collapse, Typography } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { format } from 'timeago.js'
 import { API } from '../../../../constants'
 import useStyles from './styles'
@@ -40,4 +40,4 @@ function Message({ message, own, curUserAvatar, curFriendAvatar }) {
    )
 }
 
-export default Message
+export default memo(Message)

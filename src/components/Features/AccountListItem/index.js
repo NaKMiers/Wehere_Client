@@ -23,6 +23,7 @@ import actions from '../../../actions'
 import { useHistory } from 'react-router-dom'
 import apis from '../../../apis'
 import { API } from '../../../constants'
+import { memo } from 'react'
 
 function AccountListItem({ account, actionCreators }) {
    const [isOpenRmBtn, setOpenRmBtn] = useState(false)
@@ -194,4 +195,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(AccountListItem)
+export default connect(null, mapDispatch)(memo(AccountListItem))

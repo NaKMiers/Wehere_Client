@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function CameraIcon({ color, style }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function CameraIcon({ color, style }) {
    return <i className={clsx(styles.icon, 'fad fa-camera')} style={style} />
 }
 
-export default CameraIcon
+export default memo(CameraIcon)

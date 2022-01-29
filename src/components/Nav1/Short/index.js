@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardHeader from '@material-ui/core/CardHeader'
 import IconButton from '@material-ui/core/IconButton'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '../../../components/Icons/DeleteIcon'
 import HeartIcon from '../../../components/Icons/HeartIcon'
@@ -35,17 +35,16 @@ function Short({ shortPost, author, curUser, actionCreators }) {
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
-   const handleClose = () => {
+   const handleClose = useCallback(() => {
       setAnchorEl(null)
       setOpenShareModal(false)
-   }
+   }, [])
 
    const handleOpenComment = () => {
       setOpenComments(!isOpenComments)
    }
 
    const handleLikeShort = async () => {
-      console.log('handleLikeShort')
       try {
          await apis.likeShortStatus(shortPost._id, curUser._id, !liked)
       } catch (err) {
@@ -56,8 +55,6 @@ function Short({ shortPost, author, curUser, actionCreators }) {
    }
 
    const handleDeleteShort = async () => {
-      console.log('handleDeleteShort')
-
       try {
          const res = await apis.deleteShortStatus(shortPost._id)
          console.log('res-deleteShort: ', res.data)

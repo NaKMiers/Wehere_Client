@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function CakeIcon({ style, color, type }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function CakeIcon({ style, color, type }) {
    return <i className={clsx(styles.icon, 'fad fa-birthday-cake')} style={style} />
 }
 
-export default CakeIcon
+export default memo(CakeIcon)

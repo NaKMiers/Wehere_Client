@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -14,12 +14,16 @@ import useStyles from './styles'
 import { useState } from 'react'
 
 function MessengerPage({ conversations, curUser, actionCreators }) {
-   const [isNoCvs, setIsNoCvs] = useState(true)
+   const [isHasCvs, setIsHasCvs] = useState(false)
 
    // change online status
    useEffect(() => {
       const changeOnlineStatus = async status => {
-         await apis.changeOnlineStatus(status)
+         try {
+            await apis.changeOnlineStatus(status)
+         } catch (err) {
+            console.log(err)
+         }
       }
       changeOnlineStatus(true)
 
@@ -33,7 +37,7 @@ function MessengerPage({ conversations, curUser, actionCreators }) {
          const getConversations = async () => {
             try {
                const res = await apis.getConversation(curUser._id)
-               setIsNoCvs(false)
+               setIsHasCvs(true)
                actionCreators.setConversations(res.data)
             } catch (err) {
                console.log(err)
@@ -51,8 +55,8 @@ function MessengerPage({ conversations, curUser, actionCreators }) {
          <Switch>
             <Route path='/messenger' exact={true}>
                <Box style={{ maxWidth: 960, margin: 'auto' }}>
-                  {!isNoCvs &&
-                     (conversations.length ? (
+                  {isHasCvs ? (
+                     conversations.length ? (
                         <>
                            <OnlineBar />
                            <ConversationList />
@@ -63,7 +67,14 @@ function MessengerPage({ conversations, curUser, actionCreators }) {
                               No conversations yet, please make friends so we can chat.
                            </Typography>
                         </Box>
-                     ))}
+                     )
+                  ) : (
+                     <Box className={styles.noCvsWrap}>
+                        <Typography className={styles.noCvs}>
+                           Please reload if you don't see anything else.
+                        </Typography>
+                     </Box>
+                  )}
                </Box>
             </Route>
             <Route path='/messenger/onlines' exact={true}>
@@ -89,4 +100,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(MessengerPage)
+export default connect(mapState, mapDispatch)(memo(MessengerPage))

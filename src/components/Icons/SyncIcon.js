@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function SyncIcon({ style, color }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function SyncIcon({ style, color }) {
    return <i className={clsx(styles.icon, 'fad fa-sync')} style={style} />
 }
 
-export default SyncIcon
+export default memo(SyncIcon)

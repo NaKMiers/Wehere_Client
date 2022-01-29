@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
 import Video from '../../../components/Nav1/Video'
@@ -7,10 +7,9 @@ import VideoModal from '../../../components/Nav1/VideoModal'
 import useStyles from './styles'
 
 function VideoPage({ curUser, videos }) {
-   console.log('VideoPage')
    const [open, setOpen] = useState(false)
 
-   const handleCloseModal = () => setOpen(false)
+   const handleCloseModal = useCallback(() => setOpen(false), [])
    const handleOpenModal = () => setOpen(true)
 
    const styles = useStyles()
@@ -39,4 +38,4 @@ const mapState = state => ({
    videos: state.video.videos,
 })
 
-export default connect(mapState, null)(VideoPage)
+export default connect(mapState, null)(memo(VideoPage))

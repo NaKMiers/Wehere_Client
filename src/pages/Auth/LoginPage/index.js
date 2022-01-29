@@ -1,5 +1,5 @@
 import { Button, TextField, Typography } from '@material-ui/core'
-import { useLayoutEffect, useState } from 'react'
+import { memo, useLayoutEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -134,4 +134,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(LoginPage)
+export default connect(mapState, mapDispatch)(memo(LoginPage))

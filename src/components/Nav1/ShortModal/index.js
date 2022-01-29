@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Modal, Paper, Typography } from '@material-ui/core'
 import { TextareaAutosize } from '@mui/material'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
@@ -17,7 +17,7 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
 
    const styles = useStyles()
 
-   const handleUploadshort = () => {
+   const handleUploadShort = () => {
       const input = document.createElement('input')
       input.type = 'file'
       input.onchange = e => {
@@ -99,7 +99,7 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
 
                      <Box className={styles.shortsList}>{rendershort()}</Box>
                      <ButtonGroup variant='text' className={styles.actionBtnWrap}>
-                        <Button onClick={handleUploadshort}>
+                        <Button onClick={handleUploadShort}>
                            Upload <UploadIcon color='secondary' style={{ marginLeft: 8 }} />
                         </Button>
                         <Button onClick={handleClear}>
@@ -121,4 +121,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(ShortModal)
+export default connect(null, mapDispatch)(memo(ShortModal))

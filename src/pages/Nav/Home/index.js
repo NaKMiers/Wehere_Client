@@ -5,6 +5,7 @@ import Short from '../../../components/Nav1/Short'
 import Header from '../../../components/Header'
 import { connect } from 'react-redux'
 import { makeRandomList } from '../../../commons/utils'
+import { memo } from 'react'
 
 function HomePage({ blogs, images, videos, shorts }) {
    const renderHome = () => {
@@ -43,4 +44,4 @@ const mapState = state => ({
    shorts: state.short.shorts,
 })
 
-export default connect(mapState, null)(HomePage)
+export default connect(mapState, null)(memo(HomePage))

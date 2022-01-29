@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
 import Image from '../../../components/Nav1/Image'
@@ -37,4 +37,4 @@ const mapState = state => ({
    images: state.image.images,
 })
 
-export default connect(mapState, null)(ImagePage)
+export default connect(mapState, null)(memo(ImagePage))

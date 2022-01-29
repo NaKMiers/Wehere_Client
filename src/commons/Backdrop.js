@@ -1,5 +1,6 @@
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
+import { memo } from 'react'
 import { connect } from 'react-redux'
 
 function SimpleBackdrop({ open }) {
@@ -16,4 +17,4 @@ const mapState = state => ({
    open: state.showBackdrop,
 })
 
-export default connect(mapState, null)(SimpleBackdrop)
+export default connect(mapState, null)(memo(SimpleBackdrop))

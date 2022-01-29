@@ -1,5 +1,5 @@
 import { Box, Button, List, Modal, Paper, TextField, Typography } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
@@ -13,6 +13,22 @@ function AddNewPlaylistModal({ open, handleCloseModal, songList, actionCreators 
    const [selectSongs, setSelectSongs] = useState([])
 
    const styles = useStyle()
+
+   const handleAddNewPlaylist = async () => {
+      try {
+         const res = await apis.addPlaylist({ playlistName, songs: selectSongs })
+         actionCreators.addNewPlaylist(res.data)
+         handleCloseModal()
+         handleClear()
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
+   const handleClear = () => {
+      setPlaylistName('')
+      setSelectSongs([])
+   }
 
    const renderSongList = () =>
       songList.map(s => (
@@ -31,22 +47,6 @@ function AddNewPlaylistModal({ open, handleCloseModal, songList, actionCreators 
             <SongListItem song={s} isInPlayListModal />
          </Box>
       ))
-
-   const handleAddNewPlaylist = async () => {
-      try {
-         const res = await apis.addPlaylist({ playlistName, songs: selectSongs })
-         actionCreators.addNewPlaylist(res.data)
-         handleCloseModal()
-         handleClear()
-      } catch (err) {
-         console.log(err)
-      }
-   }
-
-   const handleClear = () => {
-      setPlaylistName('')
-      setSelectSongs([])
-   }
 
    return (
       <Modal
@@ -101,4 +101,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(AddNewPlaylistModal)
+export default connect(mapState, mapDispatch)(memo(AddNewPlaylistModal))

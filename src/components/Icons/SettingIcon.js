@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function SettingIcon({ mutiple, style, color }) {
    const styles = makeStyles(theme => ({
@@ -19,4 +20,4 @@ function SettingIcon({ mutiple, style, color }) {
    )
 }
 
-export default SettingIcon
+export default memo(SettingIcon)

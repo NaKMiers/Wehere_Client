@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
-function Change({ color, style }) {
+function ChangeIcon({ color, style }) {
    const styles = makeStyles(theme => ({
       icon: {
          fontSize: 20,
@@ -13,4 +14,4 @@ function Change({ color, style }) {
    return <i className={clsx(styles.icon, 'fad fa-exchange')} style={style} />
 }
 
-export default Change
+export default memo(ChangeIcon)

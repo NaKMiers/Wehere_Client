@@ -1,6 +1,7 @@
 import { List, Typography } from '@material-ui/core'
+import { memo } from 'react'
 // import { useParams } from 'react-router-dom'
-import SongListItem from '../SongListItem'
+// import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
 function SongOfAuthor() {
@@ -22,4 +23,4 @@ function SongOfAuthor() {
    )
 }
 
-export default SongOfAuthor
+export default memo(SongOfAuthor)

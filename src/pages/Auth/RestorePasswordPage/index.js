@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from '@material-ui/core'
+import { memo } from 'react'
 import useStyles from './styles'
 
 function RestorePasswordPage() {
@@ -29,4 +30,4 @@ function RestorePasswordPage() {
    )
 }
 
-export default RestorePasswordPage
+export default memo(RestorePasswordPage)

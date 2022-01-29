@@ -28,6 +28,7 @@ import { API } from '../../../constants'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import { memo } from 'react'
+import { useCallback } from 'react'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -51,17 +52,16 @@ function Blog({ blogPost, author, curUser, actionCreators }) {
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
-   const handleClose = () => {
+   const handleClose = useCallback(() => {
       setAnchorEl(null)
       setOpenShareModal(false)
-   }
+   }, [])
 
    const handleExpandClick = () => {
       setExpanded(!expanded)
    }
 
    const handleLikeBlog = async () => {
-      console.log('handleLikeBlog')
       try {
          await apis.likeBlogStatus(blogPost._id, curUser._id, !liked)
       } catch (err) {
@@ -72,8 +72,6 @@ function Blog({ blogPost, author, curUser, actionCreators }) {
    }
 
    const handleDeleteBlog = async () => {
-      console.log('handleDeleteBlog')
-
       try {
          const res = await apis.deleteBlogStatus(blogPost._id)
          console.log('res-deleteBlog: ', res.data)

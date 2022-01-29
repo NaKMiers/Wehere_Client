@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function ShareIcon({ style }) {
    const styles = makeStyles(theme => ({
@@ -7,10 +8,10 @@ function ShareIcon({ style }) {
          fontSize: 22,
          cursor: 'pointer',
          fontWeight: 100,
-         color: theme.palette.primary.text
-      }
+         color: theme.palette.primary.text,
+      },
    }))()
    return <i className={clsx(styles.icon, 'fad fa-share-alt')} style={style} />
 }
 
-export default ShareIcon
+export default memo(ShareIcon)

@@ -8,7 +8,7 @@ import {
    Box,
    CardMedia,
 } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import useStyles from './styles'
 import apis from '../../../../apis'
 import { bindActionCreators } from 'redux'
@@ -181,4 +181,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(AddNewSongModal)
+export default connect(null, mapDispatch)(memo(AddNewSongModal))

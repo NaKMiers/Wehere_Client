@@ -2,7 +2,7 @@ import { Button, List, Typography, Box } from '@material-ui/core'
 import PlaylistListItem from '../PlaylistListItem'
 import useStyles from './styles'
 import AddNewPlaylistModal from '../AddNewPlaylistModal'
-import { useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
@@ -11,12 +11,11 @@ import SongInPlaylist from '../SongInPlaylist'
 
 function PlaylistList({ playlistList }) {
    const [isOpenAddNewPLModal, setOpenAddNewPLModal] = useState(false)
-
-   const handleCloseModal = () => {
-      setOpenAddNewPLModal(false)
-   }
-
    const styles = useStyles()
+
+   const handleCloseModal = useCallback(() => {
+      setOpenAddNewPLModal(false)
+   }, [])
 
    const renderPlaylists = () =>
       playlistList.map(p => (
@@ -71,4 +70,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(PlaylistList)
+export default connect(mapState, mapDispatch)(memo(PlaylistList))

@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function RemoveIcon({ style }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function RemoveIcon({ style }) {
    return <i className={clsx(styles.icon, 'fad fa-trash')} style={style} />
 }
 
-export default RemoveIcon
+export default memo(RemoveIcon)

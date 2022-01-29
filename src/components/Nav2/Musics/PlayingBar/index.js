@@ -1,6 +1,6 @@
 import { Avatar, Box, IconButton, LinearProgress, Typography } from '@material-ui/core'
 import clsx from 'clsx'
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, memo } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -71,7 +71,6 @@ function PlayingBar({
       return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
    }
    const handleSeek = e => {
-      console.log('handleSeek')
       const valueOnProgressBar = +e.target.value
       setCurrentTime(valueOnProgressBar)
       const valueOnAudioRef = (audioRef.current.duration / 100) * +e.target.value
@@ -79,17 +78,14 @@ function PlayingBar({
    }
 
    const handleRepeat = () => {
-      console.log('handleRepeat')
       setRepeat(!repeat)
       audioRef.current.loop = !repeat
    }
    const handleRandom = () => {
-      console.log('handleRandom')
       setRandom(!random)
    }
 
    const handleNextSong = useCallback(() => {
-      console.log('handleNextSong')
       let index
       let nextSong
       if (!random) {
@@ -111,7 +107,6 @@ function PlayingBar({
       actionCreators.setRecentlyList(nextSong)
    }, [actionCreators, mySongList, songPlaying._id, playlistPlaying, random, randomSongList])
    const handlePrevSong = () => {
-      console.log('handlePrevSong')
       let index
       let prevSong
       if (!random) {
@@ -296,4 +291,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(PlayingBar)
+export default connect(mapState, mapDispatch)(memo(PlayingBar))

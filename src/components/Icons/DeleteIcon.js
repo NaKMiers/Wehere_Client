@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function DeleteIcon({ style }) {
    const styles = makeStyles(theme => ({
@@ -14,4 +15,4 @@ function DeleteIcon({ style }) {
    return <i className={clsx(styles.icon, 'fad fa-backspace')} style={style} />
 }
 
-export default DeleteIcon
+export default memo(DeleteIcon)

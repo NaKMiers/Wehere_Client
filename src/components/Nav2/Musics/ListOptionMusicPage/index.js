@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import { TextField } from '@mui/material'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -32,8 +32,6 @@ function ListOptionMusicPage({
 
    const renderRecentlyList = () =>
       recentlyList.map(s => <SongListItem key={s._id} song={s} inRecentlyList />)
-
-   console.log('recentlyList: ', recentlyList)
 
    return (
       <List>
@@ -121,4 +119,4 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
-export default connect(mapState, mapDispatch)(ListOptionMusicPage)
+export default connect(mapState, mapDispatch)(memo(ListOptionMusicPage))

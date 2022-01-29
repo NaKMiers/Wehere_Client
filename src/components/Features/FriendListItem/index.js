@@ -1,5 +1,6 @@
 import { Avatar, Button, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
 import React from 'react'
+import { memo } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -39,4 +40,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(FriendListItem)
+export default connect(null, mapDispatch)(memo(FriendListItem))

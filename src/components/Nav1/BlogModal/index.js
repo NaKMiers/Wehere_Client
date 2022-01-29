@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Modal, Paper, Typography } from '@material-ui/core'
 import { TextareaAutosize } from '@mui/material'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import apis from '../../../apis'
 import TrashIcon from '../../Icons/TrashIcon'
 import useStyles from './styles'
@@ -77,4 +77,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(BlogModal)
+export default connect(null, mapDispatch)(memo(BlogModal))

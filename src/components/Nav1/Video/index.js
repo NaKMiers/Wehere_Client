@@ -62,7 +62,6 @@ function Video({ videoPost, author, curUser, actionCreators }) {
    }
 
    const handleLikeVideo = async () => {
-      console.log('handleLikeVideo')
       try {
          await apis.likeVideoStatus(videoPost._id, curUser._id, !liked)
       } catch (err) {
@@ -73,11 +72,8 @@ function Video({ videoPost, author, curUser, actionCreators }) {
    }
 
    const handleDeleteVideo = async () => {
-      console.log('handleDeleteVideo')
-
       try {
          const res = await apis.deleteVideoStatus(videoPost._id)
-         console.log('res-deleteVideo: ', res.data)
          actionCreators.deleteVideo(res.data._id)
       } catch (err) {
          console.log(err)

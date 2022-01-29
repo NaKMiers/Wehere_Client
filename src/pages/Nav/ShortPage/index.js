@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
 import Short from '../../../components/Nav1/Short'
@@ -8,10 +8,10 @@ import useStyles from './styles'
 
 function ShortPage({ curUser, shorts }) {
    const [open, setOpen] = useState(false)
-   const handleCloseModal = () => setOpen(false)
-   const handleOpenModal = () => setOpen(true)
-
    const styles = useStyles()
+
+   const handleCloseModal = useCallback(() => setOpen(false), [])
+   const handleOpenModal = () => setOpen(true)
 
    const renderShorts = () =>
       shorts.map(s => <Short key={s.short._id} shortPost={s.short} author={s.author} />)
@@ -37,4 +37,4 @@ const mapState = state => ({
    shorts: state.short.shorts,
 })
 
-export default connect(mapState, null)(ShortPage)
+export default connect(mapState, null)(memo(ShortPage))

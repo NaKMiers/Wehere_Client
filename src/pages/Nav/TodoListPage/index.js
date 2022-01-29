@@ -17,7 +17,7 @@ import {
 import EditIcon from '@material-ui/icons/Edit'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
@@ -49,7 +49,18 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
 
    const styles = useStyles()
 
-   const handleToggle = value => () => {
+   useEffect(() => {
+      if (!todoList.length && curUser) {
+         actionCreators.getAllTaskRequest()
+      }
+   }, [curUser, actionCreators, todoList.length])
+
+   useEffect(() => {
+      setLeft(() => todoList.filter(task => task.status === 'ready'))
+      setRight(() => todoList.filter(task => task.status === 'completed'))
+   }, [todoList])
+
+   const handleToggle = value => {
       const currentIndex = checked.indexOf(value)
       const newChecked = [...checked]
 
@@ -91,17 +102,6 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
       setLeft(left.concat(right))
       setRight([])
    }
-
-   useEffect(() => {
-      if (!todoList.length && curUser) {
-         actionCreators.getAllTaskRequest()
-      }
-   }, [curUser, actionCreators, todoList.length])
-
-   useEffect(() => {
-      setLeft(() => todoList.filter(task => task.status === 'ready'))
-      setRight(() => todoList.filter(task => task.status === 'completed'))
-   }, [todoList])
 
    const handleAddTask = e => {
       e.preventDefault()
@@ -147,7 +147,7 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                   <ListItem className={styles.taskListItem} key={task._id} role='listitem' button>
                      {taskEditing?._id !== task._id ? (
                         <>
-                           <Box className={styles.taskWrap} onClick={handleToggle(task)}>
+                           <Box className={styles.taskWrap} onClick={() => handleToggle(task)}>
                               <ListItemIcon>
                                  <Checkbox
                                     checked={checked.indexOf(task) !== -1}
@@ -354,9 +354,11 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                   </Grid>
                </Grid>
             ) : (
-               <Typography className={styles.noTask}>
-                  No task yet, please add new task now.
-               </Typography>
+               <Box className={styles.noTaskWrap}>
+                  <Typography className={styles.noTask}>
+                     No task yet, please add new task now.
+                  </Typography>
+               </Box>
             )}
          </Box>
       </>
@@ -371,4 +373,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(TodoListPage)
+export default connect(mapState, mapDispatch)(memo(TodoListPage))

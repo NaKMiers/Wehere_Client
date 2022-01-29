@@ -1,4 +1,5 @@
 import { Redirect, Route } from 'react-router-dom'
+import { memo } from 'react'
 
 function AuthLogin({ children, ...rest }) {
    return (
@@ -16,4 +17,4 @@ function AuthLogin({ children, ...rest }) {
    )
 }
 
-export default AuthLogin
+export default memo(AuthLogin)

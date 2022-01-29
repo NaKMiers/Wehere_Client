@@ -12,7 +12,7 @@ import {
    Typography,
 } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
@@ -59,34 +59,6 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
       }
    }
 
-   const renderTextColorOptions = () =>
-      textColorOptions.map(tc => (
-         <Button
-            key={tc}
-            style={{
-               backgroundColor: tc,
-               border: textColor === tc && '3px solid orange',
-            }}
-            className={styles.textColorOption}
-            onClick={() => setTextColor(tc)}
-         />
-      ))
-
-   const renderBgOptions = () =>
-      bgOptions.map(bg => (
-         <Button key={bg} className={styles.bgOptionBtn} onClick={() => setBackground(bg)}>
-            <CardMedia
-               className={styles.bgOption}
-               component='img'
-               image={bg}
-               alt={bg}
-               style={{
-                  border: background === bg && '4px solid orange',
-               }}
-            />
-         </Button>
-      ))
-
    const handleSubmit = async () => {
       const data = { userId: curUser._id, title, content, description, textColor, background }
       if (!curDiary) {
@@ -126,6 +98,34 @@ function DiaryModal({ curUser, open, handleCloseModal, curDiary, actionCreators 
       }
       handleCloseModal()
    }
+
+   const renderTextColorOptions = () =>
+      textColorOptions.map(tc => (
+         <Button
+            key={tc}
+            style={{
+               backgroundColor: tc,
+               border: textColor === tc && '3px solid orange',
+            }}
+            className={styles.textColorOption}
+            onClick={() => setTextColor(tc)}
+         />
+      ))
+
+   const renderBgOptions = () =>
+      bgOptions.map(bg => (
+         <Button key={bg} className={styles.bgOptionBtn} onClick={() => setBackground(bg)}>
+            <CardMedia
+               className={styles.bgOption}
+               component='img'
+               image={bg}
+               alt={bg}
+               style={{
+                  border: background === bg && '4px solid orange',
+               }}
+            />
+         </Button>
+      ))
 
    return (
       <>
@@ -235,4 +235,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(DiaryModal)
+export default connect(null, mapDispatch)(memo(DiaryModal))

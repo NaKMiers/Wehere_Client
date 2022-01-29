@@ -9,7 +9,7 @@ import {
    Typography,
 } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -31,6 +31,8 @@ function SongInPlaylist({ myPlaylistList, mySongList, actionCreators }) {
 
    const [anchorEl, setAnchorEl] = useState(null)
    const open = Boolean(anchorEl)
+   const styles = useStyles()
+
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
@@ -38,16 +40,17 @@ function SongInPlaylist({ myPlaylistList, mySongList, actionCreators }) {
       setAnchorEl(null)
    }
 
-   const handleRemoveSong = async songId => {
-      try {
-         const res = await apis.removeSongFromPlaylist(playlist._id, songId)
-         setSongsRemoved([...songsRemoved, res.data.songId])
-      } catch (err) {
-         console.log(err)
-      }
-   }
-
-   const styles = useStyles()
+   const handleRemoveSong = useCallback(
+      async songId => {
+         try {
+            const res = await apis.removeSongFromPlaylist(playlist._id, songId)
+            setSongsRemoved([...songsRemoved, res.data.songId])
+         } catch (err) {
+            console.log(err)
+         }
+      },
+      [playlist._id, songsRemoved]
+   )
 
    useEffect(() => {
       const getPlaylist = async () => {
@@ -186,4 +189,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(SongInPlaylist)
+export default connect(mapState, mapDispatch)(memo(SongInPlaylist))

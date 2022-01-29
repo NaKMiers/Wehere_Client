@@ -8,7 +8,7 @@ import {
    Typography,
 } from '@material-ui/core'
 import { FormControl } from '@mui/material'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -211,4 +211,4 @@ const mapDispatchToProps = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage)
+export default connect(mapStateToProps, mapDispatchToProps)(memo(RegisterPage))

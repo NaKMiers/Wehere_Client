@@ -1,19 +1,17 @@
-import { useLayoutEffect, useState } from 'react'
+import { Box, Button, List, Typography } from '@material-ui/core'
+import { memo, useCallback, useState } from 'react'
 import { connect } from 'react-redux'
-import { Button, List, Typography, Box } from '@material-ui/core'
-import SongListItem from '../SongListItem'
 import AddNewSongModal from '../AddNewSongModal'
+import SongListItem from '../SongListItem'
 import useStyles from './styles'
 
 function SongList({ songList }) {
    const [isOpenAddNewSongModal, setOpenAddNewSongModal] = useState(false)
-   const handleCloseModal = () => {
-      setOpenAddNewSongModal(false)
-   }
-
-   useLayoutEffect(() => {}, [songList])
-
    const styles = useStyles()
+
+   const handleCloseModal = useCallback(() => {
+      setOpenAddNewSongModal(false)
+   }, [])
 
    const renderSongList = () => songList.map(s => <SongListItem key={s._id} song={s} />)
 
@@ -47,4 +45,4 @@ const mapState = state => ({
    songList: state.music.mySongList,
 })
 
-export default connect(mapState, null)(SongList)
+export default connect(mapState, null)(memo(SongList))

@@ -1,6 +1,6 @@
 import { Avatar, Box, ListItem, ListItemText, Menu, MenuItem } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import AddIcon from '../../../../components/Icons/AddIcon'
 import DeleteIcon from '../../../Icons/DeleteIcon'
 import HeartIcon from '../../../Icons/HeartIcon'
@@ -14,6 +14,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
 import apis from '../../../../apis'
 import { makeRandomList } from '../../../../commons/utils'
+import { useCallback } from 'react'
 
 function SongListItem({
    isInPlayListModal = false,
@@ -49,9 +50,9 @@ function SongListItem({
       setAnchorEl(null)
       setOpenAddToPLModal(true)
    }
-   const handleCloseModal = () => {
+   const handleCloseModal = useCallback(() => {
       setOpenAddToPLModal(false)
-   }
+   }, [])
 
    const handleDeleteSong = async () => {
       try {
@@ -173,4 +174,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(SongListItem)
+export default connect(mapState, mapDispatch)(memo(SongListItem))

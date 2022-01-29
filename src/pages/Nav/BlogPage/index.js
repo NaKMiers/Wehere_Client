@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { connect } from 'react-redux'
 import Header from '../../../components/Header'
 import Blog from '../../../components/Nav1/Blog'
@@ -9,7 +9,7 @@ import useStyles from './styles'
 function BlogPage({ curUser, blogs }) {
    const [open, setOpen] = useState(false)
 
-   const handleCloseModal = () => setOpen(false)
+   const handleCloseModal = useCallback(() => setOpen(false), [])
    const handleOpenModal = () => setOpen(true)
 
    const styles = useStyles()
@@ -36,4 +36,4 @@ const mapState = state => ({
    blogs: state.blog.blogs,
 })
 
-export default connect(mapState, null)(BlogPage)
+export default connect(mapState, null)(memo(BlogPage))

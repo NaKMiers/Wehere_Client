@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
-import React from 'react'
+import React, { memo } from 'react'
 
 function MoreIcon({ rotate = false, color, style }) {
    const styles = makeStyles(theme => ({
@@ -15,4 +15,4 @@ function MoreIcon({ rotate = false, color, style }) {
    return <i className={clsx(styles.icon, 'fad fa-ellipsis-h')} style={style} />
 }
 
-export default MoreIcon
+export default memo(MoreIcon)

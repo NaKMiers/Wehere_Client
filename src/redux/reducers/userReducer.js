@@ -5,7 +5,7 @@ const initState = {
    curUser: null,
 }
 
-function useReducer(state = initState, action) {
+function userReducer(state = initState, action) {
    const { payload } = action
    switch (action.type) {
       case types.LOGIN:
@@ -44,4 +44,4 @@ function useReducer(state = initState, action) {
    }
 }
 
-export default useReducer
+export default userReducer

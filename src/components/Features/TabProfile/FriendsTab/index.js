@@ -1,4 +1,6 @@
 import { Box, List } from '@material-ui/core'
+import { memo } from 'react'
+import { useMemo } from 'react'
 import { useEffect, useState } from 'react'
 import apis from '../../../../apis'
 import FriendsTabItem from './FriendsTabItem'
@@ -23,10 +25,13 @@ function FriendsTab({ userProfile, curUser }) {
       getFriends()
    }, [userProfile?._id, userProfile.friends])
 
-   const renderFriends = () =>
-      friends
-         .filter(f => f._id !== curUser._id)
-         .map(f => <FriendsTabItem key={f._id} friend={f} curUser={curUser} />)
+   const renderFriends = useMemo(
+      () =>
+         friends
+            .filter(f => f._id !== curUser._id)
+            .map(f => <FriendsTabItem key={f._id} friend={f} curUser={curUser} />),
+      [friends, curUser]
+   )
 
    return (
       <Box className={styles.tab}>
@@ -35,4 +40,4 @@ function FriendsTab({ userProfile, curUser }) {
    )
 }
 
-export default FriendsTab
+export default memo(FriendsTab)

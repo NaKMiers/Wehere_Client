@@ -11,7 +11,7 @@ import {
    Switch,
    TextField,
 } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../../components/Header'
 import ExpandIcon from '../../../components/Icons/ExpandIcon'
@@ -292,4 +292,4 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
-export default connect(mapState, mapDispatch)(SettingPage)
+export default connect(mapState, mapDispatch)(memo(SettingPage))

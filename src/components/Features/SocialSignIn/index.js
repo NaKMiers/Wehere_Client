@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, Typography } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -72,4 +73,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(SocialSignIn)
+export default connect(null, mapDispatch)(memo(SocialSignIn))

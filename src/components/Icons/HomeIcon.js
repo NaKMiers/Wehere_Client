@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function HomeIcon({ style, color, type }) {
    const styles = makeStyles(theme => ({
@@ -18,4 +19,4 @@ function HomeIcon({ style, color, type }) {
    )
 }
 
-export default HomeIcon
+export default memo(HomeIcon)

@@ -1,5 +1,6 @@
 import { Avatar, ListItemAvatar, ListItemText } from '@material-ui/core'
 import { ListItemButton } from '@mui/material'
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import useStyles from './styles'
 
@@ -18,4 +19,4 @@ function AuthorListItem() {
    )
 }
 
-export default AuthorListItem
+export default memo(AuthorListItem)

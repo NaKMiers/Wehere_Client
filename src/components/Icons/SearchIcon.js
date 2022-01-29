@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function SearchIcon({ style }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function SearchIcon({ style }) {
    return <i className={clsx(styles.icon, 'fad fa-search')} style={style} />
 }
 
-export default SearchIcon
+export default memo(SearchIcon)

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Header from '../../../components/Header'
 import AuthorList from '../../../components/Nav2/Musics/AuthorList'
@@ -35,4 +36,4 @@ function MusicPage() {
    )
 }
 
-export default MusicPage
+export default memo(MusicPage)

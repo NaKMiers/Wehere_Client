@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function LogOutIcon({ style, color }) {
    const styles = makeStyles(theme => ({
@@ -14,4 +15,4 @@ function LogOutIcon({ style, color }) {
    return <i className={clsx(styles.icon, 'fad fa-sign-out-alt')} style={style} />
 }
 
-export default LogOutIcon
+export default memo(LogOutIcon)

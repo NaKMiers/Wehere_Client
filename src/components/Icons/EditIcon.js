@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function EditIcon({ style }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function EditIcon({ style }) {
    return <i className={clsx(styles.icon, 'fad fa-edit')} style={style} />
 }
 
-export default EditIcon
+export default memo(EditIcon)

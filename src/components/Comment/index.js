@@ -1,4 +1,5 @@
 import { Avatar, CardContent, Collapse, IconButton, TextField, Typography } from '@material-ui/core'
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import ReplyIcon from '../../components/Icons/ReplyIcon'
 import HeartIcon from '../Icons/HeartIcon'
@@ -148,4 +149,4 @@ function Comment({ expanded }) {
    )
 }
 
-export default Comment
+export default memo(Comment)

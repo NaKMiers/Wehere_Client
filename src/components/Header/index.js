@@ -21,6 +21,7 @@ import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
+import { memo } from 'react'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, NavLink, useLocation } from 'react-router-dom'
@@ -76,7 +77,7 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
       actionCreators.seenNotifications(true)
    }
 
-   const renderNotidyItem = () =>
+   const renderNotifyItem = () =>
       notifications.map((n, i) => {
          switch (n.type) {
             case 'ADD_FRIEND_REQUEST':
@@ -345,7 +346,7 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
             onClose={handleClose}
             className={styles.menu}
          >
-            {renderNotidyItem()}
+            {renderNotifyItem()}
          </Menu>
       </AppBar>
    )
@@ -361,4 +362,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(Header)
+export default connect(mapState, mapDispatch)(memo(Header))

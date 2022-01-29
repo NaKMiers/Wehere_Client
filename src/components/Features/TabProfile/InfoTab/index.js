@@ -5,6 +5,7 @@ import HeartIcon from '../../../Icons/HeartIcon'
 import HomeIcon from '../../../Icons/HomeIcon'
 import { styled } from '@material-ui/styles'
 import useStyles from './styles'
+import { memo } from 'react'
 
 const Demo = styled('div')(({ theme }) => ({
    backgroundColor: theme.palette.background.paper,
@@ -49,4 +50,4 @@ function InfoTab({ userProfile }) {
    )
 }
 
-export default InfoTab
+export default memo(InfoTab)

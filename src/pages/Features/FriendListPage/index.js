@@ -1,5 +1,5 @@
 import { List, ListSubheader, Typography } from '@material-ui/core'
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
@@ -62,4 +62,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(FriendListPage)
+export default connect(mapState, mapDispatch)(memo(FriendListPage))

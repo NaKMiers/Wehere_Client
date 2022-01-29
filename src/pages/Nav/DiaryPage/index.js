@@ -1,5 +1,6 @@
 import { Box, Button, List, Typography } from '@material-ui/core'
-import { useEffect, useState } from 'react'
+import { useCallback } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
@@ -12,19 +13,6 @@ import useStyles from './styles'
 function DiaryPage({ curUser, actionCreators, diaries }) {
    const [open, setOpen] = useState(false)
    const [curDiary, setCurDiary] = useState(null)
-   const handleCloseModal = () => {
-      setOpen(false)
-      setCurDiary(null)
-   }
-   const handleOpenModal = diary => {
-      if (diary) {
-         setCurDiary(diary)
-      } else {
-         setCurDiary(null)
-      }
-      setOpen(true)
-   }
-
    const styles = useStyles()
 
    useEffect(() => {
@@ -38,6 +26,19 @@ function DiaryPage({ curUser, actionCreators, diaries }) {
       }
       getDiaries()
    }, [actionCreators])
+
+   const handleCloseModal = () => {
+      setOpen(false)
+      setCurDiary(null)
+   }
+   const handleOpenModal = useCallback(diary => {
+      if (diary) {
+         setCurDiary(diary)
+      } else {
+         setCurDiary(null)
+      }
+      setOpen(true)
+   }, [])
 
    const renderDiaryItem = () =>
       diaries.map((d, i) => (
@@ -86,4 +87,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(DiaryPage)
+export default connect(mapState, mapDispatch)(memo(DiaryPage))

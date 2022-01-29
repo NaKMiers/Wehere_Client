@@ -1,5 +1,5 @@
 import { Box, Button, IconButton, Modal, Paper, Typography } from '@material-ui/core'
-import { useRef } from 'react'
+import { memo, useRef } from 'react'
 import useStyles from './styles'
 
 function ShareModal({ open, handleClose }) {
@@ -63,4 +63,4 @@ function ShareModal({ open, handleClose }) {
    )
 }
 
-export default ShareModal
+export default memo(ShareModal)

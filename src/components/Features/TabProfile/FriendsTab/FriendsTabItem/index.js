@@ -1,4 +1,5 @@
 import { Avatar, Button, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
+import { memo } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import apis from '../../../../../apis'
@@ -57,4 +58,4 @@ function FriendsTabItem({ friend, curUser }) {
    )
 }
 
-export default FriendsTabItem
+export default memo(FriendsTabItem)

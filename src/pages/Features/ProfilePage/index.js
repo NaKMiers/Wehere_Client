@@ -10,7 +10,7 @@ import {
    Typography,
 } from '@material-ui/core'
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -38,19 +38,11 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    const [backgroundReview, setBackgroundReview] = useState()
    const [isOpenSaveAvtBtn, setIsOpenSaveAvtBtn] = useState(false)
    const [isOpenSaveBgBtn, setIsOpenSaveBgBtn] = useState(false)
-
    const open = Boolean(anchorEl)
-   const handleClick = event => {
-      setAnchorEl(event.currentTarget)
-   }
-   const handleClose = () => {
-      setAnchorEl(null)
-   }
    const [currentTab, setCurrentTab] = useState('posts')
-
-   const styles = useStyles()
    const localtion = useLocation()
    const history = useHistory()
+   const styles = useStyles()
 
    useEffect(() => {
       const userId = localtion.pathname.split('/')[2]
@@ -69,14 +61,11 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
       userProfile?._id,
    ])
 
-   const renderTabs = () => {
-      if (currentTab === 'info') {
-         return <InfoTab userProfile={userProfile} />
-      } else if (currentTab === 'friends') {
-         return <FriendsTab userProfile={userProfile} curUser={curUser} />
-      } else {
-         return <PostsTab userProfile={userProfile} />
-      }
+   const handleClick = event => {
+      setAnchorEl(event.currentTarget)
+   }
+   const handleClose = () => {
+      setAnchorEl(null)
    }
 
    const handleAddFriendRequest = async () => {
@@ -137,7 +126,6 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    }
 
    const handleSaveAvtAndBg = type => {
-      console.log('handleSaveAvtAndBg')
       if (type === 'avatar') {
          const updateAvatar = async () => {
             let data = new FormData()
@@ -170,6 +158,16 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
             }
          }
          updateBackground()
+      }
+   }
+
+   const renderTabs = () => {
+      if (currentTab === 'info') {
+         return <InfoTab userProfile={userProfile} />
+      } else if (currentTab === 'friends') {
+         return <FriendsTab userProfile={userProfile} curUser={curUser} />
+      } else {
+         return <PostsTab userProfile={userProfile} />
       }
    }
 
@@ -357,4 +355,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(ProfilePage)
+export default connect(mapState, mapDispatch)(memo(ProfilePage))

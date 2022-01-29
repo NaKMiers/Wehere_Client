@@ -30,6 +30,7 @@ import apis from '../../../apis'
 import { bindActionCreators } from 'redux'
 import { memo } from 'react'
 import actions from '../../../actions'
+import { useCallback } from 'react'
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props
@@ -51,10 +52,10 @@ function Image({ imagePost, author, curUser, actionCreators }) {
    const handleClick = event => {
       setAnchorEl(event.currentTarget)
    }
-   const handleClose = () => {
+   const handleClose = useCallback(() => {
       setAnchorEl(null)
       setOpenShareModal(false)
-   }
+   }, [])
 
    const [expanded, setExpanded] = useState(false)
 
@@ -65,7 +66,6 @@ function Image({ imagePost, author, curUser, actionCreators }) {
    const styles = useStyles()
 
    const handleLikeImage = async () => {
-      console.log('handleLikeImage')
       try {
          await apis.likeImageStatus(imagePost._id, curUser._id, !liked)
       } catch (err) {
@@ -76,8 +76,6 @@ function Image({ imagePost, author, curUser, actionCreators }) {
    }
 
    const handleDeleteImage = async () => {
-      console.log('handleDeleteImage')
-
       try {
          const res = await apis.deleteImageStatus(imagePost._id)
          console.log('res-deleteImage: ', res.data)

@@ -151,7 +151,11 @@ export default makeStyles(theme => ({
       color: theme.palette.secondary.main,
    },
 
-   noTask: {
+   noTaskWrap: {
       textAlign: 'center',
+   },
+   noTask: {
+      color: theme.border.light,
+      fontSize: 36,
    },
 }))

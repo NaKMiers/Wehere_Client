@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function AddIcon({ style, circle }) {
    const styles = makeStyles(theme => ({
@@ -16,4 +17,4 @@ function AddIcon({ style, circle }) {
    )
 }
 
-export default AddIcon
+export default memo(AddIcon)

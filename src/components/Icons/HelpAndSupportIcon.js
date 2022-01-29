@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function HelpAndSupportIcon({ style, color }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function HelpAndSupportIcon({ style, color }) {
    return <i className={clsx(styles.icon, 'fad fa-question')} style={style} />
 }
 
-export default HelpAndSupportIcon
+export default memo(HelpAndSupportIcon)

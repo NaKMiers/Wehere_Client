@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function TrashIcon({ color, className, style }) {
    const styles = makeStyles(theme => ({
@@ -14,4 +15,4 @@ function TrashIcon({ color, className, style }) {
    return <i className={clsx(className, styles.icon, 'fad fa-trash-alt')} style={style} />
 }
 
-export default TrashIcon
+export default memo(TrashIcon)

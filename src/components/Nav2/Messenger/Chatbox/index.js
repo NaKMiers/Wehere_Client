@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import apis from '../../../../apis'
 import ChatBody from '../ChatBody'
@@ -121,4 +121,4 @@ const mapState = state => ({
    curUser: state.user.curUser,
 })
 
-export default connect(mapState)(Chatbox)
+export default connect(mapState)(memo(Chatbox))

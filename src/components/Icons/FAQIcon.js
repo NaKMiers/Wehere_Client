@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function FAQIcon({ style, color }) {
    const styles = makeStyles(theme => ({
@@ -15,4 +16,4 @@ function FAQIcon({ style, color }) {
    return <i className={clsx(styles.icon, 'fad fa-gavel')} style={style} />
 }
 
-export default FAQIcon
+export default memo(FAQIcon)

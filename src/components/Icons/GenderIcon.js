@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function GenderIcon({ style, color }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function GenderIcon({ style, color }) {
    return <i className={clsx(styles.icon, 'fad fa-venus-mars')} style={style} />
 }
 
-export default GenderIcon
+export default memo(GenderIcon)

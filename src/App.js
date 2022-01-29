@@ -11,24 +11,12 @@ import Backdrop from './commons/Backdrop'
 import theme from './commons/theme'
 import PlayingBar from './components/Nav2/Musics/PlayingBar'
 import routes from './routes'
-
-const shuffle = originalArray => {
-   let array = [...originalArray]
-   let currentIndex = array.length,
-      randomIndex
-
-   while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-      ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
-   }
-
-   return array
-}
+import { makeRandomList } from './commons/utils'
 
 function App({ curUser, actionCreators }) {
    console.log('app')
    // refresh login and
+
    useEffect(() => {
       const getUser = async () => {
          const userId = localStorage.getItem('user')
@@ -66,7 +54,7 @@ function App({ curUser, actionCreators }) {
          if (curUser?._id) {
             try {
                const res = await apis.getBlogsNewfeed()
-               const data = shuffle(res.data)
+               const data = makeRandomList(res.data)
                actionCreators.setBlogs(data)
             } catch (err) {
                console.log(err)
@@ -82,7 +70,7 @@ function App({ curUser, actionCreators }) {
          if (curUser?._id) {
             try {
                const res = await apis.getImagesNewfeed()
-               const data = shuffle(res.data)
+               const data = makeRandomList(res.data)
                actionCreators.setImages(data)
             } catch (err) {
                console.log(err)
@@ -98,7 +86,7 @@ function App({ curUser, actionCreators }) {
          if (curUser?._id) {
             try {
                const res = await apis.getVideosNewfeed()
-               const data = shuffle(res.data)
+               const data = makeRandomList(res.data)
                actionCreators.setVideos(data)
             } catch (err) {
                console.log(err)
@@ -114,7 +102,7 @@ function App({ curUser, actionCreators }) {
          if (curUser?._id) {
             try {
                const res = await apis.getShortsNewfeed()
-               const data = shuffle(res.data)
+               const data = makeRandomList(res.data)
                actionCreators.setShorts(data)
             } catch (err) {
                console.log(err)

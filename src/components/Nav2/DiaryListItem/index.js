@@ -1,5 +1,5 @@
 import { Box, IconButton, ListItem, Menu, MenuItem, Typography } from '@material-ui/core'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import MoreIcon from '../../../components/Icons/MoreIcon'
 import DeleteIcon from '../../Icons/DeleteIcon'
 import DiaryModal from '../DiaryModal'
@@ -80,4 +80,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(DiaryListItem)
+export default connect(null, mapDispatch)(memo(DiaryListItem))

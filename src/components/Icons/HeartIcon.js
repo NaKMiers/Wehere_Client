@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
-import React from 'react'
+import React, { memo } from 'react'
 
 function HeartIcon({ liked, green, style, secondary, noborder }) {
    const styles = makeStyles(theme => ({
@@ -22,4 +22,4 @@ function HeartIcon({ liked, green, style, secondary, noborder }) {
    return <i className={clsx(styles.icon, 'fad fa-heart-circle')} style={style} />
 }
 
-export default HeartIcon
+export default memo(HeartIcon)

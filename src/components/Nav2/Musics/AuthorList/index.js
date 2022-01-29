@@ -1,4 +1,5 @@
 import { CardMedia, List } from '@material-ui/core'
+import { memo } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import SongOfAuthor from '../SongOfAuthor'
 
@@ -17,4 +18,4 @@ function AuthorList() {
    )
 }
 
-export default AuthorList
+export default memo(AuthorList)

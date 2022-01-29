@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, List, Typography } from '@material-ui/core'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -48,8 +48,6 @@ function OnlineBar({ conversations, curUser }) {
          )
       })
 
-   console.log(friends)
-
    return (
       <List className={styles.onlineBar}>
          {friends &&
@@ -77,4 +75,4 @@ const mapDispath = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispath)(OnlineBar)
+export default connect(mapState, mapDispath)(memo(OnlineBar))

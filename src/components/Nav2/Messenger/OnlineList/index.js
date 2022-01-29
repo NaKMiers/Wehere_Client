@@ -2,7 +2,7 @@ import { List, Typography } from '@material-ui/core'
 import { ListSubheader } from '@mui/material'
 import { connect } from 'react-redux'
 import ConversationItem from '../ConversationItem'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import apis from '../../../../apis'
 import { useState } from 'react'
 import useStyles from './styles'
@@ -70,4 +70,4 @@ const mapState = state => ({
    conversations: state.conversation.conversationList,
 })
 
-export default connect(mapState)(OnlineList)
+export default connect(mapState)(memo(OnlineList))

@@ -1,4 +1,5 @@
 import { Avatar, Badge, Button } from '@material-ui/core'
+import { memo } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -31,4 +32,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mapState, mapDispatch)(OnlineBarItem)
+export default connect(mapState, mapDispatch)(memo(OnlineBarItem))

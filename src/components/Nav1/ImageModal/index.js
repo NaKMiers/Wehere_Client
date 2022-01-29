@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, CardMedia, Modal, Paper, Typography } from '@material-ui/core'
 import { TextareaAutosize } from '@mui/material'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
@@ -167,4 +167,4 @@ const mapDispatch = dispatch => ({
    actionCreators: bindActionCreators(actions, dispatch),
 })
 
-export default connect(null, mapDispatch)(ImageModal)
+export default connect(null, mapDispatch)(memo(ImageModal))

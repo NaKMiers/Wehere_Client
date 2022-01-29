@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core'
+import { memo } from 'react'
 
 function ExpandIcon({ rotate = false, style, color }) {
    const styles = makeStyles(theme => {
@@ -22,4 +23,4 @@ function ExpandIcon({ rotate = false, style, color }) {
    return <i className={clsx(styles.icon, 'fad fa-chevron-up')} style={style} />
 }
 
-export default ExpandIcon
+export default memo(ExpandIcon)

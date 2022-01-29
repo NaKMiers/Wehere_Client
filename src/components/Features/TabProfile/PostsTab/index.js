@@ -1,11 +1,12 @@
 import { Box } from '@material-ui/core'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import Blog from '../../../Nav1/Blog'
 import Image from '../../../Nav1/Image'
 import Video from '../../../Nav1/Video'
 import Short from '../../../Nav1/Short'
 import useStyles from './styles'
 import apis from '../../../../apis'
+import { useMemo } from 'react'
 
 function PostsTab({ userProfile }) {
    const [posts, setPosts] = useState([])
@@ -26,25 +27,28 @@ function PostsTab({ userProfile }) {
       getPosts()
    }, [userProfile])
 
-   const renderPosts = () =>
-      posts.map(post => {
-         switch (post.type) {
-            case 'blog':
-               return <Blog key={post._id} blogPost={post} author={userProfile} />
+   const renderPosts = useMemo(
+      () =>
+         posts.map(post => {
+            switch (post.type) {
+               case 'blog':
+                  return <Blog key={post._id} blogPost={post} author={userProfile} />
 
-            case 'image':
-               return <Image key={post._id} imagePost={post} author={userProfile} />
+               case 'image':
+                  return <Image key={post._id} imagePost={post} author={userProfile} />
 
-            case 'video':
-               return <Video key={post._id} videoPost={post} author={userProfile} />
+               case 'video':
+                  return <Video key={post._id} videoPost={post} author={userProfile} />
 
-            case 'short':
-               return <Short key={post._id} shortPost={post} author={userProfile} />
+               case 'short':
+                  return <Short key={post._id} shortPost={post} author={userProfile} />
 
-            default:
-               return null
-         }
-      })
+               default:
+                  return null
+            }
+         }),
+      [posts, userProfile]
+   )
 
    return (
       <Box className={styles.tab} style={{ padding: '24px 8px' }}>
@@ -53,4 +57,4 @@ function PostsTab({ userProfile }) {
    )
 }
 
-export default PostsTab
+export default memo(PostsTab)

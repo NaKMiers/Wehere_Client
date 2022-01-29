@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
+import { memo } from 'react'
 
 function HideUserIcon({ style }) {
    const styles = makeStyles(theme => ({
@@ -13,4 +14,4 @@ function HideUserIcon({ style }) {
    return <i className={clsx(styles.icon, 'fad fa-user-slash')} style={style} />
 }
 
-export default HideUserIcon
+export default memo(HideUserIcon)
