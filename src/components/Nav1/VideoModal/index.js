@@ -27,16 +27,16 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
          }
 
          const video = e.target.files[0]
-         if (video.type.startsWith('video')) {
-            // smaller then 100MB
-            if (video.size <= 104857600) {
-               reader.readAsDataURL(video)
-               setVideo(video)
-            } else {
-               alert('This video size must be less than 100Mb')
-            }
-         } else {
+
+         if (!video.type.startsWith('video')) {
             alert('This is not a video, please choose a video to continue.')
+         } else if (video.size > 104857600) {
+            alert('This video size must be less than or equal to 100Mb')
+         } else if (!/^[a-zA-Z0-9 +(),-.]+$/.test(video.name)) {
+            alert('Short name is invalid. Plase rename and try again.')
+         } else {
+            reader.readAsDataURL(video)
+            setVideo(video)
          }
       }
       input.click()

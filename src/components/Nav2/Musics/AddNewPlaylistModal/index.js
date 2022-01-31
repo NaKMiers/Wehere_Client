@@ -16,10 +16,15 @@ function AddNewPlaylistModal({ open, handleCloseModal, songList, actionCreators 
 
    const handleAddNewPlaylist = async () => {
       try {
-         const res = await apis.addPlaylist({ playlistName, songs: selectSongs })
-         actionCreators.addNewPlaylist(res.data)
-         handleCloseModal()
-         handleClear()
+         console.log('asdasdasd')
+         if (selectSongs.length) {
+            const res = await apis.addPlaylist({ playlistName, songs: selectSongs })
+            actionCreators.addNewPlaylist(res.data)
+            handleCloseModal()
+            handleClear()
+         } else {
+            alert('Please select songs to create new playlist.')
+         }
       } catch (err) {
          console.log(err)
       }
@@ -69,7 +74,7 @@ function AddNewPlaylistModal({ open, handleCloseModal, songList, actionCreators 
                   onChange={e => setPlaylistName(e.target.value)}
                />
 
-               <form className={styles.searchForm} onSubmit={e => e.preventDefault()}>
+               <form className={styles.searchForm}>
                   <input
                      placeholder='What you need to search ?'
                      className={styles.searchSongInput}

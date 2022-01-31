@@ -59,12 +59,12 @@ function SongInPlaylist({ myPlaylistList, mySongList, actionCreators }) {
                const res = await apis.getPlaylist(playlistId)
                setPlaylist(res.data)
             } catch (err) {
-               console.log(err)
+               history.push('/musics/playlists')
             }
          }
       }
       getPlaylist()
-   }, [playlistId])
+   }, [playlistId, history])
 
    useEffect(() => {
       const getSongListInPlaylist = async () => {
@@ -81,7 +81,6 @@ function SongInPlaylist({ myPlaylistList, mySongList, actionCreators }) {
    }, [playlist.songs])
 
    const handleDeletePlaylist = async () => {
-      console.log('handleDeletePlaylist')
       try {
          const res = await apis.deletePlaylist(playlist._id)
          history.push('/musics/playlists')

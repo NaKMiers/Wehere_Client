@@ -17,15 +17,17 @@ function todoListReducer(state = initState, action) {
    let index = -1
 
    switch (action.type) {
-      case types.GET_ALL_TASK:
+      case types.SET_TODOLIST:
          return [...payload]
 
       case types.ADD_NEW_TASK:
          return [...state, payload]
 
-      case types.DELETE_TASK:
-         const newTodoList = state.filter(task => task._id !== action.taskId)
-         return newTodoList
+      case types.SET_READY_TASK:
+         return [...payload]
+
+      case types.SET_COMPLETED_TASK:
+         return [...payload]
 
       case types.EDIT_TASK:
          index = findIndex(state, payload._id)
@@ -33,6 +35,9 @@ function todoListReducer(state = initState, action) {
             state[index] = payload
          }
          return [...state]
+
+      case types.DELETE_TASK:
+         return state.filter(task => task._id !== action.taskId)
 
       default:
          return state

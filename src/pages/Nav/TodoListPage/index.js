@@ -12,7 +12,6 @@ import {
    ListItemText,
    Paper,
    TextField,
-   Typography,
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
@@ -21,6 +20,7 @@ import { memo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
+import apis from '../../../apis'
 import Header from '../../../components/Header'
 import useStyles from './styles'
 
@@ -34,8 +34,8 @@ const intersection = (a, b) => {
 
 function TodoListPage({ curUser, todoList, actionCreators }) {
    const [checked, setChecked] = useState([])
-   const [left, setLeft] = useState(() => todoList.filter(task => task.status === 'ready'))
-   const [right, setRight] = useState(() => todoList.filter(task => task.status === 'completed'))
+   const [left, setLeft] = useState(todoList.filter(t => t.status === 'ready'))
+   const [right, setRight] = useState(todoList.filter(t => t.status === 'completed'))
    const [isFocusInput1, setFocusInput1] = useState(false)
    const [isFocusInput2, setFocusInput2] = useState(false)
 
@@ -48,17 +48,6 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    const [taskEditing, setTaskEditing] = useState(null)
 
    const styles = useStyles()
-
-   useEffect(() => {
-      if (!todoList.length && curUser) {
-         actionCreators.getAllTaskRequest()
-      }
-   }, [curUser, actionCreators, todoList.length])
-
-   useEffect(() => {
-      setLeft(() => todoList.filter(task => task.status === 'ready'))
-      setRight(() => todoList.filter(task => task.status === 'completed'))
-   }, [todoList])
 
    const handleToggle = value => {
       const currentIndex = checked.indexOf(value)
@@ -73,65 +62,118 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
       setChecked(newChecked)
    }
 
-   const handleAllRight = () => {
-      actionCreators.editTaskRequest(left.map(task => ({ ...task, status: 'completed' })))
+   useEffect(() => {
+      setLeft(todoList.filter(t => t.status === 'ready'))
+      setRight(todoList.filter(t => t.status === 'completed'))
+   }, [todoList])
 
-      setRight(right.concat(left))
-      setLeft([])
+   const handleAllCompleted = async () => {
+      try {
+         const data = right.concat(left.map(task => ({ ...task, status: 'completed' })))
+         await apis.editTask(data)
+         actionCreators.setCompletedTask(data)
+      } catch (err) {
+         console.log(err)
+      }
    }
 
-   const handleCheckedRight = () => {
-      actionCreators.editTaskRequest(leftChecked.map(task => ({ ...task, status: 'completed' })))
-
-      setRight(right.concat(leftChecked))
-      setLeft(not(left, leftChecked))
-      setChecked(not(checked, leftChecked))
+   const handleCompleted = async () => {
+      try {
+         const data = right.concat(
+            leftChecked.map(task => ({ ...task, status: 'completed' })),
+            not(left, leftChecked)
+         )
+         await apis.editTask(data)
+         actionCreators.setCompletedTask(
+            right.concat(
+               leftChecked.map(task => ({ ...task, status: 'completed' })),
+               not(left, leftChecked)
+            )
+         )
+         setChecked(not(checked, leftChecked))
+      } catch (err) {
+         console.log(err)
+      }
    }
 
-   const handleCheckedLeft = () => {
-      actionCreators.editTaskRequest(rightChecked.map(task => ({ ...task, status: 'ready' })))
-
-      setLeft(left.concat(rightChecked))
-      setRight(not(right, rightChecked))
-      setChecked(not(checked, rightChecked))
+   const handleReady = async () => {
+      try {
+         const data = left.concat(
+            rightChecked.map(task => ({ ...task, status: 'ready' })),
+            not(right, rightChecked)
+         )
+         await apis.editTask(data)
+         actionCreators.setReadyTask(
+            left.concat(
+               rightChecked.map(task => ({ ...task, status: 'ready' })),
+               not(right, rightChecked)
+            )
+         )
+         setChecked(not(checked, rightChecked))
+      } catch (err) {
+         console.log(err)
+      }
    }
 
-   const handleAllLeft = () => {
-      actionCreators.editTaskRequest(right.map(task => ({ ...task, status: 'ready' })))
-
-      setLeft(left.concat(right))
-      setRight([])
+   const handleAllReady = async () => {
+      try {
+         const data = left.concat(right.map(task => ({ ...task, status: 'ready' })))
+         await apis.editTask(data)
+         actionCreators.setReadyTask(data)
+      } catch (err) {
+         console.log(err)
+      }
    }
 
-   const handleAddTask = e => {
+   const handleAddTask = async e => {
       e.preventDefault()
       if (addNewTaskValue.trim() !== '') {
-         actionCreators.addNewTaskRequest({
-            userId: curUser._id,
-            title: addNewTaskValue.trim(),
-            point: +newTaskPoint,
-         })
+         try {
+            const res = await apis.addNewTask({
+               userId: curUser._id,
+               title: addNewTaskValue.trim(),
+               point: +newTaskPoint,
+            })
+            actionCreators.addNewTask(res.data)
+         } catch (err) {
+            console.log(err)
+         }
          setAddNewTaskValue('')
          setNewTaskPoint(1)
       }
    }
 
-   const handleDeleteTask = taskId => {
-      actionCreators.deleteTaskRequest(taskId)
+   const handleDeleteTask = async taskId => {
+      try {
+         const res = await apis.deleteTask(taskId)
+         actionCreators.deleteTask(res.data._id)
+      } catch (err) {
+         console.log(err)
+      }
    }
 
-   const handleMarkImportant = (task, e, isImportant) => {
-      actionCreators.editTaskRequest([
-         {
-            ...task,
-            important: !task.important,
-         },
-      ])
+   const handleMarkImportant = async (task, e, isImportant) => {
+      try {
+         const res = await apis.editTask([
+            {
+               ...task,
+               important: !task.important,
+            },
+         ])
+         actionCreators.editTask(res.data)
+      } catch (err) {
+         console.log(err)
+      }
    }
 
-   const handleEditSubmit = e => {
+   const handleEditSubmit = async e => {
       e.preventDefault()
-      actionCreators.editTaskRequest([taskEditing])
+      try {
+         const res = await apis.editTask([taskEditing])
+         actionCreators.editTask(res.data)
+      } catch (err) {
+         console.log(err)
+      }
       setTaskEditing(null)
    }
 
@@ -296,70 +338,65 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                </Button>
             </form>
 
-            {todoList.length ? (
-               <Grid container spacing={2} justifyContent='center' alignItems='center'>
-                  <Grid item xs={12}>
-                     {customList(left, 'Ready')}
-                  </Grid>
+            <Grid container spacing={2} justifyContent='center' alignItems='center'>
+               <Grid item xs={12}>
+                  {customList(left, 'Ready')}
+               </Grid>
 
-                  <Grid item xs={12}>
-                     <Grid container alignItems='center' className={styles.actionBtnWrap}>
-                        <Button
-                           className={styles.todoActionBtnUp}
-                           variant='outlined'
-                           size='small'
-                           onClick={handleAllLeft}
-                           disabled={right.length === 0}
-                           aria-label='move all right'
-                        >
-                           <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-up')} />
-                        </Button>
-                        <Button
-                           className={styles.todoActionBtnUp}
-                           variant='outlined'
-                           size='small'
-                           onClick={handleCheckedLeft}
-                           disabled={rightChecked.length === 0}
-                           aria-label='move selected right'
-                        >
-                           <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-up')} />
-                        </Button>
-                        <Button
-                           className={styles.todoActionBtnDown}
-                           variant='outlined'
-                           size='small'
-                           onClick={handleCheckedRight}
-                           disabled={leftChecked.length === 0}
-                           aria-label='move selected left'
-                        >
-                           <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-down')} />
-                        </Button>
-                        <Button
-                           className={styles.todoActionBtnDown}
-                           variant='outlined'
-                           size='small'
-                           onClick={handleAllRight}
-                           disabled={left.length === 0}
-                           aria-label='move all left'
-                        >
-                           <i
-                              className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-down')}
-                           />
-                        </Button>
-                     </Grid>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                     {customList(right, 'Completed')}
+               <Grid item xs={12}>
+                  <Grid container alignItems='center' className={styles.actionBtnWrap}>
+                     <Button
+                        className={styles.todoActionBtnUp}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleAllReady}
+                        disabled={right.length === 0}
+                        aria-label='move all right'
+                     >
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-up')} />
+                     </Button>
+                     <Button
+                        className={styles.todoActionBtnUp}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleReady}
+                        disabled={rightChecked.length === 0}
+                        aria-label='move selected right'
+                     >
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-up')} />
+                     </Button>
+                     <Button
+                        className={styles.todoActionBtnDown}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleCompleted}
+                        disabled={leftChecked.length === 0}
+                        aria-label='move selected left'
+                     >
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-arrow-down')} />
+                     </Button>
+                     <Button
+                        className={styles.todoActionBtnDown}
+                        variant='outlined'
+                        size='small'
+                        onClick={handleAllCompleted}
+                        disabled={left.length === 0}
+                        aria-label='move all left'
+                     >
+                        <i className={clsx(styles.todoActionIcon, 'fad fa-chevron-double-down')} />
+                     </Button>
                   </Grid>
                </Grid>
-            ) : (
-               <Box className={styles.noTaskWrap}>
+
+               <Grid item xs={12}>
+                  {customList(right, 'Completed')}
+               </Grid>
+            </Grid>
+            {/* <Box lassName={styles.noTaskWrap}>
                   <Typography className={styles.noTask}>
                      No task yet, please add new task now.
                   </Typography>
-               </Box>
-            )}
+               </Box> */}
          </Box>
       </>
    )

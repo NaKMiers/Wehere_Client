@@ -37,6 +37,7 @@ function userReducer(state = initState, action) {
       case types.LOG_OUT:
          Cookies.remove('theme')
          localStorage.removeItem('user')
+         localStorage.removeItem('recentlyList')
          return { ...state, userProfile: null, curUser: null }
 
       default:

@@ -69,7 +69,6 @@ function musicReducer(state = initState, action) {
          return { ...state, recentlyList: newRecentlyList }
 
       case types.SET_PLAYING_PLAYLIST:
-         console.log('wassadasdsad: ', payload)
          return { ...state, playlistPlaying: payload }
 
       case types.SET_RANDOM_SONG_LIST:

@@ -14,7 +14,6 @@ import routes from './routes'
 import { makeRandomList } from './commons/utils'
 
 function App({ curUser, actionCreators }) {
-   console.log('app')
    // refresh login and
 
    useEffect(() => {
@@ -141,6 +140,19 @@ function App({ curUser, actionCreators }) {
       }
       getMyPlaylistList()
    }, [curUser?._id, actionCreators])
+
+   // get todolist
+   useEffect(() => {
+      const getAllTask = async () => {
+         try {
+            const res = await apis.getAllTask()
+            actionCreators.setTodoList(res.data)
+         } catch (err) {
+            console.log(err)
+         }
+      }
+      getAllTask()
+   }, [curUser, actionCreators])
 
    return (
       <Router>

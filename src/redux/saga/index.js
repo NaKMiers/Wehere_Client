@@ -38,48 +38,11 @@ function* changeTheme({ payload }) {
    yield put(actions.hideBackdrop())
 }
 
-function* getAllTaskRequest() {
-   const taskListRes = yield call(apis.getAllTaskRequest)
-   yield delay(350)
-   if (taskListRes.status === 200) {
-      yield put(actions.getAllTask(taskListRes.data))
-   }
-}
-
-function* addNewTaskRequest({ payload }) {
-   const newTaskRes = yield call(apis.addNewTask, payload)
-   if (newTaskRes.status === 200) {
-      if (newTaskRes.status === 200) {
-         yield put(actions.addNewTask(newTaskRes.data))
-      }
-   }
-}
-
-function* deleteTask({ taskId }) {
-   const taskDeleted = yield call(apis.deleteTask, taskId)
-   if (taskDeleted.status === 200) {
-      yield put(actions.deleteTask(taskDeleted.data._id))
-   }
-}
-
-function* editTask({ payload }) {
-   const res = yield call(apis.editTask, payload)
-   if (res.status === 200) {
-      if (res.data.length === 1) {
-         yield put(actions.editTask(res.data[0]))
-      }
-   }
-}
-
 function* rootSaga() {
    yield takeLatest(types.CREATE_NEW_USER, createUserAndLogin)
    yield takeLatest(types.LOGIN_REQUEST, login)
    yield takeLatest(types.GET_USER_REQUEST, getUser)
    yield takeLatest(types.CHANGE_THEME_REQUEST, changeTheme)
-   yield takeLatest(types.GET_ALL_TASK_REQUEST, getAllTaskRequest)
-   yield takeLatest(types.ADD_NEW_TASK_REQUEST, addNewTaskRequest)
-   yield takeLatest(types.DELETE_TASK_REQUEST, deleteTask)
-   yield takeLatest(types.EDIT_TASK_REQUEST, editTask)
 }
 
 export default rootSaga

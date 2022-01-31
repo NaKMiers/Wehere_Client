@@ -92,7 +92,6 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    }
 
    const handleUpdateAvtAndBg = type => {
-      console.log('handleImportData')
       const input = document.createElement('input')
       input.type = 'file'
       input.onchange = e => {

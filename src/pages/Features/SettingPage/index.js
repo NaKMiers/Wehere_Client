@@ -83,7 +83,9 @@ function SettingPage({ curUser, actionCreators }) {
          try {
             let res = await apis.changePassword(currentPWValue.trim(), newPWValue.trim())
             if (res.data.isChangePasswordSuccess) {
+               alert('Your password has been changed.')
                setOpenChangePW(false)
+               handleClear()
             } else {
                setErrorCurPW('Wrong password, please enter again.')
             }
@@ -91,6 +93,15 @@ function SettingPage({ curUser, actionCreators }) {
             console.log(err)
          }
       }
+   }
+
+   const handleClear = () => {
+      setCurrentPWValue('')
+      setNewPWValue('')
+      setRetypePWValue('')
+      setErrorCurPW('')
+      setErrorNewPw('')
+      setErrorRetypePW('')
    }
 
    return (
@@ -152,6 +163,7 @@ function SettingPage({ curUser, actionCreators }) {
                   >
                      <form onSubmit={handleChangePassword}>
                         <TextField
+                           type='password'
                            style={{ width: '100%' }}
                            name='currentPassword'
                            className={styles.textField}

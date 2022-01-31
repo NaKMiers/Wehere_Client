@@ -12,7 +12,6 @@ function AddSongToPlayListModal({ open, handleCloseModal, playlistList, song }) 
    const styles = useStyles()
 
    const handleAddSongToPlaylist = async playlist => {
-      console.log('song: ', song)
       if (!playlist.songs.includes(song._id)) {
          try {
             await apis.addSongToPlaylist(playlist._id, song._id)

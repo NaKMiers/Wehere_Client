@@ -18,10 +18,10 @@ class Apis {
    updateBackground = data => axios.put(`${API}/users/update-background`, data)
 
    // todolist
-   getAllTaskRequest = () => axios.post(`${API}/todo-list`)
+   getAllTask = () => axios.post(`${API}/todo-list`)
    addNewTask = data => axios.post(`${API}/todo-list/add-task`, data)
+   editTask = data => axios.put(`${API}/todo-list/edit-task`, data)
    deleteTask = taskId => axios.delete(`${API}/todo-list/delete-task/${taskId}`)
-   editTask = data => axios.put(`${API}/todo-list/edit-task`, { data })
 
    // add friend and unfriend
    addFriendRequest = userId => axios.put(`${API}/users/add-friend/request/${userId}`)

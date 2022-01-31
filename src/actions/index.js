@@ -18,17 +18,12 @@ class Actions {
    changeAvatar = payload => ({ type: types.CHANGE_AVATAR, payload })
    changeBackground = payload => ({ type: types.CHANGE_BACKGROUND, payload })
 
-   getAllTaskRequest = () => ({ type: types.GET_ALL_TASK_REQUEST })
-   getAllTask = payload => ({ type: types.GET_ALL_TASK, payload })
-   addNewTaskRequest = payload => ({
-      type: types.ADD_NEW_TASK_REQUEST,
-      payload,
-   })
+   setTodoList = payload => ({ type: types.SET_TODOLIST, payload })
    addNewTask = payload => ({ type: types.ADD_NEW_TASK, payload })
-   deleteTaskRequest = taskId => ({ type: types.DELETE_TASK_REQUEST, taskId })
    deleteTask = taskId => ({ type: types.DELETE_TASK, taskId })
-   editTaskRequest = payload => ({ type: types.EDIT_TASK_REQUEST, payload })
    editTask = payload => ({ type: types.EDIT_TASK, payload })
+   setReadyTask = payload => ({ type: types.SET_READY_TASK, payload })
+   setCompletedTask = payload => ({ type: types.SET_COMPLETED_TASK, payload })
 
    setConversations = payload => ({ type: types.SET_CONVERSATIONS, payload })
    setCurConversation = payload => ({ type: types.SET_CUR_CONVERSATION, payload })

@@ -22,7 +22,6 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
       const input = document.createElement('input')
       input.type = 'file'
       input.onchange = e => {
-         const files = e.target.files
          const reader = new FileReader()
          reader.onload = () => {
             if (index >= 0) {
@@ -35,20 +34,24 @@ function ImageModal({ curUser, open, handleCloseModal, actionCreators }) {
                setImageList(
                   imageListPreview.map((image, i) => {
                      if (i !== index) return image
-                     return files[0]
+                     return image
                   })
                )
             } else {
                setImageListPreview([...imageListPreview, reader.result])
-               setImageList([...imageList, files[0]])
+               setImageList([...imageList, image])
             }
          }
-         if (!files[0].type.startsWith('image')) {
+
+         const image = e.target.files[0]
+         if (!image.type.startsWith('image')) {
             alert('This is must be an image.')
-         } else if (files[0].type.size > 15728640) {
+         } else if (image.type.size > 15728640) {
             alert('Image size must be less than or equal to 15MB.')
+         } else if (!/^[a-zA-Z0-9 +(),-.]+$/.test(image.name)) {
+            alert('Image name is invalid. Plase rename and try again.')
          } else {
-            reader.readAsDataURL(files[0])
+            reader.readAsDataURL(image)
          }
       }
       input.click()

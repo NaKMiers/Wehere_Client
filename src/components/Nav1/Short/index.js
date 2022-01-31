@@ -57,7 +57,6 @@ function Short({ shortPost, author, curUser, actionCreators }) {
    const handleDeleteShort = async () => {
       try {
          const res = await apis.deleteShortStatus(shortPost._id)
-         console.log('res-deleteShort: ', res.data)
          actionCreators.deleteShort(res.data._id)
       } catch (err) {
          console.log(err)

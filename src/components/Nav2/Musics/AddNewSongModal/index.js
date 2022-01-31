@@ -33,7 +33,6 @@ function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
          const file = e.target.files[0]
          const reader = new FileReader()
          reader.onload = () => {
-            // console.log('reader.result: ', reader.result)
             setSongPreview(reader.result)
          }
 

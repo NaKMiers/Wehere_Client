@@ -35,7 +35,7 @@ function FriendsTab({ userProfile, curUser }) {
 
    return (
       <Box className={styles.tab}>
-         <List>{renderFriends()}</List>
+         <List>{renderFriends}</List>
       </Box>
    )
 }

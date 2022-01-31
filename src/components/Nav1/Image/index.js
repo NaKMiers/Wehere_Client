@@ -78,7 +78,6 @@ function Image({ imagePost, author, curUser, actionCreators }) {
    const handleDeleteImage = async () => {
       try {
          const res = await apis.deleteImageStatus(imagePost._id)
-         console.log('res-deleteImage: ', res.data)
          actionCreators.deleteImage(res.data._id)
       } catch (err) {
          console.log(err)

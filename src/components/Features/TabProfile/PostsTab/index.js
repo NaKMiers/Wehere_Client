@@ -52,7 +52,7 @@ function PostsTab({ userProfile }) {
 
    return (
       <Box className={styles.tab} style={{ padding: '24px 8px' }}>
-         {renderPosts()}
+         {renderPosts}
       </Box>
    )
 }
