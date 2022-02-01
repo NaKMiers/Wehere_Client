@@ -14,11 +14,15 @@ export default makeStyles(theme => ({
       },
    },
    header: {
+      position: 'fixed',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
       background: theme.palette.primary.gradient,
       padding: '0px 24px',
+   },
+   hideHeader: {
+      display: 'none',
    },
 
    navigation: {
@@ -61,8 +65,7 @@ export default makeStyles(theme => ({
    },
    username: {
       color: theme.palette.primary.text,
-      marginLeft: '2%',
-      marginRight: '1%',
+      marginLeft: 8,
    },
 
    wehereLogo: {
@@ -106,7 +109,6 @@ export default makeStyles(theme => ({
 
    selectedHome: {
       transform: 'scale(1.25)',
-      marginTop: -2,
    },
 
    selected: {

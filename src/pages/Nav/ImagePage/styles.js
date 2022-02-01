@@ -2,13 +2,15 @@ import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
    imagePage: {
-      padding: '60px 24px 24px 24px',
-      marginTop: 24,
       position: 'relative',
+      padding: '140px 24px 24px 24px',
+      '@media (max-width: 780px)': {
+         paddingTop: 'calc(100px + 84px)',
+      },
    },
    addNewImageBtn: {
       position: 'absolute',
-      top: 0,
+      top: 'calc(56px + 24px)',
       height: 36,
       left: '50%',
       width: 'calc(100% - 24px *2)',
@@ -16,5 +18,8 @@ export default makeStyles(theme => ({
       transform: 'translateX(-50%)',
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
+      '@media (max-width: 780px)': {
+         top: 'calc(100px + 24px)',
+      },
    },
 }))

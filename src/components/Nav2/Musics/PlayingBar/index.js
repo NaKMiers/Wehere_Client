@@ -1,15 +1,15 @@
-import { Avatar, Box, IconButton, LinearProgress, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, IconButton, LinearProgress, Typography } from '@material-ui/core'
 import clsx from 'clsx'
-import { useEffect, useRef, useState, useCallback, memo } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../../actions'
 import apis from '../../../../apis'
+import { makeRandomList } from '../../../../commons/utils'
 import HeartIcon from '../../../../components/Icons/HeartIcon'
 import { API } from '../../../../constants'
 import useStyles from './styles'
-import { makeRandomList } from '../../../../commons/utils'
 
 function PlayingBar({
    curUser,
@@ -29,9 +29,9 @@ function PlayingBar({
    const isShowPlayingBar = [
       '/login',
       '/register',
-      'restore-password',
+      '/restore-password',
       '/messenger',
-      '/menu/in4',
+      '/menu/info',
    ].some(url => currentUrl.startsWith(url))
 
    const [repeat, setRepeat] = useState(false)
@@ -214,7 +214,7 @@ function PlayingBar({
                            className={clsx(styles.playBtn, {
                               [styles.pause]: !songPlaying?.song || !playing,
                            })}
-                           alt='Remy Sharp'
+                           alt='thumb'
                            src={
                               songPlaying?.song
                                  ? `${API}/${songPlaying?.thumb}`
@@ -222,6 +222,14 @@ function PlayingBar({
                            }
                         />
                      </IconButton>
+                     <Button
+                        onClick={handlePlayPause}
+                        className={clsx(styles.startPlayingBtn, {
+                           [styles.startPlayingBtnDisabled]: songPlaying?.song,
+                        })}
+                     >
+                        Play
+                     </Button>
                      <IconButton className={styles.audioBtnNext} onClick={handleNextSong}>
                         <i className={clsx(styles.audioIcon, 'fad fa-step-forward')} />
                      </IconButton>

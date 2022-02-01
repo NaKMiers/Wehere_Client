@@ -12,6 +12,7 @@ import {
    ListItemText,
    Paper,
    TextField,
+   Typography,
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
@@ -21,7 +22,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
-import Header from '../../../components/Header'
 import useStyles from './styles'
 
 const not = (a, b) => {
@@ -259,86 +259,89 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
    )
 
    return (
-      <>
-         <Header />
-         <Box className={styles.todoListPage}>
-            <form onSubmit={handleAddTask}>
-               <Grid className={styles.addTaskWrap}>
-                  <TextField
-                     onFocus={() => {
-                        setFocusInput1(true)
-                     }}
-                     onBlur={() => {
-                        setFocusInput1(false)
-                     }}
-                     InputProps={{
-                        classes: { input: styles.inputTextField },
-                     }}
-                     InputLabelProps={{
-                        style: {
-                           fontSize: 18,
-                           transform:
-                              isFocusInput1 || addNewTaskValue
-                                 ? 'translate(14px, -6px) scale(0.75)'
-                                 : 'translate(16px, 15px) scale(1)',
-                        },
-                     }}
-                     className={styles.taskTextField}
-                     label='Add new task...'
-                     variant='outlined'
-                     onChange={e => setAddNewTaskValue(e.target.value)}
-                     value={addNewTaskValue}
-                  />
-                  <TextField
-                     type='number'
-                     onFocus={() => {
-                        setFocusInput2(true)
-                     }}
-                     onBlur={() => {
-                        setFocusInput2(false)
-                     }}
-                     InputProps={{
-                        classes: { input: styles.inputTextField },
-                     }}
-                     InputLabelProps={{
-                        style: {
-                           fontSize: 18,
-                           transform:
-                              isFocusInput2 || newTaskPoint
-                                 ? 'translate(14px, -6px) scale(0.75)'
-                                 : 'translate(16px, 15px) scale(1)',
-                        },
-                     }}
-                     className={styles.pointTextField}
-                     label='Point'
-                     variant='outlined'
-                     onChange={e =>
-                        setNewTaskPoint(
-                           e.target.value > 0 && e.target.value < 100 && e.target.value
-                        )
-                     }
-                     value={newTaskPoint}
-                  />
-                  <Button
-                     type='submit'
-                     className={styles.addTaskBtn1}
-                     color='primary'
-                     variant='contained'
-                  >
-                     Add
-                  </Button>
-               </Grid>
+      <Box className={styles.todoListPage}>
+         <form onSubmit={handleAddTask}>
+            <Grid className={styles.addTaskWrap}>
+               <TextField
+                  onFocus={() => {
+                     setFocusInput1(true)
+                  }}
+                  onBlur={() => {
+                     setFocusInput1(false)
+                  }}
+                  InputProps={{
+                     classes: { input: styles.inputTextField },
+                  }}
+                  InputLabelProps={{
+                     style: {
+                        fontSize: 18,
+                        transform:
+                           isFocusInput1 || addNewTaskValue
+                              ? 'translate(14px, -6px) scale(0.75)'
+                              : 'translate(16px, 15px) scale(1)',
+                     },
+                  }}
+                  className={styles.taskTextField}
+                  label='Add new task...'
+                  variant='outlined'
+                  onChange={e => setAddNewTaskValue(e.target.value)}
+                  value={addNewTaskValue}
+               />
+               <TextField
+                  type='number'
+                  onFocus={() => {
+                     setFocusInput2(true)
+                  }}
+                  onBlur={() => {
+                     setFocusInput2(false)
+                  }}
+                  InputProps={{
+                     classes: { input: styles.inputTextField },
+                  }}
+                  InputLabelProps={{
+                     style: {
+                        fontSize: 18,
+                        transform:
+                           isFocusInput2 || newTaskPoint
+                              ? 'translate(14px, -6px) scale(0.75)'
+                              : 'translate(16px, 15px) scale(1)',
+                     },
+                  }}
+                  className={styles.pointTextField}
+                  label='Point'
+                  variant='outlined'
+                  onChange={e =>
+                     setNewTaskPoint(e.target.value > 0 && e.target.value < 100 && e.target.value)
+                  }
+                  value={newTaskPoint}
+               />
                <Button
                   type='submit'
-                  className={styles.addTaskBtn2}
+                  className={styles.addTaskBtn1}
                   color='primary'
                   variant='contained'
                >
                   Add
                </Button>
-            </form>
+            </Grid>
+            <Button
+               type='submit'
+               className={styles.addTaskBtn2}
+               color='primary'
+               variant='contained'
+            >
+               Add
+            </Button>
+         </form>
 
-            <Grid container spacing={2} justifyContent='center' alignItems='center'>
+         {todoList ? (
+            <Grid
+               container
+               spacing={2}
+               justifyContent='center'
+               alignItems='center'
+               className={styles.body}
+            >
                <Grid item xs={12}>
                   {customList(left, 'Ready')}
                </Grid>
@@ -392,13 +395,14 @@ function TodoListPage({ curUser, todoList, actionCreators }) {
                   {customList(right, 'Completed')}
                </Grid>
             </Grid>
-            {/* <Box lassName={styles.noTaskWrap}>
-                  <Typography className={styles.noTask}>
-                     No task yet, please add new task now.
-                  </Typography>
-               </Box> */}
-         </Box>
-      </>
+         ) : (
+            <Box lassName={styles.noTaskWrap}>
+               <Typography className={styles.noTask}>
+                  No task yet, please add new task now.
+               </Typography>
+            </Box>
+         )}
+      </Box>
    )
 }
 

@@ -1,10 +1,13 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
-   aboutMePage: {
+   infoPage: {
       maxWidth: 960,
-      padding: 24,
       margin: 'auto',
+      padding: '56px 24px 24px 24px',
+      '@media (max-width: 780px)': {
+         paddingTop: 'calc(100px + 24px)',
+      },
    },
    heading: {
       color: theme.palette.secondary.text,
@@ -14,15 +17,27 @@ export default makeStyles(theme => ({
       justifyContent: 'space-between',
       alignItems: 'center',
       marginTop: 24,
+      '@media (max-width: 780px)': {
+         flexDirection: 'column',
+         marginTop: 0,
+         textAlign: 'center',
+      },
    },
 
    topLeft: {
       display: 'flex',
       alignItems: 'center',
+      '@media (max-width: 780px)': {
+         flexDirection: 'column',
+      },
    },
    avatar: {
       width: 75,
       height: 75,
+      '@media (max-width: 780px)': {
+         width: 88,
+         height: 88,
+      },
    },
    descWrap: {
       marginLeft: 16,
@@ -35,6 +50,9 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient,
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
+      '@media (max-width: 780px)': {
+         marginTop: 12,
+      },
    },
    timeAndAdr: {
       fontSize: 15,
@@ -48,6 +66,9 @@ export default makeStyles(theme => ({
    topRight: {
       display: 'flex',
       flexDirection: 'column',
+      '@media (max-width: 780px)': {
+         // display: 'none',
+      },
    },
    upWork: {
       fontSize: 15,
@@ -72,6 +93,9 @@ export default makeStyles(theme => ({
    first: {
       fontSize: 32,
       marginBottom: 8,
+      '@media (max-width: 780px)': {
+         fontSize: 28,
+      },
    },
    second: {
       fontSize: 16,
@@ -89,17 +113,23 @@ export default makeStyles(theme => ({
    contact: {
       display: 'flex',
       borderTop: `2px solid ${theme.border.dark}`,
-      padding: '16px 0px 80px 0px',
+      paddingTop: 16,
       marginTop: 24,
+      '@media (max-width: 780px)': {
+         flexDirection: 'column',
+      },
    },
    bottomLeft: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      width: '60%',
       alignItems: 'center',
+      width: '60%',
+      '@media (max-width: 780px)': {
+         width: '100%',
+         alignItems: 'flex-start',
+      },
    },
-
    contactBasic: {
       fontSize: 16,
    },
@@ -117,10 +147,13 @@ export default makeStyles(theme => ({
    },
 
    bottomRight: {
-      width: '40%',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      width: '40%',
+      '@media (max-width: 780px)': {
+         width: '100%',
+      },
    },
    socialImg: {
       width: 60,

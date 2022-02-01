@@ -43,5 +43,6 @@ export default makeStyles(theme => ({
    searchBtn: {
       background: theme.palette.primary.gradient,
       marginLeft: 16,
+      height: 36,
    },
 }))

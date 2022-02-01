@@ -5,7 +5,7 @@ import { memo } from 'react'
 function HomeIcon({ style, color, type }) {
    const styles = makeStyles(theme => ({
       icon: {
-         fontSize: 32,
+         fontSize: 31,
          cursor: 'pointer',
          color: color === 'secondary' ? theme.palette.secondary.main : theme.palette.primary.text,
       },

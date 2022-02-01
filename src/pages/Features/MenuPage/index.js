@@ -5,11 +5,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
-import Header from '../../../components/Header'
 import ChangeIcon from '../../../components/Icons/ChangeIcon'
-import In4Icon from '../../../components/Icons/In4Icon'
 import FriendIcon from '../../../components/Icons/FriendIcon'
 import HelpAndSupportIcon from '../../../components/Icons/HelpAndSupportIcon'
+import In4Icon from '../../../components/Icons/In4Icon'
 import LogOutIcon from '../../../components/Icons/LogOutIcon'
 import SettingsIcon from '../../../components/Icons/SettingIcon'
 import SyncIcon from '../../../components/Icons/SyncIcon'
@@ -23,7 +22,7 @@ function MenuPage({ curUser, actionCreators }) {
       { icon: () => <SettingsIcon mutiple />, label: 'Setting', link: '/menu/setting' },
       { icon: () => <SyncIcon />, label: 'Sync', link: '/menu/sync' },
       { icon: () => <ChangeIcon />, label: 'Switch Account', link: '/menu/switch-account' },
-      { icon: () => <In4Icon />, label: 'Info', link: '/menu/in4' },
+      { icon: () => <In4Icon />, label: 'Info', link: '/menu/info' },
       {
          icon: () => <HelpAndSupportIcon />,
          label: 'Help & Support',
@@ -49,23 +48,20 @@ function MenuPage({ curUser, actionCreators }) {
    }
 
    return (
-      <>
-         <Header />
-         <List style={{ maxWidth: 960, margin: '12px auto' }}>
-            {renderList()}
+      <List className={styles.menuPage}>
+         {renderList()}
 
-            <ListItemButton className={styles.listItem} onClick={handleLogOut}>
-               <Link to='/login' className={styles.link}>
-                  <ListItemAvatar className={styles.listItemAvt}>
-                     <Avatar className={styles.menuIcon}>
-                        <LogOutIcon />
-                     </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText classes={{ primary: styles.listItemText }} primary='Log Out' />
-               </Link>
-            </ListItemButton>
-         </List>
-      </>
+         <ListItemButton className={styles.listItem} onClick={handleLogOut}>
+            <Link to='/login' className={styles.link}>
+               <ListItemAvatar className={styles.listItemAvt}>
+                  <Avatar className={styles.menuIcon}>
+                     <LogOutIcon />
+                  </Avatar>
+               </ListItemAvatar>
+               <ListItemText classes={{ primary: styles.listItemText }} primary='Log Out' />
+            </Link>
+         </ListItemButton>
+      </List>
    )
 }
 

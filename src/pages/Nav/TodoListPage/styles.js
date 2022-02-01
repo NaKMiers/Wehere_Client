@@ -3,8 +3,11 @@ import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
    todoListPage: {
       maxWidth: 960,
-      padding: '24px 24px 78px 24px',
       margin: 'auto',
+      padding: '80px 24px 78px 24px',
+      '@media (max-width: 780px)': {
+         paddingTop: 'calc(100px + 24px)',
+      },
    },
    addTaskWrap: {
       display: 'flex',
@@ -39,10 +42,15 @@ export default makeStyles(theme => ({
       height: 36,
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
+      marginTop: 8,
       marginBottom: 16,
       '@media (min-width: 781px)': {
          display: 'none',
       },
+   },
+
+   body: {
+      marginTop: 0,
    },
 
    taskListItem: {

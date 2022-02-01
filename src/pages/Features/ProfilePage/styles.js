@@ -1,6 +1,12 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
+   profilePage: {
+      padding: '56px 24px 24px 24px',
+      '@media (max-width: 780px)': {
+         paddingTop: 'calc(100px + 0px)',
+      },
+   },
    topProfile: {
       margin: 'auto',
       position: 'relative',

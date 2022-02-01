@@ -1,19 +1,17 @@
-import { memo, useEffect } from 'react'
+import { Box, Typography } from '@material-ui/core'
+import { memo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import { Typography, Box } from '@material-ui/core'
 import actions from '../../../actions'
 import apis from '../../../apis'
-import Header from '../../../components/Header'
 import Chatbox from '../../../components/Nav2/Messenger/Chatbox'
 import ConversationList from '../../../components/Nav2/Messenger/ConversationList'
 import OnlineBar from '../../../components/Nav2/Messenger/OnlineBar'
 import OnlineList from '../../../components/Nav2/Messenger/OnlineList'
 import useStyles from './styles'
-import { useState } from 'react'
 
-function MessengerPage({ conversations, curUser, actionCreators }) {
+function MessengerPage({ conversations }) {
    const [isHasCvs, setIsHasCvs] = useState(false)
 
    // change online status
@@ -33,34 +31,22 @@ function MessengerPage({ conversations, curUser, actionCreators }) {
    }, [])
 
    useEffect(() => {
-      if (curUser?._id) {
-         const getConversations = async () => {
-            try {
-               const res = await apis.getConversation(curUser._id)
-               setIsHasCvs(true)
-               actionCreators.setConversations(res.data)
-            } catch (err) {
-               console.log(err)
-            }
-         }
-         getConversations()
-      }
-   }, [curUser?._id, actionCreators])
+      setIsHasCvs(!!conversations.length)
+   }, [conversations])
 
    const styles = useStyles()
 
    return (
-      <>
-         <Header />
+      <Box className={styles.MessengerPage}>
          <Switch>
             <Route path='/messenger' exact={true}>
-               <Box style={{ maxWidth: 960, margin: 'auto' }}>
+               <Box>
                   {isHasCvs ? (
                      conversations.length ? (
-                        <>
+                        <Box>
                            <OnlineBar />
                            <ConversationList />
-                        </>
+                        </Box>
                      ) : (
                         <Box className={styles.noCvsWrap}>
                            <Typography className={styles.noCvs}>
@@ -78,17 +64,13 @@ function MessengerPage({ conversations, curUser, actionCreators }) {
                </Box>
             </Route>
             <Route path='/messenger/onlines' exact={true}>
-               <Box style={{ maxWidth: 960, padding: '6px 8px', margin: 'auto' }}>
-                  <OnlineList />
-               </Box>
+               <OnlineList />
             </Route>
             <Route path='/messenger/:user' exact={true}>
-               <Box style={{ maxWidth: 960, margin: 'auto' }}>
-                  <Chatbox />
-               </Box>
+               <Chatbox />
             </Route>
          </Switch>
-      </>
+      </Box>
    )
 }
 

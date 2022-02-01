@@ -1,13 +1,16 @@
-import Blog from '../../../components/Nav1/Blog'
-import Image from '../../../components/Nav1/Image'
-import Video from '../../../components/Nav1/Video'
-import Short from '../../../components/Nav1/Short'
-import Header from '../../../components/Header'
+import { Box } from '@material-ui/core'
+import { memo } from 'react'
 import { connect } from 'react-redux'
 import { makeRandomList } from '../../../commons/utils'
-import { memo } from 'react'
+import Blog from '../../../components/Nav1/Blog'
+import Image from '../../../components/Nav1/Image'
+import Short from '../../../components/Nav1/Short'
+import Video from '../../../components/Nav1/Video'
+import useStyles from './styles'
 
 function HomePage({ blogs, images, videos, shorts }) {
+   const styles = useStyles()
+
    const renderHome = () => {
       const renderedBlogs = blogs.map(b => (
          <Blog key={b.blog._id} blogPost={b.blog} author={b.author} />
@@ -29,12 +32,7 @@ function HomePage({ blogs, images, videos, shorts }) {
       return posts
    }
 
-   return (
-      <>
-         <Header />
-         <div style={{ padding: 24 }}>{renderHome()}</div>
-      </>
-   )
+   return <Box className={styles.homePage}>{renderHome()}</Box>
 }
 
 const mapState = state => ({

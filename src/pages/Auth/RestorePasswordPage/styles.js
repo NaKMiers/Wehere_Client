@@ -41,9 +41,8 @@ export default makeStyles(theme => ({
       border: `1px solid ${theme.palette.secondary.text}`,
       borderRadius: 4,
       fontSize: 16,
-
+      outline: 'none',
       '&:focus': {
-         border: 0,
          ouline: 'none',
       },
    },

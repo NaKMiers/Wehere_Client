@@ -26,6 +26,7 @@ function Time() {
          <span className={styles.hour}>{moment(time).format('hh')}</span>
          <span className={styles.minute}>{moment(time).format(':mm')}</span>
          <span className={styles.second}>{moment(time).format(':ss')}</span>
+         <span className={styles.second}>{moment(time).format(' a')}</span>
       </>
    )
 }

@@ -2,7 +2,7 @@ import { Route } from 'react-router'
 import MenuPage from '../pages/Features/MenuPage'
 import SettingPage from '../pages/Features/SettingPage'
 import FriendListPage from '../pages/Features/FriendListPage'
-import In4Page from '../pages/Features/In4Page'
+import InfoPage from '../pages/Features/InfoPage'
 import SwitchAccountPage from '../pages/Features/SwitchAccountPage'
 import SyncPage from '../pages/Features/Sync'
 import ProfilePage from '../pages/Features/ProfilePage'
@@ -98,9 +98,9 @@ const routes = [
       component: () => <SettingPage />,
    },
    {
-      path: '/menu/in4',
+      path: '/menu/info',
       exact: true,
-      component: () => <In4Page />,
+      component: () => <InfoPage />,
    },
    {
       path: '/menu/help-and-support',

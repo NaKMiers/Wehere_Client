@@ -21,6 +21,7 @@ import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo'
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
+import clsx from 'clsx'
 import { memo } from 'react'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
@@ -37,10 +38,10 @@ import SearchIcon from '../Icons/SearchIcon'
 import css from './header.module.css'
 import useStyles from './styles'
 
-const slide2matches = ['/messenger', '/musics', '/events', '/todolist', '/diaries']
-
 function Header({ curUser, notifications, isSeenNotifications, actionCreators }) {
    const currentUrl = useLocation().pathname
+   const slide2matches = ['/messenger', '/musics', '/events', '/todolist', '/diaries']
+
    const initSlide = () => {
       if (
          currentUrl.startsWith(slide2matches[0]) ||
@@ -57,6 +58,10 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
    const [isShowSearchHeader, setShowSearchHeader] = useState(false)
    const toolbarRef = useRef()
    const styles = useStyles()
+   const isShowHeader = ['/login', '/register', '/restore-password'].some(url =>
+      currentUrl.startsWith(url)
+   )
+
    useLayoutEffect(() => {
       slideHeader === 2
          ? toolbarRef.current.classList.add(css.slide2)
@@ -169,7 +174,10 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
    }
 
    return (
-      <AppBar position='static' className={styles.header}>
+      <AppBar
+         position='static'
+         className={clsx(styles.header, { [styles.hideHeader]: isShowHeader })}
+      >
          <Box className={styles.leftHeader}>
             {!isShowSearchHeader ? (
                <Link to='/' className={styles.link}>
@@ -237,7 +245,7 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                   exact
                   activeClassName={styles.selectedHome}
                >
-                  <HomeIcon />
+                  <HomeIcon style={{ marginBottom: 2 }} />
                </NavLink>
                <NavLink className={styles.headerItem} to='/blogs' activeClassName={styles.selected}>
                   <AssignmentIcon className={styles.headerIcon} />

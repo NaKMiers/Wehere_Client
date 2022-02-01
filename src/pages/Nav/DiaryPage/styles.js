@@ -2,9 +2,11 @@ import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
    diaryPage: {
-      padding: '52px 8px 24px 8px',
-      marginTop: 24,
       position: 'relative',
+      padding: '76px 8px 24px 8px',
+      '@media (max-width: 780px)': {
+         paddingTop: 'calc(100px + 20px)',
+      },
       maxWidth: 960,
       margin: 'auto',
       overflow: 'scroll',

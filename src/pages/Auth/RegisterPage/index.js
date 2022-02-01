@@ -1,4 +1,5 @@
 import {
+   Box,
    Button,
    FormControlLabel,
    FormLabel,
@@ -109,7 +110,7 @@ function RegisterPage({ actionCreators }) {
    }
 
    return (
-      <div style={{ maxWidth: 960, padding: 24, margin: 'auto' }}>
+      <Box className={styles.registerPage}>
          <Typography variant='h3' className={styles.title}>
             Wehere
          </Typography>
@@ -199,7 +200,7 @@ function RegisterPage({ actionCreators }) {
                </span>
             </div>
          </form>
-      </div>
+      </Box>
    )
 }
 

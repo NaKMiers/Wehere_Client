@@ -12,10 +12,10 @@ import theme from './commons/theme'
 import PlayingBar from './components/Nav2/Musics/PlayingBar'
 import routes from './routes'
 import { makeRandomList } from './commons/utils'
+import Header from './components/Header'
 
 function App({ curUser, actionCreators }) {
    // refresh login and
-
    useEffect(() => {
       const getUser = async () => {
          const userId = localStorage.getItem('user')
@@ -141,14 +141,33 @@ function App({ curUser, actionCreators }) {
       getMyPlaylistList()
    }, [curUser?._id, actionCreators])
 
+   // get conversations
+   useEffect(() => {
+      console.log('asdasasd')
+      const getConversations = async () => {
+         if (curUser?._id) {
+            try {
+               const res = await apis.getConversation(curUser._id)
+               console.log('res: ', res)
+               actionCreators.setConversations(res.data)
+            } catch (err) {
+               console.log(err)
+            }
+         }
+      }
+      getConversations()
+   }, [curUser?._id, actionCreators])
+
    // get todolist
    useEffect(() => {
       const getAllTask = async () => {
-         try {
-            const res = await apis.getAllTask()
-            actionCreators.setTodoList(res.data)
-         } catch (err) {
-            console.log(err)
+         if (curUser?._id) {
+            try {
+               const res = await apis.getAllTask()
+               actionCreators.setTodoList(res.data)
+            } catch (err) {
+               console.log(err)
+            }
          }
       }
       getAllTask()
@@ -158,6 +177,9 @@ function App({ curUser, actionCreators }) {
       <Router>
          <ThemeProvider theme={theme[Cookies.get('theme') ? JSON.parse(Cookies.get('theme')) : 0]}>
             <CssBaseline />
+
+            <Header />
+
             <Switch>{routes}</Switch>
 
             <PlayingBar />

@@ -43,7 +43,7 @@ function ListOptionMusicPage({
                InputProps={{ className: styles.searchInput }}
             />
             <Button className={styles.searchBtn}>
-               <SearchIcon />
+               <SearchIcon style={{ fontSize: 20 }} />
             </Button>
          </ListItem>
          <ListItem onClick={() => setShowRecentlySongs(!isShowRecentlySongs)}>

@@ -1,11 +1,10 @@
-import { List, ListSubheader, Typography, Box } from '@material-ui/core'
+import { Box, List, ListSubheader, Typography } from '@material-ui/core'
 import { memo, useEffect, useState } from 'react'
-import AccountListItem from '../../../components/Features/AccountListItem'
-import Header from '../../../components/Header'
-import apis from '../../../apis'
 import { connect } from 'react-redux'
-import useStyles from './styles'
 import { Link } from 'react-router-dom'
+import apis from '../../../apis'
+import AccountListItem from '../../../components/Features/AccountListItem'
+import useStyles from './styles'
 
 function SwitchAccountPage({ curUser, accounts }) {
    const [accountList, setAccountList] = useState([])
@@ -32,33 +31,28 @@ function SwitchAccountPage({ curUser, accounts }) {
          return null
       })
 
-   return (
-      <>
-         <Header />
-         {accountList.length > 1 ? (
-            <List
-               style={{ maxWidth: 960, padding: '6px 24px', margin: 'auto' }}
-               component='nav'
-               aria-labelledby='nested-list-subheader'
-               subheader={
-                  <ListSubheader component='div' id='nested-list-subheader'>
-                     Switch Account
-                  </ListSubheader>
-               }
-            >
-               {curUser && renderAccounts()}
-            </List>
-         ) : (
-            <Box className={styles.noAccWrap}>
-               <Typography className={styles.noAccMessage}>
-                  No other account.
-                  <Link to='/menu' className={styles.link}>
-                     return
-                  </Link>
-               </Typography>
-            </Box>
-         )}
-      </>
+   return accountList.length > 1 ? (
+      <List
+         className={styles.switchAccountPage}
+         component='nav'
+         aria-labelledby='nested-list-subheader'
+         subheader={
+            <ListSubheader component='div' id='nested-list-subheader'>
+               Switch Account
+            </ListSubheader>
+         }
+      >
+         {curUser && renderAccounts()}
+      </List>
+   ) : (
+      <Box className={styles.noAccWrap}>
+         <Typography className={styles.noAccMessage}>
+            No other account.
+            <Link to='/menu' className={styles.link}>
+               return
+            </Link>
+         </Typography>
+      </Box>
    )
 }
 

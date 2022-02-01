@@ -1,5 +1,10 @@
 import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
+   registerPage: {
+      maxWidth: 960,
+      padding: 24,
+      margin: 'auto',
+   },
    title: {
       textAlign: 'center',
       fontWeight: 'bold',
@@ -7,26 +12,26 @@ export default makeStyles(theme => ({
       fontSize: 64,
       background: theme.palette.primary.gradient,
       WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent'
+      WebkitTextFillColor: 'transparent',
    },
    textField: {
-      width: '100%'
+      width: '100%',
    },
    gender: {
-      padding: '0px 12px'
+      padding: '0px 12px',
    },
    registerBtn: {
       width: '100%',
       padding: 10,
       marginBottom: 16,
       background: theme.palette.primary.gradient,
-      color: theme.palette.primary.text
+      color: theme.palette.primary.text,
    },
    subOptions: {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
    },
    radioGroup: {
-      justifyContent: 'space-between'
-   }
+      justifyContent: 'space-between',
+   },
 }))

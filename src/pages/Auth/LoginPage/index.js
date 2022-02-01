@@ -1,4 +1,5 @@
 import { Button, TextField, Typography } from '@material-ui/core'
+import { Box } from '@mui/material'
 import { memo, useLayoutEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
@@ -69,7 +70,7 @@ function LoginPage({ curUser, actionCreators }) {
    }
 
    return (
-      <div style={{ maxWidth: 960, padding: 24, margin: 'auto' }}>
+      <Box className={styles.loginPage}>
          <Typography variant='h3' className={styles.title}>
             Wehere
          </Typography>
@@ -122,7 +123,7 @@ function LoginPage({ curUser, actionCreators }) {
          </div>
 
          <SocialSignIn />
-      </div>
+      </Box>
    )
 }
 

@@ -18,8 +18,6 @@ function ImagePage({ curUser, images }) {
 
    return (
       <>
-         <Header />
-
          <div className={styles.imagePage}>
             <Button className={styles.addNewImageBtn} onClick={handleOpenModal}>
                Add New Images

@@ -12,7 +12,7 @@ export default makeStyles(theme => ({
       bottom: -56,
       left: 0,
       right: 0,
-      transition: 'all 0.4s ease-in-out',
+      transition: 'all 0.4s linear 0.5s',
       background: theme.palette.primary.gradient,
       '&:hover $playingBarTop': {
          '@media (max-width: 780px)': {
@@ -141,19 +141,44 @@ export default makeStyles(theme => ({
    },
    audioBtnCenter: {
       position: 'absolute',
-      top: '-52px',
+      top: -16,
       left: '50%',
+      visibility: 'hidden',
+      opacity: 0,
       transform: 'translate(-50%, -50%)',
-      transition: 'all 0.4s ease-in-out',
-      '&:hover': {
-         top: -60,
-      },
+      transition: 'all 0.5s ease-in-out 0.4s',
    },
    audioBtnCenterActive: {
       top: 0,
+      visibility: 'visible',
+      opacity: 1,
       '&:hover': {
          top: -6,
       },
+   },
+   startPlayingBtn: {
+      position: 'absolute',
+      top: 0,
+      height: 36,
+      width: 100,
+      background: theme.palette.primary.gradient,
+      color: theme.palette.primary.text,
+      fontWeight: 600,
+      letterSpacing: 3,
+      transform: 'translate(-50%, -100%)',
+      transition: 'all 0.4s ease-in-out',
+      borderTopLeftRadius: 6,
+      borderTopRightRadius: 6,
+      border: `2px solid ${theme.border.main}`,
+      visibility: 'visible',
+      opacity: 1,
+      '&:hover': {
+         top: -8,
+      },
+   },
+   startPlayingBtnDisabled: {
+      visibility: 'hidden',
+      opacity: 0,
    },
    audioBtnPrev: {
       color: theme.palette.primary.text,
@@ -228,7 +253,7 @@ export default makeStyles(theme => ({
       margin: 'auto',
       background: '#fff',
       color: '#f44336',
-      transition: 'opacity 0.1s ease-in-out',
+      transition: 'all 0.1s ease-in-out',
       '& .MuiLinearProgress-bar': {
          background: theme.palette.secondary.main,
       },

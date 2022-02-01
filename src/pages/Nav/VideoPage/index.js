@@ -1,7 +1,6 @@
 import { Button } from '@material-ui/core'
 import { memo, useCallback, useState } from 'react'
 import { connect } from 'react-redux'
-import Header from '../../../components/Header'
 import Video from '../../../components/Nav1/Video'
 import VideoModal from '../../../components/Nav1/VideoModal'
 import useStyles from './styles'
@@ -19,8 +18,6 @@ function VideoPage({ curUser, videos }) {
 
    return (
       <>
-         <Header />
-
          <div className={styles.videoPage}>
             <Button className={styles.addNewVideoBtn} onClick={handleOpenModal}>
                Add New Video

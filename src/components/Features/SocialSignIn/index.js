@@ -54,7 +54,7 @@ function SocialSignIn({ actionCreators }) {
                </Avatar>
                <Typography className={styles.text}>Sign with google</Typography>
             </Button>
-            <Button
+            {/* <Button
                variant='contained'
                className={clsx(styles.socialBtn, styles.btn2)}
                onClick={SocialSignIn}
@@ -63,7 +63,7 @@ function SocialSignIn({ actionCreators }) {
                   F
                </Avatar>
                <Typography className={styles.text}>Sign with facebook</Typography>
-            </Button>
+            </Button> */}
          </Box>
       </Box>
    )

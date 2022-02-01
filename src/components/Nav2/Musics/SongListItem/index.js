@@ -65,7 +65,7 @@ function SongListItem({
    }
 
    const handlePlaySong = () => {
-      if (!isInPlayListModal && songPlaying._id !== song._id) {
+      if (!isInPlayListModal && songPlaying?._id !== song?._id) {
          let randomSongList
          actionCreators.setPlayingSong(song)
          actionCreators.setRecentlyList(song)

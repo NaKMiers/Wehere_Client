@@ -1,5 +1,10 @@
 import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
+   loginPage: {
+      maxWidth: 960,
+      margin: 'auto',
+      padding: 24,
+   },
    title: {
       textAlign: 'center',
       fontWeight: 'bold',

@@ -11,6 +11,15 @@ export default makeStyles(theme => ({
       },
    },
 
+   settingPage: {
+      maxWidth: 960,
+      margin: 'auto',
+      padding: '62px 24px 24px 24px',
+      '@media (max-width: 780px)': {
+         paddingTop: 'calc(100px + 6px)',
+      },
+   },
+
    themeList: {
       width: '100%',
       height: 100,

@@ -1,7 +1,6 @@
 import { Button } from '@material-ui/core'
 import React, { memo, useCallback, useState } from 'react'
 import { connect } from 'react-redux'
-import Header from '../../../components/Header'
 import Short from '../../../components/Nav1/Short'
 import ShortModal from '../../../components/Nav1/ShortModal'
 import useStyles from './styles'
@@ -18,8 +17,6 @@ function ShortPage({ curUser, shorts }) {
 
    return (
       <>
-         <Header />
-
          <div className={styles.shortPage}>
             <Button className={styles.addNewShortBtn} onClick={handleOpenModal}>
                Add New Short

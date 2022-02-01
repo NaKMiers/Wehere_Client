@@ -1,11 +1,10 @@
-import { List, ListSubheader, Typography } from '@material-ui/core'
+import { Box, List, ListSubheader, Typography } from '@material-ui/core'
 import React, { memo, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import apis from '../../../apis'
 import FriendListItem from '../../../components/Features/FriendListItem'
-import Header from '../../../components/Header'
 import useStyles from './styles'
 
 function FriendListPage({ friends, actionCreators }) {
@@ -35,22 +34,19 @@ function FriendListPage({ friends, actionCreators }) {
    }
 
    return (
-      <>
-         <Header />
-         <div style={{ maxWidth: 960, padding: '6px 8px', margin: 'auto' }}>
-            <List
-               component='nav'
-               aria-labelledby='nested-list-subheader'
-               subheader={
-                  <ListSubheader component='div' id='nested-list-subheader'>
-                     Friend List
-                  </ListSubheader>
-               }
-            >
-               {renderFriends()}
-            </List>
-         </div>
-      </>
+      <Box className={styles.friendListPage}>
+         <List
+            component='nav'
+            aria-labelledby='nested-list-subheader'
+            subheader={
+               <ListSubheader component='div' id='nested-list-subheader'>
+                  Friend List
+               </ListSubheader>
+            }
+         >
+            {renderFriends()}
+         </List>
+      </Box>
    )
 }
 

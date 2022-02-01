@@ -19,7 +19,6 @@ import apis from '../../../apis'
 import FriendsTab from '../../../components/Features/TabProfile/FriendsTab'
 import InfoTab from '../../../components/Features/TabProfile/InfoTab'
 import PostsTab from '../../../components/Features/TabProfile/PostsTab'
-import Header from '../../../components/Header'
 import BlockIcon from '../../../components/Icons/BlockIcon'
 import CameraIcon from '../../../components/Icons/CameraIcon'
 import HideUserIcon from '../../../components/Icons/HideUserIcon'
@@ -171,177 +170,164 @@ function ProfilePage({ curUser, userProfile, actionCreators }) {
    }
 
    return (
-      <div>
-         <Header />
-         <Box className={styles.profileWrap}>
-            <Box className={styles.topProfile}>
+      <Box className={styles.profilePage}>
+         <Box className={styles.topProfile}>
+            <CardMedia
+               height='300px'
+               className={styles.bgProfile}
+               component='img'
+               image={
+                  backgroundReview ||
+                  (curUser?._id !== userProfile?._id
+                     ? `${API}/${userProfile?.background}`
+                     : `${API}/${curUser?.background}`)
+               }
+            />
+            {curUser?._id === userProfile?._id &&
+               (!isOpenSaveBgBtn ? (
+                  <Fab
+                     className={styles.updateBgBtn}
+                     onClick={_ => handleUpdateAvtAndBg('background')}
+                  >
+                     <CameraIcon color='secondary' />
+                  </Fab>
+               ) : (
+                  <Fab className={styles.saveBgBtn} onClick={_ => handleSaveAvtAndBg('background')}>
+                     <SaveChange />
+                  </Fab>
+               ))}
+
+            <Box className={styles.avatarWrap}>
                <CardMedia
-                  height='300px'
-                  className={styles.bgProfile}
+                  className={styles.avatar}
                   component='img'
                   image={
-                     backgroundReview ||
+                     avatarReview ||
                      (curUser?._id !== userProfile?._id
-                        ? `${API}/${userProfile?.background}`
-                        : `${API}/${curUser?.background}`)
+                        ? `${API}/${userProfile?.avatar}`
+                        : `${API}/${curUser?.avatar}`)
                   }
                />
                {curUser?._id === userProfile?._id &&
-                  (!isOpenSaveBgBtn ? (
+                  (!isOpenSaveAvtBtn ? (
                      <Fab
-                        className={styles.updateBgBtn}
-                        onClick={_ => handleUpdateAvtAndBg('background')}
+                        className={styles.updateAvtBtn}
+                        onClick={_ => handleUpdateAvtAndBg('avatar')}
                      >
                         <CameraIcon color='secondary' />
                      </Fab>
                   ) : (
-                     <Fab
-                        className={styles.saveBgBtn}
-                        onClick={_ => handleSaveAvtAndBg('background')}
-                     >
+                     <Fab className={styles.saveBgBtn} onClick={_ => handleSaveAvtAndBg('avatar')}>
                         <SaveChange />
                      </Fab>
                   ))}
+            </Box>
 
-               <Box className={styles.avatarWrap}>
-                  <CardMedia
-                     className={styles.avatar}
-                     component='img'
-                     image={
-                        avatarReview ||
-                        (curUser?._id !== userProfile?._id
-                           ? `${API}/${userProfile?.avatar}`
-                           : `${API}/${curUser?.avatar}`)
-                     }
-                  />
-                  {curUser?._id === userProfile?._id &&
-                     (!isOpenSaveAvtBtn ? (
-                        <Fab
-                           className={styles.updateAvtBtn}
-                           onClick={_ => handleUpdateAvtAndBg('avatar')}
-                        >
-                           <CameraIcon color='secondary' />
-                        </Fab>
-                     ) : (
-                        <Fab
-                           className={styles.saveBgBtn}
-                           onClick={_ => handleSaveAvtAndBg('avatar')}
-                        >
-                           <SaveChange />
-                        </Fab>
-                     ))}
-               </Box>
+            {curUser?._id === userProfile?._id && (
+               <Typography variant='h4' className={styles.myUsername}>
+                  {userProfile?.username}
+               </Typography>
+            )}
 
-               {curUser?._id === userProfile?._id && (
-                  <Typography variant='h4' className={styles.myUsername}>
+            {curUser?._id !== userProfile?._id && (
+               <Box className={styles.nameAdnGroupActionsWrap}>
+                  <Typography variant='h4' className={styles.username}>
                      {userProfile?.username}
                   </Typography>
-               )}
 
-               {curUser?._id !== userProfile?._id && (
-                  <Box className={styles.nameAdnGroupActionsWrap}>
-                     <Typography variant='h4' className={styles.username}>
-                        {userProfile?.username}
-                     </Typography>
+                  <Box className={styles.groupActionBtn}>
+                     <Button
+                        className={styles.addFriendBtn}
+                        variant='contained'
+                        onClick={handleAddFriendRequest}
+                        disabled={isAllowAddFriends}
+                     >
+                        {!userProfile?.friends.includes(curUser?._id) || justUnf
+                           ? 'Add friend'
+                           : 'Friend'}
+                     </Button>
+                     <Button
+                        className={styles.actionBtn}
+                        variant='contained'
+                        onClick={handleOpenConversation}
+                     >
+                        Messenger
+                     </Button>
 
-                     <Box className={styles.groupActionBtn}>
-                        <Button
-                           className={styles.addFriendBtn}
-                           variant='contained'
-                           onClick={handleAddFriendRequest}
-                           disabled={isAllowAddFriends}
-                        >
-                           {!userProfile?.friends.includes(curUser?._id) || justUnf
-                              ? 'Add friend'
-                              : 'Friend'}
-                        </Button>
-                        <Button
-                           className={styles.actionBtn}
-                           variant='contained'
-                           onClick={handleOpenConversation}
-                        >
-                           Messenger
-                        </Button>
+                     <Button className={styles.actionBtn} variant='contained' onClick={handleClick}>
+                        <MoreIcon style={{ color: '#fff' }} />
+                     </Button>
 
-                        <Button
-                           className={styles.actionBtn}
-                           variant='contained'
-                           onClick={handleClick}
-                        >
-                           <MoreIcon style={{ color: '#fff' }} />
-                        </Button>
-
-                        <Menu
-                           className={styles.menuAction}
-                           id='basic-menu'
-                           anchorEl={anchorEl}
-                           open={open}
-                           onClose={handleClose}
-                        >
-                           {userProfile?.friends.includes(curUser?._id) && !justUnf ? (
-                              <MenuItem className={styles.menuActionItem} onClick={handleUnfriend}>
-                                 Unfriend <HideUserIcon />
-                              </MenuItem>
-                           ) : null}
-
-                           <MenuItem className={styles.menuActionItem} onClick={handleClose}>
-                              Block <BlockIcon style={{ marginLeft: 8 }} />
+                     <Menu
+                        className={styles.menuAction}
+                        id='basic-menu'
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                     >
+                        {userProfile?.friends.includes(curUser?._id) && !justUnf ? (
+                           <MenuItem className={styles.menuActionItem} onClick={handleUnfriend}>
+                              Unfriend <HideUserIcon />
                            </MenuItem>
-                        </Menu>
-                     </Box>
-                  </Box>
-               )}
-               <Divider style={{ marginTop: 10 }} />
-            </Box>
-            <Box className={styles.bottomProfile}>
-               <Box
-                  className={clsx(styles.tabsList, {
-                     [styles.myTabsList]: curUser?._id === userProfile?._id,
-                  })}
-                  style={{ marginTop: curUser?._id === userProfile?._id && '-66px' }}
-               >
-                  <ButtonGroup
-                     variant='text'
-                     aria-label='text button group'
-                     className={styles.tabButtonsWrap}
-                  >
-                     <Button
-                        className={styles.tabButton}
-                        style={{
-                           border: 'none',
-                           backgroundColor: `${currentTab === 'info' ? '#eee' : '#fff'}`,
-                        }}
-                        onClick={() => setCurrentTab('info')}
-                     >
-                        Info
-                     </Button>
-                     <Button
-                        className={styles.tabButton}
-                        style={{
-                           border: 'none',
-                           backgroundColor: `${currentTab === 'posts' ? '#eee' : '#fff'}`,
-                        }}
-                        onClick={() => setCurrentTab('posts')}
-                     >
-                        Posts
-                     </Button>
-                     <Button
-                        className={styles.tabButton}
-                        style={{
-                           border: 'none',
-                           backgroundColor: `${currentTab === 'friends' ? '#eee' : '#fff'}`,
-                        }}
-                        onClick={() => setCurrentTab('friends')}
-                     >
-                        Friends
-                     </Button>
-                  </ButtonGroup>
+                        ) : null}
 
-                  {renderTabs()}
+                        <MenuItem className={styles.menuActionItem} onClick={handleClose}>
+                           Block <BlockIcon style={{ marginLeft: 8 }} />
+                        </MenuItem>
+                     </Menu>
+                  </Box>
                </Box>
+            )}
+            <Divider style={{ marginTop: 10 }} />
+         </Box>
+         <Box className={styles.bottomProfile}>
+            <Box
+               className={clsx(styles.tabsList, {
+                  [styles.myTabsList]: curUser?._id === userProfile?._id,
+               })}
+               style={{ marginTop: curUser?._id === userProfile?._id && '-66px' }}
+            >
+               <ButtonGroup
+                  variant='text'
+                  aria-label='text button group'
+                  className={styles.tabButtonsWrap}
+               >
+                  <Button
+                     className={styles.tabButton}
+                     style={{
+                        border: 'none',
+                        backgroundColor: `${currentTab === 'info' ? '#eee' : '#fff'}`,
+                     }}
+                     onClick={() => setCurrentTab('info')}
+                  >
+                     Info
+                  </Button>
+                  <Button
+                     className={styles.tabButton}
+                     style={{
+                        border: 'none',
+                        backgroundColor: `${currentTab === 'posts' ? '#eee' : '#fff'}`,
+                     }}
+                     onClick={() => setCurrentTab('posts')}
+                  >
+                     Posts
+                  </Button>
+                  <Button
+                     className={styles.tabButton}
+                     style={{
+                        border: 'none',
+                        backgroundColor: `${currentTab === 'friends' ? '#eee' : '#fff'}`,
+                     }}
+                     onClick={() => setCurrentTab('friends')}
+                  >
+                     Friends
+                  </Button>
+               </ButtonGroup>
+
+               {renderTabs()}
             </Box>
          </Box>
-      </div>
+      </Box>
    )
 }
 
