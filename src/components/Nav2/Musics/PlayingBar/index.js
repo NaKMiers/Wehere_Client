@@ -26,9 +26,13 @@ function PlayingBar({
    const [currentTime, setCurrentTime] = useState(0)
    const audioRef = useRef(null)
    const currentUrl = useLocation().pathname
-   const isShowPlayingBar = ['/login', '/register', 'restore-password', '/messenger'].some(url =>
-      currentUrl.startsWith(url)
-   )
+   const isShowPlayingBar = [
+      '/login',
+      '/register',
+      'restore-password',
+      '/messenger',
+      '/menu/in4',
+   ].some(url => currentUrl.startsWith(url))
 
    const [repeat, setRepeat] = useState(false)
    const [random, setRandom] = useState(false)

@@ -166,7 +166,7 @@ function AccountListItem({ account, actionCreators }) {
                </Box>
 
                <Box className={styles.dialogBtnWrap}>
-                  {account.authType === 'local' && (
+                  {account.authType === 'local' ? (
                      <Button
                         variant='contained'
                         className={styles.dialogRmBtn}
@@ -175,6 +175,14 @@ function AccountListItem({ account, actionCreators }) {
                         }
                      >
                         {isOpenDialogAcc === 'remove' ? 'Remove' : 'Change'}
+                     </Button>
+                  ) : (
+                     <Button
+                        variant='contained'
+                        className={styles.dialogRmBtn}
+                        onClick={handleRemoveAccount}
+                     >
+                        Remove
                      </Button>
                   )}
                   <Button

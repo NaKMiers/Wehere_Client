@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../../../actions'
 import Header from '../../../components/Header'
 import ChangeIcon from '../../../components/Icons/ChangeIcon'
-import FAQIcon from '../../../components/Icons/FAQIcon'
+import In4Icon from '../../../components/Icons/In4Icon'
 import FriendIcon from '../../../components/Icons/FriendIcon'
 import HelpAndSupportIcon from '../../../components/Icons/HelpAndSupportIcon'
 import LogOutIcon from '../../../components/Icons/LogOutIcon'
@@ -21,14 +21,14 @@ function MenuPage({ curUser, actionCreators }) {
       { icon: () => <UserIcon />, label: 'Profile', link: `/profile/${curUser?._id}` },
       { icon: () => <FriendIcon />, label: 'Friends', link: '/friend-list' },
       { icon: () => <SettingsIcon mutiple />, label: 'Setting', link: '/menu/setting' },
-      { icon: () => <FAQIcon />, label: 'FAQ', link: '/menu/faq' },
+      { icon: () => <SyncIcon />, label: 'Sync', link: '/menu/sync' },
+      { icon: () => <ChangeIcon />, label: 'Switch Account', link: '/menu/switch-account' },
+      { icon: () => <In4Icon />, label: 'Info', link: '/menu/in4' },
       {
          icon: () => <HelpAndSupportIcon />,
          label: 'Help & Support',
          link: '/menu/help-and-support',
       },
-      { icon: () => <SyncIcon />, label: 'Sync', link: '/menu/sync' },
-      { icon: () => <ChangeIcon />, label: 'Switch Account', link: '/menu/switch-account' },
    ]
    const styles = useStyles()
 
