@@ -143,12 +143,10 @@ function App({ curUser, actionCreators }) {
 
    // get conversations
    useEffect(() => {
-      console.log('asdasasd')
       const getConversations = async () => {
          if (curUser?._id) {
             try {
                const res = await apis.getConversation(curUser._id)
-               console.log('res: ', res)
                actionCreators.setConversations(res.data)
             } catch (err) {
                console.log(err)

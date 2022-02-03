@@ -7,6 +7,7 @@ import ChatHeader from '../ChatHeader'
 import ChatInput from '../ChatInput'
 import useStyles from './styles'
 import { io } from 'socket.io-client'
+import { SOCKET } from '../../../../constants'
 
 function Chatbox({ curUser }) {
    const [curFriend, setCurFriend] = useState({})
@@ -24,7 +25,7 @@ function Chatbox({ curUser }) {
    const styles = useStyles()
 
    useEffect(() => {
-      socket.current = io('ws://localhost:3002/')
+      socket.current = io(SOCKET)
       socket.current.on('getMessage', ({ senderId, text }) => {
          setArrivalMessage({
             sender: senderId,
@@ -32,6 +33,10 @@ function Chatbox({ curUser }) {
             createdAt: Date.now(),
          })
       })
+
+      return () => {
+         setArrivalMessage(null)
+      }
    }, [])
 
    useEffect(() => {

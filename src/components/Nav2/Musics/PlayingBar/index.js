@@ -65,13 +65,13 @@ function PlayingBar({
       }
    }
    const showDuration = () => {
-      const audioDuration = audioRef.current.duration
+      const audioDuration = audioRef.current?.duration
       const minute = Math.floor(audioDuration / 60) || 0
       const second = Math.floor(audioDuration - minute * 60) || 0
       return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
    }
    const showCurrentTime = () => {
-      const audioCurrentTime = audioRef.current.currentTime
+      const audioCurrentTime = audioRef.current?.currentTime
       const minute = Math.floor(audioCurrentTime / 60) || 0
       const second = Math.floor(audioCurrentTime - minute * 60) || 0
       return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
@@ -151,7 +151,6 @@ function PlayingBar({
          audioRef.current.ontimeupdate = () =>
             setCurrentTime((audioRef.current.currentTime / audioRef.current.duration) * 100)
          audioRef.current.onended = () => {
-            console.log('ended')
             if (!repeat) {
                handleNextSong()
             }
@@ -278,13 +277,20 @@ function PlayingBar({
             )}
          </Box>
          {/* {songPlaying?.song && ( */}
-         <Box className={styles.playingBarTop}>
+         <Box
+            className={clsx(styles.playingBarTop, {
+               [styles.playingBarTopActive]: songPlaying?.song,
+            })}
+         >
             <Box className={styles.aboutName} onClick={handleShowPlayingBarCenter}>
                <Typography variant='body1' style={{ marginRight: 8 }}>
                   {songPlaying?.author}:
                </Typography>
                <Typography variant='body1'>{songPlaying?.songName}</Typography>
             </Box>
+            <Typography variant='body1' className={styles.timeStateTop}>
+               {showCurrentTime()}/{showDuration()}
+            </Typography>
             <IconButton className={styles.favoriteBtn}>
                <HeartIcon />
             </IconButton>

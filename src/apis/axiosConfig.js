@@ -1,7 +1,8 @@
 import 'firebase/compat/auth'
 import axios from 'axios'
+import { API } from '../constants'
 
-axios.defaults.baseURL = 'http://localhost:3001'
+axios.defaults.baseURL = `${API}`
 axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 

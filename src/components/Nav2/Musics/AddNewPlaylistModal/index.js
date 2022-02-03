@@ -16,7 +16,6 @@ function AddNewPlaylistModal({ open, handleCloseModal, songList, actionCreators 
 
    const handleAddNewPlaylist = async () => {
       try {
-         console.log('asdasdasd')
          if (selectSongs.length) {
             const res = await apis.addPlaylist({ playlistName, songs: selectSongs })
             actionCreators.addNewPlaylist(res.data)

@@ -16,8 +16,12 @@ export default makeStyles(theme => ({
       background: theme.palette.primary.gradient,
       '&:hover $playingBarTop': {
          '@media (max-width: 780px)': {
-            height: 40,
             visibility: 'visible',
+         },
+      },
+      '&:hover $playingBarTopActive': {
+         '@media (max-width: 780px)': {
+            height: 40,
          },
       },
       '&:hover $processPlayingBarWrap': {
@@ -45,6 +49,13 @@ export default makeStyles(theme => ({
       borderBottom: `1px solid ${theme.border.light}`,
       cursor: 'pointer',
       transition: 'all 0.2s ease-in-out',
+   },
+   playingBarTopActive: {
+      height: 0,
+   },
+   timeStateTop: {
+      color: theme.palette.primary.text,
+      marginRight: 8,
    },
    aboutName: {
       display: 'flex',
@@ -239,10 +250,10 @@ export default makeStyles(theme => ({
       display: 'flex',
       height: 0,
       opacity: 0,
-      marginTop: -7,
+      marginTop: -2,
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: 6,
+      marginBottom: 0,
       transition: 'all 0.2s ease-in-out',
    },
 

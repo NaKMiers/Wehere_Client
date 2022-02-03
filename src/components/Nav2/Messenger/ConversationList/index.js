@@ -1,4 +1,4 @@
-import { List } from '@material-ui/core'
+import { Box, List, Typography } from '@material-ui/core'
 import { memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -12,7 +12,15 @@ function ConversationList({ conversations }) {
       return conversations.map(c => <ConversationItem key={c._id} conversation={c} />)
    }
 
-   return <List className={styles.cvsList}>{renderConversationItem()}</List>
+   return conversations.length ? (
+      <List className={styles.cvsList}>{renderConversationItem()}</List>
+   ) : (
+      <Box className={styles.noCvsWrap}>
+         <Typography className={styles.noCvs}>
+            No conversations yet, please make friends so we can chat.
+         </Typography>
+      </Box>
+   )
 }
 
 const mapState = state => ({

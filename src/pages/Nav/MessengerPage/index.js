@@ -34,6 +34,7 @@ function MessengerPage({ conversations }) {
       setIsHasCvs(!!conversations.length)
    }, [conversations])
 
+   console.log('conversations: ', conversations)
    const styles = useStyles()
 
    return (
@@ -42,22 +43,14 @@ function MessengerPage({ conversations }) {
             <Route path='/messenger' exact={true}>
                <Box>
                   {isHasCvs ? (
-                     conversations.length ? (
-                        <Box>
-                           <OnlineBar />
-                           <ConversationList />
-                        </Box>
-                     ) : (
-                        <Box className={styles.noCvsWrap}>
-                           <Typography className={styles.noCvs}>
-                              No conversations yet, please make friends so we can chat.
-                           </Typography>
-                        </Box>
-                     )
+                     <Box>
+                        <OnlineBar />
+                        <ConversationList />
+                     </Box>
                   ) : (
                      <Box className={styles.noCvsWrap}>
                         <Typography className={styles.noCvs}>
-                           Please reload if you don't see anything else.
+                           No conversations yet, please make friends so we can chat.
                         </Typography>
                      </Box>
                   )}

@@ -74,7 +74,6 @@ function Blog({ blogPost, author, curUser, actionCreators }) {
    const handleDeleteBlog = async () => {
       try {
          const res = await apis.deleteBlogStatus(blogPost._id)
-         console.log('res-deleteBlog: ', res.data)
          actionCreators.deleteBlog(res.data._id)
       } catch (err) {
          console.log(err)

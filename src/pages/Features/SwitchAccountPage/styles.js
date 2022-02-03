@@ -4,15 +4,13 @@ export default makeStyles(theme => ({
    switchAccountPage: {
       maxWidth: 960,
       margin: 'auto',
-      padding: '62px 24px 24px 24px',
+      padding: '56px 24px 24px 24px',
       '@media (max-width: 780px)': {
          paddingTop: 'calc(100px + 6px)',
       },
    },
    accList: {
-      maxWidth: 960,
-      padding: '6px 24px',
-      margin: 'auto',
+      paddingTop: 6,
    },
    noAccWrap: {
       margin: 'auto',

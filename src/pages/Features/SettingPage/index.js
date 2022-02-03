@@ -234,16 +234,16 @@ function SettingPage({ curUser, actionCreators }) {
          <Collapse style={{ marginLeft: 24 }} in={openBlockFriends} timeout='auto' unmountOnExit>
             <List component='div' disablePadding>
                <ListItem className={styles.listBlockFrItem}>
-                  <Link to={`/profile/${curUser?._id}`} className={styles.linkBlockFriend}>
+                  <Link to={`/profile/61fb496b69a2f9c8c336e520`} className={styles.linkBlockFriend}>
                      <ListItemAvatar>
                         <Avatar className={styles.userAvt} alt='avt' src='https://bom.so/oyM6lT' />
                      </ListItemAvatar>
-                     <ListItemText primary='aaa' />
+                     <ListItemText primary='-nakmier-' />
                   </Link>
                   <Switch />
                </ListItem>
                <ListItem className={styles.listBlockFrItem}>
-                  <Link to={`/profile/${curUser?._id}`} className={styles.linkBlockFriend}>
+                  <Link to={`/profile/61fb4a4769a2f9c8c336e611`} className={styles.linkBlockFriend}>
                      <ListItemAvatar>
                         <Avatar className={styles.userAvt} alt='avt' src='https://bom.so/BRmiik' />
                      </ListItemAvatar>
@@ -252,11 +252,20 @@ function SettingPage({ curUser, actionCreators }) {
                   <Switch />
                </ListItem>
                <ListItem className={styles.listBlockFrItem}>
-                  <Link to={`/profile/${curUser?._id}`} className={styles.linkBlockFriend}>
+                  <Link to={`/profile/61f9e816c446437c6ecf0e30`} className={styles.linkBlockFriend}>
                      <ListItemAvatar>
                         <Avatar className={styles.userAvt} alt='avt' src='https://bom.so/W1tQGo' />
                      </ListItemAvatar>
                      <ListItemText primary='ccc' />
+                  </Link>
+                  <Switch />
+               </ListItem>
+               <ListItem className={styles.listBlockFrItem}>
+                  <Link to={`/profile/61fb4a5769a2f9c8c336e62d`} className={styles.linkBlockFriend}>
+                     <ListItemAvatar>
+                        <Avatar className={styles.userAvt} alt='avt' src='https://bom.so/W1tQGo' />
+                     </ListItemAvatar>
+                     <ListItemText primary='ddd' />
                   </Link>
                   <Switch />
                </ListItem>

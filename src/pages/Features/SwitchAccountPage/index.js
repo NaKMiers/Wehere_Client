@@ -31,27 +31,31 @@ function SwitchAccountPage({ curUser, accounts }) {
          return null
       })
 
-   return accountList.length > 1 ? (
-      <List
-         className={styles.switchAccountPage}
-         component='nav'
-         aria-labelledby='nested-list-subheader'
-         subheader={
-            <ListSubheader component='div' id='nested-list-subheader'>
-               Switch Account
-            </ListSubheader>
-         }
-      >
-         {curUser && renderAccounts()}
-      </List>
-   ) : (
-      <Box className={styles.noAccWrap}>
-         <Typography className={styles.noAccMessage}>
-            No other account.
-            <Link to='/menu' className={styles.link}>
-               return
-            </Link>
-         </Typography>
+   return (
+      <Box className={styles.switchAccountPage}>
+         {accountList.length > 1 ? (
+            <List
+               className={styles.accList}
+               component='nav'
+               aria-labelledby='nested-list-subheader'
+               subheader={
+                  <ListSubheader component='div' id='nested-list-subheader'>
+                     Switch Account
+                  </ListSubheader>
+               }
+            >
+               {curUser && renderAccounts()}
+            </List>
+         ) : (
+            <Box className={styles.noAccWrap}>
+               <Typography className={styles.noAccMessage}>
+                  No other account.
+                  <Link to='/menu' className={styles.link}>
+                     return
+                  </Link>
+               </Typography>
+            </Box>
+         )}
       </Box>
    )
 }

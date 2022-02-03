@@ -1,7 +1,6 @@
 import { Button } from '@material-ui/core'
 import { memo, useState } from 'react'
 import { connect } from 'react-redux'
-import Header from '../../../components/Header'
 import Image from '../../../components/Nav1/Image'
 import ImageModal from '../../../components/Nav1/ImageModal'
 import useStyles from './styles'

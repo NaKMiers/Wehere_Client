@@ -34,8 +34,8 @@ function ShortModal({ curUser, open, handleCloseModal, actionCreators }) {
          } else if (!/^[a-zA-Z0-9 +(),-.]+$/.test(short.name)) {
             alert('Short name is invalid. Plase rename and try again.')
          } else {
-            reader.readAsDataURL(short)
             setShort(short)
+            reader.readAsDataURL(short)
          }
       }
       input.click()

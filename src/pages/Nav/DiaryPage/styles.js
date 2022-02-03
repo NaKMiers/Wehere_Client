@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core'
 export default makeStyles(theme => ({
    diaryPage: {
       position: 'relative',
-      padding: '76px 8px 24px 8px',
+      padding: '132px 8px 24px 8px',
       '@media (max-width: 780px)': {
-         paddingTop: 'calc(100px + 20px)',
+         paddingTop: 'calc(100px + 76px)',
       },
       maxWidth: 960,
       margin: 'auto',
@@ -14,7 +14,7 @@ export default makeStyles(theme => ({
    },
    addNewDiaryBtn: {
       position: 'absolute',
-      top: 0,
+      top: 80,
       height: 36,
       left: '50%',
       width: 'calc(100% - 24px *2)',
@@ -22,6 +22,9 @@ export default makeStyles(theme => ({
       transform: 'translateX(-50%)',
       background: theme.palette.primary.gradient,
       color: theme.palette.primary.text,
+      '@media (max-width: 780px)': {
+         top: 'calc(100px + 24px)',
+      },
    },
    noDiaryWrap: {
       textAlign: 'center',

@@ -40,6 +40,8 @@ function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
             alert('This must to a audio.')
          } else if (file.size > 52428800) {
             alert('This must to less than or equal to 50MB')
+         } else if (!/^[a-zA-Z0-9 +(),-.]+$/.test(file.name)) {
+            alert('Song name is invalid. Plase rename and try again.')
          } else {
             setFileName(file.name)
             setSong(file)
@@ -61,6 +63,8 @@ function AddNewSongModal({ open, handleCloseModal, actionCreators }) {
 
          if (!file.type.startsWith('image')) {
             alert('This must to a image.')
+         } else if (!/^[a-zA-Z0-9 +(),-.]+$/.test(file.name)) {
+            alert('Thumbnail name is invalid. Plase rename and try again.')
          } else if (file.size > 5242880) {
             alert('This must to less than or equal to 5MB')
          } else {

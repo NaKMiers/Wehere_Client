@@ -33,10 +33,10 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
          } else if (video.size > 104857600) {
             alert('This video size must be less than or equal to 100Mb')
          } else if (!/^[a-zA-Z0-9 +(),-.]+$/.test(video.name)) {
-            alert('Short name is invalid. Plase rename and try again.')
+            alert('Video name is invalid. Plase rename and try again.')
          } else {
-            reader.readAsDataURL(video)
             setVideo(video)
+            reader.readAsDataURL(video)
          }
       }
       input.click()
@@ -52,8 +52,8 @@ function VideoModal({ curUser, open, handleCloseModal, actionCreators }) {
       e.preventDefault()
       const postVideoStatus = async () => {
          let data = new FormData()
-         data.append('video', video)
          data.append('statusText', statusValue)
+         data.append('video', video)
 
          if (statusValue.trim() && video) {
             try {
