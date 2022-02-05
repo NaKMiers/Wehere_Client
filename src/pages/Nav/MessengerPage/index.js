@@ -11,16 +11,18 @@ import OnlineBar from '../../../components/Nav2/Messenger/OnlineBar'
 import OnlineList from '../../../components/Nav2/Messenger/OnlineList'
 import useStyles from './styles'
 
-function MessengerPage({ conversations }) {
+function MessengerPage({ curUser, conversations }) {
    const [isHasCvs, setIsHasCvs] = useState(false)
 
    // change online status
    useEffect(() => {
       const changeOnlineStatus = async status => {
-         try {
-            await apis.changeOnlineStatus(status)
-         } catch (err) {
-            console.log(err)
+         if (curUser?._id) {
+            try {
+               await apis.changeOnlineStatus(status)
+            } catch (err) {
+               console.log(err)
+            }
          }
       }
       changeOnlineStatus(true)
@@ -28,7 +30,7 @@ function MessengerPage({ conversations }) {
       return () => {
          changeOnlineStatus(false)
       }
-   }, [])
+   }, [curUser?._id])
 
    useEffect(() => {
       setIsHasCvs(!!conversations.length)
