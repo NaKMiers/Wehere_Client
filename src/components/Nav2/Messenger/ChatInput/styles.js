@@ -14,6 +14,7 @@ export default makeStyles(theme => ({
       left: '50%',
       transform: 'translate(-50%)',
       width: 'calc(100% - 48px)',
+      maxWidth: 'calc(960px - 48px)',
    },
    chatInput: {
       position: 'relative',
@@ -57,6 +58,7 @@ export default makeStyles(theme => ({
       fontSize: 24,
       padding: 0,
       borderRadius: 0,
+      backgroundColor: '#fff',
    },
 
    paperSetting: {

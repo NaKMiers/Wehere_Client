@@ -8,6 +8,7 @@ import ChatInput from '../ChatInput'
 import useStyles from './styles'
 import { io } from 'socket.io-client'
 import { SOCKET } from '../../../../constants'
+import { Box } from '@material-ui/core'
 
 function Chatbox({ curUser }) {
    const [curFriend, setCurFriend] = useState({})
@@ -110,13 +111,13 @@ function Chatbox({ curUser }) {
    return (
       <div className={styles.chatBox}>
          {curCvs && curUser ? (
-            <>
+            <Box>
                <ChatHeader curFriend={curFriend} />
 
                <ChatBody curUser={curUser} curFriend={curFriend} messages={messages} />
 
                <ChatInput curUser={curUser} curCvs={curCvs} handleSendMessage={handleSendMessage} />
-            </>
+            </Box>
          ) : null}
       </div>
    )

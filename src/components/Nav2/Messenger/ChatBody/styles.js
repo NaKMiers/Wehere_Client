@@ -12,14 +12,13 @@ export default makeStyles(theme => ({
       padding: 24,
       height: 'calc(100vh - 194px)',
       '@media (max-width: 780px)': {
-         height: 'calc(100vh - 238px)',
+         height: 'calc(100vh - 252px)',
       },
       overflow: 'scroll',
    },
 
    noMessage: {
       textAlign: 'center',
-      color: '#ccc',
       fontWeight: 400,
    },
 }))
