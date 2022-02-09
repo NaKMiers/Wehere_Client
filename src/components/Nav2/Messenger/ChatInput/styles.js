@@ -8,7 +8,15 @@ export default makeStyles(theme => ({
       },
    },
 
+   chatInputWrap: {
+      position: 'absolute',
+      bottom: 0,
+      left: '50%',
+      transform: 'translate(-50%)',
+      width: 'calc(100% - 48px)',
+   },
    chatInput: {
+      position: 'relative',
       height: 80,
       display: 'flex',
       justifyContent: 'space-between',
@@ -19,7 +27,7 @@ export default makeStyles(theme => ({
       padding: '0px 12px',
       borderBottom: `3px solid ${theme.border.main}`,
       boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0)',
-      transition: 'margin 0.2s ease-in-out',
+      transition: 'all 0.2s ease-in-out',
    },
    inputTextField: {
       flexGrow: '1',
@@ -32,14 +40,11 @@ export default makeStyles(theme => ({
       color: theme.palette.primary.text,
    },
 
-   emojiTable: {
-      textAlign: 'center',
-      height: '25vh',
-   },
    emojiTableWrap: {
       height: 'calc(25vh - 48px)',
       padding: 8,
       overflow: 'scroll',
+      background: '#fff',
    },
    emoji: {
       fontSize: 20,

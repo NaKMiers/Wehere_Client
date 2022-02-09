@@ -49,7 +49,7 @@ function ChatInput({ curUser, curCvs, handleSendMessage }) {
    }
 
    return (
-      <>
+      <Box className={styles.chatInputWrap}>
          <form
             className={styles.chatInput}
             style={{
@@ -81,7 +81,7 @@ function ChatInput({ curUser, curCvs, handleSendMessage }) {
             <Box className={styles.emojiTableWrap}>{renderEmoji()}</Box>
             <Box className={styles.emojiBar}>{renderTabEmoji()}</Box>
          </Collapse>
-      </>
+      </Box>
    )
 }
 
