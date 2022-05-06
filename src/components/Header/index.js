@@ -90,7 +90,9 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                   <MenuItem key={i} onClick={handleClose} className={styles.notifyItem}>
                      <Box className={styles.leftNotifyWrap}>
                         <Avatar src={`${API}/${n.senderAvt}`} alt='avt' />
-                        <Typography className={styles.messageNotify}>{n.senderUsername}</Typography>
+                        <Typography className={styles.messageNotify}>
+                           {n.senderUsername}
+                        </Typography>
                      </Box>
                      <Box className={styles.menuBtnWrap}>
                         <IconButton
@@ -156,7 +158,13 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
          }
       })
 
-   const handleResponseNotification = async ({ type, senderId, curUserId, value, curNotifyId }) => {
+   const handleResponseNotification = async ({
+      type,
+      senderId,
+      curUserId,
+      value,
+      curNotifyId,
+   }) => {
       switch (type) {
          case 'ADD_FRIEND_REQUEST':
             actionCreators.removeNotify(curNotifyId)
@@ -247,7 +255,11 @@ function Header({ curUser, notifications, isSeenNotifications, actionCreators })
                >
                   <HomeIcon style={{ marginBottom: 2 }} />
                </NavLink>
-               <NavLink className={styles.headerItem} to='/blogs' activeClassName={styles.selected}>
+               <NavLink
+                  className={styles.headerItem}
+                  to='/blogs'
+                  activeClassName={styles.selected}
+               >
                   <AssignmentIcon className={styles.headerIcon} />
                </NavLink>
                <NavLink

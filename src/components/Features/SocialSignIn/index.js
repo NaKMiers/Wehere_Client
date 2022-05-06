@@ -8,6 +8,7 @@ import actions from '../../../actions'
 import apis from '../../../apis'
 import { firebase } from '../../../commons/firebase'
 import useStyles from './styles'
+import { renderGuestUser } from '../../../commons/utils'
 
 function SocialSignIn({ actionCreators }) {
    const styles = useStyles()
@@ -44,6 +45,16 @@ function SocialSignIn({ actionCreators }) {
       <Box className={styles.socialSignInWrap}>
          <Typography className={styles.title}>Login with socical account. </Typography>
          <Box className={styles.btnWrap}>
+            <Button
+               variant='contained'
+               className={clsx(styles.socialBtn, styles.btn1)}
+               onClick={() => actionCreators.createNewUser(renderGuestUser())}
+            >
+               <Avatar src='https://bom.so/UKJXrF' alt='guest' className={styles.socialLogo}>
+                  G
+               </Avatar>
+               <Typography className={styles.text}>Sign in as guest</Typography>
+            </Button>
             <Button
                variant='contained'
                className={clsx(styles.socialBtn, styles.btn1)}

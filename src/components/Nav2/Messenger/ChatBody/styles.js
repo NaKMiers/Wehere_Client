@@ -19,6 +19,7 @@ export default makeStyles(theme => ({
 
    noMessage: {
       textAlign: 'center',
+      color: '#ccc',
       fontWeight: 400,
    },
 }))

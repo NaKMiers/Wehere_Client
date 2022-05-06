@@ -14,12 +14,16 @@ export default makeStyles(theme => ({
       },
    },
    header: {
+      height: 56,
       position: 'fixed',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
       background: theme.palette.primary.gradient,
       padding: '0px 24px',
+      '@media (max-width: 780px)': {
+         height: 100,
+      },
    },
    hideHeader: {
       display: 'none',
@@ -62,6 +66,7 @@ export default makeStyles(theme => ({
    avatar: {
       cursor: 'pointer',
       marginLeft: 8,
+      marginRight: 6,
    },
    username: {
       color: theme.palette.primary.text,
