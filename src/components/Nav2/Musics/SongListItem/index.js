@@ -34,6 +34,8 @@ function SongListItem({
    const open = Boolean(anchorEl)
    const [favorite, setFavorite] = useState(song?.favorite)
 
+   console.log(`${API}/${song.thumb}`)
+
    const styles = useStyles()
 
    useEffect(() => {
