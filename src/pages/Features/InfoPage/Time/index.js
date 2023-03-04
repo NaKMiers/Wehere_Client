@@ -10,7 +10,10 @@ function Time() {
       let interval
       const handleTime = () => {
          interval = setInterval(() => {
-            setTime(Date.now())
+            const now = new Date()
+            const options = { timeZone: 'Asia/Ho_Chi_Minh' }
+            const time = now.toLocaleString('en-US', options)
+            setTime(time)
          }, 1000)
       }
       handleTime()
